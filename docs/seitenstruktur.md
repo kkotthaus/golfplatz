@@ -176,7 +176,7 @@ Nicht öffentlich und ohne eigene Seite: `sperrung`, `spieler`, `ligaspiel`, `pr
 
 **Anforderungen**
 
-- Das Formular bietet die Modelle aus `preis` zur Auswahl an. Mit Einwilligungshinweis zum Datenschutz.
+- Das Formular bietet die Modelle aus `preis` zur Auswahl an. Mit Einwilligungshinweis zum Datenschutz. **Stand:** noch nicht umgesetzt (kein Formular-Plugin); bis dahin Telefon, E-Mail und PDF.
 - Die hervorgehobene Karte (`preis_hervorheben`) wird optisch betont.
 
 ### Turniere & Kalender `/turniere/`

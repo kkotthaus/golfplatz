@@ -91,6 +91,29 @@
       ]
     },
     {
+      "key": "Preiskarten",
+      "name": "Preiskarten",
+      "description": "Preise einer Kategorie als Karten, z. B. Mitgliedschaften: Titel, Betrag („auf Anfrage“), Einheit, Zusatz, Aufnahmegebühr, Leistungen (eine je Zeile am Preis), hervorgehobene Karte mit „Beliebt“. Eigenschaften: kategorie (z. B. mitgliedschaft), ziel (Link der Buttons, z. B. #antrag). Daten: {options.golfplatz.preise}.",
+      "properties": [
+        {
+          "key": "kategorie",
+          "name": "Kategorie",
+          "type": {
+            "primitive": "string"
+          },
+          "default": "mitgliedschaft"
+        },
+        {
+          "key": "ziel",
+          "name": "Link der Buttons",
+          "type": {
+            "primitive": "string"
+          },
+          "default": "#antrag"
+        }
+      ]
+    },
+    {
       "key": "PlatzstatusKurz",
       "name": "Platzstatus kurz",
       "description": "Kurzfassung im Hero der Startseite: Zustand jetzt, heutige Sperren von Platz und Abschlägen, Spielbedingungen als Chips (inkl. Fahnen), Link auf den ausführlichen Platzstatus. Daten: {options.golfplatz.platzstatus.kurz}.",
@@ -239,11 +262,6 @@
       "order": 11
     },
     {
-      "slug": "mitgliedschaft",
-      "title": "Mitgliedschaft",
-      "order": 50
-    },
-    {
       "slug": "golfschule",
       "title": "Golfschule",
       "order": 50
@@ -276,6 +294,11 @@
     {
       "slug": "datenschutz",
       "title": "Datenschutz",
+      "order": 50
+    },
+    {
+      "slug": "mitgliedschaft",
+      "title": "Mitgliedschaft",
       "order": 50
     },
     {

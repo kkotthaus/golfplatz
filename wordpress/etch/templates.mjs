@@ -1,7 +1,7 @@
 // Etch-Templates der Website. Aufbau und Klassen wie im Prototyp (prototype/src/build.mjs).
 // Erzeugen: node wordpress/etch/build.mjs  →  wordpress/etch/dist/<slug>.html
 
-import { el, t, text, raw, wenn, markup, komponente, club, icon, svgEl, postContent, loop, CLUB } from './lib.mjs';
+import { el, t, text, raw, wenn, markup, komponente, club, telHref, icon, svgEl, postContent, loop, CLUB } from './lib.mjs';
 import { header } from './header.mjs';
 import { birdiebookKomponente, bahnenRaster } from './birdiebook.mjs';
 
@@ -328,7 +328,6 @@ const platzhalter = (slug, title, eyebrow, lead, parent) => ({
   ),
 });
 pages.push(
-  platzhalter('mitgliedschaft', 'Mitgliedschaft', 'Mitglied werden', 'Unbegrenzt spielen – ohne Startzeiten, mit DGV-Mitgliedschaft, GOLFHOCHZEHN und Urlaubspartnern.'),
   platzhalter('golfschule', 'Golfschule', 'Golf lernen', 'Vom ersten Schwung bis zur DGV-Platzreife mit unseren Professionals.'),
   platzhalter('restaurant', 'Restaurant', 'Gastronomie', 'Für Golfer und alle anderen Gäste.'),
   platzhalter('news', 'Aktuelles', 'News', 'Neues aus dem Club.'),
@@ -337,6 +336,59 @@ pages.push(
   platzhalter('impressum', 'Impressum', '', ''),
   platzhalter('datenschutz', 'Datenschutz', '', ''),
 );
+
+// Mitgliedschaft: Modelle (Preise der Kategorie „Mitgliedschaft“), drei Schritte, Aufnahmeantrag mit FAQ.
+// Ein Antragsformular folgt, sobald ein Formular-Plugin feststeht – bis dahin Telefon, E-Mail und PDF.
+const faq = (frage, antwort) =>
+  el('details', 'accordion__item', [t('summary', 'accordion__summary', frage), el('div', 'accordion__content', [t('p', '', antwort)])]);
+const schritt = (titel, inhalt) => el('li', 'steps__item', [t('h3', 'steps__title', titel), el('p', 'steps__text', inhalt)]);
+pages.push({
+  slug: 'mitgliedschaft',
+  title: 'Mitgliedschaft',
+  order: 50,
+  content: markup(
+    seitenkopf({
+      krumen: [['Mitgliedschaft']],
+      eyebrow: 'Mitglied werden',
+      titel: 'Ihr Heimatclub',
+      lead: 'Unbegrenzt spielen – ohne Startzeiten, mit DGV-Mitgliedschaft, GOLFHOCHZEHN und Urlaubspartnern. Mitglied werden Sie mit einer Aktie der Dohrmann Golfplatz AG oder mit einer Spielberechtigung.',
+    }),
+    el('section', 'section', [el('div', 'container', [komponente('Preiskarten', { kategorie: 'mitgliedschaft', ziel: '#antrag' })])], { name: 'Modelle' }),
+    el('section', 'section section--tint', [
+      el('div', 'container', [
+        el('header', 'section-head section-head--center', [t('p', 'section-head__eyebrow', 'In drei Schritten'), t('h2', 'section-head__title', 'So werden Sie Mitglied')]),
+        el('ol', 'steps', [
+          schritt('Kennenlernen', [text('Spielen Sie eine Runde als Gast oder besuchen Sie einen '), t('a', '', 'Schnupperkurs', { attrs: { href: '/golfschule/' } }), text('.')]),
+          schritt('Persönliches Gespräch', [text('Aktie oder Spielberechtigung? Wir beraten Sie und nennen Ihnen die aktuellen Konditionen.')]),
+          schritt('Aufnahmeantrag', [text('Antrag als PDF herunterladen, ausfüllen und im Sekretariat abgeben – oder uns anrufen oder schreiben.')]),
+        ]),
+      ]),
+    ], { name: 'In drei Schritten' }),
+    el('section', 'section', [
+      el('div', 'container split', [
+        el('div', 'prose', [
+          t('h2', '', 'Aufnahmeantrag'),
+          t('p', '', 'Rufen Sie uns an oder schreiben Sie uns, wir melden uns für ein persönliches Gespräch. Ansprechpartner ist Erich Buchholz (Clubmanagement).'),
+          // Kontaktzeilen wie auf „Club & Kontakt“ im Prototyp: Link mit Symbol
+          el('p', '', [
+            el('a', 'contact-line', [icon('phone'), text(' ' + club('club_telefon'))], { attrs: { href: telHref('club_telefon') } }),
+            el('br', '', []),
+            el('a', 'contact-line', [icon('mail'), text(' ' + club('club_email'))], { attrs: { href: 'mailto:' + club('club_email') } }),
+          ]),
+          el('p', '', [t('a', 'btn btn--primary', 'Aufnahmeantrag als PDF', { attrs: { href: 'https://dreibaeumen.de/wp-content/uploads/2020/07/Aufnahmeantrag_GC3B.pdf' } })]),
+        ], { name: 'Kontakt' }),
+        el('div', '', [
+          t('h3', '', 'Häufige Fragen'),
+          el('div', 'accordion', [
+            faq('Warum eine Aktie?', 'Voraussetzung für die ordentliche Mitgliedschaft ist eine der 800 Aktien der Dohrmann Golfplatz AG. Sie können eine Aktie kaufen und später verkaufen, verschenken oder vererben – oder eine Spielberechtigung erwerben (Aktienmiete).'),
+            faq('Muss ich Startzeiten buchen?', 'Nein. Auf unserem Platz gibt es keine festen Startzeiten.'),
+            faq('Was ist GOLFHOCHZEHN?', 'Ein Verbund von Golfclubs, auf deren Plätzen Mitglieder greenfeefrei spielen.'),
+          ]),
+        ], { name: 'Häufige Fragen' }),
+      ]),
+    ], { attrs: { id: 'antrag' }, name: 'Aufnahmeantrag' }),
+  ),
+});
 
 // Turniere: Lochwettspiel (auf der Website gepflegt) und Hinweis auf PC CADDIE (Einbettung folgt)
 pages.push({

@@ -545,16 +545,17 @@ html.scheme--dark {
 .price-cards { align-items: stretch; }
 .price-card { position: relative; display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--base-light); border-radius: var(--radius-l); padding: var(--space-l) var(--space-m); }
 .price-card--featured { border: 2px solid var(--secondary); box-shadow: var(--shadow-m); }
-.price-card__badge { position: absolute; top: -0.8rem; left: var(--space-m); background: var(--secondary); color: var(--white); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 99px; }
-.price-card__title { font-size: var(--h4); }
+.price-card__badge { margin: 0; position: absolute; top: -0.8rem; left: var(--space-m); background: var(--secondary); color: var(--white); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 99px; }
+.price-card__title { margin: 0 0 var(--space-xs); font-size: var(--h4); }
 .price-card__price { margin: 0; }
 .price-card__amount { font-family: var(--heading-font-family); font-size: var(--h2); color: var(--primary-dark); }
 .price-card__unit { color: var(--base-semi-dark); font-size: var(--text-s); }
-.price-card__note { font-size: var(--text-s); color: var(--base-semi-dark); padding-bottom: var(--space-s); border-bottom: 1px solid var(--base-ultra-light); }
-.price-card__list { list-style: none; margin: 0 0 var(--space-m); padding: 0; flex: 1; font-size: var(--text-s); }
+.price-card__note { margin: var(--space-xs) 0 0; font-size: var(--text-s); color: var(--base-semi-dark); padding-bottom: var(--space-s); border-bottom: 1px solid var(--base-ultra-light); }
+.price-card__list { list-style: none; margin: var(--space-s) 0 var(--space-m); padding: 0; flex: 1; font-size: var(--text-s); }
 .price-card__item { position: relative; padding: 0.3rem 0 0.3rem 1.4rem; }
 .price-card__item::before { content: ""; position: absolute; left: 0.15rem; top: 0.7rem; width: 0.6rem; height: 0.35rem; border-left: 2px solid var(--secondary); border-bottom: 2px solid var(--secondary); transform: rotate(-45deg); }
-.price-card__button { width: 100%; }
+/* ACSS setzt die Buttonbreite über --btn-width und lädt nach diesem Stylesheet */
+.price-card__button { --btn-width: 100%; width: 100%; margin-top: auto; }
 
 .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); counter-reset: step; }
 .steps__item { counter-increment: step; background: var(--white); border-radius: var(--radius-l); padding: var(--space-l) var(--space-m); position: relative; }

@@ -145,7 +145,17 @@ Umsetzung des [Konzepts](konzept-birdiebook.md), Stand 2026-09-26.
   - Ohne Stunden oder Koordinaten erscheint nur die Regel.
   - Bei einem Seitencache auf der Live-Seite die Greenfee-Seite höchstens einen Tag cachen, sonst stimmt die Uhrzeit nicht.
 - **Hinweis zum Import:** Beim Übernehmen der drei Felder am 2026-09-27 hat `import-settings` alle Clubdaten aus dem Repository neu geschrieben. Im Admin geänderte Clubdaten wären dabei überschrieben worden. Seitdem kann `import-settings` mit `felder` gezielt einzelne Felder übernehmen.
-- **Offen:** Mitgliedschaftspreise (Kategorie „Mitgliedschaft“) erscheinen noch nicht; sie gehören auf `/mitgliedschaft/`.
+- Mitgliedschaftspreise (Kategorie „Mitgliedschaft“) stehen auf `/mitgliedschaft/` (siehe unten).
+
+### Mitgliedschaft `/mitgliedschaft/`
+
+Stand 2026-09-28, Aufbau wie im Prototyp.
+
+- **Modelle:** Etch-Komponente „Preiskarten“ (`wordpress/etch/preise.mjs`, Eigenschaften `kategorie` = `mitgliedschaft`, `ziel` = `#antrag`). Daten aus den Preisen der Kategorie „Mitgliedschaft“: `golfplatz-preise.php` liefert je Kategorie zusätzlich `karten[]` (Titel, Betrag bzw. „auf Anfrage“, Einheit, Zusatz, Aufnahmegebühr aus `preis_aufnahme`, Leistungen aus `preis_leistungen` – eine je Zeile –, Hervorhebung aus `preis_hervorheben` mit „Beliebt“). Button „Gespräch vereinbaren“ bei „auf Anfrage“, sonst „Anfragen“.
+- **In drei Schritten:** Kennenlernen (Link Golfschule), persönliches Gespräch, Aufnahmeantrag.
+- **Aufnahmeantrag** (`#antrag`): Ansprechpartner, Telefon und E-Mail aus den Clubdaten, Aufnahmeantrag als PDF (dreibaeumen.de), häufige Fragen als Akkordeon (`<details>`).
+- **Offen:** Das Antragsformular aus dem Prototyp fehlt, weil kein Formular-Plugin installiert ist. Sobald eines feststeht, das Formular mit den Modellen aus `preis` und Datenschutzhinweis ergänzen. Das PDF liegt noch auf dreibaeumen.de, besser in die Mediathek übernehmen.
+- **CSS:** `.price-card__button` setzt `--btn-width: 100%`, weil ACSS die Buttonbreite über diese Variable steuert und nach dem Golfplatz-Stylesheet lädt. Abstände in der Karte sind ausdrücklich gesetzt (ACSS setzt Überschriften- und Absatzabstände auf 0).
 
 ### Lochwettspiel (Turnierbaum)
 

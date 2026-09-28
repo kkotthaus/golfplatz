@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Golfplatz – Preise
- * Description: Stellt die Preise (Beitragstyp „preis“, gruppiert nach Preiskategorie) Etch als Daten bereit: {options.golfplatz.preise.tabellen}. Tabellen mit Wochentagen werden als Matrix aufbereitet (Tarif je Zeile, Spalten Mo–Sa und So/Feiertag, Varianten wie „mit DGV-Ausweis „R““ als Unterzeile), die übrigen als Liste. Keine Shortcodes – das Markup baut die Etch-Komponente „Preistabelle“ (wordpress/etch/preise.mjs).
+ * Description: Stellt die Preise (Beitragstyp „preis“, gruppiert nach Preiskategorie) Etch als Daten bereit: {options.golfplatz.preise.tabellen}, je Kategorie auch als Karten (karten[], z. B. Mitgliedschaften). Tabellen mit Wochentagen werden als Matrix aufbereitet (Tarif je Zeile, Spalten Mo–Sa und So/Feiertag, Varianten wie „mit DGV-Ausweis „R““ als Unterzeile), die übrigen als Liste. Keine Shortcodes – das Markup baut die Etch-Komponente „Preistabelle“ (wordpress/etch/preise.mjs).
  * Version: 1.1.0
  *
  * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-preise.php
@@ -118,6 +118,10 @@ function golfplatz_preise_roh( int $term_id ): array {
 			'anfrage' => $anfrage,
 			'betrag'  => $m( 'preis_betrag' ),
 			'einheit' => $einheit,
+			// Für Karten (Mitgliedschaft): Hervorhebung, Aufnahmegebühr, Leistungen (eine je Zeile)
+			'hervorheben' => (bool) $m( 'preis_hervorheben' ),
+			'aufnahme'    => (string) $m( 'preis_aufnahme' ),
+			'leistungen'  => array_values( array_filter( array_map( 'trim', preg_split( '/\R/',(string) $m( 'preis_leistungen' ) ) ) ) ),
 		);
 	}
 	return $zeilen;
@@ -170,6 +174,29 @@ function golfplatz_preise_matrix( array $roh ): array {
 	return $bloecke;
 }
 
+/**
+ * Preise einer Kategorie als Karten (Komponente „Preiskarten“): Betrag groß, Einheit, Zusatz, Aufnahmegebühr, Leistungen.
+ * Hervorgehobene Karte mit Modifier „featured“ und Kennzeichnung „Beliebt“.
+ */
+function golfplatz_preise_karten( array $roh ): array {
+	return array_map(
+		fn( $z ) => array(
+			'titel'          => $z['titel'],
+			'betrag'         => $z['anfrage'] ? 'auf Anfrage' : golfplatz_euro( $z['betrag'] ),
+			'einheit'        => $z['anfrage'] ? '' : $z['einheit'],
+			'zusatz'         => $z['zusatz'],
+			'aufnahme'       => '' !== $z['aufnahme'] && (float) $z['aufnahme'] > 0 ? 'Aufnahmegebühr ' . golfplatz_euro( $z['aufnahme'] ) : '',
+			'leistungen'     => array_map( fn( $l ) => array( 'text' => $l ), $z['leistungen'] ),
+			'hat_leistungen' => (bool) $z['leistungen'],
+			'hervorheben'    => $z['hervorheben'],
+			'mod'            => $z['hervorheben'] ? 'featured' : 'normal',
+			'button'         => $z['anfrage'] ? 'Gespräch vereinbaren' : 'Anfragen',
+			'button_mod'     => $z['hervorheben'] ? 'primary' : 'outline',
+		),
+		$roh
+	);
+}
+
 /** Alle Preistabellen je Kategorie. */
 function golfplatz_preise_etch(): array {
 	$tabellen = array();
@@ -184,6 +211,7 @@ function golfplatz_preise_etch(): array {
 			'name'    => $term->name,
 			'matrix'  => $matrix,
 			'bloecke' => $matrix ? golfplatz_preise_matrix( $roh ) : array(),
+			'karten'  => golfplatz_preise_karten( $roh ),
 			'zeilen'  => $matrix ? array() : array_map(
 				// Einheit gehört zur Leistung („E-Buggy 18 Loch“, „Trolley pro Runde“), in der Preisspalte nur der Betrag
 				fn( $z ) => array(

@@ -70,3 +70,37 @@ export const preistabelleKomponente = {
     wenn('k.key', [wenn('k.matrix', [matrix()]), wenn('k.matrix', [liste()], 'isFalsy')], '===', 'props.kategorie'),
   ]),
 };
+
+// Etch-Komponente „Preiskarten“: Preise einer Kategorie als Karten (Mitgliedschaft auf /mitgliedschaft/).
+// Daten: {options.golfplatz.preise.tabellen[].karten} – Betrag, Einheit, Zusatz, Aufnahmegebühr, Leistungen, Hervorhebung.
+export const preiskartenKomponente = {
+  key: 'Preiskarten',
+  name: 'Preiskarten',
+  description: 'Preise einer Kategorie als Karten, z. B. Mitgliedschaften: Titel, Betrag („auf Anfrage“), Einheit, Zusatz, Aufnahmegebühr, Leistungen (eine je Zeile am Preis), hervorgehobene Karte mit „Beliebt“. Eigenschaften: kategorie (z. B. mitgliedschaft), ziel (Link der Buttons, z. B. #antrag). Daten: {options.golfplatz.preise}.',
+  properties: [
+    { key: 'kategorie', name: 'Kategorie', type: { primitive: 'string' }, default: 'mitgliedschaft' },
+    { key: 'ziel', name: 'Link der Buttons', type: { primitive: 'string' }, default: '#antrag' },
+  ],
+  content: loop({ target: `${PR}.tabellen`, itemId: 'k' }, [
+    wenn('k.key', [
+      el('div', 'grid grid--2 price-cards', [
+        loop({ target: 'k.karten', itemId: 'c' }, [
+          el('article', 'price-card price-card--{c.mod}', [
+            wenn('c.hervorheben', [t('p', 'price-card__badge', 'Beliebt')]),
+            t('h2', 'price-card__title', '{c.titel}'),
+            el('p', 'price-card__price', [
+              t('span', 'price-card__amount', '{c.betrag}'),
+              wenn('c.einheit', [text(' '), t('span', 'price-card__unit', '{c.einheit}')]),
+            ]),
+            wenn('c.zusatz', [t('p', 'price-card__note', '{c.zusatz}')]),
+            wenn('c.aufnahme', [t('p', 'price-card__note', '{c.aufnahme}')]),
+            wenn('c.hat_leistungen', [
+              el('ul', 'price-card__list', [loop({ target: 'c.leistungen', itemId: 'l' }, [t('li', 'price-card__item', '{l.text}')])]),
+            ]),
+            t('a', 'btn btn--{c.button_mod} price-card__button', '{c.button}', { attrs: { href: '{props.ziel}' } }),
+          ], { name: 'Preiskarte' }),
+        ]),
+      ], { name: 'Preiskarten' }),
+    ], '===', 'props.kategorie'),
+  ]),
+};

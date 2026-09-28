@@ -5,7 +5,7 @@ import { el, t, text, wenn, club, telHref, icon, CLUB, komponente } from './lib.
 import { birdiebookKomponente, scorekarteKomponente, ratingKomponente, spielvorgabenRechnerKomponente, spielvorgabenTabellenKomponente } from './birdiebook.mjs';
 import { platzstatusKomponente, ampelKomponente, platzstatusKurzKomponente } from './platzstatus.mjs';
 import { oeffnungszeitenKomponente, oeffnungszeitenAlleKomponente } from './zeiten.mjs';
-import { preistabelleKomponente } from './preise.mjs';
+import { preistabelleKomponente, preiskartenKomponente } from './preise.mjs';
 import { zaehlkarteKomponente } from './zaehlkarte.mjs';
 import { lochwettspielKomponente } from './lochwettspiel.mjs';
 
@@ -45,6 +45,7 @@ export const components = [
   farbschemaKomponente,
   oeffnungszeitenAlleKomponente,
   preistabelleKomponente,
+  preiskartenKomponente,
   platzstatusKurzKomponente,
   platzstatusKomponente,
   scorekarteKomponente,

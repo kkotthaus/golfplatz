@@ -1,0 +1,51 @@
+<!-- wp:etch/loop {"target":"options.golfplatz.preise.tabellen","itemId":"k"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"k.key","operator":"===","rightHand":"props.kategorie"},"conditionString":"k.key === props.kategorie"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"grid grid\u002d\u002d2 price-cards"},"metadata":{"name":"Preiskarten"}} -->
+<!-- wp:etch/loop {"target":"k.karten","itemId":"c"} -->
+<!-- wp:etch/element {"tag":"article","attributes":{"class":"price-card price-card\u002d\u002d{c.mod}"},"metadata":{"name":"Preiskarte"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"c.hervorheben","operator":"isTruthy","rightHand":null},"conditionString":"c.hervorheben"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"price-card__badge"}} -->
+<!-- wp:etch/text {"content":"Beliebt"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"h2","attributes":{"class":"price-card__title"}} -->
+<!-- wp:etch/text {"content":"{c.titel}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"price-card__price"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"price-card__amount"}} -->
+<!-- wp:etch/text {"content":"{c.betrag}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"c.einheit","operator":"isTruthy","rightHand":null},"conditionString":"c.einheit"} -->
+<!-- wp:etch/text {"content":" "} /-->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"price-card__unit"}} -->
+<!-- wp:etch/text {"content":"{c.einheit}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"c.zusatz","operator":"isTruthy","rightHand":null},"conditionString":"c.zusatz"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"price-card__note"}} -->
+<!-- wp:etch/text {"content":"{c.zusatz}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"c.aufnahme","operator":"isTruthy","rightHand":null},"conditionString":"c.aufnahme"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"price-card__note"}} -->
+<!-- wp:etch/text {"content":"{c.aufnahme}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"c.hat_leistungen","operator":"isTruthy","rightHand":null},"conditionString":"c.hat_leistungen"} -->
+<!-- wp:etch/element {"tag":"ul","attributes":{"class":"price-card__list"}} -->
+<!-- wp:etch/loop {"target":"c.leistungen","itemId":"l"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"price-card__item"}} -->
+<!-- wp:etch/text {"content":"{l.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{props.ziel}","class":"btn btn\u002d\u002d{c.button_mod} price-card__button"}} -->
+<!-- wp:etch/text {"content":"{c.button}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
