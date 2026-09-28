@@ -12,4 +12,5 @@ Stand der Umsetzung (angelegte Beitragstypen/Felder, offene Handgriffe): [docs/u
 - Antworte auf Deutsch.
 - Halte dich an die Konventionen aus der Stack-Doku (u. a. BEM).
 - Keine Shortcodes, wenn es als Etch-Komponente geht: PHP liefert nur Daten (Etch-Filter `etch/dynamic_data/option` bzw. `etch/dynamic_data/post`), Markup baut die Etch-Komponente.
+- Neue oder geänderte Funktionen im Handbuch für die Redaktion nachtragen: [docs/handbuch.md](docs/handbuch.md) (erscheint im Backend unter „Handbuch“).
 - Farben immer aus dem ACSS-Farbsystem (`--primary*`, `--secondary*` …), nie eigene Farbvariablen oder Hex-Werte im CSS.

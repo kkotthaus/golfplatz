@@ -8,6 +8,7 @@ import { templates, pages } from './templates.mjs';
 import { components } from './komponenten.mjs';
 import { acssEinstellungen } from './acss-farben.mjs';
 import { loops } from './loops.mjs';
+import { handbuchHtml } from './handbuch.mjs';
 import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, news, preise, kurse, kurseAnmeldung, lochwettspiele } from '../../prototype/src/data.mjs';
 
 const hier = dirname(fileURLToPath(import.meta.url));
@@ -40,6 +41,10 @@ writeFileSync(
     2,
   ) + '\n',
 );
+
+// Handbuch für die Backend-Seite „Handbuch“ (mu-plugins/golfplatz-handbuch.php), Quelle docs/handbuch.md.
+writeFileSync(join(dist, 'handbuch.html'), handbuchHtml(readFileSync(join(hier, '../../docs/handbuch.md'), 'utf8')));
+console.log('handbuch.html');
 
 // Inhalte für golfplatz/import-content, Quelle sind die Prototyp-Daten.
 mkdirSync(join(dist, 'daten'), { recursive: true });

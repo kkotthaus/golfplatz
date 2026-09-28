@@ -234,6 +234,14 @@ Stand 2026-09-28. Daten aus `mu-plugins/golfplatz-news.php`, Markup aus `wordpre
   - Zusätzlich leeren `the_content` und die REST-API ihn, damit er auch nicht über Feeds oder die API herauskommt.
 - **Beispielinhalte:** sechs Beiträge aus dem Prototyp (`daten/post.json`, `golfplatz/import-content` mit `post`), zum Ersetzen durch echte Nachrichten. Der WordPress-Standardbeitrag „Hallo Welt!“ liegt im Papierkorb.
 
+### Handbuch im Backend
+
+Stand 2026-09-28. Die Bedienungsanleitung für alle Funktionen steht in [handbuch.md](handbuch.md). Der Build macht daraus `dist/handbuch.html`, und `mu-plugins/golfplatz-handbuch.php` zeigt sie im Backend unter **Handbuch** (ganz oben im Menü) mit Kapitel-Verzeichnis, dazu ein Kasten im Dashboard.
+
+- Sichtbar für angemeldete Benutzer mit `edit_posts` (Administrator, Redakteur, Autor, Mitarbeiter) oder `edit_sperrungen` (Rolle Platzstatus), nicht für Abonnenten bzw. künftige Mitglieder-Konten.
+- Bei neuen oder geänderten Funktionen das Handbuch mitpflegen.
+- Mannschaften haben dafür jetzt das Feld „Reihenfolge“ (Seiten-Attribute), das im Editor bisher fehlte.
+
 ### Lochwettspiel (Turnierbaum)
 
 Einmal im Jahr, Teams aus zwei Spielern, K.-o.-System. Jede Runde hat einen vorgeschriebenen Spielzeitraum. Stand 2026-09-28.

@@ -9,6 +9,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// Feld „Reihenfolge“ (menu_order) im Editor der Mannschaft – bestimmt die Reihenfolge der Übersicht.
+add_action( 'init', fn() => add_post_type_support( 'mannschaft', 'page-attributes' ), 20 );
+
 /** Name eines Spielers – nur mit Einwilligung (spieler_einwilligung), sonst leer. */
 function golfplatz_spieler_name( $id ): string {
 	$id = (int) $id;
