@@ -62,7 +62,7 @@ const GOLFPLATZ_MCP_TYPES = array( 'page', 'wp_template', 'wp_block' );
 const GOLFPLATZ_MCP_LOOP_TYPES = array( 'spielbahn', 'preis', 'person', 'kurs', 'post', 'mannschaft', 'ligaspiel', 'spielbericht', 'sperrung', 'lochwettspiel' );
 
 /** Beitragstypen, deren Inhalte aus daten/<typ>.json importiert werden dürfen. */
-const GOLFPLATZ_MCP_IMPORT_TYPES = array( 'spielbahn', 'sperrung', 'person', 'preis', 'kurs', 'lochwettspiel', 'spieler', 'mannschaft', 'ligaspiel', 'spielbericht' );
+const GOLFPLATZ_MCP_IMPORT_TYPES = array( 'spielbahn', 'sperrung', 'person', 'post', 'preis', 'kurs', 'lochwettspiel', 'spieler', 'mannschaft', 'ligaspiel', 'spielbericht' );
 
 add_action(
 	'wp_abilities_api_init',
@@ -752,6 +752,13 @@ function golfplatz_mcp_import_content( $input ) {
 			'post_status' => $item['status'] ?? 'publish',
 			'menu_order'  => (int) ( $item['order'] ?? 0 ),
 		);
+		// Beiträge: Datum und Textauszug
+		if ( isset( $item['date'] ) ) {
+			$post['post_date'] = sanitize_text_field( $item['date'] );
+		}
+		if ( isset( $item['excerpt'] ) ) {
+			$post['post_excerpt'] = sanitize_textarea_field( $item['excerpt'] );
+		}
 		if ( isset( $item['content'] ) ) {
 			$post['post_content'] = wp_kses_post( (string) $item['content'] );
 		}

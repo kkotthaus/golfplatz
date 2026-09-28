@@ -217,6 +217,23 @@ Stand 2026-09-28, Aufbau wie im Prototyp. Daten aus `mu-plugins/golfplatz-club.p
   - Kontaktformular ergänzen, sobald ein Formular-Plugin feststeht.
   - Jugendtext prüfen.
 
+### Aktuelles `/news/`
+
+Stand 2026-09-28. Daten aus `mu-plugins/golfplatz-news.php`, Markup aus `wordpress/etch/news.mjs`.
+
+- **Beiträge:** News sind normale Beiträge (`post`) mit Kategorie, Textauszug (Teaser), Beitragsbild und dem Schalter `nur_mitglieder`.
+  - Die URL lautet `/news/<slug>/`: eigene Rewrite-Regel und Filter `post_link`. Die Permalink-Struktur der übrigen Inhalte bleibt unverändert.
+  - Kategorie-Links führen auf `/news/?kategorie=<slug>` statt auf ein eigenes Archiv.
+- **Übersicht:** Etch-Komponente „Newskarten“ mit `liste` = `alle`.
+  - Darüber stehen Kategorien als Pillen, darunter Seitenzahlen (`?seite=<n>`, 9 je Seite).
+  - Daten: `{options.golfplatz.news}` (`beitraege`, `kategorien`, `seiten`, `neueste`).
+- **Startseite:** Abschnitt „Aktuelles“ mit den drei neuesten Beiträgen (`liste` = `neueste`).
+- **Beitrag:** Template `single-post` mit Kopf (Kategorie · Datum), Teaser, Inhalt und Rücklink. Daten: `{this.golfplatz.news}`.
+- **Nur für Mitglieder:** Ohne Anmeldung erscheinen nur Titel, Teaser und der Hinweis mit Anmelde-Button.
+  - Den Volltext zeigt das Template dann nicht an.
+  - Zusätzlich leeren `the_content` und die REST-API ihn, damit er auch nicht über Feeds oder die API herauskommt.
+- **Beispielinhalte:** sechs Beiträge aus dem Prototyp (`daten/post.json`, `golfplatz/import-content` mit `post`), zum Ersetzen durch echte Nachrichten. Der WordPress-Standardbeitrag „Hallo Welt!“ liegt im Papierkorb.
+
 ### Lochwettspiel (Turnierbaum)
 
 Einmal im Jahr, Teams aus zwei Spielern, K.-o.-System. Jede Runde hat einen vorgeschriebenen Spielzeitraum. Stand 2026-09-28.

@@ -137,6 +137,21 @@
       ]
     },
     {
+      "key": "Newskarten",
+      "name": "Newskarten",
+      "description": "Beiträge als Karten (Bild bzw. Verlauf, Kategorie, Datum, Titel, Teaser, Schloss bei „Nur für Mitglieder“). Eigenschaft liste: neueste (drei neueste, Startseite) oder alle (Übersicht /news/ mit ?kategorie= und ?seite=). Daten: {options.golfplatz.news} aus golfplatz-news.php.",
+      "properties": [
+        {
+          "key": "liste",
+          "name": "Liste (neueste oder alle)",
+          "type": {
+            "primitive": "string"
+          },
+          "default": "neueste"
+        }
+      ]
+    },
+    {
       "key": "PlatzstatusKurz",
       "name": "Platzstatus kurz",
       "description": "Kurzfassung im Hero der Startseite: Zustand jetzt, heutige Sperren von Platz und Abschlägen, Spielbedingungen als Chips (inkl. Fahnen), Link auf den ausführlichen Platzstatus. Daten: {options.golfplatz.platzstatus.kurz}.",
@@ -263,6 +278,10 @@
       "title": "Spielbericht"
     },
     {
+      "slug": "single-post",
+      "title": "Beitrag"
+    },
+    {
       "slug": "page-birdiebook",
       "title": "Birdiebook (Vollbild)"
     },
@@ -325,11 +344,6 @@
       "order": 50
     },
     {
-      "slug": "news",
-      "title": "Aktuelles",
-      "order": 50
-    },
-    {
       "slug": "mitglieder",
       "title": "Mitgliederbereich",
       "order": 50
@@ -352,6 +366,11 @@
     {
       "slug": "club",
       "title": "Club & Kontakt",
+      "order": 50
+    },
+    {
+      "slug": "news",
+      "title": "Aktuelles",
       "order": 50
     },
     {

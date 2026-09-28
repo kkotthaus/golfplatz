@@ -921,6 +921,11 @@ background: var(--warning-ultra-light); box-shadow: inset 0 0 0 1px var(--warnin
 .person-card__avatar--bild { object-fit: cover; padding: 0; }
 .club-map { width: 100%; height: auto; border-radius: var(--radius-l); }
 @media (max-width: 63.99em) { .subnav { top: 6.3rem; } }
+.news-card__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.news-card__members .icon { width: 1em; height: 1em; vertical-align: -0.125em; }
+.pagination { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-xs); margin-top: var(--space-l); }
+.pagination__link { min-width: 2.5rem; padding: 0.4rem 0.6rem; text-align: center; border: 1px solid var(--base-light); border-radius: var(--radius); color: var(--primary-dark); text-decoration: none; }
+.pagination__link--aktiv { background: var(--primary); border-color: var(--primary); color: var(--white); font-weight: 700; }
 .dwc-nest-header.dwc-nest-header,
 .dwce-nav-nested.dwce-nav-nested {
 --primary-clr: var(--primary);

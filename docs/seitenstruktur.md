@@ -366,8 +366,8 @@ Gilt für alle 10 Einträge von `mannschaft`.
 
 **Anforderungen**
 
-- Kategorie-Archive (z. B. `/news/kategorie/<slug>/`) nutzen dasselbe Template.
-- Die Seite `/news/` wird unter Einstellungen → Lesen als Beitragsseite gesetzt, oder die Beitrags-URL wird auf `/news/%postname%/` gestellt.
+- Kategorien filtern die Übersicht per `/news/?kategorie=<slug>` (Pillen über den Karten). Kategorie-Links in WordPress zeigen dorthin.
+- `/news/` ist eine normale Seite. Beiträge liegen unter `/news/<slug>/` (Rewrite-Regel in `golfplatz-news.php`), die Permalink-Struktur bleibt `/%postname%/`.
 
 ### News-Beitrag (Single) `/news/<slug>/`
 

@@ -1078,3 +1078,10 @@ html.scheme--dark {
 .club-map { width: 100%; height: auto; border-radius: var(--radius-l); }
 /* Sprungnavigation unter dem EMMP-Header: auf schmalen Bildschirmen ist der Header niedriger (Top-Bar + Logo-Zeile ≈ 101 px) */
 @media (max-width: 63.99em) { .subnav { top: 6.3rem; } }
+
+/* Aktuelles: Beitragsbild in der Karte, Schloss-Icon in der Zeile, Seitenzahlen unter der Übersicht */
+.news-card__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.news-card__members .icon { width: 1em; height: 1em; vertical-align: -0.125em; }
+.pagination { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-xs); margin-top: var(--space-l); }
+.pagination__link { min-width: 2.5rem; padding: 0.4rem 0.6rem; text-align: center; border: 1px solid var(--base-light); border-radius: var(--radius); color: var(--primary-dark); text-decoration: none; }
+.pagination__link--aktiv { background: var(--primary); border-color: var(--primary); color: var(--white); font-weight: 700; }

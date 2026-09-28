@@ -5,6 +5,7 @@ import { el, t, text, raw, wenn, markup, komponente, club, telHref, icon, svgEl,
 import { header } from './header.mjs';
 import { birdiebookKomponente, bahnenRaster } from './birdiebook.mjs';
 import { anfahrt } from './club.mjs';
+import { kategorienNav, seitenNav, keineBeitraege, beitragInhalt } from './news.mjs';
 import { MS, BERICHT, teamKarten, alleLigaspiele, teamInhalt, teamKader, berichtMeta, berichtBilder, berichtRuecklink } from './mannschaften.mjs';
 
 // Hero-Illustration der Startseite (wie im Prototyp). Platzhalter, bis ein Foto des Platzes vorliegt.
@@ -118,6 +119,13 @@ export const pages = [
         ]),
       ], { name: 'Einstiege' }),
       el('section', 'section section--tint', [el('div', 'container', [komponente('GastInfo', { anker: 'gast' })])], { name: 'Als Gast spielen' }),
+      el('section', 'section', [
+        el('div', 'container', [
+          el('header', 'section-head', [t('p', 'section-head__eyebrow', 'Aus dem Club'), t('h2', 'section-head__title', 'Aktuelles')]),
+          komponente('Newskarten', { liste: 'neueste' }),
+          el('p', 'more-link', [el('a', 'link-arrow', [text('Alle Nachrichten '), icon('arrow')], { attrs: { href: '/news/' } })]),
+        ]),
+      ], { name: 'Aktuelles' }),
     ),
   },
   {
@@ -332,7 +340,6 @@ const platzhalter = (slug, title, eyebrow, lead, parent) => ({
 pages.push(
   platzhalter('golfschule', 'Golfschule', 'Golf lernen', 'Vom ersten Schwung bis zur DGV-Platzreife mit unseren Professionals.'),
   platzhalter('restaurant', 'Restaurant', 'Gastronomie', 'Für Golfer und alle anderen Gäste.'),
-  platzhalter('news', 'Aktuelles', 'News', 'Neues aus dem Club.'),
   platzhalter('mitglieder', 'Mitgliederbereich', 'Intern', 'Melden Sie sich an, um die internen Inhalte zu sehen.'),
   platzhalter('impressum', 'Impressum', '', ''),
   platzhalter('datenschutz', 'Datenschutz', '', ''),
@@ -446,6 +453,19 @@ pages.push({
   ),
 });
 
+// Aktuelles: Beiträge (post) als Karten, Kategorien als Pillen (?kategorie=), Seitenzahlen (?seite=). Daten: mu-plugins/golfplatz-news.php.
+pages.push({
+  slug: 'news',
+  title: 'Aktuelles',
+  order: 50,
+  content: markup(
+    seitenkopf({ krumen: [['Aktuelles']], eyebrow: 'News', titel: 'Aktuelles aus dem Club' }),
+    el('section', 'section', [
+      el('div', 'container', [kategorienNav(), komponente('Newskarten', { liste: 'alle' }), keineBeitraege(), seitenNav()]),
+    ], { name: 'Beiträge' }),
+  ),
+});
+
 // Turniere: Turnierkalender des Heimatclubs, Platzbelegung Heimatclub + GOLFHOCHZEHN-Partnerclubs (beides aus PC CADDIE,
 // golfplatz-turniere.php), das Lochwettspiel (auf der Website gepflegt) und die Ergebnisse des Heimatclubs
 pages.push({
@@ -528,6 +548,15 @@ export const templates = [
         titel: '{this.title}',
       }),
       el('section', 'section', [el('div', 'container prose prose--narrow', [berichtMeta(), postContent(), berichtBilder(), berichtRuecklink()])], { name: 'Bericht' }),
+    ),
+  },
+  {
+    // Ein News-Beitrag: /news/<slug>/ – bei „Nur für Mitglieder“ ohne Anmeldung nur Titel, Teaser und Sperre
+    slug: 'single-post',
+    title: 'Beitrag',
+    content: rahmen(
+      seitenkopf({ krumen: [['Aktuelles', '/news/'], ['{this.title}']], eyebrow: '{this.golfplatz.news.kategorie} · {this.golfplatz.news.datum}', titel: '{this.title}' }),
+      el('section', 'section', [el('div', 'container prose prose--narrow', beitragInhalt())], { name: 'Beitrag' }),
     ),
   },
   {

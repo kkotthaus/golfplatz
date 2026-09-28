@@ -1,0 +1,95 @@
+{
+  "key": "slug",
+  "items": [
+    {
+      "title": "Herbstpreis des Präsidenten: Meldeliste offen",
+      "slug": "herbstpreis-des-praesidenten",
+      "date": "2026-09-22 10:00:00",
+      "excerpt": "Am Freitag startet das traditionelle Herbstturnier mit Kanonenstart. Bitte meldet euch bis Donnerstag, 12 Uhr, über PC CADDIE an.",
+      "content": "<!-- wp:paragraph --><p>Hier steht der vollständige Beitragstext. Er wird im WordPress-Editor gepflegt und kann Bilder, Zwischenüberschriften und Links enthalten.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "nur_mitglieder": 0
+      },
+      "terms": {
+        "category": [
+          "Turniere"
+        ]
+      }
+    },
+    {
+      "title": "Grünpflege im Herbst: Was jetzt passiert",
+      "slug": "gruens-werden-besandet",
+      "date": "2026-09-18 10:00:00",
+      "excerpt": "Unser Greenkeeping-Team aerifiziert und besandet die Grüns. Warum das nötig ist und wann der Platz wieder im Topzustand ist.",
+      "content": "<!-- wp:paragraph --><p>Hier steht der vollständige Beitragstext. Er wird im WordPress-Editor gepflegt und kann Bilder, Zwischenüberschriften und Links enthalten.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "nur_mitglieder": 0
+      },
+      "terms": {
+        "category": [
+          "Platz"
+        ]
+      }
+    },
+    {
+      "title": "Zwei Podestplätze bei der Jugend-Landesmeisterschaft",
+      "slug": "jugend-landesmeisterschaft",
+      "date": "2026-09-10 10:00:00",
+      "excerpt": "Unsere Jugend hat bei den Landesmeisterschaften stark gespielt. Glückwunsch an Lea und Jan zu Platz 2 und 3!",
+      "content": "<!-- wp:paragraph --><p>Hier steht der vollständige Beitragstext. Er wird im WordPress-Editor gepflegt und kann Bilder, Zwischenüberschriften und Links enthalten.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "nur_mitglieder": 0
+      },
+      "terms": {
+        "category": [
+          "Jugend"
+        ]
+      }
+    },
+    {
+      "title": "Die neue Terrasse ist eröffnet",
+      "slug": "neue-terrasse",
+      "date": "2026-08-29 10:00:00",
+      "excerpt": "Mehr Plätze, mehr Schatten und der beste Blick auf das 18. Grün: Unser Clubrestaurant hat die neue Terrasse eingeweiht.",
+      "content": "<!-- wp:paragraph --><p>Hier steht der vollständige Beitragstext. Er wird im WordPress-Editor gepflegt und kann Bilder, Zwischenüberschriften und Links enthalten.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "nur_mitglieder": 0
+      },
+      "terms": {
+        "category": [
+          "Club"
+        ]
+      }
+    },
+    {
+      "title": "Einladung zur Mitgliederversammlung",
+      "slug": "mitgliederversammlung-2026",
+      "date": "2026-08-15 10:00:00",
+      "excerpt": "Die ordentliche Mitgliederversammlung findet am 14. November im Clubhaus statt. Die Unterlagen stehen im Mitgliederbereich bereit.",
+      "content": "<!-- wp:paragraph --><p>Hier steht der vollständige Beitragstext. Er wird im WordPress-Editor gepflegt und kann Bilder, Zwischenüberschriften und Links enthalten.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "nur_mitglieder": 1
+      },
+      "terms": {
+        "category": [
+          "Club"
+        ]
+      }
+    },
+    {
+      "title": "Firmen-Golf-Tag: Team-Event mit Schnupperkurs",
+      "slug": "firmen-golf-tag",
+      "date": "2026-07-30 10:00:00",
+      "excerpt": "Golf als Teamevent: Wir haben ein Paket aus Schnupperkurs, Turnier und Abendessen geschnürt – auch für Nicht-Golfer.",
+      "content": "<!-- wp:paragraph --><p>Hier steht der vollständige Beitragstext. Er wird im WordPress-Editor gepflegt und kann Bilder, Zwischenüberschriften und Links enthalten.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "nur_mitglieder": 0
+      },
+      "terms": {
+        "category": [
+          "Events"
+        ]
+      }
+    }
+  ]
+}

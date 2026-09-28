@@ -8,7 +8,7 @@ import { templates, pages } from './templates.mjs';
 import { components } from './komponenten.mjs';
 import { acssEinstellungen } from './acss-farben.mjs';
 import { loops } from './loops.mjs';
-import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, preise, kurse, kurseAnmeldung, lochwettspiele } from '../../prototype/src/data.mjs';
+import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, news, preise, kurse, kurseAnmeldung, lochwettspiele } from '../../prototype/src/data.mjs';
 
 const hier = dirname(fileURLToPath(import.meta.url));
 const dist = join(hier, 'dist');
@@ -116,6 +116,28 @@ writeFileSync(
   ) + '\n',
 );
 console.log(`daten/person.json  (${personen.length} Personen)`);
+
+// Beispiel-News (Beiträge) aus dem Prototyp – zum Ersetzen durch echte Nachrichten.
+writeFileSync(
+  join(dist, 'daten/post.json'),
+  JSON.stringify(
+    {
+      key: 'slug',
+      items: news.map((n) => ({
+        title: n.titel,
+        slug: n.slug,
+        date: `${n.datum} 10:00:00`,
+        excerpt: n.teaser,
+        content: '<!-- wp:paragraph --><p>Hier steht der vollständige Beitragstext. Er wird im WordPress-Editor gepflegt und kann Bilder, Zwischenüberschriften und Links enthalten.</p><!-- /wp:paragraph -->',
+        meta: { nur_mitglieder: n.mitglieder ? 1 : 0 },
+        terms: { category: [n.kategorie] },
+      })),
+    },
+    null,
+    2,
+  ) + '\n',
+);
+console.log(`daten/post.json  (${news.length} Beispiel-Beiträge)`);
 
 // Preise (Beitragstyp „preis“) mit Preiskategorie. Reihenfolge über menu_order wie auf dreibaeumen.de.
 const preisKategorien = [
