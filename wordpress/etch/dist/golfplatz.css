@@ -842,6 +842,14 @@ background: var(--warning-ultra-light); box-shadow: inset 0 0 0 1px var(--warnin
 .lw-round__dates, .lw-round__count { font-size: var(--text-s); color: var(--base-semi-dark); font-variant-numeric: tabular-nums; }
 .lw-round__matches { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: var(--space-s); padding: var(--space-s); border-top: 1px solid var(--base-light); background: var(--secondary-ultra-light); }
 .lw-round__item { display: flex; }
+.match-table--grid { display: grid; grid-template-columns: max-content minmax(8rem, 1fr) max-content minmax(10rem, 1.5fr) max-content; min-width: 42rem; }
+.match-table--kompakt { grid-template-columns: max-content max-content minmax(10rem, 1fr) max-content; min-width: 32rem; }
+.match-table--grid .match-table__row { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; }
+.match-table__cell { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--base-ultra-light); }
+.match-table__row--head .match-table__cell { background: var(--primary); color: var(--white); font-weight: 600; font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; }
+.team-photo--bild { display: block; width: 100%; height: auto; object-fit: cover; margin-bottom: var(--space-l); }
+.report-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: var(--space-s); margin-block: var(--space-m); }
+.report-gallery__image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
 .dwc-nest-header.dwc-nest-header,
 .dwce-nav-nested.dwce-nav-nested {
 --primary-clr: var(--primary);

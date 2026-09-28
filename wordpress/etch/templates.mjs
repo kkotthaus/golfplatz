@@ -4,6 +4,7 @@
 import { el, t, text, raw, wenn, markup, komponente, club, telHref, icon, svgEl, postContent, loop, CLUB } from './lib.mjs';
 import { header } from './header.mjs';
 import { birdiebookKomponente, bahnenRaster } from './birdiebook.mjs';
+import { MS, BERICHT, teamKarten, alleLigaspiele, teamInhalt, teamKader, berichtMeta, berichtBilder, berichtRuecklink } from './mannschaften.mjs';
 
 // Hero-Illustration der Startseite (wie im Prototyp). Platzhalter, bis ein Foto des Platzes vorliegt.
 const heroArt = () =>
@@ -412,6 +413,48 @@ pages.push({
 const rahmen = (...inhalt) => markup(header(), el('main', 'site-main', inhalt, { attrs: { id: 'main' }, name: 'Main' }), komponente('SiteFooter'));
 
 export const templates = [
+  {
+    // Übersicht /mannschaften/ (Archiv des Beitragstyps „mannschaft“) mit allen Ligaspielen unter #ligaspiele
+    slug: 'archive-mannschaft',
+    title: 'Mannschaften',
+    content: rahmen(
+      seitenkopf({
+        krumen: [['Mannschaften']],
+        eyebrow: 'Ligabetrieb',
+        titel: 'Unsere Mannschaften',
+        lead: `{${MS}.anzahl_text} vertreten den Club in den Ligen des Landesverbands – von der Clubmannschaft bis zur AK65.`,
+      }),
+      el('section', 'section', [
+        el('div', 'container', [
+          teamKarten(),
+          el('p', 'more-link', [t('a', 'btn btn--outline', 'Alle Ligaspiele im Überblick', { attrs: { href: '#ligaspiele' } })]),
+        ]),
+      ], { name: 'Mannschaften' }),
+      el('section', 'section section--tint', [el('div', 'container', alleLigaspiele())], { attrs: { id: 'ligaspiele' }, name: 'Alle Ligaspiele' }),
+    ),
+  },
+  {
+    // Eine Mannschaft: /mannschaften/<slug>/
+    slug: 'single-mannschaft',
+    title: 'Mannschaft',
+    content: rahmen(
+      seitenkopf({ krumen: [['Mannschaften', '/mannschaften/'], ['{this.title}']], eyebrow: '{this.golfplatz.team.liga}', titel: '{this.title}' }),
+      el('section', 'section', [el('div', 'container split split--wide-left', [teamInhalt(), teamKader()])], { name: 'Mannschaft' }),
+    ),
+  },
+  {
+    // Ein Spielbericht: /spielberichte/<slug>/ – Mannschaft, Spieltag und Datum kommen über das Ligaspiel
+    slug: 'single-spielbericht',
+    title: 'Spielbericht',
+    content: rahmen(
+      seitenkopf({
+        krumen: [['Mannschaften', '/mannschaften/'], [`{${BERICHT}.mannschaft}`, `{${BERICHT}.mannschaft_link}`], ['Spielbericht']],
+        eyebrow: `{${BERICHT}.eyebrow}`,
+        titel: '{this.title}',
+      }),
+      el('section', 'section', [el('div', 'container prose prose--narrow', [berichtMeta(), postContent(), berichtBilder(), berichtRuecklink()])], { name: 'Bericht' }),
+    ),
+  },
   {
     // Vollbild-Birdiebook: schmale Leiste (Logo, Platzstatus, Schließen), kein Menü, kein Footer
     slug: 'page-birdiebook',

@@ -210,6 +210,18 @@
   ],
   "templates": [
     {
+      "slug": "archive-mannschaft",
+      "title": "Mannschaften"
+    },
+    {
+      "slug": "single-mannschaft",
+      "title": "Mannschaft"
+    },
+    {
+      "slug": "single-spielbericht",
+      "title": "Spielbericht"
+    },
+    {
       "slug": "page-birdiebook",
       "title": "Birdiebook (Vollbild)"
     },

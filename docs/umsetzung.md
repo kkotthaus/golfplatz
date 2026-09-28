@@ -147,6 +147,22 @@ Umsetzung des [Konzepts](konzept-birdiebook.md), Stand 2026-09-26.
 - **Hinweis zum Import:** Beim Übernehmen der drei Felder am 2026-09-27 hat `import-settings` alle Clubdaten aus dem Repository neu geschrieben. Im Admin geänderte Clubdaten wären dabei überschrieben worden. Seitdem kann `import-settings` mit `felder` gezielt einzelne Felder übernehmen.
 - Mitgliedschaftspreise (Kategorie „Mitgliedschaft“) stehen auf `/mitgliedschaft/` (siehe unten).
 
+### Mannschaften & Ligaspiele
+
+Stand 2026-09-28, Aufbau wie im Prototyp.
+
+- **Übersicht `/mannschaften/`** (Template `archive-mannschaft`): Seitenkopf mit Anzahl, Mannschaftskarten in fester Reihenfolge (Feld „Reihenfolge“/menu_order, dann Titel) mit Liga, Spielführer und nächstem Spiel bzw. „Saison beendet“. Darunter **„Alle Ligaspiele“ als Abschnitt `#ligaspiele`** (kommende und vergangene Spiele, Heimspiele hervorgehoben). Damit ist der offene Punkt „URL Alle Ligaspiele“ gelöst: keine eigene Seite `/mannschaften/ligaspiele/`, die mit den Mannschafts-URLs kollidieren würde.
+- **Mannschaft `/mannschaften/<slug>/`** (Template `single-mannschaft`): Liga, Mannschaftsfoto (Beitragsbild, nur wenn gesetzt), Ligaspiele chronologisch, Spielberichte (nur wenn vorhanden), Spielführer und Kader. **Spieler erscheinen nur mit `spieler_einwilligung`**, auch der Spielführer.
+- **Spielbericht `/spielberichte/<slug>/`** (Template `single-spielbericht`): Mannschaft, Spieltag und Datum über das Ligaspiel, Autor (WordPress-Benutzer), Spielort, Platzierung, Text aus dem Editor, Bilder aus `bericht_bilder`, Rücklink zur Mannschaft.
+- **Daten:** `golfplatz-mannschaften.php` liefert `{options.golfplatz.mannschaften}` (`anzahl_text`, `liste[]`, `kommende[]`, `vergangene[]`), `{this.golfplatz.team}` und `{this.golfplatz.bericht}`. Ergebnis: Platzierung („1. Platz“), sonst `ligaspiel_ergebnis`. Ein Spiel gilt bis zum Ende seines Spieltags als kommend.
+- **Etch:** Bausteine in `wordpress/etch/mannschaften.mjs`; Ligaspiel-Tabellen als CSS-Grid mit Tabellen-Rollen (`.match-table--grid`).
+- **Beispieldaten** aus dem Prototyp (Platzhalter!): 10 Mannschaften, 69 Spieler (10 ohne Einwilligung, zum Prüfen des Filters), 50 Ligaspiele der Saison 2026, 2 Spielberichte. Import in dieser Reihenfolge: `golfplatz/import-content` mit `spieler`, `mannschaft`, `ligaspiel`, `spielbericht` – Verweise stehen in den Dateien als `{"@post": "<typ>:<slug>"}` und werden beim Import zur ID.
+- **Geprüft** am 2026-09-28 auf golfplatz.local (1280 px und 375 px): Übersicht, Mannschaft AK50/1 Herren (6 von 7 Spielern mit Einwilligung), Spielbericht mit Rücklink, keine Konsolenfehler.
+- **Offen:**
+  - Echte Mannschaften, Spieler (mit Einwilligung), Ligaspiele und Berichte vom Club; die Platzhalter vorher löschen.
+  - Startseite „Nächste Ligaspiele“ ist noch nicht eingebaut; die Daten liegen schon unter `{options.golfplatz.mannschaften.kommende}`.
+  - Im Menü ist „Mannschaften“ auf Mannschafts- und Berichtsseiten nicht markiert (EMMP markiert nur exakt gleiche URLs).
+
 ### Mitgliedschaft `/mitgliedschaft/`
 
 Stand 2026-09-28, Aufbau wie im Prototyp.

@@ -62,7 +62,7 @@ const GOLFPLATZ_MCP_TYPES = array( 'page', 'wp_template', 'wp_block' );
 const GOLFPLATZ_MCP_LOOP_TYPES = array( 'spielbahn', 'preis', 'person', 'kurs', 'post', 'mannschaft', 'ligaspiel', 'spielbericht', 'sperrung', 'lochwettspiel' );
 
 /** Beitragstypen, deren Inhalte aus daten/<typ>.json importiert werden dürfen. */
-const GOLFPLATZ_MCP_IMPORT_TYPES = array( 'spielbahn', 'sperrung', 'person', 'preis', 'kurs', 'lochwettspiel' );
+const GOLFPLATZ_MCP_IMPORT_TYPES = array( 'spielbahn', 'sperrung', 'person', 'preis', 'kurs', 'lochwettspiel', 'spieler', 'mannschaft', 'ligaspiel', 'spielbericht' );
 
 add_action(
 	'wp_abilities_api_init',
@@ -202,7 +202,7 @@ add_action(
 			'import-content',
 			array(
 				'label'            => 'Inhalte aus dem Build importieren',
-				'description'      => 'Liest wp-content/mu-plugins/golfplatz/daten/<post_type>.json und legt Einträge an oder aktualisiert sie. Erkannt wird ein Eintrag am Schlüsselfeld der Datei (z. B. bahn_nummer). Erlaubte Beitragstypen: ' . implode( ', ', GOLFPLATZ_MCP_IMPORT_TYPES ) . '.',
+				'description'      => 'Liest wp-content/mu-plugins/golfplatz/daten/<post_type>.json und legt Einträge an oder aktualisiert sie. Erkannt wird ein Eintrag am Schlüsselfeld der Datei (z. B. bahn_nummer). Erlaubte Beitragstypen: ' . implode( ', ', GOLFPLATZ_MCP_IMPORT_TYPES ) . '. Verweise auf andere Beiträge als {"@post": "<typ>:<slug>"} oder Liste davon; sie werden zur ID aufgelöst (Reihenfolge: spieler, mannschaft, ligaspiel, spielbericht).',
 				'input_schema'     => array(
 					'type'       => 'object',
 					'required'   => array( 'post_type' ),
@@ -651,6 +651,28 @@ function golfplatz_mcp_sync_from_files( $input ) {
 }
 
 /**
+ * Verweis im Import auflösen: {"@post": "spieler:anna-adler"} → Beitrags-ID, Liste von Verweisen → Liste von IDs.
+ * Nur Beitragstypen aus GOLFPLATZ_MCP_IMPORT_TYPES. Nicht gefundene Verweise werden 0 bzw. fallen aus der Liste.
+ */
+function golfplatz_mcp_import_ref( $v ) {
+	$eins = function ( $ref ) {
+		[ $typ, $slug ] = array_pad( explode( ':', (string) $ref, 2 ), 2, '' );
+		if ( ! in_array( $typ, GOLFPLATZ_MCP_IMPORT_TYPES, true ) ) {
+			return 0;
+		}
+		$ids = get_posts( array( 'post_type' => $typ, 'name' => sanitize_title( $slug ), 'post_status' => 'any', 'posts_per_page' => 1, 'fields' => 'ids' ) );
+		return $ids ? (int) $ids[0] : 0;
+	};
+	if ( is_array( $v ) && isset( $v['@post'] ) ) {
+		return $eins( $v['@post'] );
+	}
+	if ( is_array( $v ) && $v && array_is_list( $v ) && is_array( $v[0] ) && isset( $v[0]['@post'] ) ) {
+		return array_values( array_filter( array_map( fn( $x ) => $eins( $x['@post'] ?? '' ), $v ) ) );
+	}
+	return $v;
+}
+
+/**
  * Importiert Einträge aus daten/<post_type>.json.
  * Format: { "key": "<meta-feld>", "items": [ { "title", "slug", "status", "order", "meta": { feld: wert } } ] }
  */
@@ -718,6 +740,7 @@ function golfplatz_mcp_import_content( $input ) {
 		}
 		foreach ( (array) ( $item['meta'] ?? array() ) as $feld => $v ) {
 			$feld = sanitize_key( $feld );
+			$v    = golfplatz_mcp_import_ref( $v );
 			if ( function_exists( 'rwmb_set_meta' ) ) {
 				rwmb_set_meta( $id, $feld, $v );
 			} else {

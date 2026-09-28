@@ -315,7 +315,8 @@ Gilt für alle 18 Einträge von `spielbahn`.
 | --- | --- | --- | --- | --- |
 | 1 | Seitenkopf | Titel, Anzahl Mannschaften | Anzahl `mannschaft` | – |
 | 2 | Mannschaftskarten (`team-card`) | Liga, Name, Spielführer, nächstes Spiel (Datum, Spielort) oder „Saison beendet“ | `mannschaft`, `mannschaft_spielfuehrer`, nächstes `ligaspiel` der Mannschaft | Mannschaftsseite |
-| 3 | Button | „Alle Ligaspiele im Überblick“ | – | Alle Ligaspiele |
+| 3 | Button | „Alle Ligaspiele im Überblick“ | – | `#ligaspiele` |
+| 4 | Alle Ligaspiele (`#ligaspiele`, `match-table`) | Kommende und vergangene Spiele aller Mannschaften, Heimspiele hervorgehoben, Link zum Spielbericht | `ligaspiel`, `spielbericht` | Mannschaftsseite, Spielbericht |
 
 **Anforderungen**
 
@@ -492,7 +493,7 @@ flowchart LR
 
 ## Offene Punkte
 
-- [ ] **URL „Alle Ligaspiele“:** `/mannschaften/ligaspiele/` kollidiert mit der Einzel-URL von `mannschaft` (`/mannschaften/<slug>/`). WordPress würde „ligaspiele“ als Mannschaft suchen. Vorschlag: feste Seite unter `/ligaspiele/` oder die Übersicht als Abschnitt im Mannschaften-Archiv.
+- [x] **URL „Alle Ligaspiele“:** gelöst als Abschnitt `#ligaspiele` im Mannschaften-Archiv (`/mannschaften/#ligaspiele`), weil `/mannschaften/ligaspiele/` mit den Mannschafts-URLs kollidiert.
 - [x] **URL Spielbahnen:** festgelegt auf `/platz/bahn/1/` … `/platz/bahn/18/` (Slug = Bahnnummer). Die Bahnen haben keine Namen. Offen bleibt nur, ob `/platz/bahn/` auf `/platz/` weiterleitet.
 - [ ] **Kurs-Template:** Kursseiten bauen oder `kurs` auf nicht öffentlich stellen.
 - [ ] **Speisekarte:** Auszug auf der Seite als Text pflegen oder nur PDF (`restaurant_speisekarte`)?

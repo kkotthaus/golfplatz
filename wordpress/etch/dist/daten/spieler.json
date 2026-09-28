@@ -1,0 +1,695 @@
+{
+  "key": "slug",
+  "items": [
+    {
+      "title": "Andreas Adler",
+      "slug": "andreas-adler",
+      "meta": {
+        "spieler_vorname": "Andreas",
+        "spieler_nachname": "Adler",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Doris Fuchs",
+      "slug": "doris-fuchs",
+      "meta": {
+        "spieler_vorname": "Doris",
+        "spieler_nachname": "Fuchs",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Georg Keller",
+      "slug": "georg-keller",
+      "meta": {
+        "spieler_vorname": "Georg",
+        "spieler_nachname": "Keller",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Julia Pohl",
+      "slug": "julia-pohl",
+      "meta": {
+        "spieler_vorname": "Julia",
+        "spieler_nachname": "Pohl",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Norbert Wolf",
+      "slug": "norbert-wolf",
+      "meta": {
+        "spieler_vorname": "Norbert",
+        "spieler_nachname": "Wolf",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Renate Dietz",
+      "slug": "renate-dietz",
+      "meta": {
+        "spieler_vorname": "Renate",
+        "spieler_nachname": "Dietz",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Andreas Imhof",
+      "slug": "andreas-imhof",
+      "meta": {
+        "spieler_vorname": "Andreas",
+        "spieler_nachname": "Imhof",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 0
+      }
+    },
+    {
+      "title": "Friederike Hahn",
+      "slug": "friederike-hahn",
+      "meta": {
+        "spieler_vorname": "Friederike",
+        "spieler_nachname": "Hahn",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Ines Maier",
+      "slug": "ines-maier",
+      "meta": {
+        "spieler_vorname": "Ines",
+        "spieler_nachname": "Maier",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Lea Schulz",
+      "slug": "lea-schulz",
+      "meta": {
+        "spieler_vorname": "Lea",
+        "spieler_nachname": "Schulz",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Petra Adler",
+      "slug": "petra-adler",
+      "meta": {
+        "spieler_vorname": "Petra",
+        "spieler_nachname": "Adler",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Ute Fuchs",
+      "slug": "ute-fuchs",
+      "meta": {
+        "spieler_vorname": "Ute",
+        "spieler_nachname": "Fuchs",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Claudia Keller",
+      "slug": "claudia-keller",
+      "meta": {
+        "spieler_vorname": "Claudia",
+        "spieler_nachname": "Keller",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Friederike Pohl",
+      "slug": "friederike-pohl",
+      "meta": {
+        "spieler_vorname": "Friederike",
+        "spieler_nachname": "Pohl",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 0
+      }
+    },
+    {
+      "title": "Lars Otto",
+      "slug": "lars-otto",
+      "meta": {
+        "spieler_vorname": "Lars",
+        "spieler_nachname": "Otto",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Oliver Vogel",
+      "slug": "oliver-vogel",
+      "meta": {
+        "spieler_vorname": "Oliver",
+        "spieler_nachname": "Vogel",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Stefan Conrad",
+      "slug": "stefan-conrad",
+      "meta": {
+        "spieler_vorname": "Stefan",
+        "spieler_nachname": "Conrad",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Bernd Hahn",
+      "slug": "bernd-hahn",
+      "meta": {
+        "spieler_vorname": "Bernd",
+        "spieler_nachname": "Hahn",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Erik Maier",
+      "slug": "erik-maier",
+      "meta": {
+        "spieler_vorname": "Erik",
+        "spieler_nachname": "Maier",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Holger Schulz",
+      "slug": "holger-schulz",
+      "meta": {
+        "spieler_vorname": "Holger",
+        "spieler_nachname": "Schulz",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Lars Adler",
+      "slug": "lars-adler",
+      "meta": {
+        "spieler_vorname": "Lars",
+        "spieler_nachname": "Adler",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 0
+      }
+    },
+    {
+      "title": "Renate Ziegler",
+      "slug": "renate-ziegler",
+      "meta": {
+        "spieler_vorname": "Renate",
+        "spieler_nachname": "Ziegler",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Anna Engel",
+      "slug": "anna-engel",
+      "meta": {
+        "spieler_vorname": "Anna",
+        "spieler_nachname": "Engel",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Doris Jäger",
+      "slug": "doris-jaeger",
+      "meta": {
+        "spieler_vorname": "Doris",
+        "spieler_nachname": "Jäger",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Gabi Otto",
+      "slug": "gabi-otto",
+      "meta": {
+        "spieler_vorname": "Gabi",
+        "spieler_nachname": "Otto",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Julia Vogel",
+      "slug": "julia-vogel",
+      "meta": {
+        "spieler_vorname": "Julia",
+        "spieler_nachname": "Vogel",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Monika Conrad",
+      "slug": "monika-conrad",
+      "meta": {
+        "spieler_vorname": "Monika",
+        "spieler_nachname": "Conrad",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Renate Hahn",
+      "slug": "renate-hahn",
+      "meta": {
+        "spieler_vorname": "Renate",
+        "spieler_nachname": "Hahn",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 0
+      }
+    },
+    {
+      "title": "Christian Graf",
+      "slug": "christian-graf",
+      "meta": {
+        "spieler_vorname": "Christian",
+        "spieler_nachname": "Graf",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Frank Lorenz",
+      "slug": "frank-lorenz",
+      "meta": {
+        "spieler_vorname": "Frank",
+        "spieler_nachname": "Lorenz",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Jan Roth",
+      "slug": "jan-roth",
+      "meta": {
+        "spieler_vorname": "Jan",
+        "spieler_nachname": "Roth",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Michael Ziegler",
+      "slug": "michael-ziegler",
+      "meta": {
+        "spieler_vorname": "Michael",
+        "spieler_nachname": "Ziegler",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Peter Engel",
+      "slug": "peter-engel",
+      "meta": {
+        "spieler_vorname": "Peter",
+        "spieler_nachname": "Engel",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Uwe Jäger",
+      "slug": "uwe-jaeger",
+      "meta": {
+        "spieler_vorname": "Uwe",
+        "spieler_nachname": "Jäger",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Christian Otto",
+      "slug": "christian-otto",
+      "meta": {
+        "spieler_vorname": "Christian",
+        "spieler_nachname": "Otto",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 0
+      }
+    },
+    {
+      "title": "Holger Neumann",
+      "slug": "holger-neumann",
+      "meta": {
+        "spieler_vorname": "Holger",
+        "spieler_nachname": "Neumann",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Lars Thiel",
+      "slug": "lars-thiel",
+      "meta": {
+        "spieler_vorname": "Lars",
+        "spieler_nachname": "Thiel",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Oliver Becker",
+      "slug": "oliver-becker",
+      "meta": {
+        "spieler_vorname": "Oliver",
+        "spieler_nachname": "Becker",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Stefan Graf",
+      "slug": "stefan-graf",
+      "meta": {
+        "spieler_vorname": "Stefan",
+        "spieler_nachname": "Graf",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Bernd Lorenz",
+      "slug": "bernd-lorenz",
+      "meta": {
+        "spieler_vorname": "Bernd",
+        "spieler_nachname": "Lorenz",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Erik Roth",
+      "slug": "erik-roth",
+      "meta": {
+        "spieler_vorname": "Erik",
+        "spieler_nachname": "Roth",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Holger Ziegler",
+      "slug": "holger-ziegler",
+      "meta": {
+        "spieler_vorname": "Holger",
+        "spieler_nachname": "Ziegler",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 0
+      }
+    },
+    {
+      "title": "Monika Wolf",
+      "slug": "monika-wolf",
+      "meta": {
+        "spieler_vorname": "Monika",
+        "spieler_nachname": "Wolf",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Anna Imhof",
+      "slug": "anna-imhof",
+      "meta": {
+        "spieler_vorname": "Anna",
+        "spieler_nachname": "Imhof",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Doris Neumann",
+      "slug": "doris-neumann",
+      "meta": {
+        "spieler_vorname": "Doris",
+        "spieler_nachname": "Neumann",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Gabi Thiel",
+      "slug": "gabi-thiel",
+      "meta": {
+        "spieler_vorname": "Gabi",
+        "spieler_nachname": "Thiel",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Julia Becker",
+      "slug": "julia-becker",
+      "meta": {
+        "spieler_vorname": "Julia",
+        "spieler_nachname": "Becker",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Monika Graf",
+      "slug": "monika-graf",
+      "meta": {
+        "spieler_vorname": "Monika",
+        "spieler_nachname": "Graf",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 0
+      }
+    },
+    {
+      "title": "Uwe Fuchs",
+      "slug": "uwe-fuchs",
+      "meta": {
+        "spieler_vorname": "Uwe",
+        "spieler_nachname": "Fuchs",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Christian Keller",
+      "slug": "christian-keller",
+      "meta": {
+        "spieler_vorname": "Christian",
+        "spieler_nachname": "Keller",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Frank Pohl",
+      "slug": "frank-pohl",
+      "meta": {
+        "spieler_vorname": "Frank",
+        "spieler_nachname": "Pohl",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Jan Wolf",
+      "slug": "jan-wolf",
+      "meta": {
+        "spieler_vorname": "Jan",
+        "spieler_nachname": "Wolf",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Michael Dietz",
+      "slug": "michael-dietz",
+      "meta": {
+        "spieler_vorname": "Michael",
+        "spieler_nachname": "Dietz",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Peter Imhof",
+      "slug": "peter-imhof",
+      "meta": {
+        "spieler_vorname": "Peter",
+        "spieler_nachname": "Imhof",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Uwe Neumann",
+      "slug": "uwe-neumann",
+      "meta": {
+        "spieler_vorname": "Uwe",
+        "spieler_nachname": "Neumann",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 0
+      }
+    },
+    {
+      "title": "Eva Maier",
+      "slug": "eva-maier",
+      "meta": {
+        "spieler_vorname": "Eva",
+        "spieler_nachname": "Maier",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Heike Schulz",
+      "slug": "heike-schulz",
+      "meta": {
+        "spieler_vorname": "Heike",
+        "spieler_nachname": "Schulz",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Karin Adler",
+      "slug": "karin-adler",
+      "meta": {
+        "spieler_vorname": "Karin",
+        "spieler_nachname": "Adler",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Nina Fuchs",
+      "slug": "nina-fuchs",
+      "meta": {
+        "spieler_vorname": "Nina",
+        "spieler_nachname": "Fuchs",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Susanne Keller",
+      "slug": "susanne-keller",
+      "meta": {
+        "spieler_vorname": "Susanne",
+        "spieler_nachname": "Keller",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Birgit Pohl",
+      "slug": "birgit-pohl",
+      "meta": {
+        "spieler_vorname": "Birgit",
+        "spieler_nachname": "Pohl",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Eva Wolf",
+      "slug": "eva-wolf",
+      "meta": {
+        "spieler_vorname": "Eva",
+        "spieler_nachname": "Wolf",
+        "spieler_geschlecht": "weiblich",
+        "spieler_einwilligung": 0
+      }
+    },
+    {
+      "title": "Klaus Vogel",
+      "slug": "klaus-vogel",
+      "meta": {
+        "spieler_vorname": "Klaus",
+        "spieler_nachname": "Vogel",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Norbert Conrad",
+      "slug": "norbert-conrad",
+      "meta": {
+        "spieler_vorname": "Norbert",
+        "spieler_nachname": "Conrad",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Ralf Hahn",
+      "slug": "ralf-hahn",
+      "meta": {
+        "spieler_vorname": "Ralf",
+        "spieler_nachname": "Hahn",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Andreas Maier",
+      "slug": "andreas-maier",
+      "meta": {
+        "spieler_vorname": "Andreas",
+        "spieler_nachname": "Maier",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Dieter Schulz",
+      "slug": "dieter-schulz",
+      "meta": {
+        "spieler_vorname": "Dieter",
+        "spieler_nachname": "Schulz",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Georg Adler",
+      "slug": "georg-adler",
+      "meta": {
+        "spieler_vorname": "Georg",
+        "spieler_nachname": "Adler",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 1
+      }
+    },
+    {
+      "title": "Klaus Fuchs",
+      "slug": "klaus-fuchs",
+      "meta": {
+        "spieler_vorname": "Klaus",
+        "spieler_nachname": "Fuchs",
+        "spieler_geschlecht": "maennlich",
+        "spieler_einwilligung": 0
+      }
+    }
+  ]
+}
