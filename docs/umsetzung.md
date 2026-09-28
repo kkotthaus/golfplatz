@@ -17,6 +17,7 @@ Was in WordPress (golfplatz.local) bereits angelegt ist, was noch von Hand zu tu
 | `kurs` | Kurse (Menü „Golfschule“) | ✓ | `/golfschule/kurs/<slug>/` | |
 | `preis` | Preise | – | – | Reihenfolge über „Reihenfolge“ (menu_order) |
 | `person` | Personen (Menü „Team & Vorstand“) | – | – | Vorstand, Sekretariat, Pros, Team |
+| `gastclub` | Gastclubs (Untermenü von Mannschaften) | – | – | Austragungsorte der Ligaspiele mit Website; legt der Verband-Abgleich an |
 | `lochwettspiel` | Lochwettspiele (Menü „Lochwettspiel“) | ✓ | `/turniere/lochwettspiel/<jahr>/` | ein Eintrag je Jahr, Slug = Jahr; 2 Beispiele (2025, 2026) |
 
 News sind normale **Beiträge** (`post`).
@@ -34,9 +35,10 @@ News sind normale **Beiträge** (`post`).
 | --- | --- | --- |
 | Spielbahn | `spielbahn` | `bahn_nummer`, `bahn_par_herren`, `bahn_par_damen`, `bahn_hcp`, `laenge_gelb`, `laenge_blau`, `laenge_rot`, `laenge_orange`, `bahn_beschreibung`, `bahn_spieltipp`, `bahn_grafik`, `bahn_bilder`, `bahn_video` (nur MP4), `bahn_video_poster` |
 | Sperrung | `sperrung` | `sperr_bereich` (`abschlag_1`, `abschlag_10`, `platz`, `range`, `kurzspiel`, `proshop`, `trolley`, `buggy`), `sperr_beginn`, `sperr_ende` (beide als Unix-Timestamp), `sperr_grund` |
-| Mannschaft | `mannschaft` | `mannschaft_altersklasse`, `mannschaft_nummer`, `mannschaft_geschlecht`, `mannschaft_liga`, `mannschaft_spielfuehrer` → Spieler, `mannschaft_kader` → Spieler (mehrfach) |
+| Mannschaft | `mannschaft` | `mannschaft_altersklasse`, `mannschaft_nummer`, `mannschaft_geschlecht`, `mannschaft_liga` (setzt der Abgleich), `mannschaft_spielfuehrer` → Spieler, `mannschaft_kader` → Spieler (mehrfach), `mannschaft_verband_wettbewerb`, `mannschaft_verband_team` |
 | Spieler | `spieler` | `spieler_vorname`, `spieler_nachname`, `spieler_geschlecht`, `spieler_jahrgang`, `spieler_einwilligung` |
-| Ligaspiel | `ligaspiel` | `ligaspiel_mannschaft` → Mannschaft, `ligaspiel_spieltag`, `ligaspiel_termin` (Timestamp), `ligaspiel_spielort`, `ligaspiel_heimspiel`, `ligaspiel_ergebnis`, `ligaspiel_platzierung` |
+| Ligaspiel | `ligaspiel` | `ligaspiel_mannschaft` → Mannschaft, `ligaspiel_spieltag`, `ligaspiel_termin` (Timestamp), `ligaspiel_spielort`, `ligaspiel_heimspiel`, `ligaspiel_ergebnis`, `ligaspiel_platzierung`, `ligaspiel_saison`, `ligaspiel_liga`, `ligaspiel_verband_link`, `ligaspiel_extern_id` (Verbands-Kennung, schreibgeschützt) |
+| Gastclub | `gastclub` | `gastclub_website` (Titel = Clubname wie beim Verband) |
 | Spielbericht | `spielbericht` | `bericht_ligaspiel` → Ligaspiel, `bericht_bilder` |
 | Kurs | `kurs` | `kurs_typ`, `kurs_preis` (leer = auf Anfrage), `kurs_max_teilnehmer`, `kurs_dauer`, `kurs_trainer` → Person, `kurs_termine` (Gruppe, klonbar: `von`, `bis`, `uhrzeit`), `kurs_anmeldung` |
 | Preis | `preis` | `preis_betrag`, `preis_auf_anfrage`, `preis_einheit` (`runde18`, `runde9`, `runde`, `tag`, `monat`, `jahr`, `einmalig`), `preis_tage` (Gültig an), `preis_zusatz`, `preis_hervorheben`, `preis_aufnahme`, `preis_leistungen` |
@@ -148,6 +150,18 @@ Umsetzung des [Konzepts](konzept-birdiebook.md), Stand 2026-09-26.
 - Mitgliedschaftspreise (Kategorie „Mitgliedschaft“) stehen auf `/mitgliedschaft/` (siehe unten).
 
 ### Mannschaften & Ligaspiele
+
+**Ligaspiele vom Golfverband NRW** (seit 2026-09-28, `mu-plugins/golfplatz-liga-sync.php`):
+
+- **Quelle:** gvnrw.liga.golf lädt seine Tabellen von `https://gvnrw-backend.liga.golf` (GraphQL, ohne Anmeldung): `findLeagues(year)` (Wettbewerbe und Ligen), `findLeagueResult` (Tabelle einer Liga: Spieltage mit Datum, Werte je Team, `homeTeam` = Gastgeber), `findTeamResult(teamId)` (je Spieltag der Austragungsort mit vollem Clubnamen). Die Schnittstelle ist **nicht offiziell dokumentiert**; beim Golfverband NRW klären, ob der tägliche Abruf in Ordnung ist.
+- **Suche:** alle Ligen eines Jahres nach Teams mit dem Suchbegriff aus den Clubdaten (`verband_suchbegriff`, „Dreibäumen“), rund 250 Abrufe. Das Ergebnis steht je Jahr in der Option `golfplatz_liga_teams`; danach werden nur noch die bekannten Teams abgefragt (etwa 25 Abrufe).
+- **Zuordnung:** Mannschaft = Wettbewerb ohne Jahr + Teamname (`mannschaft_verband_wettbewerb`, `mannschaft_verband_team`; „Dreibäumen 1“ gilt wie „Dreibäumen“). Die Jugendliga zählt über alle Stufen als ein Wettbewerb „Jugendliga“. Fehlt die Mannschaft, legt der Abgleich sie an (Titel z. B. „AK50 Herren“, „AK65/2 Herren“, „Jugend 1“, „Willy-Schniewind-Preis“) – Titel, Reihenfolge und Foto danach frei änderbar.
+- **Ligaspiele:** je Team und Spieltag ein Eintrag mit Verbands-Kennung (`gvnrw:<liga>:<team>:<spieltag>`). Übernommen werden Spieltag, Datum (ohne Uhrzeit, liefert der Verband nicht), Spielort, Heimspiel (Ort enthält den Suchbegriff), Ergebnis (Schläge über CR bzw. Brutto bei der Jugend), Tagesplatzierung aus der Spalte „Punkte“, Saison, Liga und Link zur Tabelle. Spieltage ohne Ort und Ergebnis (Team spielt nicht) entfallen. Spielberichte hängen am Ligaspiel und bleiben erhalten; ein Spiel wird nur geschrieben, wenn sich etwas geändert hat.
+- **Gastclubs:** Jeder fremde Austragungsort landet unter Mannschaften → Gastclubs. Die Website dort einmal eintragen, dann ist der Spielort auf der Website verlinkt. Die Schnittstelle liefert keine Websites. Stand 2026-09-28: 54 Gastclubs aus 2023–2026, 52 Websites eingetragen (jede per Abruf mit passendem Seitentitel oder per Websuche belegt). Offen: **Golfclub Bonn-Godesberg in Wachtberg** (gcbg.de steht zum Verkauf) und **Gut Köbbinghof** (keine eindeutige Adresse gefunden). Vergleich der Namen ohne HTML-Entities („&“ speichert WordPress als „&amp;amp;“).
+- **Erster Abgleich** 2026-09-28: 13 Mannschaften (DGL Damen/Herren, Willy-Schniewind-Preis, AK30 Damen/Herren, AK50 Damen, AK50/1 und /2 Herren, AK65 Damen, AK65/1 und /2 Herren, Jugend 1 und 2), 218 Ligaspiele 2023–2026. Teams mit Zusatz „(abgemeldet …)“ bekommen keine Spiele (AK65 Damen 2023). Ein zweiter Lauf ändert nichts (geprüft für 2023, 2024, 2026).
+- **Ablauf:** täglich per WP-Cron (`golfplatz_liga_sync`, 5:30 Uhr) für die laufende Saison; von Hand unter **Mannschaften → Verband-Abgleich** (Saison wählen, optional „alle Ligen neu durchsuchen“, z. B. bei einer neuen Mannschaft) oder per MCP `golfplatz/liga-sync` (`jahr`, `suche`). Protokoll der letzten 20 Läufe auf derselben Seite.
+- **Anzeige:** Übersicht mit Saison-Auswahl (`/mannschaften/?saison=2025#ligaspiele`, Standard: laufendes Jahr), Mannschaftsseite je Saison ein aufklappbarer Block mit Liga und Link „Tabelle beim Golfverband NRW“. Spiele von Mannschaften, die nicht veröffentlicht sind, erscheinen nirgends.
+- **Die Platzhalter aus dem Prototyp** (10 Mannschaften, 50 Ligaspiele, 69 Spieler, 2 Berichte) liegen seit 2026-09-28 im Papierkorb; `build.mjs` erzeugt dafür keine Importdateien mehr.
 
 Stand 2026-09-28, Aufbau wie im Prototyp.
 

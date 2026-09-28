@@ -422,7 +422,7 @@ export const templates = [
         krumen: [['Mannschaften']],
         eyebrow: 'Ligabetrieb',
         titel: 'Unsere Mannschaften',
-        lead: `{${MS}.anzahl_text} vertreten den Club in den Ligen des Landesverbands – von der Clubmannschaft bis zur AK65.`,
+        lead: `{${MS}.anzahl_text} spielen für den Club in den Ligen des Golfverbands NRW – von der Jugend bis zur AK65.`,
       }),
       el('section', 'section', [
         el('div', 'container', [

@@ -313,6 +313,30 @@ add_action(
 			),
 			false
 		);
+
+		golfplatz_mcp_ability(
+			'liga-sync',
+			array(
+				'label'            => 'Ligaspiele vom Golfverband NRW abgleichen',
+				'description'      => 'Gleicht Mannschaften, Ligaspiele (Spieltag, Datum, Ort, Ergebnis) und Gastclubs einer Saison mit gvnrw.liga.golf ab (golfplatz-liga-sync.php). suche: alle Ligen neu durchsuchen (1–2 Minuten).',
+				'input_schema'     => array(
+					'type'       => 'object',
+					'required'   => array( 'jahr' ),
+					'properties' => array(
+						'jahr'  => array( 'type' => 'integer', 'minimum' => 2023 ),
+						'suche' => array( 'type' => 'boolean', 'default' => false ),
+					),
+				),
+				'execute_callback' => function ( $input ) {
+					if ( ! function_exists( 'golfplatz_liga_abgleich' ) ) {
+						return new WP_Error( 'golfplatz_liga', 'golfplatz-liga-sync.php ist nicht aktiv.' );
+					}
+					$log = golfplatz_liga_abgleich( (int) $input['jahr'], ! empty( $input['suche'] ) );
+					return array( 'text' => golfplatz_liga_log_text( $log ), 'log' => $log );
+				},
+			),
+			false
+		);
 	}
 );
 

@@ -185,8 +185,17 @@
 <!-- wp:etch/element {"tag":"h2","attributes":{"class":"h3"}} -->
 <!-- wp:etch/text {"content":"Ligaspiele"} /-->
 <!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"this.golfplatz.team.saisons","itemId":"z"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.offen","operator":"isTruthy","rightHand":null},"conditionString":"z.offen"} -->
+<!-- wp:etch/element {"tag":"details","attributes":{"open":"","class":"season"},"metadata":{"name":"Saison"}} -->
+<!-- wp:etch/element {"tag":"summary","attributes":{"class":"season__summary"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"season__title"}} -->
+<!-- wp:etch/text {"content":"{z.titel}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"season__body"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"table-wrap"}} -->
-<!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Ligaspiele {this.title}","class":"match-table match-table\u002d\u002dgrid match-table\u002d\u002dkompakt"},"metadata":{"name":"Ligaspiele"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Ligaspiele {this.title} {z.jahr}","class":"match-table match-table\u002d\u002dgrid match-table\u002d\u002dkompakt"},"metadata":{"name":"Ligaspiele"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"match-table__row match-table__row\u002d\u002dhead"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"match-table__cell"}} -->
 <!-- wp:etch/text {"content":"Datum"} /-->
@@ -201,7 +210,7 @@
 <!-- wp:etch/text {"content":"Ergebnis"} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
-<!-- wp:etch/loop {"target":"this.golfplatz.team.spiele","itemId":"s"} -->
+<!-- wp:etch/loop {"target":"z.spiele","itemId":"s"} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"match-table__row match-table__row\u002d\u002d{s.mod}"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"match-table__cell match-table__date"}} -->
 <!-- wp:etch/element {"tag":"time","attributes":{"datetime":"{s.datum_iso}"}} -->
@@ -217,7 +226,14 @@
 <!-- wp:etch/text {"content":"{s.spieltag}"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"match-table__cell"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_spielort_link","operator":"isTruthy","rightHand":null},"conditionString":"s.hat_spielort_link"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{s.spielort_link}","rel":"noopener","class":"match-table__venue"}} -->
 <!-- wp:etch/text {"content":"{s.spielort}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_spielort_link","operator":"isFalsy","rightHand":null},"conditionString":"!s.hat_spielort_link"} -->
+<!-- wp:etch/text {"content":"{s.spielort}"} /-->
+<!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"s.heim","operator":"isTruthy","rightHand":null},"conditionString":"s.heim"} -->
 <!-- wp:etch/text {"content":" "} /-->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"badge badge\u002d\u002dhome"}} -->
@@ -252,6 +268,109 @@
 <!-- /wp:etch/loop -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.hat_verband_link","operator":"isTruthy","rightHand":null},"conditionString":"z.hat_verband_link"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"season__source"}} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{z.verband_link}","rel":"noopener","class":"link-arrow"}} -->
+<!-- wp:etch/text {"content":"Tabelle beim Golfverband NRW"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.offen","operator":"isFalsy","rightHand":null},"conditionString":"!z.offen"} -->
+<!-- wp:etch/element {"tag":"details","attributes":{"class":"season"},"metadata":{"name":"Saison"}} -->
+<!-- wp:etch/element {"tag":"summary","attributes":{"class":"season__summary"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"season__title"}} -->
+<!-- wp:etch/text {"content":"{z.titel}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"season__body"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"table-wrap"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Ligaspiele {this.title} {z.jahr}","class":"match-table match-table\u002d\u002dgrid match-table\u002d\u002dkompakt"},"metadata":{"name":"Ligaspiele"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"match-table__row match-table__row\u002d\u002dhead"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"match-table__cell"}} -->
+<!-- wp:etch/text {"content":"Datum"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"match-table__cell"}} -->
+<!-- wp:etch/text {"content":"Spieltag"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"match-table__cell"}} -->
+<!-- wp:etch/text {"content":"Spielort"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"match-table__cell"}} -->
+<!-- wp:etch/text {"content":"Ergebnis"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"z.spiele","itemId":"s"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"match-table__row match-table__row\u002d\u002d{s.mod}"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"match-table__cell match-table__date"}} -->
+<!-- wp:etch/element {"tag":"time","attributes":{"datetime":"{s.datum_iso}"}} -->
+<!-- wp:etch/text {"content":"{s.datum}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.uhrzeit","operator":"isTruthy","rightHand":null},"conditionString":"s.uhrzeit"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"match-table__time"}} -->
+<!-- wp:etch/text {"content":"{s.uhrzeit}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"match-table__cell"}} -->
+<!-- wp:etch/text {"content":"{s.spieltag}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"match-table__cell"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_spielort_link","operator":"isTruthy","rightHand":null},"conditionString":"s.hat_spielort_link"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{s.spielort_link}","rel":"noopener","class":"match-table__venue"}} -->
+<!-- wp:etch/text {"content":"{s.spielort}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_spielort_link","operator":"isFalsy","rightHand":null},"conditionString":"!s.hat_spielort_link"} -->
+<!-- wp:etch/text {"content":"{s.spielort}"} /-->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.heim","operator":"isTruthy","rightHand":null},"conditionString":"s.heim"} -->
+<!-- wp:etch/text {"content":" "} /-->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"badge badge\u002d\u002dhome"}} -->
+<!-- wp:etch/text {"content":"Heimspiel"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"match-table__cell"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_ergebnis","operator":"isTruthy","rightHand":null},"conditionString":"s.hat_ergebnis"} -->
+<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
+<!-- wp:etch/text {"content":"{s.ergebnis}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_ergebnis","operator":"isFalsy","rightHand":null},"conditionString":"!s.hat_ergebnis"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"visually-hidden"}} -->
+<!-- wp:etch/text {"content":"noch kein Ergebnis"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_bericht","operator":"isTruthy","rightHand":null},"conditionString":"s.hat_bericht"} -->
+<!-- wp:etch/element {"tag":"br","attributes":{}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{s.bericht_link}","class":"match-table__report"}} -->
+<!-- wp:etch/text {"content":"Spielbericht"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.hat_verband_link","operator":"isTruthy","rightHand":null},"conditionString":"z.hat_verband_link"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"season__source"}} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{z.verband_link}","rel":"noopener","class":"link-arrow"}} -->
+<!-- wp:etch/text {"content":"Tabelle beim Golfverband NRW"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
 <!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.hat_berichte","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.team.hat_berichte"} -->
 <!-- wp:etch/element {"tag":"h2","attributes":{"class":"h3 spacer-top"}} -->
@@ -271,6 +390,7 @@
 <!-- /wp:etch/element -->
 <!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.hat_personen","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.team.hat_personen"} -->
 <!-- wp:etch/element {"tag":"aside","attributes":{"aria-label":"Spielführer und Kader","class":"side-box"},"metadata":{"name":"Kader"}} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.hat_spielfuehrer","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.team.hat_spielfuehrer"} -->
 <!-- wp:etch/element {"tag":"h2","attributes":{"class":"side-box__title"}} -->
@@ -307,6 +427,7 @@
 <!-- wp:etch/text {"content":"Es erscheinen nur Spieler, die der Veröffentlichung zugestimmt haben."} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->

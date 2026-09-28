@@ -167,7 +167,7 @@
 <!-- wp:etch/text {"content":"Unsere Mannschaften"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"page-hero__lead"}} -->
-<!-- wp:etch/text {"content":"{options.golfplatz.mannschaften.anzahl_text} vertreten den Club in den Ligen des Landesverbands – von der Clubmannschaft bis zur AK65."} /-->
+<!-- wp:etch/text {"content":"{options.golfplatz.mannschaften.anzahl_text} spielen für den Club in den Ligen des Golfverbands NRW – von der Jugend bis zur AK65."} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
@@ -205,11 +205,30 @@
 <!-- wp:etch/element {"tag":"section","attributes":{"id":"ligaspiele","class":"section section\u002d\u002dtint"},"metadata":{"name":"Alle Ligaspiele"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"container"}} -->
 <!-- wp:etch/element {"tag":"h2","attributes":{}} -->
-<!-- wp:etch/text {"content":"Alle Ligaspiele"} /-->
+<!-- wp:etch/text {"content":"Alle Ligaspiele · Saison {options.golfplatz.mannschaften.saison}"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
-<!-- wp:etch/text {"content":"Termine und Ergebnisse aller Mannschaften. Heimspiele sind hervorgehoben."} /-->
+<!-- wp:etch/text {"content":"Termine und Ergebnisse aller Mannschaften. Heimspiele sind hervorgehoben. Die Daten kommen vom Golfverband NRW."} /-->
 <!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.mannschaften.hat_saisons","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.mannschaften.hat_saisons"} -->
+<!-- wp:etch/element {"tag":"nav","attributes":{"aria-label":"Saison wählen","class":"season-nav"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"season-nav__label"}} -->
+<!-- wp:etch/text {"content":"Saison:"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.mannschaften.saisons","itemId":"j"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"j.aktiv","operator":"isFalsy","rightHand":null},"conditionString":"!j.aktiv"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{j.link}","class":"season-nav__link"}} -->
+<!-- wp:etch/text {"content":"{j.jahr}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"j.aktiv","operator":"isTruthy","rightHand":null},"conditionString":"j.aktiv"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-current":"page","class":"season-nav__link season-nav__link\u002d\u002daktiv"}} -->
+<!-- wp:etch/text {"content":"{j.jahr}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
 <!-- wp:etch/element {"tag":"h3","attributes":{"class":"spacer-top"}} -->
 <!-- wp:etch/text {"content":"Kommende Spiele"} /-->
 <!-- /wp:etch/element -->
@@ -254,7 +273,14 @@
 <!-- wp:etch/text {"content":"{s.spieltag}"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"match-table__cell"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_spielort_link","operator":"isTruthy","rightHand":null},"conditionString":"s.hat_spielort_link"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{s.spielort_link}","rel":"noopener","class":"match-table__venue"}} -->
 <!-- wp:etch/text {"content":"{s.spielort}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_spielort_link","operator":"isFalsy","rightHand":null},"conditionString":"!s.hat_spielort_link"} -->
+<!-- wp:etch/text {"content":"{s.spielort}"} /-->
+<!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"s.heim","operator":"isTruthy","rightHand":null},"conditionString":"s.heim"} -->
 <!-- wp:etch/text {"content":" "} /-->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"badge badge\u002d\u002dhome"}} -->
@@ -339,7 +365,14 @@
 <!-- wp:etch/text {"content":"{s.spieltag}"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"match-table__cell"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_spielort_link","operator":"isTruthy","rightHand":null},"conditionString":"s.hat_spielort_link"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{s.spielort_link}","rel":"noopener","class":"match-table__venue"}} -->
 <!-- wp:etch/text {"content":"{s.spielort}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.hat_spielort_link","operator":"isFalsy","rightHand":null},"conditionString":"!s.hat_spielort_link"} -->
+<!-- wp:etch/text {"content":"{s.spielort}"} /-->
+<!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"s.heim","operator":"isTruthy","rightHand":null},"conditionString":"s.heim"} -->
 <!-- wp:etch/text {"content":" "} /-->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"badge badge\u002d\u002dhome"}} -->

@@ -32,7 +32,12 @@ export const spielTabelle = (target, label, mitMannschaft = true) =>
           ]),
           mitMannschaft && zelle('', [t('a', 'match-table__team', '{s.mannschaft}', { attrs: { href: '{s.mannschaft_link}' } })]),
           zelle('', [text('{s.spieltag}')]),
-          zelle('', [text('{s.spielort}'), wenn('s.heim', [text(' '), t('span', 'badge badge--home', 'Heimspiel')])]),
+          zelle('', [
+            // Spielort mit Link zur Website des Gastclubs (Mannschaften → Gastclubs), sonst nur der Name
+            wenn('s.hat_spielort_link', [t('a', 'match-table__venue', '{s.spielort}', { attrs: { href: '{s.spielort_link}', rel: 'noopener' } })]),
+            wenn('s.hat_spielort_link', [text('{s.spielort}')], 'isFalsy'),
+            wenn('s.heim', [text(' '), t('span', 'badge badge--home', 'Heimspiel')]),
+          ]),
           zelle('', [
             wenn('s.hat_ergebnis', [t('strong', '', '{s.ergebnis}')]),
             wenn('s.hat_ergebnis', [t('span', '', '–', { attrs: { 'aria-hidden': 'true' } }), t('span', 'visually-hidden', 'noch kein Ergebnis')], 'isFalsy'),
@@ -58,19 +63,42 @@ export const teamKarten = () =>
 
 /** Übersicht: alle Ligaspiele (früher als eigene Seite /mannschaften/ligaspiele/ geplant, die URL kollidiert mit den Mannschaften). */
 export const alleLigaspiele = () => [
-  t('h2', '', 'Alle Ligaspiele'),
-  t('p', '', 'Termine und Ergebnisse aller Mannschaften. Heimspiele sind hervorgehoben.'),
+  t('h2', '', `Alle Ligaspiele · Saison {${MS}.saison}`),
+  t('p', '', 'Termine und Ergebnisse aller Mannschaften. Heimspiele sind hervorgehoben. Die Daten kommen vom Golfverband NRW.'),
+  wenn(`${MS}.hat_saisons`, [
+    el('nav', 'season-nav', [
+      t('span', 'season-nav__label', 'Saison:'),
+      loop({ target: `${MS}.saisons`, itemId: 'j' }, [
+        wenn('j.aktiv', [t('a', 'season-nav__link', '{j.jahr}', { attrs: { href: '{j.link}' } })], 'isFalsy'),
+        wenn('j.aktiv', [t('span', 'season-nav__link season-nav__link--aktiv', '{j.jahr}', { attrs: { 'aria-current': 'page' } })]),
+      ]),
+    ], { attrs: { 'aria-label': 'Saison wählen' } }),
+  ]),
   t('h3', 'spacer-top', 'Kommende Spiele'),
   wenn(`${MS}.hat_kommende`, [spielTabelle(`${MS}.kommende`, 'Kommende Ligaspiele')]),
   wenn(`${MS}.hat_kommende`, [t('p', '', 'Keine weiteren Spiele in dieser Saison.')], 'isFalsy'),
   wenn(`${MS}.hat_vergangene`, [t('h3', 'spacer-top', 'Vergangene Spiele'), spielTabelle(`${MS}.vergangene`, 'Vergangene Ligaspiele')]),
 ];
 
+/** Eine Saison auf der Mannschaftsseite: aufklappbar, Tabelle der Spiele, Link zur Ligatabelle beim Verband. */
+const saison = (offen) =>
+  el('details', 'season', [
+    el('summary', 'season__summary', [t('h3', 'season__title', '{z.titel}')]),
+    el('div', 'season__body', [
+      spielTabelle('z.spiele', 'Ligaspiele {this.title} {z.jahr}', false),
+      wenn('z.hat_verband_link', [el('p', 'season__source', [t('a', 'link-arrow', 'Tabelle beim Golfverband NRW', { attrs: { href: '{z.verband_link}', rel: 'noopener' } })])]),
+    ]),
+  ], { attrs: offen ? { open: '' } : {}, name: 'Saison' });
+
 /** Mannschaftsseite, linke Spalte: Foto, Ligaspiele, Spielberichte. */
 export const teamInhalt = () =>
   el('div', '', [
     wenn(`${TEAM}.hat_foto`, [el('img', 'team-photo team-photo--bild', [], { attrs: { src: `{${TEAM}.foto}`, alt: `{${TEAM}.foto_alt}` } })]),
-    wenn(`${TEAM}.hat_spiele`, [t('h2', 'h3', 'Ligaspiele'), spielTabelle(`${TEAM}.spiele`, 'Ligaspiele {this.title}', false)]),
+    // Ligaspiele je Saison, die neueste aufgeklappt
+    wenn(`${TEAM}.hat_spiele`, [
+      t('h2', 'h3', 'Ligaspiele'),
+      loop({ target: `${TEAM}.saisons`, itemId: 'z' }, [wenn('z.offen', [saison(true)]), wenn('z.offen', [saison(false)], 'isFalsy')]),
+    ]),
     wenn(`${TEAM}.hat_berichte`, [
       t('h2', 'h3 spacer-top', 'Spielberichte'),
       el('ul', 'report-list', [
@@ -83,7 +111,7 @@ export const teamInhalt = () =>
 
 /** Mannschaftsseite, Seitenkasten: Spielführer und Kader (nur Spieler mit Einwilligung). */
 export const teamKader = () =>
-  el('aside', 'side-box', [
+  wenn(`${TEAM}.hat_personen`, [el('aside', 'side-box', [
     wenn(`${TEAM}.hat_spielfuehrer`, [t('h2', 'side-box__title', 'Spielführer'), el('p', 'side-box__captain', [icon('user'), text(` {${TEAM}.spielfuehrer}`)])]),
     wenn(`${TEAM}.hat_kader`, [
       t('h2', 'side-box__title', 'Kader'),
@@ -94,7 +122,7 @@ export const teamKader = () =>
       ]),
     ]),
     t('p', 'small', 'Es erscheinen nur Spieler, die der Veröffentlichung zugestimmt haben.'),
-  ], { attrs: { 'aria-label': 'Spielführer und Kader' }, name: 'Kader' });
+  ], { attrs: { 'aria-label': 'Spielführer und Kader' }, name: 'Kader' })]);
 
 /** Spielbericht: Meta-Zeile, Galerie und Rücklink zur Mannschaft (der Text kommt aus dem Beitragsinhalt). */
 export const berichtMeta = () => wenn(`${BERICHT}.meta`, [t('p', 'article-meta', `{${BERICHT}.meta}`)]);

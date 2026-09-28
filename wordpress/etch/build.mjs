@@ -8,7 +8,7 @@ import { templates, pages } from './templates.mjs';
 import { components } from './komponenten.mjs';
 import { acssEinstellungen } from './acss-farben.mjs';
 import { loops } from './loops.mjs';
-import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, preise, kurse, kurseAnmeldung, lochwettspiele, mannschaften, ligaspiele, spielberichte } from '../../prototype/src/data.mjs';
+import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, preise, kurse, kurseAnmeldung, lochwettspiele } from '../../prototype/src/data.mjs';
 
 const hier = dirname(fileURLToPath(import.meta.url));
 const dist = join(hier, 'dist');
@@ -180,66 +180,8 @@ const lwItems = lochwettspiele.map((lw) => ({
 writeFileSync(join(dist, 'daten/lochwettspiel.json'), JSON.stringify({ key: 'lw_jahr', items: lwItems }, null, 2) + '\n');
 console.log(`daten/lochwettspiel.json  (${lwItems.length} Turniere)`);
 
-// Mannschaften & Ligabetrieb (Platzhalter aus dem Prototyp). Verweise als {"@post": "<typ>:<slug>"}, der Import löst sie
-// zur ID auf – deshalb in dieser Reihenfolge importieren: spieler, mannschaft, ligaspiel, spielbericht.
-const ref = (typ, s) => ({ '@post': `${typ}:${s}` });
-const spielerMap = new Map();
-mannschaften.forEach((m) =>
-  m.kader.forEach((name, k) => {
-    const s = slug(name);
-    const geschlecht = m.geschlecht === 'gemischt' ? (k % 2 ? 'weiblich' : 'maennlich') : m.geschlecht;
-    const vorher = spielerMap.get(s);
-    // Beispiel für die Einwilligung: der letzte im Kader hat (sofern nirgends sonst im Kader) nicht zugestimmt
-    spielerMap.set(s, { name, geschlecht, einwilligung: (vorher && vorher.einwilligung) || k < 6 });
-  }),
-);
-const spielerItems = [...spielerMap].map(([s, sp]) => {
-  const [vorname, ...rest] = sp.name.split(' ');
-  return {
-    title: sp.name,
-    slug: s,
-    meta: { spieler_vorname: vorname, spieler_nachname: rest.join(' '), spieler_geschlecht: sp.geschlecht, spieler_einwilligung: sp.einwilligung ? 1 : 0 },
-  };
-});
-const akWert = { Clubmannschaft: 'club', AK30: 'ak30', AK50: 'ak50', AK65: 'ak65' };
-const mannschaftItems = mannschaften.map((m, i) => ({
-  title: m.titel,
-  slug: m.slug,
-  order: (i + 1) * 10,
-  meta: {
-    mannschaft_altersklasse: akWert[m.ak],
-    mannschaft_nummer: m.nr,
-    mannschaft_geschlecht: m.geschlecht,
-    mannschaft_liga: m.liga,
-    mannschaft_spielfuehrer: ref('spieler', slug(m.spielfuehrer)),
-    mannschaft_kader: m.kader.map((n) => ref('spieler', slug(n))),
-  },
-}));
-const titelVon = Object.fromEntries(mannschaften.map((m) => [m.slug, m.titel]));
-// Termin: Meta Box speichert datetime mit timestamp=true als „Ortszeit als Unix-Zeit“ (wie bei den Sperrungen)
-const termin = (datum, uhrzeit) => Date.UTC(+datum.slice(0, 4), +datum.slice(5, 7) - 1, +datum.slice(8, 10), +uhrzeit.slice(0, 2), +uhrzeit.slice(3, 5)) / 1000;
-const ligaspielItems = ligaspiele.map((l) => ({
-  title: `${titelVon[l.mannschaft]} · ${l.spieltag}. Spieltag`,
-  slug: l.id,
-  meta: {
-    ligaspiel_mannschaft: ref('mannschaft', l.mannschaft),
-    ligaspiel_spieltag: l.spieltag,
-    ligaspiel_termin: termin(l.datum, l.uhrzeit),
-    ligaspiel_spielort: l.spielort,
-    ligaspiel_heimspiel: l.heim ? 1 : 0,
-    ligaspiel_platzierung: l.platzierung ?? '',
-  },
-}));
-const berichtItems = spielberichte.map((b) => ({
-  title: b.titel,
-  slug: b.slug,
-  content: b.text.map((t) => `<!-- wp:paragraph --><p>${t}</p><!-- /wp:paragraph -->`).join('\n'),
-  meta: { bericht_ligaspiel: ref('ligaspiel', b.ligaspiel) },
-}));
-for (const [typ, items] of [['spieler', spielerItems], ['mannschaft', mannschaftItems], ['ligaspiel', ligaspielItems], ['spielbericht', berichtItems]]) {
-  writeFileSync(join(dist, `daten/${typ}.json`), JSON.stringify({ key: 'slug', items }, null, 2) + '\n');
-  console.log(`daten/${typ}.json  (${items.length})`);
-}
+// Mannschaften, Ligaspiele und Gastclubs kommen vom Golfverband NRW (mu-plugins/golfplatz-liga-sync.php),
+// Spieler und Spielberichte pflegt der Club. Die Platzhalter aus dem Prototyp werden nicht mehr importiert.
 
 // Einstellungsseiten für golfplatz/import-settings. Nur die aufgeführten Felder werden überschrieben.
 // Öffnungszeiten je Bereich; Beispiel-Ausnahmen aus dem Prototyp werden nicht übernommen.
