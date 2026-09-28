@@ -1,0 +1,85 @@
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"table-wrap"},"metadata":{"name":"Scorekarte"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Scorekarte mit Par, Schwierigkeitsrang und Längen in Metern je Abschlag","class":"scorecard"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"scorecard__row scorecard__row\u002d\u002dhead"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"Loch"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"Par "} /-->
+<!-- wp:etch/element {"tag":"small","attributes":{}} -->
+<!-- wp:etch/text {"content":"H/D"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"HCP"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platz.scorekarte.kopf","itemId":"k"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"scorecard__cell"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"tee-badge tee-badge\u002d\u002d{k.tee}"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","class":"tee-badge__dot"}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":"{k.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"small","attributes":{"class":"scorecard__gender"}} -->
+<!-- wp:etch/text {"content":"{k.fuer}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platz.scorekarte.bloecke","itemId":"b"} -->
+<!-- wp:etch/loop {"target":"b.zeilen","itemId":"z"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"scorecard__row"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"rowheader","class":"scorecard__cell scorecard__hole"}} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{z.link}","aria-label":"Bahn {z.nr}"}} -->
+<!-- wp:etch/text {"content":"{z.nr}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"{z.par}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"{z.hcp}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"z.laengen","itemId":"l"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"scorecard__cell scorecard__len scorecard__len\u002d\u002d{l.tee}"}} -->
+<!-- wp:etch/text {"content":"{l.wert}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"scorecard__row scorecard__row\u002d\u002dsum"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"rowheader","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"{b.summe.label}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"{b.summe.par}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"scorecard__cell"}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"b.summe.laengen","itemId":"l"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"{l.wert}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"scorecard__row scorecard__row\u002d\u002dsum"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"rowheader","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"{options.golfplatz.platz.scorekarte.gesamt.label}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"{options.golfplatz.platz.scorekarte.gesamt.par}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"scorecard__cell"}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platz.scorekarte.gesamt.laengen","itemId":"l"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"scorecard__cell"}} -->
+<!-- wp:etch/text {"content":"{l.wert}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->

@@ -1,0 +1,265 @@
+// Schreibt das Block-Markup aller Etch-Templates nach wordpress/etch/dist/<slug>.html.
+// Übertragen nach WordPress: MCP-Funktion golfplatz/save-template (siehe wordpress/README.md).
+
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { templates, pages } from './templates.mjs';
+import { components } from './komponenten.mjs';
+import { acssEinstellungen } from './acss-farben.mjs';
+import { loops } from './loops.mjs';
+import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, preise, kurse, kurseAnmeldung } from '../../prototype/src/data.mjs';
+
+const hier = dirname(fileURLToPath(import.meta.url));
+const dist = join(hier, 'dist');
+mkdirSync(dist, { recursive: true });
+
+for (const tpl of templates) {
+  // Präfix template-, damit ein Template wie page-birdiebook nicht mit der Seiten-Datei page-<slug>.html kollidiert
+  writeFileSync(join(dist, `template-${tpl.slug}.html`), tpl.content + '\n');
+  console.log(`template-${tpl.slug}.html  (${tpl.content.length} Zeichen)`);
+}
+for (const c of components) {
+  writeFileSync(join(dist, `component-${c.key}.html`), c.content + '\n');
+  console.log(`component-${c.key}.html  (${c.content.length} Zeichen)`);
+}
+for (const p of pages) {
+  writeFileSync(join(dist, `page-${p.slug}.html`), p.content + '\n');
+  console.log(`page-${p.slug}.html  (${p.content.length} Zeichen)`);
+}
+writeFileSync(
+  join(dist, 'manifest.json'),
+  JSON.stringify(
+    {
+      loops,
+      components: components.map(({ content, ...meta }) => meta),
+      templates: templates.map(({ slug, title }) => ({ slug, title })),
+      pages: pages.map(({ content, ...meta }) => meta),
+    },
+    null,
+    2,
+  ) + '\n',
+);
+
+// Inhalte für golfplatz/import-content, Quelle sind die Prototyp-Daten.
+mkdirSync(join(dist, 'daten'), { recursive: true });
+writeFileSync(
+  join(dist, 'daten/spielbahn.json'),
+  JSON.stringify(
+    {
+      key: 'bahn_nummer',
+      items: bahnen.map((b) => ({
+        title: `Bahn ${b.nr}`,
+        slug: String(b.nr),
+        order: b.nr,
+        meta: {
+          bahn_nummer: b.nr,
+          bahn_par_herren: String(b.parHerren),
+          bahn_par_damen: String(b.parDamen),
+          bahn_hcp: b.hcp,
+          laenge_gelb: b.laengen.gelb,
+          laenge_blau: b.laengen.blau,
+          laenge_rot: b.laengen.rot,
+          laenge_orange: b.laengen.orange,
+          bahn_beschreibung: b.beschreibung ? `<p>${b.beschreibung}</p>` : '',
+          bahn_spieltipp: b.spieltipp,
+        },
+      })),
+    },
+    null,
+    2,
+  ) + '\n',
+);
+console.log(`daten/spielbahn.json  (${bahnen.length} Bahnen)`);
+
+// Beispiel-Sperrungen relativ zum Build-Tag. Meta Box speichert datetime mit timestamp=true
+// als „Ortszeit als Unix-Zeit“, deshalb Date.UTC mit den lokalen Datumsteilen.
+const ortszeit = (tagVersatz, hhmm) => {
+  const d = new Date();
+  d.setDate(d.getDate() + tagVersatz);
+  return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), +hhmm.slice(0, 2), +hhmm.slice(3, 5)) / 1000;
+};
+writeFileSync(
+  join(dist, 'daten/sperrung.json'),
+  JSON.stringify(
+    {
+      key: 'slug',
+      items: sperrungen.map((s, i) => ({
+        title: `${s.grund} (Beispiel)`,
+        slug: `beispiel-${i + 1}`,
+        meta: { sperr_bereich: s.bereich, sperr_beginn: ortszeit(s.tag, s.von), sperr_ende: ortszeit(s.tag, s.bis), sperr_grund: s.grund },
+      })),
+    },
+    null,
+    2,
+  ) + '\n',
+);
+console.log(`daten/sperrung.json  (${sperrungen.length} Beispiel-Sperrungen)`);
+
+// Team & Vorstand (Beitragstyp „person“) mit Personengruppen.
+const slug = (s) => s.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+writeFileSync(
+  join(dist, 'daten/person.json'),
+  JSON.stringify(
+    {
+      key: 'slug',
+      items: personen.map((p, i) => ({
+        title: p.name,
+        slug: slug(p.name),
+        order: (i + 1) * 10,
+        meta: { person_funktion: p.funktion, person_email: p.email || '', person_telefon: p.telefon || '', person_text: p.text || '' },
+        terms: { personengruppe: p.gruppen.map((g) => personengruppen[g]) },
+      })),
+    },
+    null,
+    2,
+  ) + '\n',
+);
+console.log(`daten/person.json  (${personen.length} Personen)`);
+
+// Preise (Beitragstyp „preis“) mit Preiskategorie. Reihenfolge über menu_order wie auf dreibaeumen.de.
+const preisKategorien = [
+  ['greenfee', 'Greenfee'],
+  ['turnier', 'Turnier-Greenfee'],
+  ['kooperationen', 'Kooperation'],
+  ['leihe', 'Leihgeräte'],
+  ['mitgliedschaft', 'Mitgliedschaft'],
+];
+const preisItems = preisKategorien.flatMap(([schluessel, kategorie], k) =>
+  preise[schluessel].map((p, i) => ({
+    title: p.titel,
+    slug: slug(`${kategorie} ${p.titel} ${p.tage || ''} ${p.einheit || ''}`),
+    order: (k + 1) * 100 + i,
+    meta: {
+      preis_betrag: p.betrag ?? '',
+      preis_auf_anfrage: p.betrag === null ? 1 : 0,
+      preis_einheit: p.einheit || '',
+      preis_tage: p.tage || '',
+      preis_zusatz: p.zusatz || '',
+      preis_hervorheben: p.hervorheben ? 1 : 0,
+      preis_leistungen: (p.leistungen || []).join('\n'),
+    },
+    terms: { preiskategorie: [kategorie] },
+  })),
+);
+writeFileSync(join(dist, 'daten/preis.json'), JSON.stringify({ key: 'slug', items: preisItems }, null, 2) + '\n');
+console.log(`daten/preis.json  (${preisItems.length} Preise)`);
+
+// Kurse (Beitragstyp „kurs“). Preis leer = auf Anfrage.
+const kursTyp = { Schnupperkurs: 'schnupperkurs', Platzreife: 'platzreife', Training: 'training', 'Kinder & Jugend': 'jugend' };
+const kursItems = kurse.map((k, i) => ({
+  title: k.titel,
+  slug: slug(k.titel),
+  order: (i + 1) * 10,
+  content: `<!-- wp:paragraph --><p>${k.text}</p><!-- /wp:paragraph -->`,
+  meta: {
+    kurs_typ: kursTyp[k.typ] || 'training',
+    kurs_preis: k.preis ?? '',
+    kurs_dauer: k.dauer || '',
+    kurs_max_teilnehmer: k.max ?? '',
+    kurs_anmeldung: `${k.termine.length ? k.termine.join(', ') + '. ' : ''}Anmeldung unter ${kurseAnmeldung.telefon} oder ${kurseAnmeldung.email}.`,
+  },
+}));
+writeFileSync(join(dist, 'daten/kurs.json'), JSON.stringify({ key: 'slug', items: kursItems }, null, 2) + '\n');
+console.log(`daten/kurs.json  (${kursItems.length} Kurse)`);
+
+// Einstellungsseiten für golfplatz/import-settings. Nur die aufgeführten Felder werden überschrieben.
+// Öffnungszeiten je Bereich; Beispiel-Ausnahmen aus dem Prototyp werden nicht übernommen.
+const zeitenFelder = Object.fromEntries(
+  Object.entries(oeffnungszeiten).flatMap(([key, b]) => [
+    [`zeiten_${key}_standard`, b.standard],
+    [`zeiten_${key}_ausnahmen`, b.ausnahmen.filter((a) => !a.beispiel).map(({ titel, von, bis, geschlossen, zeiten }) => ({ titel, von, bis, geschlossen: geschlossen ? 1 : 0, zeiten }))],
+    [`zeiten_${key}_hinweis`, b.hinweis],
+  ]),
+);
+const einstellungen = {
+  clubdaten: {
+    club_name: club.name,
+    club_kurzname: club.kurzname,
+    club_claim: club.claim,
+    club_gegruendet: '',
+    club_strasse: club.adresse[0],
+    club_plz: club.adresse[1].split(' ')[0],
+    club_ort: club.adresse[1].split(' ').slice(1).join(' '),
+    club_telefon: club.telefon,
+    club_fax: club.fax,
+    club_email: club.email,
+    club_anfahrt_auto: '',
+    club_anfahrt_oepnv: '',
+    anmeldung_telefon: club.anmeldung.telefon,
+    anmeldung_hinweis: club.anmeldung.hinweis,
+    ruhetag_hinweis: club.anmeldung.ruhetag,
+    greenfee_hinweise: preise.hinweise,
+    greenfee_fussnote: '„R“ = DGV-Ausweis mit R-Kennzeichnung.',
+    kooperationen_hinweis: preise.kooperationenHinweis,
+    // Twilight laut dreibaeumen.de › Gäste › Greenfee; Koordinaten: Hückeswagen (für den Sonnenuntergang)
+    twilight_regel: 'Täglich bei Start ab drei Stunden vor Sonnenuntergang.',
+    twilight_stunden: 3,
+    club_geo: '51.145, 7.344',
+    restaurant_name: restaurant.name,
+    restaurant_telefon: restaurant.telefon,
+    restaurant_hinweis: restaurant.hinweis,
+    recht_vertretung: club.recht.vertretung,
+    recht_registergericht: club.recht.registergericht,
+    recht_registernummer: club.recht.registernummer,
+    recht_steuernummer: club.recht.steuernummer,
+    recht_verantwortlich: club.recht.verantwortlich,
+    social_facebook: club.social.facebook,
+    social_instagram: club.social.instagram,
+    ...Object.fromEntries(abschlaege.map((a) => [`abschlag_${a.id}`, { geschlecht: a.geschlecht, cr: a.cr, slope: a.slope, par: a.par }])),
+    // null = Feld entfernen (veraltet bzw. Platzhalter ohne echte Quelle)
+    ...zeitenFelder,
+    // Alte Öffnungszeiten-Felder (Freitext) entfernen
+    club_oeffnungszeiten: null,
+    club_oeffnungszeiten_hinweis: null,
+    range_oeffnungszeiten: null,
+    range_hinweis: null,
+    kurzspiel_oeffnungszeiten: null,
+    kurzspiel_hinweis: null,
+    proshop_oeffnungszeiten: null,
+    proshop_hinweis: null,
+    restaurant_oeffnungszeiten: null,
+    startzeiten_url: null,
+    startzeiten_hinweis: null,
+    club_adresse: null,
+    club_mitglieder: null,
+    club_jugend: null,
+    recht_ust_id: null,
+  },
+  platzstatus: {
+    gruens: platzstatus.gruens,
+    gruens_hinweis: platzstatus.gruensHinweis,
+    abschlaege_offen: platzstatus.abschlaegeOffen,
+    buggy_gesperrt: platzstatus.buggy.gesperrt ? 1 : 0,
+    trolley_gesperrt: platzstatus.trolley.gesperrt ? 1 : 0,
+  },
+};
+for (const [id, werte] of Object.entries(einstellungen)) {
+  writeFileSync(join(dist, `daten/einstellungen-${id}.json`), JSON.stringify(werte, null, 2) + '\n');
+  console.log(`daten/einstellungen-${id}.json  (${Object.keys(werte).length} Felder)`);
+}
+
+// Globales Etch-Stylesheet „Golfplatz“: eigene Tokens + Komponenten-CSS aus dem Prototyp.
+const kompakt = (css) =>
+  css
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\s*\n\s*/g, '\n')
+    .replace(/\n{2,}/g, '\n')
+    .trim();
+const css = [
+  kompakt(readFileSync(join(hier, 'css/tokens.css'), 'utf8')),
+  kompakt(readFileSync(join(hier, '../../prototype/assets/css/main.css'), 'utf8')),
+  // EtchMegaMenuPro-Farben an das Club-Design anpassen
+  kompakt(readFileSync(join(hier, 'css/emmp.css'), 'utf8')),
+].join('\n');
+writeFileSync(join(dist, 'golfplatz.css'), css + '\n');
+console.log(`golfplatz.css  (${css.length} Zeichen)`);
+
+// ACSS-Farben und Farbschema (MCP golfplatz/acss-colors mit aus_datei: true)
+const acss = acssEinstellungen();
+writeFileSync(join(dist, 'daten/acss-farben.json'), JSON.stringify(acss, null, 1) + '\n');
+console.log(`daten/acss-farben.json  (${Object.keys(acss).length} Einstellungen)`);
+
+// Skript der Zählkarte (gemeinsam mit dem Prototyp), eingebunden von mu-plugins/golfplatz-birdiebook.php
+copyFileSync(new URL('../../prototype/assets/js/zaehlkarte.js', import.meta.url), join(dist, 'zaehlkarte.js'));
+console.log('zaehlkarte.js');

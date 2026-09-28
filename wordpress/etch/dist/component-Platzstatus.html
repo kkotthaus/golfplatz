@@ -1,0 +1,134 @@
+<!-- wp:etch/element {"tag":"section","attributes":{"id":"platzstatus","aria-labelledby":"status-board-title","class":"status-board"},"metadata":{"name":"Platzstatus"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"status-board__head"}} -->
+<!-- wp:etch/element {"tag":"h2","attributes":{"id":"status-board-title","class":"status-board__title"}} -->
+<!-- wp:etch/text {"content":"Platzstatus"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"status-board__updated"}} -->
+<!-- wp:etch/text {"content":"Stand: {options.golfplatz.platzstatus.stand} Uhr"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.platzstatus.platz_gesperrt","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.platzstatus.platz_gesperrt"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"alert","class":"status-board__alert"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{}} -->
+<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
+<!-- wp:etch/text {"content":"Der Platz ist gesperrt."} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":" {options.golfplatz.platzstatus.platz_gesperrt_grund}"} /-->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.platzstatus.platz_gesperrt_bis","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.platzstatus.platz_gesperrt_bis"} -->
+<!-- wp:etch/text {"content":" – {options.golfplatz.platzstatus.platz_gesperrt_bis}."} /-->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"ul","attributes":{"aria-label":"Spielbedingungen","class":"status-board__conditions"},"metadata":{"name":"Spielbedingungen"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platzstatus.bedingungen","itemId":"b"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"condition condition\u002d\u002d{b.mod}"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"condition__label"}} -->
+<!-- wp:etch/text {"content":"{b.label}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"condition__value"}} -->
+<!-- wp:etch/text {"content":"{b.wert}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"b.info","operator":"isTruthy","rightHand":null},"conditionString":"b.info"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"condition__info"}} -->
+<!-- wp:etch/text {"content":"{b.info}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.platzstatus.fahnen.vorhanden","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.platzstatus.fahnen.vorhanden"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"condition condition\u002d\u002dok"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"condition__label"}} -->
+<!-- wp:etch/text {"content":"Fahnenposition"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"condition__value"}} -->
+<!-- wp:etch/text {"content":"{options.golfplatz.platzstatus.fahnen.standard}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.platzstatus.fahnen.info","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.platzstatus.fahnen.info"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"condition__info"}} -->
+<!-- wp:etch/text {"content":"{options.golfplatz.platzstatus.fahnen.info}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platzstatus.fahnen.ausnahmen","itemId":"a"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"condition condition\u002d\u002dpin condition\u002d\u002dausnahme"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"condition__label"}} -->
+<!-- wp:etch/text {"content":"Bahn {a.bahn}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"condition__value"}} -->
+<!-- wp:etch/text {"content":"{a.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"a.lage","operator":"isTruthy","rightHand":null},"conditionString":"a.lage"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"condition__info"}} -->
+<!-- wp:etch/text {"content":"{a.lage}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"status-board__days"},"metadata":{"name":"Heute und morgen"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platzstatus.tage","itemId":"tag"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"status-board__day"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"status-board__day-title"}} -->
+<!-- wp:etch/text {"content":"{tag.label} "} /-->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"status-board__date"}} -->
+<!-- wp:etch/text {"content":"{tag.datum}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"ul","attributes":{"class":"status-board__list"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tag.frei","operator":"isTruthy","rightHand":null},"conditionString":"tag.frei"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"status-board__empty"}} -->
+<!-- wp:etch/text {"content":"Platz uneingeschränkt bespielbar"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/loop {"target":"tag.eintraege","itemId":"e"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"status-entry {e.klasse}"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"status-entry__area"}} -->
+<!-- wp:etch/text {"content":"{e.bereich}"} /-->
+<!-- wp:etch/condition {"condition":{"leftHand":"e.laeuft","operator":"isTruthy","rightHand":null},"conditionString":"e.laeuft"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"status-entry__live"}} -->
+<!-- wp:etch/text {"content":"· jetzt"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"status-entry__time"}} -->
+<!-- wp:etch/text {"content":"{e.zeit}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"status-entry__reason"}} -->
+<!-- wp:etch/text {"content":"{e.grund}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"status-board__facilities"},"metadata":{"name":"Übungsanlagen \u0026 Proshop"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"status-board__day-title"}} -->
+<!-- wp:etch/text {"content":"Übungsanlagen \u0026 Proshop"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"ul","attributes":{"class":"status-board__facility-list"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platzstatus.einrichtungen","itemId":"x"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"facility-status facility-status\u002d\u002d{x.mod}"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"facility-status__name"}} -->
+<!-- wp:etch/text {"content":"{x.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"facility-status__state"}} -->
+<!-- wp:etch/text {"content":"{x.zustand}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"x.infos","itemId":"i"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"facility-status__info"}} -->
+<!-- wp:etch/text {"content":"{i.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"status-board__more"}} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{props.zeitenLink}","class":"link-arrow"}} -->
+<!-- wp:etch/text {"content":"Alle Öffnungszeiten"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->

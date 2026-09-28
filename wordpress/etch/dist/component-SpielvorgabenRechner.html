@@ -1,0 +1,50 @@
+<!-- wp:etch/element {"tag":"div","attributes":{"data-calculator":"","class":"calculator"},"metadata":{"name":"Spielvorgaben-Rechner"}} -->
+<!-- wp:etch/element {"tag":"h2","attributes":{"class":"calculator__title"}} -->
+<!-- wp:etch/text {"content":"Spielvorgaben-Rechner"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"label","attributes":{"for":"hi-input","class":"calculator__label"}} -->
+<!-- wp:etch/text {"content":"Ihr Handicap-Index"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"calculator__input-row"}} -->
+<!-- wp:etch/element {"tag":"input","attributes":{"id":"hi-input","type":"text","inputmode":"decimal","placeholder":"z. B. 18,4 oder +1,2","autocomplete":"off","data-calculator-input":"","aria-describedby":"hi-hinweis","class":"calculator__input"}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"id":"hi-hinweis","class":"calculator__hint"}} -->
+<!-- wp:etch/text {"content":"von +5,0 bis 54,0"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"data-calculator-error":"","hidden":"","role":"alert","class":"calculator__error"}} -->
+<!-- wp:etch/text {"content":"Bitte einen Wert zwischen +5,0 und 54,0 eingeben."} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Ihre Spielvorgabe je Abschlag","class":"calculator__result"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"calculator__row calculator__row\u002d\u002dhead"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"calculator__cell"}} -->
+<!-- wp:etch/text {"content":"Abschlag"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"calculator__cell"}} -->
+<!-- wp:etch/text {"content":"Für"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"calculator__cell"}} -->
+<!-- wp:etch/text {"content":"Spiel­vorgabe"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platz.spielvorgaben","itemId":"s"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","data-cr":"{s.cr_zahl}","data-slope":"{s.slope}","data-par":"{s.par}","class":"calculator__row"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"rowheader","class":"calculator__cell"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"tee-badge tee-badge\u002d\u002d{s.tee}"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","class":"tee-badge__dot"}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":"{s.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"calculator__cell"}} -->
+<!-- wp:etch/text {"content":"{s.fuer}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sv":"{s.tee}","aria-live":"polite","class":"calculator__cell calculator__sv"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->

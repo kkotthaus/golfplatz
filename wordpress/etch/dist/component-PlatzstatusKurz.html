@@ -1,0 +1,43 @@
+<!-- wp:etch/element {"tag":"aside","attributes":{"aria-labelledby":"status-summary-title","class":"status-summary status-summary\u002d\u002d{options.golfplatz.platzstatus.kurz.zustand}"},"metadata":{"name":"Platzstatus kurz"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"status-summary__eyebrow"}} -->
+<!-- wp:etch/text {"content":"Platzstatus heute"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"id":"status-summary-title","class":"status-summary__state"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","class":"status-summary__dot"}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":"{options.golfplatz.platzstatus.kurz.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.platzstatus.kurz.hat_heute","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.platzstatus.kurz.hat_heute"} -->
+<!-- wp:etch/element {"tag":"ul","attributes":{"class":"status-summary__list"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platzstatus.kurz.heute","itemId":"h"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"status-summary__item {h.klasse}"}} -->
+<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
+<!-- wp:etch/text {"content":"{h.bereich}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":" {h.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.platzstatus.kurz.mehr","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.platzstatus.kurz.mehr"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"status-summary__item"}} -->
+<!-- wp:etch/text {"content":"{options.golfplatz.platzstatus.kurz.mehr}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.platzstatus.kurz.hat_heute","operator":"isFalsy","rightHand":null},"conditionString":"!options.golfplatz.platzstatus.kurz.hat_heute"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"status-summary__empty"}} -->
+<!-- wp:etch/text {"content":"Heute keine Sperren – Platz uneingeschränkt bespielbar"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"ul","attributes":{"aria-label":"Spielbedingungen","class":"status-summary__chips"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platzstatus.kurz.chips","itemId":"c"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"status-summary__chip status-summary__chip\u002d\u002d{c.mod}"}} -->
+<!-- wp:etch/text {"content":"{c.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"#platzstatus","class":"status-summary__link link-arrow"}} -->
+<!-- wp:etch/text {"content":"Morgen, Übungsanlagen \u0026 Details"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->

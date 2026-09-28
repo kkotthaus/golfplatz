@@ -1,0 +1,65 @@
+{
+  "key": "slug",
+  "items": [
+    {
+      "title": "Ligaspiel AK50/1 Männlich (Beispiel)",
+      "slug": "beispiel-1",
+      "meta": {
+        "sperr_bereich": "abschlag_10",
+        "sperr_beginn": 1790496000,
+        "sperr_ende": 1790514000,
+        "sperr_grund": "Ligaspiel AK50/1 Männlich"
+      }
+    },
+    {
+      "title": "Afterwork-Turnier (Beispiel)",
+      "slug": "beispiel-2",
+      "meta": {
+        "sperr_bereich": "abschlag_1",
+        "sperr_beginn": 1790528400,
+        "sperr_ende": 1790542800,
+        "sperr_grund": "Afterwork-Turnier"
+      }
+    },
+    {
+      "title": "Turnier: Herbstpreis des Präsidenten (Beispiel)",
+      "slug": "beispiel-3",
+      "meta": {
+        "sperr_bereich": "abschlag_1",
+        "sperr_beginn": 1790584200,
+        "sperr_ende": 1790591400,
+        "sperr_grund": "Turnier: Herbstpreis des Präsidenten"
+      }
+    },
+    {
+      "title": "Turnier: Herbstpreis des Präsidenten (Beispiel)",
+      "slug": "beispiel-4",
+      "meta": {
+        "sperr_bereich": "abschlag_10",
+        "sperr_beginn": 1790584200,
+        "sperr_ende": 1790591400,
+        "sperr_grund": "Turnier: Herbstpreis des Präsidenten"
+      }
+    },
+    {
+      "title": "Platzpflege: Grüns werden besandet (Beispiel)",
+      "slug": "beispiel-5",
+      "meta": {
+        "sperr_bereich": "platz",
+        "sperr_beginn": 1790575200,
+        "sperr_ende": 1790584200,
+        "sperr_grund": "Platzpflege: Grüns werden besandet"
+      }
+    },
+    {
+      "title": "Mäharbeiten (Beispiel)",
+      "slug": "beispiel-6",
+      "meta": {
+        "sperr_bereich": "range",
+        "sperr_beginn": 1790578800,
+        "sperr_ende": 1790586000,
+        "sperr_grund": "Mäharbeiten"
+      }
+    }
+  ]
+}

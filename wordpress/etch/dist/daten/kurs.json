@@ -1,0 +1,44 @@
+{
+  "key": "slug",
+  "items": [
+    {
+      "title": "Schnupperkurs",
+      "slug": "schnupperkurs",
+      "order": 10,
+      "content": "<!-- wp:paragraph --><p>Einzeln oder in kleinen Gruppen: ein Gefühl für Schläger und Ball bekommen und die Basics lernen.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "kurs_typ": "schnupperkurs",
+        "kurs_preis": 35,
+        "kurs_dauer": "",
+        "kurs_max_teilnehmer": "",
+        "kurs_anmeldung": "Anmeldung unter 02192 8547-12 oder info@dreibaeumen.de."
+      }
+    },
+    {
+      "title": "Golfunterricht",
+      "slug": "golfunterricht",
+      "order": 20,
+      "content": "<!-- wp:paragraph --><p>Einzelstunden oder Unterricht in kleinen Gruppen – auch zur Vorbereitung auf die DGV-Platzreife.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "kurs_typ": "training",
+        "kurs_preis": "",
+        "kurs_dauer": "",
+        "kurs_max_teilnehmer": "",
+        "kurs_anmeldung": "nach Absprache. Anmeldung unter 02192 8547-12 oder info@dreibaeumen.de."
+      }
+    },
+    {
+      "title": "DGV-Platzreife",
+      "slug": "dgv-platzreife",
+      "order": 30,
+      "content": "<!-- wp:paragraph --><p>Mit der Platzreife dürfen Sie eigenständig auf dem Platz spielen.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "kurs_typ": "platzreife",
+        "kurs_preis": "",
+        "kurs_dauer": "",
+        "kurs_max_teilnehmer": "",
+        "kurs_anmeldung": "nach Absprache. Anmeldung unter 02192 8547-12 oder info@dreibaeumen.de."
+      }
+    }
+  ]
+}

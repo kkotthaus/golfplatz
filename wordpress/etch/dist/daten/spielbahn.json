@@ -1,0 +1,311 @@
+{
+  "key": "bahn_nummer",
+  "items": [
+    {
+      "title": "Bahn 1",
+      "slug": "1",
+      "order": 1,
+      "meta": {
+        "bahn_nummer": 1,
+        "bahn_par_herren": "4",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 7,
+        "laenge_gelb": 368,
+        "laenge_blau": 346,
+        "laenge_rot": 322,
+        "laenge_orange": 303,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 2",
+      "slug": "2",
+      "order": 2,
+      "meta": {
+        "bahn_nummer": 2,
+        "bahn_par_herren": "3",
+        "bahn_par_damen": "3",
+        "bahn_hcp": 11,
+        "laenge_gelb": 182,
+        "laenge_blau": 171,
+        "laenge_rot": 160,
+        "laenge_orange": 151,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 3",
+      "slug": "3",
+      "order": 3,
+      "meta": {
+        "bahn_nummer": 3,
+        "bahn_par_herren": "4",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 5,
+        "laenge_gelb": 364,
+        "laenge_blau": 342,
+        "laenge_rot": 320,
+        "laenge_orange": 301,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 4",
+      "slug": "4",
+      "order": 4,
+      "meta": {
+        "bahn_nummer": 4,
+        "bahn_par_herren": "3",
+        "bahn_par_damen": "3",
+        "bahn_hcp": 17,
+        "laenge_gelb": 107,
+        "laenge_blau": 102,
+        "laenge_rot": 95,
+        "laenge_orange": 90,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 5",
+      "slug": "5",
+      "order": 5,
+      "meta": {
+        "bahn_nummer": 5,
+        "bahn_par_herren": "5",
+        "bahn_par_damen": "5",
+        "bahn_hcp": 9,
+        "laenge_gelb": 484,
+        "laenge_blau": 456,
+        "laenge_rot": 425,
+        "laenge_orange": 401,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 6",
+      "slug": "6",
+      "order": 6,
+      "meta": {
+        "bahn_nummer": 6,
+        "bahn_par_herren": "4",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 1,
+        "laenge_gelb": 391,
+        "laenge_blau": 366,
+        "laenge_rot": 342,
+        "laenge_orange": 321,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 7",
+      "slug": "7",
+      "order": 7,
+      "meta": {
+        "bahn_nummer": 7,
+        "bahn_par_herren": "4",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 15,
+        "laenge_gelb": 286,
+        "laenge_blau": 276,
+        "laenge_rot": 256,
+        "laenge_orange": 240,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 8",
+      "slug": "8",
+      "order": 8,
+      "meta": {
+        "bahn_nummer": 8,
+        "bahn_par_herren": "3",
+        "bahn_par_damen": "3",
+        "bahn_hcp": 13,
+        "laenge_gelb": 182,
+        "laenge_blau": 172,
+        "laenge_rot": 160,
+        "laenge_orange": 151,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 9",
+      "slug": "9",
+      "order": 9,
+      "meta": {
+        "bahn_nummer": 9,
+        "bahn_par_herren": "5",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 3,
+        "laenge_gelb": 470,
+        "laenge_blau": 428,
+        "laenge_rot": 414,
+        "laenge_orange": 378,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 10",
+      "slug": "10",
+      "order": 10,
+      "meta": {
+        "bahn_nummer": 10,
+        "bahn_par_herren": "4",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 2,
+        "laenge_gelb": 381,
+        "laenge_blau": 375,
+        "laenge_rot": 356,
+        "laenge_orange": 347,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 11",
+      "slug": "11",
+      "order": 11,
+      "meta": {
+        "bahn_nummer": 11,
+        "bahn_par_herren": "4",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 12,
+        "laenge_gelb": 290,
+        "laenge_blau": 273,
+        "laenge_rot": 254,
+        "laenge_orange": 242,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 12",
+      "slug": "12",
+      "order": 12,
+      "meta": {
+        "bahn_nummer": 12,
+        "bahn_par_herren": "3",
+        "bahn_par_damen": "3",
+        "bahn_hcp": 18,
+        "laenge_gelb": 119,
+        "laenge_blau": 119,
+        "laenge_rot": 108,
+        "laenge_orange": 108,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 13",
+      "slug": "13",
+      "order": 13,
+      "meta": {
+        "bahn_nummer": 13,
+        "bahn_par_herren": "5",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 14,
+        "laenge_gelb": 445,
+        "laenge_blau": 420,
+        "laenge_rot": 394,
+        "laenge_orange": 371,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 14",
+      "slug": "14",
+      "order": 14,
+      "meta": {
+        "bahn_nummer": 14,
+        "bahn_par_herren": "4",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 16,
+        "laenge_gelb": 298,
+        "laenge_blau": 275,
+        "laenge_rot": 260,
+        "laenge_orange": 242,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 15",
+      "slug": "15",
+      "order": 15,
+      "meta": {
+        "bahn_nummer": 15,
+        "bahn_par_herren": "4",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 10,
+        "laenge_gelb": 403,
+        "laenge_blau": 382,
+        "laenge_rot": 357,
+        "laenge_orange": 337,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 16",
+      "slug": "16",
+      "order": 16,
+      "meta": {
+        "bahn_nummer": 16,
+        "bahn_par_herren": "4",
+        "bahn_par_damen": "4",
+        "bahn_hcp": 4,
+        "laenge_gelb": 359,
+        "laenge_blau": 338,
+        "laenge_rot": 316,
+        "laenge_orange": 297,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 17",
+      "slug": "17",
+      "order": 17,
+      "meta": {
+        "bahn_nummer": 17,
+        "bahn_par_herren": "3",
+        "bahn_par_damen": "3",
+        "bahn_hcp": 8,
+        "laenge_gelb": 203,
+        "laenge_blau": 184,
+        "laenge_rot": 180,
+        "laenge_orange": 162,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    },
+    {
+      "title": "Bahn 18",
+      "slug": "18",
+      "order": 18,
+      "meta": {
+        "bahn_nummer": 18,
+        "bahn_par_herren": "5",
+        "bahn_par_damen": "5",
+        "bahn_hcp": 6,
+        "laenge_gelb": 548,
+        "laenge_blau": 518,
+        "laenge_rot": 470,
+        "laenge_orange": 436,
+        "bahn_beschreibung": "",
+        "bahn_spieltipp": ""
+      }
+    }
+  ]
+}

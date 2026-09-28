@@ -1,0 +1,74 @@
+<!-- wp:etch/element {"tag":"div","attributes":{"data-tabs":"","class":"tabs"},"metadata":{"name":"Spielvorgaben-Tabellen"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"tablist","aria-label":"Abschlag wählen","class":"tabs__list"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platz.spielvorgaben","itemId":"s"} -->
+<!-- wp:etch/element {"tag":"button","attributes":{"type":"button","role":"tab","id":"tab-{s.tee}","aria-controls":"panel-{s.tee}","aria-selected":"{s.selected}","tabindex":"{s.tabindex}","class":"tabs__tab"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"tee-badge tee-badge\u002d\u002d{s.tee}"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","class":"tee-badge__dot"}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":"{s.name} · {s.fuer}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platz.spielvorgaben","itemId":"s"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.erster","operator":"isTruthy","rightHand":null},"conditionString":"s.erster"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"tabpanel","id":"panel-{s.tee}","aria-labelledby":"tab-{s.tee}","class":"tabs__panel"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"hcp-table"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"hcp-table__title"}} -->
+<!-- wp:etch/text {"content":"{s.fuer} · CR {s.cr} · Slope {s.slope} · Par {s.par}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Spielvorgaben Abschlag {s.name}","class":"hcp-table__table"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"hcp-table__row hcp-table__row\u002d\u002dhead"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"hcp-table__cell"}} -->
+<!-- wp:etch/text {"content":"Handicap-Index"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"hcp-table__cell"}} -->
+<!-- wp:etch/text {"content":"Spielvorgabe"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"s.zeilen","itemId":"z"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"hcp-table__row"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"hcp-table__cell"}} -->
+<!-- wp:etch/text {"content":"{z.hi}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"hcp-table__cell"}} -->
+<!-- wp:etch/text {"content":"{z.sv}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"s.erster","operator":"isFalsy","rightHand":null},"conditionString":"!s.erster"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"tabpanel","id":"panel-{s.tee}","aria-labelledby":"tab-{s.tee}","hidden":"","class":"tabs__panel"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"hcp-table"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"hcp-table__title"}} -->
+<!-- wp:etch/text {"content":"{s.fuer} · CR {s.cr} · Slope {s.slope} · Par {s.par}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Spielvorgaben Abschlag {s.name}","class":"hcp-table__table"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"hcp-table__row hcp-table__row\u002d\u002dhead"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"hcp-table__cell"}} -->
+<!-- wp:etch/text {"content":"Handicap-Index"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"hcp-table__cell"}} -->
+<!-- wp:etch/text {"content":"Spielvorgabe"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"s.zeilen","itemId":"z"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"hcp-table__row"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"hcp-table__cell"}} -->
+<!-- wp:etch/text {"content":"{z.hi}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"hcp-table__cell"}} -->
+<!-- wp:etch/text {"content":"{z.sv}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->

@@ -1,0 +1,47 @@
+<!-- wp:etch/loop {"target":"options.golfplatz.zeiten","itemId":"z"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.key","operator":"===","rightHand":"props.bereich"},"conditionString":"z.key === props.bereich"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"opening-hours opening-hours\u002d\u002d{props.variante}"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"props.titel","operator":"===","rightHand":"\u00221\u0022"},"conditionString":"props.titel === \u00221\u0022"} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"opening-hours__title"}} -->
+<!-- wp:etch/text {"content":"{z.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.hat_status","operator":"isTruthy","rightHand":null},"conditionString":"z.hat_status"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"opening-hours__status opening-hours__status\u002d\u002d{z.status_mod}"}} -->
+<!-- wp:etch/text {"content":"{z.status_text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.hat_standard","operator":"isTruthy","rightHand":null},"conditionString":"z.hat_standard"} -->
+<!-- wp:etch/element {"tag":"dl","attributes":{"class":"hours hours\u002d\u002d{props.liste}"}} -->
+<!-- wp:etch/loop {"target":"z.standard","itemId":"s"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"hours__row"}} -->
+<!-- wp:etch/element {"tag":"dt","attributes":{"class":"hours__days"}} -->
+<!-- wp:etch/text {"content":"{s.tage}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dd","attributes":{"class":"hours__time"}} -->
+<!-- wp:etch/text {"content":"{s.zeit}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.hat_ausnahmen","operator":"isTruthy","rightHand":null},"conditionString":"z.hat_ausnahmen"} -->
+<!-- wp:etch/element {"tag":"ul","attributes":{"class":"opening-hours__exceptions"}} -->
+<!-- wp:etch/loop {"target":"z.ausnahmen","itemId":"a"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"opening-hours__exception"}} -->
+<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
+<!-- wp:etch/text {"content":"{a.titel}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":" {a.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.hinweis","operator":"isTruthy","rightHand":null},"conditionString":"z.hinweis"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"opening-hours__note"}} -->
+<!-- wp:etch/text {"content":"{z.hinweis}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->

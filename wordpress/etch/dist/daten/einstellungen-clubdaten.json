@@ -1,0 +1,134 @@
+{
+  "club_name": "Golfclub Dreibäumen e. V.",
+  "club_kurzname": "GC Dreibäumen",
+  "club_claim": "Einer der schönsten Golfplätze im Bergischen Land.",
+  "club_gegruendet": "",
+  "club_strasse": "Stoote 1",
+  "club_plz": "42499",
+  "club_ort": "Hückeswagen",
+  "club_telefon": "02192 8547-20",
+  "club_fax": "02192 8547-19",
+  "club_email": "sekretariat@dreibaeumen.de",
+  "club_anfahrt_auto": "",
+  "club_anfahrt_oepnv": "",
+  "anmeldung_telefon": "02192 8547-12",
+  "anmeldung_hinweis": "Wir verzichten bewusst auf feste Startzeiten – kommen Sie einfach vorbei. Am Wochenende und an Feiertagen bitten wir um eine kurze telefonische Anmeldung.",
+  "ruhetag_hinweis": "Montags ist Greenkeeper-Tag: Es kann zu Einschränkungen im Spielbetrieb kommen.",
+  "greenfee_hinweise": [
+    "Gültiger Mitgliedsausweis eines Golfclubs",
+    "Handicap: Mo–Fr bis 54, Sa, So und Feiertag bis 36",
+    "Schüler und Studierende unter 27 Jahren: 50 % Ermäßigung mit Ausweis",
+    "Mitglieder können täglich bis zu drei Gäste anmelden und auf der Runde begleiten: 10 € Ermäßigung auf das 18-Loch-Tagesgreenfee, je Gast höchstens zweimal im Jahr pro Mitglied"
+  ],
+  "greenfee_fussnote": "„R“ = DGV-Ausweis mit R-Kennzeichnung.",
+  "kooperationen_hinweis": "Ermäßigtes Greenfee für Mitglieder der Partnerclubs. Es ist nur eine Ermäßigung möglich.",
+  "twilight_regel": "Täglich bei Start ab drei Stunden vor Sonnenuntergang.",
+  "twilight_stunden": 3,
+  "club_geo": "51.145, 7.344",
+  "restaurant_name": "Clubrestaurant",
+  "restaurant_telefon": "",
+  "restaurant_hinweis": "Unsere Gastronomie startet unter neuer Leitung. Öffnungszeiten und Speisekarte folgen.",
+  "recht_vertretung": "Michael Dattner, Erich Buchholz, Friedhelm Klüting, Susanne Kessler, Angelika Rahm, Marc Rogge",
+  "recht_registergericht": "Amtsgericht Köln",
+  "recht_registernummer": "VR 800575",
+  "recht_steuernummer": "221/5711/2525",
+  "recht_verantwortlich": "Erich Buchholz, Stoote 1, 42499 Hückeswagen",
+  "social_facebook": "https://www.facebook.com/golfclubdreibaeumen/",
+  "social_instagram": "https://www.instagram.com/dreibaeumen/",
+  "abschlag_gelb": {
+    "geschlecht": "herren",
+    "cr": 71.2,
+    "slope": 132,
+    "par": 71
+  },
+  "abschlag_blau": {
+    "geschlecht": "herren",
+    "cr": 69.4,
+    "slope": 124,
+    "par": 71
+  },
+  "abschlag_rot": {
+    "geschlecht": "damen",
+    "cr": 73,
+    "slope": 131,
+    "par": 69
+  },
+  "abschlag_orange": {
+    "geschlecht": "damen",
+    "cr": 71,
+    "slope": 125,
+    "par": 69
+  },
+  "zeiten_sekretariat_standard": [
+    {
+      "tage": [
+        "mo",
+        "di",
+        "mi",
+        "do",
+        "fr",
+        "sa",
+        "so"
+      ],
+      "von": "10:00",
+      "bis": "17:00"
+    }
+  ],
+  "zeiten_sekretariat_ausnahmen": [],
+  "zeiten_sekretariat_hinweis": "",
+  "zeiten_range_standard": [
+    {
+      "tage": [
+        "mo",
+        "di",
+        "mi",
+        "do",
+        "fr",
+        "sa",
+        "so"
+      ],
+      "von": "09:00",
+      "bis": "20:00"
+    }
+  ],
+  "zeiten_range_ausnahmen": [],
+  "zeiten_range_hinweis": "Rangefee 5 €.",
+  "zeiten_kurzspiel_standard": [],
+  "zeiten_kurzspiel_ausnahmen": [],
+  "zeiten_kurzspiel_hinweis": "Öffnungszeiten folgen.",
+  "zeiten_proshop_standard": [
+    {
+      "tage": [
+        "mo",
+        "di",
+        "mi",
+        "do",
+        "fr",
+        "sa",
+        "so"
+      ],
+      "von": "10:00",
+      "bis": "17:00"
+    }
+  ],
+  "zeiten_proshop_ausnahmen": [],
+  "zeiten_proshop_hinweis": "Betrieben von Golf und Günstig OHG.",
+  "zeiten_restaurant_standard": [],
+  "zeiten_restaurant_ausnahmen": [],
+  "zeiten_restaurant_hinweis": "Öffnungszeiten folgen.",
+  "club_oeffnungszeiten": null,
+  "club_oeffnungszeiten_hinweis": null,
+  "range_oeffnungszeiten": null,
+  "range_hinweis": null,
+  "kurzspiel_oeffnungszeiten": null,
+  "kurzspiel_hinweis": null,
+  "proshop_oeffnungszeiten": null,
+  "proshop_hinweis": null,
+  "restaurant_oeffnungszeiten": null,
+  "startzeiten_url": null,
+  "startzeiten_hinweis": null,
+  "club_adresse": null,
+  "club_mitglieder": null,
+  "club_jugend": null,
+  "recht_ust_id": null
+}

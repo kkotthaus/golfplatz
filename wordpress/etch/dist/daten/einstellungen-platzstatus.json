@@ -1,0 +1,10 @@
+{
+  "gruens": "sommer",
+  "gruens_hinweis": "",
+  "abschlaege_offen": [
+    "gelb",
+    "rot"
+  ],
+  "buggy_gesperrt": 0,
+  "trolley_gesperrt": 0
+}

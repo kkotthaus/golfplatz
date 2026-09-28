@@ -1,0 +1,50 @@
+/*
+  Design-Tokens des Prototyps.
+  Die Variablennamen folgen Automatic.css v4 (--primary, --space-m, --text-l, --radius …).
+  In Etch liefert ACSS diese Variablen, und diese Datei entfällt.
+  Die Farben (hell/dunkel) stehen in farben.css, erzeugt aus wordpress/etch/acss-farben.mjs.
+  Richtung: klassisch-elegant, gedämpfte Farben. CI des Clubs steht noch aus.
+*/
+:root {
+  /* Abschlagfarben */
+  --tee-gelb: #d9ad1f;
+  --tee-blau: #2e5f9e;
+  --tee-rot: #b53a2e;
+  --tee-orange: #e07a2b;
+
+  /* Typografie: Systemschriften, damit keine externen Fonts geladen werden */
+  --heading-font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --text-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --text-xs: 0.8rem;
+  --text-s: 0.9rem;
+  --text-m: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-l: clamp(1.125rem, 1.05rem + 0.35vw, 1.3rem);
+  --text-xl: clamp(1.3rem, 1.15rem + 0.7vw, 1.6rem);
+  --h1: clamp(2.2rem, 1.6rem + 3vw, 3.8rem);
+  --h2: clamp(1.75rem, 1.4rem + 1.7vw, 2.6rem);
+  --h3: clamp(1.35rem, 1.2rem + 0.75vw, 1.75rem);
+  --h4: clamp(1.15rem, 1.08rem + 0.35vw, 1.3rem);
+
+  /* Abstände */
+  --space-xs: clamp(0.5rem, 0.45rem + 0.2vw, 0.625rem);
+  --space-s: clamp(0.75rem, 0.68rem + 0.35vw, 1rem);
+  --space-m: clamp(1.1rem, 0.95rem + 0.7vw, 1.6rem);
+  --space-l: clamp(1.6rem, 1.3rem + 1.4vw, 2.5rem);
+  --space-xl: clamp(2.2rem, 1.7rem + 2.4vw, 3.75rem);
+  --space-xxl: clamp(3rem, 2.2rem + 4vw, 6rem);
+  --section-space-m: var(--space-xxl);
+  --section-space-s: var(--space-xl);
+
+  --content-width: 76rem;
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
+  --grid-gap: var(--space-m);
+
+  /* Form */
+  --radius: 0.375rem;
+  --radius-l: 0.75rem;
+  --radius-circle: 50%;
+  --shadow-s: 0 1px 2px rgb(20 30 20 / 0.06), 0 2px 8px rgb(20 30 20 / 0.05);
+  --shadow-m: 0 4px 12px rgb(20 30 20 / 0.08), 0 16px 40px rgb(20 30 20 / 0.08);
+  --transition: 180ms ease;
+}

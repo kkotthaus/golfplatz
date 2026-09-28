@@ -1,0 +1,15 @@
+# Projekt Golfplatz
+
+Website für einen Golfplatz auf Basis von WordPress + Etch.
+
+Stack und Konventionen: @docs/development-environment.md
+
+Seiten, Templates, Inhalte und Verknüpfungen: [docs/seitenstruktur.md](docs/seitenstruktur.md). Konzept Birdiebook (Platz & Bahnen am Handy): [docs/konzept-birdiebook.md](docs/konzept-birdiebook.md).
+
+Stand der Umsetzung (angelegte Beitragstypen/Felder, offene Handgriffe): [docs/umsetzung.md](docs/umsetzung.md). Klickbarer Prototyp aller Seiten: [prototype/README.md](prototype/README.md).
+
+## Arbeitsweise
+- Antworte auf Deutsch.
+- Halte dich an die Konventionen aus der Stack-Doku (u. a. BEM).
+- Keine Shortcodes, wenn es als Etch-Komponente geht: PHP liefert nur Daten (Etch-Filter `etch/dynamic_data/option` bzw. `etch/dynamic_data/post`), Markup baut die Etch-Komponente.
+- Farben immer aus dem ACSS-Farbsystem (`--primary*`, `--secondary*` …), nie eigene Farbvariablen oder Hex-Werte im CSS.

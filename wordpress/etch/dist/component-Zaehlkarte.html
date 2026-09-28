@@ -1,0 +1,229 @@
+<!-- wp:etch/element {"tag":"div","attributes":{"data-score-calc":"","data-sc-club":"{options.metabox.clubdaten.club_name}","class":"score-calc"},"metadata":{"name":"Zählkarte"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__settings"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__field"}} -->
+<!-- wp:etch/element {"tag":"label","attributes":{"for":"sc-hi","class":"score-calc__label"}} -->
+<!-- wp:etch/text {"content":"Handicap-Index"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"input","attributes":{"id":"sc-hi","type":"text","inputmode":"decimal","placeholder":"z. B. 18,4","autocomplete":"off","data-sc-hi":"","aria-describedby":"sc-hi-hinweis","class":"score-calc__input"}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"id":"sc-hi-hinweis","class":"score-calc__hint"}} -->
+<!-- wp:etch/text {"content":"von +5,0 bis 54,0"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__field"}} -->
+<!-- wp:etch/element {"tag":"label","attributes":{"for":"sc-tee","class":"score-calc__label"}} -->
+<!-- wp:etch/text {"content":"Abschlag"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"select","attributes":{"id":"sc-tee","data-sc-tee":"","class":"score-calc__select"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platz.spielvorgaben","itemId":"s"} -->
+<!-- wp:etch/element {"tag":"option","attributes":{"value":"{s.tee}","data-cr":"{s.cr_zahl}","data-slope":"{s.slope}","data-par":"{s.par}","data-geschlecht":"{s.geschlecht}"}} -->
+<!-- wp:etch/text {"content":"{s.name} · {s.fuer}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__field score-calc__field\u002d\u002dsv"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"id":"sc-sv-label","class":"score-calc__label"}} -->
+<!-- wp:etch/text {"content":"Ihre Spielvorgabe"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"output","attributes":{"data-sc-sv":"","aria-labelledby":"sc-sv-label","aria-live":"polite","class":"score-calc__sv"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"data-sc-geteilt":"","hidden":"","class":"score-calc__shared"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"score-calc__shared-text"}} -->
+<!-- wp:etch/text {"content":"Sie sehen eine geteilte Runde. Sobald Sie etwas ändern, wird sie als Ihre Runde gespeichert."} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"button","attributes":{"type":"button","data-sc-eigene":"","class":"btn btn\u002d\u002doutline score-calc__own"}} -->
+<!-- wp:etch/text {"content":"Meine eigene Runde anzeigen"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"data-sc-error":"","hidden":"","role":"alert","class":"calculator__error"}} -->
+<!-- wp:etch/text {"content":"Bitte einen Handicap-Index zwischen +5,0 und 54,0 eingeben."} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"table-wrap"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Zählkarte: Vorgabe, Schläge und Punkte je Loch","class":"score-calc__table"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"score-calc__row score-calc__row\u002d\u002dhead"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/text {"content":"Loch"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/text {"content":"Par"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/element {"tag":"abbr","attributes":{"title":"Schwierigkeit des Lochs (1 = am schwersten)"}} -->
+<!-- wp:etch/text {"content":"HCP"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/element {"tag":"abbr","attributes":{"title":"Vorgabeschläge auf diesem Loch"}} -->
+<!-- wp:etch/text {"content":"Vorgabe"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/text {"content":"Schläge"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/text {"content":"Netto"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/element {"tag":"abbr","attributes":{"title":"Stableford-Punkte brutto"}} -->
+<!-- wp:etch/text {"content":"Pkt. brutto"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/element {"tag":"abbr","attributes":{"title":"Stableford-Punkte netto"}} -->
+<!-- wp:etch/text {"content":"Pkt. netto"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.platz.zaehlkarte.bloecke","itemId":"b"} -->
+<!-- wp:etch/loop {"target":"b.zeilen","itemId":"z"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","data-sc-loch":"{z.nr}","data-hcp":"{z.hcp}","data-par-herren":"{z.par_herren}","data-par-damen":"{z.par_damen}","class":"score-calc__row"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"rowheader","class":"score-calc__cell score-calc__hole"}} -->
+<!-- wp:etch/text {"content":"{z.nr}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-par":"","class":"score-calc__cell score-calc__cell\u002d\u002dpar"}} -->
+<!-- wp:etch/text {"content":"{z.par}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"score-calc__cell"}} -->
+<!-- wp:etch/text {"content":"{z.hcp}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-vorgabe":"","class":"score-calc__cell score-calc__cell\u002d\u002dvorgabe"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"score-calc__cell score-calc__cell\u002d\u002deingabe"}} -->
+<!-- wp:etch/element {"tag":"input","attributes":{"type":"number","inputmode":"numeric","min":"1","max":"20","step":"1","aria-label":"Schläge Loch {z.nr}","data-sc-schlaege":"","class":"score-calc__strokes"}} -->
+
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-netto":"","class":"score-calc__cell score-calc__cell\u002d\u002dnetto"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-pb":"","class":"score-calc__cell score-calc__cell\u002d\u002dpb"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-pn":"","class":"score-calc__cell score-calc__cell\u002d\u002dpn"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","data-sc-summe":"{b.key}","class":"score-calc__row score-calc__row\u002d\u002dsum"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"rowheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/text {"content":"{b.label}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-par":"","class":"score-calc__cell score-calc__cell\u002d\u002dpar"}} -->
+<!-- wp:etch/text {"content":""} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"score-calc__cell"}} -->
+<!-- wp:etch/text {"content":""} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-vorgabe":"","class":"score-calc__cell score-calc__cell\u002d\u002dvorgabe"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-schlaege":"","class":"score-calc__cell score-calc__cell\u002d\u002dschlaege"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-netto":"","class":"score-calc__cell score-calc__cell\u002d\u002dnetto"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-pb":"","class":"score-calc__cell score-calc__cell\u002d\u002dpb"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-pn":"","class":"score-calc__cell score-calc__cell\u002d\u002dpn"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","data-sc-summe":"gesamt","class":"score-calc__row score-calc__row\u002d\u002dsum"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"rowheader","class":"score-calc__cell"}} -->
+<!-- wp:etch/text {"content":"Gesamt"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-par":"","class":"score-calc__cell score-calc__cell\u002d\u002dpar"}} -->
+<!-- wp:etch/text {"content":""} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"score-calc__cell"}} -->
+<!-- wp:etch/text {"content":""} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-vorgabe":"","class":"score-calc__cell score-calc__cell\u002d\u002dvorgabe"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-schlaege":"","class":"score-calc__cell score-calc__cell\u002d\u002dschlaege"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-netto":"","class":"score-calc__cell score-calc__cell\u002d\u002dnetto"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-pb":"","class":"score-calc__cell score-calc__cell\u002d\u002dpb"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","data-sc-pn":"","class":"score-calc__cell score-calc__cell\u002d\u002dpn"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__footer"}} -->
+<!-- wp:etch/element {"tag":"dl","attributes":{"aria-live":"polite","class":"score-calc__summary"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__stat score-calc__stat\u002d\u002dgespielt"}} -->
+<!-- wp:etch/element {"tag":"dt","attributes":{"class":"score-calc__stat-label"}} -->
+<!-- wp:etch/text {"content":"Gespielte Löcher"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dd","attributes":{"data-sc-ergebnis":"gespielt","class":"score-calc__stat-value"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__stat score-calc__stat\u002d\u002dbrutto"}} -->
+<!-- wp:etch/element {"tag":"dt","attributes":{"class":"score-calc__stat-label"}} -->
+<!-- wp:etch/text {"content":"Brutto"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dd","attributes":{"data-sc-ergebnis":"brutto","class":"score-calc__stat-value"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__stat score-calc__stat\u002d\u002dnetto"}} -->
+<!-- wp:etch/element {"tag":"dt","attributes":{"class":"score-calc__stat-label"}} -->
+<!-- wp:etch/text {"content":"Netto"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dd","attributes":{"data-sc-ergebnis":"netto","class":"score-calc__stat-value"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__stat score-calc__stat\u002d\u002dpb"}} -->
+<!-- wp:etch/element {"tag":"dt","attributes":{"class":"score-calc__stat-label"}} -->
+<!-- wp:etch/text {"content":"Stableford brutto"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dd","attributes":{"data-sc-ergebnis":"pb","class":"score-calc__stat-value"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__stat score-calc__stat\u002d\u002dpn"}} -->
+<!-- wp:etch/element {"tag":"dt","attributes":{"class":"score-calc__stat-label"}} -->
+<!-- wp:etch/text {"content":"Stableford netto"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dd","attributes":{"data-sc-ergebnis":"pn","class":"score-calc__stat-value"}} -->
+<!-- wp:etch/text {"content":"–"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"score-calc__actions"}} -->
+<!-- wp:etch/element {"tag":"button","attributes":{"type":"button","data-sc-teilen":"","class":"btn btn\u002d\u002dprimary score-calc__share"}} -->
+<!-- wp:etch/text {"content":"Ergebnis teilen"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"button","attributes":{"type":"button","data-sc-html":"","class":"btn btn\u002d\u002doutline score-calc__download"}} -->
+<!-- wp:etch/text {"content":"Als HTML speichern"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"button","attributes":{"type":"button","data-sc-reset":"","class":"btn btn\u002d\u002doutline score-calc__reset"}} -->
+<!-- wp:etch/text {"content":"Schläge löschen"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"data-sc-status":"","role":"status","hidden":"","class":"score-calc__status"}} -->
+<!-- wp:etch/text {"content":""} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"score-calc__note"}} -->
+<!-- wp:etch/text {"content":"Vorgabeschläge nach Loch-HCP verteilt. Netto = Schläge − Vorgabe. Stableford: Par = 2 Punkte, je Schlag besser +1, ab zwei über Par (netto: über Par plus Vorgabe) 0 Punkte. Ihre Eingaben bleiben nur in diesem Browser gespeichert."} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->

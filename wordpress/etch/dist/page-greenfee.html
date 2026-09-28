@@ -1,0 +1,130 @@
+<!-- wp:etch/element {"tag":"section","attributes":{"class":"page-hero"},"metadata":{"name":"Seitenkopf"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"page-hero__inner container"}} -->
+<!-- wp:etch/element {"tag":"nav","attributes":{"aria-label":"Brotkrumen","class":"breadcrumb"}} -->
+<!-- wp:etch/element {"tag":"ol","attributes":{"class":"breadcrumb__list"}} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"breadcrumb__item"}} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"/","class":"breadcrumb__link"}} -->
+<!-- wp:etch/text {"content":"Start"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"li","attributes":{"aria-current":"page","class":"breadcrumb__item"}} -->
+<!-- wp:etch/text {"content":"Greenfee \u0026 Preise"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"page-hero__eyebrow"}} -->
+<!-- wp:etch/text {"content":"Für Gäste"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"h1","attributes":{"class":"page-hero__title"}} -->
+<!-- wp:etch/text {"content":"Greenfee \u0026 Preise"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"page-hero__lead"}} -->
+<!-- wp:etch/text {"content":"Gäste sind jeden Tag willkommen – ohne feste Startzeiten. Am Wochenende und an Feiertagen bitte kurz telefonisch anmelden."} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"section","attributes":{"class":"section"},"metadata":{"name":"Greenfee"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"container split split\u002d\u002dwide-left"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{},"metadata":{"name":"Preise"}} -->
+<!-- wp:etch/element {"tag":"h2","attributes":{"class":"h3"}} -->
+<!-- wp:etch/text {"content":"Greenfee {options.golfplatz.preise.jahr}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/component {"ref":"__REF_Preistabelle__","attributes":{"kategorie":"greenfee"}} -->
+
+<!-- /wp:etch/component -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.metabox.clubdaten.greenfee_fussnote","operator":"isTruthy","rightHand":null},"conditionString":"options.metabox.clubdaten.greenfee_fussnote"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"small"}} -->
+<!-- wp:etch/text {"content":"{options.metabox.clubdaten.greenfee_fussnote}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.twilight.regel","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.twilight.regel"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"price-note"},"metadata":{"name":"Twilight"}} -->
+<!-- wp:etch/element {"tag":"strong","attributes":{"class":"price-note__title"}} -->
+<!-- wp:etch/text {"content":"Twilight: "} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":"{options.golfplatz.twilight.regel}"} /-->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.twilight.hat_zeit","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.twilight.hat_zeit"} -->
+<!-- wp:etch/text {"content":" "} /-->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"price-note__today"}} -->
+<!-- wp:etch/text {"content":"Heute ab {options.golfplatz.twilight.ab} Uhr (Sonnenuntergang {options.golfplatz.twilight.sonnenuntergang} Uhr)."} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"h2","attributes":{"class":"h3 spacer-top"}} -->
+<!-- wp:etch/text {"content":"Greenfee bei Turnieren"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/component {"ref":"__REF_Preistabelle__","attributes":{"kategorie":"turnier"}} -->
+
+<!-- /wp:etch/component -->
+<!-- wp:etch/element {"tag":"h2","attributes":{"class":"h3 spacer-top"}} -->
+<!-- wp:etch/text {"content":"Leihgeräte"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/component {"ref":"__REF_Preistabelle__","attributes":{"kategorie":"leihe"}} -->
+
+<!-- /wp:etch/component -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"aside","attributes":{"class":"side-box"},"metadata":{"name":"Gut zu wissen"}} -->
+<!-- wp:etch/element {"tag":"h2","attributes":{"class":"side-box__title"}} -->
+<!-- wp:etch/text {"content":"Gut zu wissen"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"ul","attributes":{"class":"check-list"}} -->
+<!-- wp:etch/loop {"target":"options.metabox.clubdaten.greenfee_hinweise","itemId":"h"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"check-list__item"}} -->
+<!-- wp:etch/text {"content":"{h}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.metabox.clubdaten.ruhetag_hinweis","operator":"isTruthy","rightHand":null},"conditionString":"options.metabox.clubdaten.ruhetag_hinweis"} -->
+<!-- wp:etch/element {"tag":"li","attributes":{"class":"check-list__item"}} -->
+<!-- wp:etch/text {"content":"{options.metabox.clubdaten.ruhetag_hinweis}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"section","attributes":{"class":"section section\u002d\u002dtint"},"metadata":{"name":"Als Gast spielen"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"container"}} -->
+<!-- wp:etch/component {"ref":"__REF_GastInfo__","attributes":{"anker":"spielen"}} -->
+
+<!-- /wp:etch/component -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"section","attributes":{"class":"section"},"metadata":{"name":"Öffnungszeiten"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"container"}} -->
+<!-- wp:etch/element {"tag":"header","attributes":{"class":"section-head"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"section-head__eyebrow"}} -->
+<!-- wp:etch/text {"content":"Anlage"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"h2","attributes":{"class":"section-head__title"}} -->
+<!-- wp:etch/text {"content":"Öffnungszeiten"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"section-head__lead"}} -->
+<!-- wp:etch/text {"content":"Sekretariat, Übungsanlagen, Proshop und Restaurant. Abweichende Zeiten und aktuelle Sperren sind markiert."} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/component {"ref":"__REF_OeffnungszeitenAlle__","attributes":{}} -->
+
+<!-- /wp:etch/component -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"section","attributes":{"class":"section"},"metadata":{"name":"Kooperationen"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"container"}} -->
+<!-- wp:etch/element {"tag":"header","attributes":{"class":"section-head"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"section-head__eyebrow"}} -->
+<!-- wp:etch/text {"content":"Kooperationen"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"h2","attributes":{"class":"section-head__title"}} -->
+<!-- wp:etch/text {"content":"Greenfee für Mitglieder unserer Partnerclubs"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.metabox.clubdaten.kooperationen_hinweis","operator":"isTruthy","rightHand":null},"conditionString":"options.metabox.clubdaten.kooperationen_hinweis"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"section-head__lead"}} -->
+<!-- wp:etch/text {"content":"{options.metabox.clubdaten.kooperationen_hinweis}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/component {"ref":"__REF_Preistabelle__","attributes":{"kategorie":"kooperationen"}} -->
+
+<!-- /wp:etch/component -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->

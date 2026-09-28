@@ -1,0 +1,58 @@
+/*
+  EtchMegaMenuPro an das Club-Design anpassen.
+  EMMP steuert Farben und Größen über eigene Variablen. Doppelte Klassen erhöhen die Spezifität,
+  damit diese Werte die EMMP-Standards überstimmen, egal in welcher Reihenfolge die Stylesheets laden.
+*/
+.dwc-nest-header.dwc-nest-header,
+.dwce-nav-nested.dwce-nav-nested {
+  --primary-clr: var(--primary);
+}
+
+/* Hauptmenü und Button „Als Gast spielen“ (letzter Menüpunkt) */
+.dwc-top-level-items-vars.dwc-top-level-items-vars {
+  --menu-item-clr: var(--base);
+  --menu-item-font-size: 0.8125rem;
+  --menu-item-font-weight: 500;
+  --menu-item-hover-clr: var(--primary-dark);
+  --menu-item-hover-bg: var(--primary-ultra-light);
+  --menu-cta-clr: var(--white);
+  --menu-cta-bg: var(--secondary);
+  --menu-cta-hover-clr: var(--white);
+  --menu-cta-hover-bg: var(--secondary-dark);
+}
+
+/* Dropdown „Golf spielen“ */
+.dwc-dropdown-items-vars.dwc-dropdown-items-vars {
+  --dropdown-content-bg: var(--white);
+  --dropdown-item-hover-clr: var(--white);
+  --dropdown-item-hover-bg: var(--primary);
+}
+
+/* Skip-Link in Clubfarben. EMMP setzt die Variablen an .dwc-header-vars (#111), deshalb direkt am Link. */
+.dwc-skip-link.dwc-skip-link {
+  --skip-link-bg: var(--primary);
+  --skip-link-color: var(--white);
+  --skip-link-hover-bg: var(--primary-dark);
+  --skip-link-hover-color: var(--white);
+}
+
+/* Logo im EMMP-Header: Signet und Wortmarke nebeneinander */
+.dwc-nest-menu__logo.site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--primary);
+  min-width: 0;
+}
+.dwc-nest-menu__logo .site-logo__mark {
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+}
+
+/* Top-Bar im EMMP-Header über die volle Breite */
+.dwc-nest-header ~ .top-bar,
+.top-bar {
+  width: 100%;
+}
