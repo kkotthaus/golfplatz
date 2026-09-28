@@ -315,6 +315,23 @@ add_action(
 		);
 
 		golfplatz_mcp_ability(
+			'turniere-sync',
+			array(
+				'label'            => 'Turniere aus PC CADDIE abgleichen',
+				'description'      => 'Liest Turnierkalender und Ergebnisliste des Clubs aus PC CADDIE://online und aktualisiert die Einträge „turnier“ (golfplatz-turniere.php).',
+				'input_schema'     => array( 'type' => 'object', 'properties' => new stdClass() ),
+				'execute_callback' => function () {
+					if ( ! function_exists( 'golfplatz_pcc_abgleich' ) ) {
+						return new WP_Error( 'golfplatz_pcc', 'golfplatz-turniere.php ist nicht aktiv.' );
+					}
+					$log = golfplatz_pcc_abgleich();
+					return array( 'text' => golfplatz_pcc_log_text( $log ), 'log' => $log );
+				},
+			),
+			false
+		);
+
+		golfplatz_mcp_ability(
 			'liga-sync',
 			array(
 				'label'            => 'Ligaspiele vom Golfverband NRW abgleichen',

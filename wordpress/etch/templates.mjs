@@ -391,21 +391,32 @@ pages.push({
   ),
 });
 
-// Turniere: Lochwettspiel (auf der Website gepflegt) und Hinweis auf PC CADDIE (Einbettung folgt)
+// Turniere: Turnierkalender und Ergebnisse aus PC CADDIE (golfplatz-turniere.php), dazu das Lochwettspiel (auf der Website gepflegt)
 pages.push({
   slug: 'turniere',
   title: 'Turniere & Kalender',
   order: 50,
   content: markup(
-    seitenkopf({ krumen: [['Turniere & Kalender']], eyebrow: 'Spielbetrieb', titel: 'Turniere & Kalender', lead: 'Clubturniere mit Ausschreibung, Meldung und Ergebnissen aus PC CADDIE – und unser Lochwettspiel im K.-o.-System.' }),
-    el('section', 'section', [
+    seitenkopf({
+      krumen: [['Turniere & Kalender']],
+      eyebrow: 'Spielbetrieb',
+      titel: 'Turniere & Kalender',
+      lead: 'Alle Clubturniere mit Anmeldeschluss und freien Plätzen – angemeldet wird direkt in PC CADDIE. Dazu unser Lochwettspiel im K.-o.-System.',
+      aktionen: [
+        t('a', 'btn btn--secondary', 'Turnierkalender', { attrs: { href: '#turnierkalender' } }),
+        t('a', 'btn btn--ghost', 'Ergebnisse', { attrs: { href: '#turnierergebnisse' } }),
+        t('a', 'btn btn--ghost', 'Lochwettspiel', { attrs: { href: '#lochwettspiel' } }),
+      ],
+    }),
+    el('section', 'section', [el('div', 'container', [t('h2', '', 'Turnierkalender'), komponente('Turnierkalender')])], { attrs: { id: 'turnierkalender' }, name: 'Turnierkalender' }),
+    el('section', 'section section--tint', [
       el('div', 'container', [
         t('h2', '', 'Lochwettspiel'),
         t('p', 'lead', 'Einmal im Jahr spielen Zweier-Teams im Lochwettspiel um den Titel. Jede Runde hat einen festen Zeitraum, in dem die Teams ihr Spiel selbst verabreden.'),
         komponente('Lochwettspiel', { jahr: 'aktuell' }),
       ]),
     ], { attrs: { id: 'lochwettspiel' }, name: 'Lochwettspiel' }),
-    el('section', 'section section--tint', [el('div', 'container prose', [t('h2', 'h3', 'Turnierkalender'), t('p', 'small', 'Turnierkalender, Meldung und Ergebnisse aus PC CADDIE werden gerade eingebunden.')])], { name: 'PC CADDIE' }),
+    el('section', 'section', [el('div', 'container', [t('h2', '', 'Ergebnisse'), komponente('Turnierergebnisse')])], { attrs: { id: 'turnierergebnisse' }, name: 'Turnierergebnisse' }),
   ),
 });
 

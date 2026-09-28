@@ -1,0 +1,51 @@
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.hat_gespielt","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.turniere.hat_gespielt"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"results"},"metadata":{"name":"Turnierergebnisse"}} -->
+<!-- wp:etch/element {"tag":"nav","attributes":{"aria-label":"Jahr wählen","class":"season-nav"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.turniere.jahre","itemId":"f"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"f.aktiv","operator":"isFalsy","rightHand":null},"conditionString":"!f.aktiv"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{f.link}","class":"season-nav__link"}} -->
+<!-- wp:etch/text {"content":"{f.jahr}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"f.aktiv","operator":"isTruthy","rightHand":null},"conditionString":"f.aktiv"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-current":"page","class":"season-nav__link season-nav__link\u002d\u002daktiv"}} -->
+<!-- wp:etch/text {"content":"{f.jahr}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"list","aria-label":"Turnierergebnisse {options.golfplatz.turniere.jahr}","class":"results__list"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.turniere.gespielt","itemId":"g"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"listitem","class":"results__item"}} -->
+<!-- wp:etch/element {"tag":"time","attributes":{"datetime":"{g.datum_iso}","class":"results__date"}} -->
+<!-- wp:etch/text {"content":"{g.tag}. {g.monat}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"results__body"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"results__title"}} -->
+<!-- wp:etch/text {"content":"{g.titel}"} /-->
+<!-- wp:etch/condition {"condition":{"leftHand":"g.untertitel","operator":"isTruthy","rightHand":null},"conditionString":"g.untertitel"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"results__subtitle"}} -->
+<!-- wp:etch/text {"content":" {g.untertitel}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"g.hat_kategorien","operator":"isTruthy","rightHand":null},"conditionString":"g.hat_kategorien"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournament__tags"}} -->
+<!-- wp:etch/loop {"target":"g.kategorien","itemId":"k"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"badge badge\u002d\u002d{k.key}"}} -->
+<!-- wp:etch/text {"content":"{k.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"g.hat_ergebnisse","operator":"isTruthy","rightHand":null},"conditionString":"g.hat_ergebnisse"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{g.link_ergebnisse}","rel":"noopener","class":"results__link"}} -->
+<!-- wp:etch/text {"content":"Ergebnisliste"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->

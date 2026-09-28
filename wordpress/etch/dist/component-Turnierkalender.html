@@ -1,0 +1,128 @@
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"tournaments"},"metadata":{"name":"Turnierkalender"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.hat_heute","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.turniere.hat_heute"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"status","class":"tournaments__today"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournaments__today-label"}} -->
+<!-- wp:etch/text {"content":"Heute auf dem Platz"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.turniere.heute","itemId":"h"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournaments__today-item"}} -->
+<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
+<!-- wp:etch/text {"content":"{h.titel}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"h.infos","operator":"isTruthy","rightHand":null},"conditionString":"h.infos"} -->
+<!-- wp:etch/text {"content":" · {h.infos}"} /-->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"nav","attributes":{"aria-label":"Turniere nach Kategorie filtern","class":"season-nav"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.turniere.filter","itemId":"f"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"f.aktiv","operator":"isFalsy","rightHand":null},"conditionString":"!f.aktiv"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{f.link}","class":"season-nav__link"}} -->
+<!-- wp:etch/text {"content":"{f.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"f.aktiv","operator":"isTruthy","rightHand":null},"conditionString":"f.aktiv"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-current":"page","class":"season-nav__link season-nav__link\u002d\u002daktiv"}} -->
+<!-- wp:etch/text {"content":"{f.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.hat_kommende","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.turniere.hat_kommende"} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.turniere.monate","itemId":"mo"} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"tournaments__month"}} -->
+<!-- wp:etch/text {"content":"{mo.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"list","aria-label":"Turniere {mo.name}","class":"tournaments__list"}} -->
+<!-- wp:etch/loop {"target":"mo.turniere","itemId":"tu"} -->
+<!-- wp:etch/element {"tag":"article","attributes":{"role":"listitem","class":"tournament"},"metadata":{"name":"Turnier"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"aria-hidden":"true","class":"tournament__date"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"tournament__weekday"}} -->
+<!-- wp:etch/text {"content":"{tu.wochentag}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"tournament__day"}} -->
+<!-- wp:etch/text {"content":"{tu.tag}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"tournament__month"}} -->
+<!-- wp:etch/text {"content":"{tu.monat}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"tournament__body"}} -->
+<!-- wp:etch/element {"tag":"h4","attributes":{"class":"tournament__title"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"visually-hidden"}} -->
+<!-- wp:etch/text {"content":"{tu.datum_lang}: "} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":"{tu.titel}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tu.untertitel","operator":"isTruthy","rightHand":null},"conditionString":"tu.untertitel"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournament__subtitle"}} -->
+<!-- wp:etch/text {"content":"{tu.untertitel}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tu.infos","operator":"isTruthy","rightHand":null},"conditionString":"tu.infos"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournament__info"}} -->
+<!-- wp:etch/text {"content":"{tu.infos}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tu.hat_kategorien","operator":"isTruthy","rightHand":null},"conditionString":"tu.hat_kategorien"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournament__tags"}} -->
+<!-- wp:etch/loop {"target":"tu.kategorien","itemId":"k"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"badge badge\u002d\u002d{k.key}"}} -->
+<!-- wp:etch/text {"content":"{k.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tu.anmeldeschluss","operator":"isTruthy","rightHand":null},"conditionString":"tu.anmeldeschluss"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournament__deadline"}} -->
+<!-- wp:etch/text {"content":"Anmeldeschluss: {tu.anmeldeschluss}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tu.plaetze","operator":"isTruthy","rightHand":null},"conditionString":"tu.plaetze"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournament__places"}} -->
+<!-- wp:etch/text {"content":"{tu.plaetze}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"tournament__actions"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tu.hat_anmeldung","operator":"isTruthy","rightHand":null},"conditionString":"tu.hat_anmeldung"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{tu.link_anmeldung}","rel":"noopener","class":"btn btn\u002d\u002dprimary tournament__button"}} -->
+<!-- wp:etch/text {"content":"Anmelden"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tu.ausgebucht","operator":"isTruthy","rightHand":null},"conditionString":"tu.ausgebucht"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"tournament__full"}} -->
+<!-- wp:etch/text {"content":"ausgebucht"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tu.hat_ausschreibung","operator":"isTruthy","rightHand":null},"conditionString":"tu.hat_ausschreibung"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{tu.link_ausschreibung}","rel":"noopener","class":"tournament__link"}} -->
+<!-- wp:etch/text {"content":"Ausschreibung (PDF)"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"tu.hat_details","operator":"isTruthy","rightHand":null},"conditionString":"tu.hat_details"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{tu.link_details}","rel":"noopener","class":"tournament__link"}} -->
+<!-- wp:etch/text {"content":"Details"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.hat_kommende","operator":"isFalsy","rightHand":null},"conditionString":"!options.golfplatz.turniere.hat_kommende"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournaments__empty"}} -->
+<!-- wp:etch/text {"content":"Zurzeit sind keine Turniere ausgeschrieben."} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournaments__source small"}} -->
+<!-- wp:etch/text {"content":"Die Turniere kommen aus PC CADDIE. Anmeldung, Start- und Ergebnislisten finden Sie dort, auch im "} /-->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{options.golfplatz.turniere.pcc_kalender}","rel":"noopener"}} -->
+<!-- wp:etch/text {"content":"Turnierkalender bei PC CADDIE"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":"."} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->

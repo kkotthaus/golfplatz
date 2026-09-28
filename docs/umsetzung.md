@@ -17,6 +17,7 @@ Was in WordPress (golfplatz.local) bereits angelegt ist, was noch von Hand zu tu
 | `kurs` | Kurse (Menü „Golfschule“) | ✓ | `/golfschule/kurs/<slug>/` | |
 | `preis` | Preise | – | – | Reihenfolge über „Reihenfolge“ (menu_order) |
 | `person` | Personen (Menü „Team & Vorstand“) | – | – | Vorstand, Sekretariat, Pros, Team |
+| `turnier` | Turniere (Menü „Turniere (PC CADDIE)“) | – | – | aus PC CADDIE, stündlich abgeglichen; nicht von Hand ändern |
 | `gastclub` | Gastclubs (Untermenü von Mannschaften) | – | – | Austragungsorte der Ligaspiele mit Website; legt der Verband-Abgleich an |
 | `lochwettspiel` | Lochwettspiele (Menü „Lochwettspiel“) | ✓ | `/turniere/lochwettspiel/<jahr>/` | ein Eintrag je Jahr, Slug = Jahr; 2 Beispiele (2025, 2026) |
 
@@ -39,6 +40,7 @@ News sind normale **Beiträge** (`post`).
 | Spieler | `spieler` | `spieler_vorname`, `spieler_nachname`, `spieler_geschlecht`, `spieler_jahrgang`, `spieler_einwilligung` |
 | Ligaspiel | `ligaspiel` | `ligaspiel_mannschaft` → Mannschaft, `ligaspiel_spieltag`, `ligaspiel_termin` (Timestamp), `ligaspiel_spielort`, `ligaspiel_heimspiel`, `ligaspiel_ergebnis`, `ligaspiel_platzierung`, `ligaspiel_saison`, `ligaspiel_liga`, `ligaspiel_verband_link`, `ligaspiel_extern_id` (Verbands-Kennung, schreibgeschützt) |
 | Gastclub | `gastclub` | `gastclub_website` (Titel = Clubname wie beim Verband) |
+| Turnier | `turnier` | alle schreibgeschützt, aus PC CADDIE: `turnier_extern_id`, `turnier_beginn`, `turnier_hat_uhrzeit`, `turnier_kategorien` (D, H, S, J, C, M, T), `turnier_untertitel`, `turnier_spielform`, `turnier_loecher`, `turnier_vorgabewirksam`, `turnier_gaeste`, `turnier_anmeldeschluss`, `turnier_teilnehmer_max`, `turnier_plaetze_frei`, `turnier_link_anmeldung`, `_details`, `_ausschreibung`, `_ergebnisse`, `_startliste` |
 | Spielbericht | `spielbericht` | `bericht_ligaspiel` → Ligaspiel, `bericht_bilder` |
 | Kurs | `kurs` | `kurs_typ`, `kurs_preis` (leer = auf Anfrage), `kurs_max_teilnehmer`, `kurs_dauer`, `kurs_trainer` → Person, `kurs_termine` (Gruppe, klonbar: `von`, `bis`, `uhrzeit`), `kurs_anmeldung` |
 | Preis | `preis` | `preis_betrag`, `preis_auf_anfrage`, `preis_einheit` (`runde18`, `runde9`, `runde`, `tag`, `monat`, `jahr`, `einmalig`), `preis_tage` (Gültig an), `preis_zusatz`, `preis_hervorheben`, `preis_aufnahme`, `preis_leistungen` |
@@ -148,6 +150,17 @@ Umsetzung des [Konzepts](konzept-birdiebook.md), Stand 2026-09-26.
   - Bei einem Seitencache auf der Live-Seite die Greenfee-Seite höchstens einen Tag cachen, sonst stimmt die Uhrzeit nicht.
 - **Hinweis zum Import:** Beim Übernehmen der drei Felder am 2026-09-27 hat `import-settings` alle Clubdaten aus dem Repository neu geschrieben. Im Admin geänderte Clubdaten wären dabei überschrieben worden. Seitdem kann `import-settings` mit `felder` gezielt einzelne Felder übernehmen.
 - Mitgliedschaftspreise (Kategorie „Mitgliedschaft“) stehen auf `/mitgliedschaft/` (siehe unten).
+
+### Turniere aus PC CADDIE
+
+Stand 2026-09-28, `mu-plugins/golfplatz-turniere.php`.
+
+- **Quelle:** die öffentlichen Seiten von PC CADDIE://online, die der Club schon auf dreibaeumen.de einbindet: Turnierkalender `pccaddie.net/clubs/<kennung>/app.php?cat=ts_calendar` (kommende Turniere) und Ergebnisliste `…?cat=ts_resultlist` (gespielte, 2024 bis heute). Club-Kennung **0494538** in den Clubdaten (`pccaddie_code`, Tab Gäste & Systeme). Gelesen werden die Tabellenzeilen `tr.pcco-xcal-list-item` (`data-id`, `data-kat`, `<time datetime>`, Anmeldeschluss, Teilnehmer, freie Plätze, Spielform, Löcher, Handicap-relevant, Links). Ändert PC CADDIE den Aufbau, meldet der Abgleich „Keine Turniere gelesen“ und lässt die Daten stehen.
+- **Abgleich:** stündlich per WP-Cron (`golfplatz_pcc_sync`), von Hand unter **Turniere (PC CADDIE) → PC-CADDIE-Abgleich** oder per MCP `golfplatz/turniere-sync`. Je Turnier ein Eintrag `turnier` (Schlüssel = PC-CADDIE-Kennung); nur Geändertes wird geschrieben. Kommende Turniere, die aus dem Kalender verschwinden, gelten als abgesagt und kommen in den Papierkorb.
+- **Nicht übernommen:** Namen aus Melde-, Start- und Ergebnislisten (Datenschutz) – nur Links dorthin. Anmelden, Abmelden und Ergebnisse bleiben bei PC CADDIE (Login dort).
+- **Anzeige** auf `/turniere/`: Etch-Komponenten **Turnierkalender** (kommende Turniere nach Monat, Filter `?kategorie=d|h|s|j|c`, „Heute auf dem Platz“, Anmeldeschluss, freie Plätze bzw. „ausgebucht“, Buttons Anmelden, Ausschreibung, Details) und **Turnierergebnisse** (gespielte Turniere eines Jahres, `?jahr=2025`, Link „Ergebnisliste“). Daten `{options.golfplatz.turniere}` (`monate[]`, `filter[]`, `gespielt[]`, `jahre[]`, `heute[]`, `naechste[]` für die Startseite).
+- **Erster Abgleich** 2026-09-28: 287 Turniere (28 kommende, 259 gespielte 2024–2026); zweiter Lauf ohne Änderung. Geprüft auf golfplatz.local, 1280 px und 375 px.
+- **Offen:** mit PC CADDIE bzw. dem Club klären, ob das Auslesen der HTML-Seiten in Ordnung ist oder eine offizielle Schnittstelle genutzt werden soll; „Nächste Turniere“ auf der Startseite (Daten liegen unter `naechste[]`). Kategorien G, E, V von PC CADDIE sind nicht beschriftet und werden ignoriert.
 
 ### Mannschaften & Ligaspiele
 

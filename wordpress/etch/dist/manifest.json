@@ -180,6 +180,18 @@
       ]
     },
     {
+      "key": "Turnierkalender",
+      "name": "Turnierkalender",
+      "description": "Kommende Turniere aus PC CADDIE, nach Monat, mit Kategorie-Filter (?kategorie=d|h|s|j|c), Anmeldeschluss, freien Plätzen und Links zu Anmeldung, Ausschreibung und Details bei PC CADDIE. Daten: {options.golfplatz.turniere} (golfplatz-turniere.php, stündlicher Abgleich).",
+      "properties": []
+    },
+    {
+      "key": "Turnierergebnisse",
+      "name": "Turnierergebnisse",
+      "description": "Gespielte Turniere eines Jahres (?jahr=2025) mit Link zur Ergebnisliste bei PC CADDIE. Daten: {options.golfplatz.turniere}.",
+      "properties": []
+    },
+    {
       "key": "Birdiebook",
       "name": "Birdiebook",
       "description": "Alle 18 Bahnen zum Durchwischen (EtchSliderPro) mit Abschlag-Wahl, Nummernleiste und Vor/Zurück. Daten: Spielbahnen (Loop gp-bahnen), Skript: mu-plugins/golfplatz-birdiebook.php.",

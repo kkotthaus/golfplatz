@@ -194,7 +194,7 @@ Nicht öffentlich und ohne eigene Seite: `sperrung`, `spieler`, `ligaspiel`, `pr
 **Anforderungen**
 
 - Ausnahme ist das **Lochwettspiel** (einmal im Jahr, Zweier-Teams, K.-o.-System mit festem Spielzeitraum je Runde). Es läuft nicht über PC CADDIE und wird deshalb im Beitragstyp `lochwettspiel` gepflegt; je Jahr gibt es eine Seite `/turniere/lochwettspiel/<jahr>/` (Template `single-lochwettspiel`: Turnierbaum und Ausschreibung aus dem Beitragstext).
-- Alle übrigen Turniere werden **nicht** in WordPress gepflegt. Einbettung, Design-Anpassung und Consent sind offen (siehe [projekt.md › Offene Punkte](projekt.md#offene-punkte)).
+- Alle übrigen Turniere werden **nicht** in WordPress gepflegt: Sie kommen stündlich aus PC CADDIE (Beitragstyp `turnier`, nur lesend) und erscheinen als Turnierkalender und Ergebnisliste; Anmeldung und Ergebnislisten verlinken zu PC CADDIE. Einbettung, Design-Anpassung und Consent sind offen (siehe [projekt.md › Offene Punkte](projekt.md#offene-punkte)).
 
 ### Golfschule `/golfschule/`
 

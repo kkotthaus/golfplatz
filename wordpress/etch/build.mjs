@@ -212,6 +212,8 @@ const einstellungen = {
     greenfee_hinweise: preise.hinweise,
     greenfee_fussnote: '„R“ = DGV-Ausweis mit R-Kennzeichnung.',
     kooperationen_hinweis: preise.kooperationenHinweis,
+    // PC CADDIE://online, Club-Kennung aus der Einbindung auf dreibaeumen.de › Sport › Turniere
+    pccaddie_code: '0494538',
     // Twilight laut dreibaeumen.de › Gäste › Greenfee; Koordinaten: Hückeswagen (für den Sonnenuntergang)
     twilight_regel: 'Täglich bei Start ab drei Stunden vor Sonnenuntergang.',
     twilight_stunden: 3,
