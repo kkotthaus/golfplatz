@@ -1,0 +1,297 @@
+{
+  "key": "lw_jahr",
+  "items": [
+    {
+      "title": "Lochwettspiel 2026",
+      "slug": "2026",
+      "content": "<!-- wp:paragraph --><p>Beispiel-Turnier. Hier steht die Ausschreibung: Teilnahme, Spielform, Vorgabe und Meldung.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "lw_jahr": 2026,
+        "lw_spielform": "vierball",
+        "lw_hinweis": "Spiel mit voller Vorgabe nach Spielvorgabe; Termine bitte selbst verabreden und das Ergebnis im Sekretariat melden.",
+        "lw_runden": [
+          {
+            "name": "",
+            "von": "2026-04-15",
+            "bis": "2026-05-31"
+          },
+          {
+            "name": "",
+            "von": "",
+            "bis": "2026-06-30"
+          },
+          {
+            "name": "",
+            "von": "",
+            "bis": "2026-08-31"
+          },
+          {
+            "name": "",
+            "von": "",
+            "bis": "2026-10-11"
+          }
+        ],
+        "lw_teams": [
+          {
+            "team_id": "t1",
+            "spieler_1": "Petra Schneider",
+            "spieler_2": "Thomas Schneider",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t2",
+            "spieler_1": "Jan Becker",
+            "spieler_2": "Lukas Wolf",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t3",
+            "spieler_1": "Anna Hoffmann",
+            "spieler_2": "Mia Krüger",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t4",
+            "spieler_1": "Stefan Braun",
+            "spieler_2": "Frank Zimmermann",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t5",
+            "spieler_1": "Sabine Koch",
+            "spieler_2": "Uwe Richter",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t6",
+            "spieler_1": "Heike Schulz",
+            "spieler_2": "Jürgen Lange",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t7",
+            "spieler_1": "Tim Schäfer",
+            "spieler_2": "Nils Werner",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t8",
+            "spieler_1": "Claudia Meyer",
+            "spieler_2": "Karin Fischer",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t9",
+            "spieler_1": "Ralf Klein",
+            "spieler_2": "Dirk Neumann",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t10",
+            "spieler_1": "Laura Weber",
+            "spieler_2": "Paul Weber",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t11",
+            "spieler_1": "Andrea Vogel",
+            "spieler_2": "Markus Hahn",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t12",
+            "spieler_1": "Ben Keller",
+            "spieler_2": "Felix Roth",
+            "name": "",
+            "position": ""
+          }
+        ],
+        "lw_spiele": [
+          {
+            "paarung": "1:t9",
+            "ergebnis": "2 & 1",
+            "datum": "2026-05-09"
+          },
+          {
+            "paarung": "1:t5",
+            "ergebnis": "4 & 3",
+            "datum": "2026-05-16"
+          },
+          {
+            "paarung": "1:t7",
+            "ergebnis": "1 auf",
+            "datum": "2026-05-23"
+          },
+          {
+            "paarung": "1:t11",
+            "ergebnis": "3 & 2",
+            "datum": "2026-05-30"
+          },
+          {
+            "paarung": "2:t1",
+            "ergebnis": "5 & 4",
+            "datum": "2026-06-06"
+          },
+          {
+            "paarung": "2:t5",
+            "ergebnis": "2 auf",
+            "datum": "2026-06-13"
+          },
+          {
+            "paarung": "2:t2",
+            "ergebnis": "19. Loch",
+            "datum": "2026-06-20"
+          },
+          {
+            "paarung": "2:t11",
+            "ergebnis": "3 & 1",
+            "datum": "2026-06-27"
+          },
+          {
+            "paarung": "3:t5",
+            "ergebnis": "2 & 1",
+            "datum": "2026-07-25"
+          },
+          {
+            "paarung": "3:t2",
+            "ergebnis": "kampflos",
+            "datum": "2026-08-31"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Lochwettspiel 2025",
+      "slug": "2025",
+      "content": "<!-- wp:paragraph --><p>Beispiel-Turnier. Hier steht die Ausschreibung: Teilnahme, Spielform, Vorgabe und Meldung.</p><!-- /wp:paragraph -->",
+      "meta": {
+        "lw_jahr": 2025,
+        "lw_spielform": "vierball",
+        "lw_hinweis": "",
+        "lw_runden": [
+          {
+            "name": "",
+            "von": "2025-05-01",
+            "bis": "2025-06-30"
+          },
+          {
+            "name": "",
+            "von": "",
+            "bis": "2025-08-31"
+          },
+          {
+            "name": "",
+            "von": "",
+            "bis": "2025-09-30"
+          }
+        ],
+        "lw_teams": [
+          {
+            "team_id": "t1",
+            "spieler_1": "Anna Hoffmann",
+            "spieler_2": "Mia Krüger",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t2",
+            "spieler_1": "Petra Schneider",
+            "spieler_2": "Thomas Schneider",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t3",
+            "spieler_1": "Ralf Klein",
+            "spieler_2": "Dirk Neumann",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t4",
+            "spieler_1": "Sabine Koch",
+            "spieler_2": "Uwe Richter",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t5",
+            "spieler_1": "Jan Becker",
+            "spieler_2": "Lukas Wolf",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t6",
+            "spieler_1": "Tim Schäfer",
+            "spieler_2": "Nils Werner",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t7",
+            "spieler_1": "Heike Schulz",
+            "spieler_2": "Jürgen Lange",
+            "name": "",
+            "position": ""
+          },
+          {
+            "team_id": "t8",
+            "spieler_1": "Claudia Meyer",
+            "spieler_2": "Karin Fischer",
+            "name": "",
+            "position": ""
+          }
+        ],
+        "lw_spiele": [
+          {
+            "paarung": "1:t1",
+            "ergebnis": "3 & 2",
+            "datum": "2025-05-24"
+          },
+          {
+            "paarung": "1:t5",
+            "ergebnis": "1 auf",
+            "datum": "2025-06-07"
+          },
+          {
+            "paarung": "1:t2",
+            "ergebnis": "4 & 2",
+            "datum": "2025-06-14"
+          },
+          {
+            "paarung": "1:t6",
+            "ergebnis": "20. Loch",
+            "datum": "2025-06-28"
+          },
+          {
+            "paarung": "2:t1",
+            "ergebnis": "2 & 1",
+            "datum": "2025-07-19"
+          },
+          {
+            "paarung": "2:t6",
+            "ergebnis": "1 auf",
+            "datum": "2025-08-16"
+          },
+          {
+            "paarung": "3:t6",
+            "ergebnis": "3 & 2",
+            "datum": "2025-09-20"
+          }
+        ]
+      }
+    }
+  ]
+}

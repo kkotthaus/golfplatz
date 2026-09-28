@@ -59,10 +59,10 @@ function golfplatz_mcp_ability( string $name, array $args, bool $readonly ): voi
 const GOLFPLATZ_MCP_TYPES = array( 'page', 'wp_template', 'wp_block' );
 
 /** Beitragstypen, auf die Etch-Loops aus dem Generator abfragen dürfen. */
-const GOLFPLATZ_MCP_LOOP_TYPES = array( 'spielbahn', 'preis', 'person', 'kurs', 'post', 'mannschaft', 'ligaspiel', 'spielbericht', 'sperrung' );
+const GOLFPLATZ_MCP_LOOP_TYPES = array( 'spielbahn', 'preis', 'person', 'kurs', 'post', 'mannschaft', 'ligaspiel', 'spielbericht', 'sperrung', 'lochwettspiel' );
 
 /** Beitragstypen, deren Inhalte aus daten/<typ>.json importiert werden dürfen. */
-const GOLFPLATZ_MCP_IMPORT_TYPES = array( 'spielbahn', 'sperrung', 'person', 'preis', 'kurs' );
+const GOLFPLATZ_MCP_IMPORT_TYPES = array( 'spielbahn', 'sperrung', 'person', 'preis', 'kurs', 'lochwettspiel' );
 
 add_action(
 	'wp_abilities_api_init',

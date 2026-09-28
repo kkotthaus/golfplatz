@@ -7,6 +7,7 @@ import { platzstatusKomponente, ampelKomponente, platzstatusKurzKomponente } fro
 import { oeffnungszeitenKomponente, oeffnungszeitenAlleKomponente } from './zeiten.mjs';
 import { preistabelleKomponente } from './preise.mjs';
 import { zaehlkarteKomponente } from './zaehlkarte.mjs';
+import { lochwettspielKomponente } from './lochwettspiel.mjs';
 
 /** Öffnungszeiten eines Bereichs als Etch-Komponente (wordpress/etch/zeiten.mjs). */
 export const zeiten = (bereich, variante = 'compact', liste = variante) => komponente('Oeffnungszeiten', { bereich, variante, liste, titel: '0' });
@@ -51,6 +52,7 @@ export const components = [
   spielvorgabenRechnerKomponente,
   spielvorgabenTabellenKomponente,
   zaehlkarteKomponente,
+  lochwettspielKomponente,
   birdiebookKomponente,
   {
     key: 'GastInfo',

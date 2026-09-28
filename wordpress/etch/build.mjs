@@ -8,7 +8,7 @@ import { templates, pages } from './templates.mjs';
 import { components } from './komponenten.mjs';
 import { acssEinstellungen } from './acss-farben.mjs';
 import { loops } from './loops.mjs';
-import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, preise, kurse, kurseAnmeldung } from '../../prototype/src/data.mjs';
+import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, preise, kurse, kurseAnmeldung, lochwettspiele } from '../../prototype/src/data.mjs';
 
 const hier = dirname(fileURLToPath(import.meta.url));
 const dist = join(hier, 'dist');
@@ -162,6 +162,23 @@ const kursItems = kurse.map((k, i) => ({
 }));
 writeFileSync(join(dist, 'daten/kurs.json'), JSON.stringify({ key: 'slug', items: kursItems }, null, 2) + '\n');
 console.log(`daten/kurs.json  (${kursItems.length} Kurse)`);
+
+// Lochwettspiele (Beitragstyp „lochwettspiel“), je Jahr ein Eintrag, Slug = Jahr (/turniere/lochwettspiel/2026/).
+const lwItems = lochwettspiele.map((lw) => ({
+  title: `Lochwettspiel ${lw.jahr}`,
+  slug: String(lw.jahr),
+  content: '<!-- wp:paragraph --><p>Beispiel-Turnier. Hier steht die Ausschreibung: Teilnahme, Spielform, Vorgabe und Meldung.</p><!-- /wp:paragraph -->',
+  meta: {
+    lw_jahr: lw.jahr,
+    lw_spielform: lw.spielform,
+    lw_hinweis: lw.hinweis,
+    lw_runden: lw.runden.map((r) => ({ name: r.name || '', von: r.von || '', bis: r.bis })),
+    lw_teams: lw.teams.map(([spieler_1, spieler_2], i) => ({ team_id: `t${i + 1}`, spieler_1, spieler_2, name: '', position: '' })),
+    lw_spiele: lw.spiele.map(([runde, team, ergebnis, datum]) => ({ paarung: `${runde}:t${team}`, ergebnis, datum })),
+  },
+}));
+writeFileSync(join(dist, 'daten/lochwettspiel.json'), JSON.stringify({ key: 'lw_jahr', items: lwItems }, null, 2) + '\n');
+console.log(`daten/lochwettspiel.json  (${lwItems.length} Turniere)`);
 
 // Einstellungsseiten für golfplatz/import-settings. Nur die aufgeführten Felder werden überschrieben.
 // Öffnungszeiten je Bereich; Beispiel-Ausnahmen aus dem Prototyp werden nicht übernommen.

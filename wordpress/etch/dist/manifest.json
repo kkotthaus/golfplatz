@@ -142,6 +142,21 @@
       "properties": []
     },
     {
+      "key": "Lochwettspiel",
+      "name": "Lochwettspiel",
+      "description": "Turnierbaum des jährlichen Lochwettspiels (Teams aus zwei Spielern, K.-o.-System, Spielzeitraum je Runde; beliebig viele Teams – ab 17 Teams frühere Runden als aufklappbare Listen, Baum ab Achtelfinale). Eigenschaft: jahr („aktuell“ = neuestes Turnier, sonst die Jahreszahl). Daten: {options.golfplatz.lochwettspiele} aus golfplatz-lochwettspiel.php; gepflegt im Beitragstyp „Lochwettspiele“ (Teams, Spielzeiträume, Ergebnisse).",
+      "properties": [
+        {
+          "key": "jahr",
+          "name": "Jahr (aktuell oder Jahreszahl)",
+          "type": {
+            "primitive": "string"
+          },
+          "default": "aktuell"
+        }
+      ]
+    },
+    {
       "key": "Birdiebook",
       "name": "Birdiebook",
       "description": "Alle 18 Bahnen zum Durchwischen (EtchSliderPro) mit Abschlag-Wahl, Nummernleiste und Vor/Zurück. Daten: Spielbahnen (Loop gp-bahnen), Skript: mu-plugins/golfplatz-birdiebook.php.",
@@ -178,6 +193,10 @@
     {
       "slug": "index",
       "title": "Index"
+    },
+    {
+      "slug": "single-lochwettspiel",
+      "title": "Lochwettspiel"
     },
     {
       "slug": "single-spielbahn",
@@ -225,11 +244,6 @@
       "order": 50
     },
     {
-      "slug": "turniere",
-      "title": "Turniere & Kalender",
-      "order": 50
-    },
-    {
       "slug": "golfschule",
       "title": "Golfschule",
       "order": 50
@@ -262,6 +276,11 @@
     {
       "slug": "datenschutz",
       "title": "Datenschutz",
+      "order": 50
+    },
+    {
+      "slug": "turniere",
+      "title": "Turniere & Kalender",
       "order": 50
     }
   ]

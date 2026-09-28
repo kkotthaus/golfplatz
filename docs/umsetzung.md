@@ -17,6 +17,7 @@ Was in WordPress (golfplatz.local) bereits angelegt ist, was noch von Hand zu tu
 | `kurs` | Kurse (Menü „Golfschule“) | ✓ | `/golfschule/kurs/<slug>/` | |
 | `preis` | Preise | – | – | Reihenfolge über „Reihenfolge“ (menu_order) |
 | `person` | Personen (Menü „Team & Vorstand“) | – | – | Vorstand, Sekretariat, Pros, Team |
+| `lochwettspiel` | Lochwettspiele (Menü „Lochwettspiel“) | ✓ | `/turniere/lochwettspiel/<jahr>/` | ein Eintrag je Jahr, Slug = Jahr; 2 Beispiele (2025, 2026) |
 
 News sind normale **Beiträge** (`post`).
 
@@ -40,6 +41,7 @@ News sind normale **Beiträge** (`post`).
 | Kurs | `kurs` | `kurs_typ`, `kurs_preis` (leer = auf Anfrage), `kurs_max_teilnehmer`, `kurs_dauer`, `kurs_trainer` → Person, `kurs_termine` (Gruppe, klonbar: `von`, `bis`, `uhrzeit`), `kurs_anmeldung` |
 | Preis | `preis` | `preis_betrag`, `preis_auf_anfrage`, `preis_einheit` (`runde18`, `runde9`, `runde`, `tag`, `monat`, `jahr`, `einmalig`), `preis_tage` (Gültig an), `preis_zusatz`, `preis_hervorheben`, `preis_aufnahme`, `preis_leistungen` |
 | Person | `person` | `person_funktion`, `person_email`, `person_telefon`, `person_text` |
+| Lochwettspiel | `lochwettspiel` | `lw_jahr`, `lw_spielform` (`vierball`, `vierer`, `chapman`, `greensome`), `lw_hinweis`, `lw_runden` (klonbar: `name`, `von`, `bis`), `lw_teams` (klonbar: `spieler_1`, `spieler_2`, `name`, `position`, `team_id` automatisch/ausgeblendet), `lw_pruefung` (Kasten „Stand“), `lw_spiele` (klonbar: `paarung` = „<runde>:<team_id des Siegers>“, `ergebnis`, `datum`) |
 | Sichtbarkeit | `post`, `page` | `nur_mitglieder` |
 | Platzstatus | Einstellungsseite `platzstatus` | Schnellsperren je `<bereich>_gesperrt` + Grund + Ende für `platz`, `range`, `kurzspiel`, `proshop` (`*_sperrgrund`, `*_gesperrt_bis`) und `trolley`, `buggy` (`*_grund`, `*_bis`); `gruens` (`sommer`/`winter`), `gruens_hinweis` |
 
@@ -144,6 +146,27 @@ Umsetzung des [Konzepts](konzept-birdiebook.md), Stand 2026-09-26.
   - Bei einem Seitencache auf der Live-Seite die Greenfee-Seite höchstens einen Tag cachen, sonst stimmt die Uhrzeit nicht.
 - **Hinweis zum Import:** Beim Übernehmen der drei Felder am 2026-09-27 hat `import-settings` alle Clubdaten aus dem Repository neu geschrieben. Im Admin geänderte Clubdaten wären dabei überschrieben worden. Seitdem kann `import-settings` mit `felder` gezielt einzelne Felder übernehmen.
 - **Offen:** Mitgliedschaftspreise (Kategorie „Mitgliedschaft“) erscheinen noch nicht; sie gehören auf `/mitgliedschaft/`.
+
+### Lochwettspiel (Turnierbaum)
+
+Einmal im Jahr, Teams aus zwei Spielern, K.-o.-System. Jede Runde hat einen vorgeschriebenen Spielzeitraum. Stand 2026-09-28.
+
+- **Pflege** (Menü „Lochwettspiel“, je Jahr ein Eintrag):
+  - `lw_teams`: Teams in Reihenfolge der Setzliste. Ohne „Platz im Tableau“ setzt die Website nach Standard-Setzung (1 gegen 16, 8 gegen 9 …); die Freilose fallen auf die ersten Teams und nie zwei aufeinander. Mit Platz (1 … n) gilt die Auslosung.
+  - `lw_runden`: Spielzeitraum je Runde (erste Zeile = 1. Runde). „Von“ leer = Tag nach dem Ende der Vorrunde. Name leer = Achtelfinale, Viertelfinale, Halbfinale, Finale bzw. „1. Runde“.
+  - `lw_spiele`: je Spiel eine Zeile. In „Spiel und Sieger“ steht jedes Spiel zweimal, einmal je möglichem Sieger, z. B. „Spiel 11 (Finale): Koch / Richter gegen Becker / Wolf → Sieger: Koch / Richter“. Dazu Ergebnis („3 & 2“, „1 auf“, „19. Loch“, „kampflos“) und Datum. Der Sieger rückt von selbst weiter.
+  - Die Liste füllt `golfplatz-lochwettspiel.php` (`rwmb_normalize_lw_spiele_field`) aus dem gespeicherten Stand. Spiele der nächsten Runde erscheinen, sobald die Ergebnisse davor gespeichert sind. Ein gespeicherter Eintrag, der nicht mehr passt (weil ein Ergebnis davor geändert wurde), bleibt mit „⚠ passt zu keinem Spiel mehr“ sichtbar.
+  - Jedes Team hat eine feste `team_id` (Feld ausgeblendet, vergeben beim Speichern). Namen korrigieren oder Teams umsortieren lässt die Ergebnisse gültig. Kommt eine ID einmal nicht mit, übernimmt das Team die ID des bisherigen Teams mit denselben Spielern.
+  - Kasten **„Stand“** über den Ergebnissen: Tabelle aller Paarungen (Spiel, Runde, beide Teams, Sieger mit ✔ und Ergebnis bzw. offen/Frist) sowie Ergebnisse, die zu keinem Spiel passen (Team hatte Freilos, ist ausgeschieden, Gegner steht noch nicht fest, doppelter Eintrag). Solche Einträge erscheinen nicht im Baum. Der Kasten zeigt den Stand beim Öffnen; nach dem Speichern neu laden.
+  - Die Reihenfolge der Teams (Setzliste) bestimmt das Tableau – nach Beginn der ersten Runde nicht mehr ändern.
+  - Die Ausschreibung steht im Beitragstext.
+- **Daten:** `golfplatz-lochwettspiel.php` rechnet den Baum und liefert `{options.golfplatz.lochwettspiele}` (neuestes Jahr zusätzlich unter `key` = `aktuell`): `jahr`, `spielform`, `teams_text`, `status`, `hinweis`, `jahre[]`, `runden[]` (`name`, `zeitraum`, `mod`/`status`: läuft, Frist abgelaufen, abgeschlossen, beginnt am …; `lage`; `paare[].spiele[]` mit `label`, `mod`, `status`, `aria` und `seiten[]`), `sieger`.
+- **Spielstatus:** gespielt, offen (bis Fristende), Frist abgelaufen (Frist vorbei, kein Ergebnis), wartet (Gegner steht noch nicht fest oder Runde beginnt später), Freilos. Status immer als Text, nie nur über Farbe.
+- **Größe:** beliebig viele Teams (ab 2). Das Tableau wird auf die nächste Zweierpotenz aufgefüllt (Freilose). Der Turnierbaum zeigt höchstens 8 Spiele in der ersten Spalte (`GOLFPLATZ_LW_BAUM_MAX_SPIELE`), also ab dem Achtelfinale; bis 16 Teams ist das das ganze Turnier. Frühere Runden (1. Runde, 2. Runde …) stehen darüber als aufklappbare Rundenlisten mit allen Spielen im Raster; die laufende Runde ist aufgeklappt, in der Kopfzeile stehen Zeitraum, Status und „32 Spiele · 8 offen · 4 Freilose“. Im Admin stehen offene Spiele zuerst (Tabelle und Auswahl), gespielte sind eingeklappt.
+- **Etch:** Komponente „Lochwettspiel“ (`wordpress/etch/lochwettspiel.mjs`, Eigenschaft `jahr`: `aktuell` oder Jahreszahl; im Template `{this.metabox.lw_jahr}`). Grafik: je Runde eine Spalte, Linien per CSS (`.bracket`), auf schmalen Bildschirmen seitlich scrollbar. Screenreader lesen je Spiel einen Satz („Spiel 3: … gegen …, Sieger … 3 & 2“).
+- **Eingebunden:** `/turniere/` (Abschnitt `#lochwettspiel`, aktuelles Jahr) und Template `single-lochwettspiel`.
+- **Geprüft** am 2026-09-28 mit einem Test-Turnier aus 64 Teams (1. Runde gespielt, 2. Runde halb): Rundenlisten, Baum ab Achtelfinale, Handy 375 px, Eingabemaske (96 Einträge, offene zuerst). Das Test-Turnier liegt im Papierkorb. Logik zusätzlich mit 17, 100 und 256 Teams. Außerdem Eingabemaske serverseitig gerendert (Paarungstabelle, Auswahl „Spiel und Sieger“ mit gespeicherten Werten vorausgewählt, `team_id` im Formular), Speichern simuliert (fehlende ID, umbenanntes Team, neues Team). Auf golfplatz.local mit den Beispielen 2026 (12 Teams, 4 Freilose, Finale läuft) und 2025 (8 Teams, beendet): Hell/Dunkel, 375 px und 1280/1440 px, keine Konsolenfehler. Die Baumlogik außerdem mit 1, 3 und 11 Teams und abgelaufenen Fristen.
+- **Offen:** Die Beispiel-Teams sind erfunden; vor dem Livegang löschen (`/turniere/lochwettspiel/2025/`, `/2026/`). Rechte für die Spielleitung (eigene Rolle) nach Bedarf mit User Role Editor. Der Prototyp zeigt den Turnierbaum nicht.
 
 ### Fahnenpositionen
 

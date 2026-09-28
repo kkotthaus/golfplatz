@@ -5,7 +5,7 @@
 // Scorekarte 2024 (Bahnen, Abschläge, CR/Slope), alle Preise (Greenfee, Turnier, Kooperationen,
 // Leihgeräte, Mitgliedschaft), Golfschule-Angebote, Vorstand und Team.
 // PLATZHALTER (noch vom Club zu liefern): Gründungsjahr, Bahnbeschreibungen, Restaurant,
-// Mannschaften, Ligaspiele, Spielberichte, News, Sperrungen (Beispiele).
+// Mannschaften, Ligaspiele, Spielberichte, News, Sperrungen (Beispiele), Lochwettspiele (Beispiele).
 
 export const club = {
   name: 'Golfclub Dreibäumen e. V.',
@@ -375,4 +375,46 @@ export const news = [
   { slug: 'neue-terrasse', datum: '2026-08-29', kategorie: 'Club', titel: 'Die neue Terrasse ist eröffnet', teaser: 'Mehr Plätze, mehr Schatten und der beste Blick auf das 18. Grün: Unser Clubrestaurant hat die neue Terrasse eingeweiht.' },
   { slug: 'mitgliederversammlung-2026', datum: '2026-08-15', kategorie: 'Club', titel: 'Einladung zur Mitgliederversammlung', teaser: 'Die ordentliche Mitgliederversammlung findet am 14. November im Clubhaus statt. Die Unterlagen stehen im Mitgliederbereich bereit.', mitglieder: true },
   { slug: 'firmen-golf-tag', datum: '2026-07-30', kategorie: 'Events', titel: 'Firmen-Golf-Tag: Team-Event mit Schnupperkurs', teaser: 'Golf als Teamevent: Wir haben ein Paket aus Schnupperkurs, Turnier und Abendessen geschnürt – auch für Nicht-Golfer.' },
+];
+
+// Lochwettspiel (Beispiele): je Jahr ein Turnier, Teams aus zwei Spielern in Reihenfolge der Setzliste.
+// Runden: Spielzeitraum je Runde (von leer = Tag nach der Vorrunde). Ergebnisse: Runde, Siegerteam (Nummer in der
+// Teamliste, wird zur team_id „t<n>“; beides zusammen ergibt lw_spiele.paarung „<runde>:t<n>“), Ergebnis, Datum.
+export const lochwettspiele = [
+  {
+    jahr: 2026,
+    spielform: 'vierball',
+    hinweis: 'Spiel mit voller Vorgabe nach Spielvorgabe; Termine bitte selbst verabreden und das Ergebnis im Sekretariat melden.',
+    runden: [
+      { von: '2026-04-15', bis: '2026-05-31' },
+      { bis: '2026-06-30' },
+      { bis: '2026-08-31' },
+      { bis: '2026-10-11' },
+    ],
+    teams: [
+      ['Petra Schneider', 'Thomas Schneider'], ['Jan Becker', 'Lukas Wolf'], ['Anna Hoffmann', 'Mia Krüger'], ['Stefan Braun', 'Frank Zimmermann'],
+      ['Sabine Koch', 'Uwe Richter'], ['Heike Schulz', 'Jürgen Lange'], ['Tim Schäfer', 'Nils Werner'], ['Claudia Meyer', 'Karin Fischer'],
+      ['Ralf Klein', 'Dirk Neumann'], ['Laura Weber', 'Paul Weber'], ['Andrea Vogel', 'Markus Hahn'], ['Ben Keller', 'Felix Roth'],
+    ],
+    spiele: [
+      [1, 9, '2 & 1', '2026-05-09'], [1, 5, '4 & 3', '2026-05-16'], [1, 7, '1 auf', '2026-05-23'], [1, 11, '3 & 2', '2026-05-30'],
+      [2, 1, '5 & 4', '2026-06-06'], [2, 5, '2 auf', '2026-06-13'], [2, 2, '19. Loch', '2026-06-20'], [2, 11, '3 & 1', '2026-06-27'],
+      [3, 5, '2 & 1', '2026-07-25'], [3, 2, 'kampflos', '2026-08-31'],
+    ],
+  },
+  {
+    jahr: 2025,
+    spielform: 'vierball',
+    hinweis: '',
+    runden: [{ von: '2025-05-01', bis: '2025-06-30' }, { bis: '2025-08-31' }, { bis: '2025-09-30' }],
+    teams: [
+      ['Anna Hoffmann', 'Mia Krüger'], ['Petra Schneider', 'Thomas Schneider'], ['Ralf Klein', 'Dirk Neumann'], ['Sabine Koch', 'Uwe Richter'],
+      ['Jan Becker', 'Lukas Wolf'], ['Tim Schäfer', 'Nils Werner'], ['Heike Schulz', 'Jürgen Lange'], ['Claudia Meyer', 'Karin Fischer'],
+    ],
+    spiele: [
+      [1, 1, '3 & 2', '2025-05-24'], [1, 5, '1 auf', '2025-06-07'], [1, 2, '4 & 2', '2025-06-14'], [1, 6, '20. Loch', '2025-06-28'],
+      [2, 1, '2 & 1', '2025-07-19'], [2, 6, '1 auf', '2025-08-16'],
+      [3, 6, '3 & 2', '2025-09-20'],
+    ],
+  },
 ];

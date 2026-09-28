@@ -329,7 +329,6 @@ const platzhalter = (slug, title, eyebrow, lead, parent) => ({
 });
 pages.push(
   platzhalter('mitgliedschaft', 'Mitgliedschaft', 'Mitglied werden', 'Unbegrenzt spielen – ohne Startzeiten, mit DGV-Mitgliedschaft, GOLFHOCHZEHN und Urlaubspartnern.'),
-  platzhalter('turniere', 'Turniere & Kalender', 'Spielbetrieb', 'Clubturniere mit Ausschreibung, Meldung und Ergebnissen aus PC CADDIE.'),
   platzhalter('golfschule', 'Golfschule', 'Golf lernen', 'Vom ersten Schwung bis zur DGV-Platzreife mit unseren Professionals.'),
   platzhalter('restaurant', 'Restaurant', 'Gastronomie', 'Für Golfer und alle anderen Gäste.'),
   platzhalter('news', 'Aktuelles', 'News', 'Neues aus dem Club.'),
@@ -338,6 +337,24 @@ pages.push(
   platzhalter('impressum', 'Impressum', '', ''),
   platzhalter('datenschutz', 'Datenschutz', '', ''),
 );
+
+// Turniere: Lochwettspiel (auf der Website gepflegt) und Hinweis auf PC CADDIE (Einbettung folgt)
+pages.push({
+  slug: 'turniere',
+  title: 'Turniere & Kalender',
+  order: 50,
+  content: markup(
+    seitenkopf({ krumen: [['Turniere & Kalender']], eyebrow: 'Spielbetrieb', titel: 'Turniere & Kalender', lead: 'Clubturniere mit Ausschreibung, Meldung und Ergebnissen aus PC CADDIE – und unser Lochwettspiel im K.-o.-System.' }),
+    el('section', 'section', [
+      el('div', 'container', [
+        t('h2', '', 'Lochwettspiel'),
+        t('p', 'lead', 'Einmal im Jahr spielen Zweier-Teams im Lochwettspiel um den Titel. Jede Runde hat einen festen Zeitraum, in dem die Teams ihr Spiel selbst verabreden.'),
+        komponente('Lochwettspiel', { jahr: 'aktuell' }),
+      ]),
+    ], { attrs: { id: 'lochwettspiel' }, name: 'Lochwettspiel' }),
+    el('section', 'section section--tint', [el('div', 'container prose', [t('h2', 'h3', 'Turnierkalender'), t('p', 'small', 'Turnierkalender, Meldung und Ergebnisse aus PC CADDIE werden gerade eingebunden.')])], { name: 'PC CADDIE' }),
+  ),
+});
 
 // Seitenrahmen: EMMP-Header, Inhalt, Footer. id=main ist das Sprungziel des EMMP-Skip-Links.
 const rahmen = (...inhalt) => markup(header(), el('main', 'site-main', inhalt, { attrs: { id: 'main' }, name: 'Main' }), komponente('SiteFooter'));
@@ -361,6 +378,22 @@ export const templates = [
     slug: 'index',
     title: 'Index',
     content: rahmen(postContent()),
+  },
+  {
+    // Ein Jahrgang des Lochwettspiels: /turniere/lochwettspiel/<jahr>/
+    slug: 'single-lochwettspiel',
+    title: 'Lochwettspiel',
+    content: rahmen(
+      seitenkopf({
+        krumen: [['Turniere & Kalender', '/turniere/'], ['Lochwettspiel {this.metabox.lw_jahr}']],
+        eyebrow: 'Lochwettspiel · Zweier-Teams',
+        titel: '{this.title}',
+      }),
+      el('section', 'section', [
+        el('div', 'container', [t('h2', 'visually-hidden', 'Turnierbaum'), komponente('Lochwettspiel', { jahr: '{this.metabox.lw_jahr}' })]),
+      ], { name: 'Turnierbaum' }),
+      el('section', 'section section--tint', [el('div', 'container prose', [postContent()])], { name: 'Ausschreibung' }),
+    ),
   },
   {
     slug: 'single-spielbahn',

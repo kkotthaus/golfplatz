@@ -1,0 +1,315 @@
+<!-- wp:etch/loop {"target":"options.golfplatz.lochwettspiele","itemId":"t"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"t.key","operator":"===","rightHand":"props.jahr"},"conditionString":"t.key === props.jahr"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"lochwettspiel"},"metadata":{"name":"Lochwettspiel"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"lochwettspiel__head"},"metadata":{"name":"Kopf"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"lochwettspiel__meta"}} -->
+<!-- wp:etch/text {"content":"{t.spielform} · {t.teams_text} · K.-o.-System"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"t.status","operator":"isTruthy","rightHand":null},"conditionString":"t.status"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"lochwettspiel__status"}} -->
+<!-- wp:etch/text {"content":"{t.status}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"t.hinweis","operator":"isTruthy","rightHand":null},"conditionString":"t.hinweis"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"lochwettspiel__note"}} -->
+<!-- wp:etch/text {"content":"{t.hinweis}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"t.hat_jahre","operator":"isTruthy","rightHand":null},"conditionString":"t.hat_jahre"} -->
+<!-- wp:etch/element {"tag":"nav","attributes":{"aria-label":"Lochwettspiel anderer Jahre","class":"lochwettspiel__years"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lochwettspiel__years-label"}} -->
+<!-- wp:etch/text {"content":"Jahrgänge:"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"t.jahre","itemId":"j"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"j.aktiv","operator":"isFalsy","rightHand":null},"conditionString":"!j.aktiv"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{j.link}","class":"lochwettspiel__year"}} -->
+<!-- wp:etch/text {"content":"{j.jahr}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"j.aktiv","operator":"isTruthy","rightHand":null},"conditionString":"j.aktiv"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lochwettspiel__year lochwettspiel__year\u002d\u002daktiv"}} -->
+<!-- wp:etch/text {"content":"{j.jahr}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"t.hat_baum","operator":"isTruthy","rightHand":null},"conditionString":"t.hat_baum"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"t.hat_vorrunden","operator":"isTruthy","rightHand":null},"conditionString":"t.hat_vorrunden"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"lw-rounds"},"metadata":{"name":"Frühere Runden"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"lw-rounds__title"}} -->
+<!-- wp:etch/text {"content":"Frühere Runden"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"t.runden","itemId":"r"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"r.vorrunde","operator":"isTruthy","rightHand":null},"conditionString":"r.vorrunde"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"r.aufklappen","operator":"isTruthy","rightHand":null},"conditionString":"r.aufklappen"} -->
+<!-- wp:etch/element {"tag":"details","attributes":{"open":"","class":"lw-round lw-round\u002d\u002d{r.mod}"},"metadata":{"name":"Runde (Liste)"}} -->
+<!-- wp:etch/element {"tag":"summary","attributes":{"class":"lw-round__summary"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"lw-round__name"}} -->
+<!-- wp:etch/text {"content":"{r.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"r.zeitraum","operator":"isTruthy","rightHand":null},"conditionString":"r.zeitraum"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lw-round__dates"}} -->
+<!-- wp:etch/text {"content":"{r.zeitraum}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__status bracket__status\u002d\u002d{r.mod}"}} -->
+<!-- wp:etch/text {"content":"{r.status}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lw-round__count"}} -->
+<!-- wp:etch/text {"content":"{r.zahlen}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"list","aria-label":"Spiele {r.name}","class":"lw-round__matches"}} -->
+<!-- wp:etch/loop {"target":"r.liste","itemId":"m"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"listitem","class":"lw-round__item"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__match bracket__match\u002d\u002d{m.mod}"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"visually-hidden"}} -->
+<!-- wp:etch/text {"content":"{m.aria}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"aria-hidden":"true","class":"bracket__card"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"m.label","operator":"isTruthy","rightHand":null},"conditionString":"m.label"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"bracket__label"}} -->
+<!-- wp:etch/text {"content":"{m.label}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/loop {"target":"m.seiten","itemId":"o"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__team bracket__team\u002d\u002d{o.mod}"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.leer","operator":"isTruthy","rightHand":null},"conditionString":"o.leer"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__placeholder"}} -->
+<!-- wp:etch/text {"content":"{o.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.leer","operator":"isFalsy","rightHand":null},"conditionString":"!o.leer"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__players"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.name","operator":"isTruthy","rightHand":null},"conditionString":"o.name"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__team-name"}} -->
+<!-- wp:etch/text {"content":"{o.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__player"}} -->
+<!-- wp:etch/text {"content":"{o.spieler_1}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__player"}} -->
+<!-- wp:etch/text {"content":"{o.spieler_2}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.ergebnis","operator":"isTruthy","rightHand":null},"conditionString":"o.ergebnis"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__score"}} -->
+<!-- wp:etch/text {"content":"{o.ergebnis}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/condition {"condition":{"leftHand":"m.status","operator":"isTruthy","rightHand":null},"conditionString":"m.status"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"bracket__state"}} -->
+<!-- wp:etch/text {"content":"{m.status}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"r.aufklappen","operator":"isFalsy","rightHand":null},"conditionString":"!r.aufklappen"} -->
+<!-- wp:etch/element {"tag":"details","attributes":{"class":"lw-round lw-round\u002d\u002d{r.mod}"},"metadata":{"name":"Runde (Liste)"}} -->
+<!-- wp:etch/element {"tag":"summary","attributes":{"class":"lw-round__summary"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"lw-round__name"}} -->
+<!-- wp:etch/text {"content":"{r.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"r.zeitraum","operator":"isTruthy","rightHand":null},"conditionString":"r.zeitraum"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lw-round__dates"}} -->
+<!-- wp:etch/text {"content":"{r.zeitraum}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__status bracket__status\u002d\u002d{r.mod}"}} -->
+<!-- wp:etch/text {"content":"{r.status}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lw-round__count"}} -->
+<!-- wp:etch/text {"content":"{r.zahlen}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"list","aria-label":"Spiele {r.name}","class":"lw-round__matches"}} -->
+<!-- wp:etch/loop {"target":"r.liste","itemId":"m"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"listitem","class":"lw-round__item"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__match bracket__match\u002d\u002d{m.mod}"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"visually-hidden"}} -->
+<!-- wp:etch/text {"content":"{m.aria}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"aria-hidden":"true","class":"bracket__card"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"m.label","operator":"isTruthy","rightHand":null},"conditionString":"m.label"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"bracket__label"}} -->
+<!-- wp:etch/text {"content":"{m.label}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/loop {"target":"m.seiten","itemId":"o"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__team bracket__team\u002d\u002d{o.mod}"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.leer","operator":"isTruthy","rightHand":null},"conditionString":"o.leer"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__placeholder"}} -->
+<!-- wp:etch/text {"content":"{o.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.leer","operator":"isFalsy","rightHand":null},"conditionString":"!o.leer"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__players"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.name","operator":"isTruthy","rightHand":null},"conditionString":"o.name"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__team-name"}} -->
+<!-- wp:etch/text {"content":"{o.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__player"}} -->
+<!-- wp:etch/text {"content":"{o.spieler_1}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__player"}} -->
+<!-- wp:etch/text {"content":"{o.spieler_2}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.ergebnis","operator":"isTruthy","rightHand":null},"conditionString":"o.ergebnis"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__score"}} -->
+<!-- wp:etch/text {"content":"{o.ergebnis}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/condition {"condition":{"leftHand":"m.status","operator":"isTruthy","rightHand":null},"conditionString":"m.status"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"bracket__state"}} -->
+<!-- wp:etch/text {"content":"{m.status}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"lw-rounds__title"}} -->
+<!-- wp:etch/text {"content":"{t.baum_titel}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"bracket__hint"}} -->
+<!-- wp:etch/text {"content":"Der Turnierbaum lässt sich seitlich verschieben."} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"region","tabindex":"0","aria-label":"Turnierbaum {t.titel}","class":"bracket"},"metadata":{"name":"Turnierbaum"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__grid"}} -->
+<!-- wp:etch/loop {"target":"t.runden","itemId":"r"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"r.im_baum","operator":"isTruthy","rightHand":null},"conditionString":"r.im_baum"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"group","aria-label":"{r.name}","class":"bracket__round bracket__round\u002d\u002d{r.lage}"},"metadata":{"name":"Runde"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__head"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"bracket__title"}} -->
+<!-- wp:etch/text {"content":"{r.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"r.zeitraum","operator":"isTruthy","rightHand":null},"conditionString":"r.zeitraum"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"bracket__dates"}} -->
+<!-- wp:etch/text {"content":"{r.zeitraum}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"bracket__status bracket__status\u002d\u002d{r.mod}"}} -->
+<!-- wp:etch/text {"content":"{r.status}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"list","aria-label":"Spiele {r.name}","class":"bracket__matches"}} -->
+<!-- wp:etch/loop {"target":"r.paare","itemId":"p"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__pair bracket__pair\u002d\u002d{p.mod}"}} -->
+<!-- wp:etch/loop {"target":"p.spiele","itemId":"m"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"listitem","class":"bracket__slot"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__match bracket__match\u002d\u002d{m.mod}"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"visually-hidden"}} -->
+<!-- wp:etch/text {"content":"{m.aria}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"aria-hidden":"true","class":"bracket__card"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"m.label","operator":"isTruthy","rightHand":null},"conditionString":"m.label"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"bracket__label"}} -->
+<!-- wp:etch/text {"content":"{m.label}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/loop {"target":"m.seiten","itemId":"o"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__team bracket__team\u002d\u002d{o.mod}"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.leer","operator":"isTruthy","rightHand":null},"conditionString":"o.leer"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__placeholder"}} -->
+<!-- wp:etch/text {"content":"{o.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.leer","operator":"isFalsy","rightHand":null},"conditionString":"!o.leer"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__players"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.name","operator":"isTruthy","rightHand":null},"conditionString":"o.name"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__team-name"}} -->
+<!-- wp:etch/text {"content":"{o.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__player"}} -->
+<!-- wp:etch/text {"content":"{o.spieler_1}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__player"}} -->
+<!-- wp:etch/text {"content":"{o.spieler_2}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"o.ergebnis","operator":"isTruthy","rightHand":null},"conditionString":"o.ergebnis"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__score"}} -->
+<!-- wp:etch/text {"content":"{o.ergebnis}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/condition {"condition":{"leftHand":"m.status","operator":"isTruthy","rightHand":null},"conditionString":"m.status"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"bracket__state"}} -->
+<!-- wp:etch/text {"content":"{m.status}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"group","aria-label":"Sieger {t.jahr}","class":"bracket__round bracket__round\u002d\u002dfolge bracket__round\u002d\u002dsieger"},"metadata":{"name":"Sieger"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__head"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"bracket__title"}} -->
+<!-- wp:etch/text {"content":"Sieger {t.jahr}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__matches"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__pair"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__slot"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"bracket__champion bracket__champion\u002d\u002d{t.sieger.mod}"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"t.sieger.vorhanden","operator":"isTruthy","rightHand":null},"conditionString":"t.sieger.vorhanden"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"t.sieger.name","operator":"isTruthy","rightHand":null},"conditionString":"t.sieger.name"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__team-name"}} -->
+<!-- wp:etch/text {"content":"{t.sieger.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__player"}} -->
+<!-- wp:etch/text {"content":"{t.sieger.spieler_1}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__player"}} -->
+<!-- wp:etch/text {"content":"{t.sieger.spieler_2}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"t.sieger.vorhanden","operator":"isFalsy","rightHand":null},"conditionString":"!t.sieger.vorhanden"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"bracket__placeholder"}} -->
+<!-- wp:etch/text {"content":"{t.sieger.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->

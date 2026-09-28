@@ -181,18 +181,20 @@ Nicht öffentlich und ohne eigene Seite: `sperrung`, `spieler`, `ligaspiel`, `pr
 
 ### Turniere & Kalender `/turniere/`
 
-**Zweck:** Clubturniere aus PC CADDIE zeigen.
+**Zweck:** Clubturniere aus PC CADDIE zeigen, dazu das Lochwettspiel.
 
 | # | Abschnitt | Inhalt | Quelle | Verlinkt auf |
 | --- | --- | --- | --- | --- |
 | 1 | Seitenkopf | Titel, Hinweis auf PC CADDIE | Text | – |
+| 1a | Lochwettspiel (`#lochwettspiel`, Komponente „Lochwettspiel“, `jahr: aktuell`) | Turnierbaum des laufenden Jahres: Runden mit Spielzeitraum und Status, Spiele, Ergebnisse, Sieger; Jahrgänge | `lochwettspiel` | `/turniere/lochwettspiel/<jahr>/` |
 | 2 | Turnierbereich (`tabs`, `embed-placeholder`) | Tabs Turnierkalender, Meldung, Ergebnisse, je eine Einbettung | `pccaddie_code` | – |
 | 3 | Ligaspiele | Hinweis, dass Ligaspiele auf der Website gepflegt werden | Text | Alle Ligaspiele |
 | 4 | Abschlagsperren | Hinweis auf den Platzstatus | Text | `/#platzstatus` |
 
 **Anforderungen**
 
-- Turniere werden **nicht** in WordPress gepflegt. Einbettung, Design-Anpassung und Consent sind offen (siehe [projekt.md › Offene Punkte](projekt.md#offene-punkte)).
+- Ausnahme ist das **Lochwettspiel** (einmal im Jahr, Zweier-Teams, K.-o.-System mit festem Spielzeitraum je Runde). Es läuft nicht über PC CADDIE und wird deshalb im Beitragstyp `lochwettspiel` gepflegt; je Jahr gibt es eine Seite `/turniere/lochwettspiel/<jahr>/` (Template `single-lochwettspiel`: Turnierbaum und Ausschreibung aus dem Beitragstext).
+- Alle übrigen Turniere werden **nicht** in WordPress gepflegt. Einbettung, Design-Anpassung und Consent sind offen (siehe [projekt.md › Offene Punkte](projekt.md#offene-punkte)).
 
 ### Golfschule `/golfschule/`
 
