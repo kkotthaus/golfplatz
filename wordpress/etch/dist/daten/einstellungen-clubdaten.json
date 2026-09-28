@@ -23,6 +23,71 @@
   "greenfee_fussnote": "„R“ = DGV-Ausweis mit R-Kennzeichnung.",
   "kooperationen_hinweis": "Ermäßigtes Greenfee für Mitglieder der Partnerclubs. Es ist nur eine Ermäßigung möglich.",
   "pccaddie_code": "0494538",
+  "partnerclubs": [
+    {
+      "name": "Golfclub Velbert – Gut Kuhlendahl e.V.",
+      "kurzname": "Velbert",
+      "pccaddie_code": "0494503",
+      "website": "https://golfclub-velbert.de/",
+      "kalender_link": ""
+    },
+    {
+      "name": "Golf-Club Marienfeld e.V.",
+      "kurzname": "Marienfeld",
+      "pccaddie_code": "0494449",
+      "website": "https://www.gc-marienfeld.de/",
+      "kalender_link": ""
+    },
+    {
+      "name": "Golfclub Gut Berge Gevelsberg/Wetter e.V.",
+      "kurzname": "Gut Berge",
+      "pccaddie_code": "0494529",
+      "website": "https://www.aufgutberge.de/",
+      "kalender_link": ""
+    },
+    {
+      "name": "Golfclub Schloss Haag e.V.",
+      "kurzname": "Schloss Haag",
+      "pccaddie_code": "0494523",
+      "website": "https://www.gc-schloss-haag.de/",
+      "kalender_link": ""
+    },
+    {
+      "name": "Golfclub Schwarze Heide Bottrop-Kirchhellen e.V.",
+      "kurzname": "Schwarze Heide",
+      "pccaddie_code": "0494412",
+      "website": "https://www.gc-schwarze-heide.de/",
+      "kalender_link": ""
+    },
+    {
+      "name": "Golfclub Siegen-Olpe e.V.",
+      "kurzname": "Siegen-Olpe",
+      "pccaddie_code": "",
+      "website": "https://www.gcso.de/",
+      "kalender_link": "https://gcso-backend.web.reaze.dev/fileadmin/user_upload/downloads/GSCO-Wettspielkalender_2026_RZ_WEB.pdf"
+    },
+    {
+      "name": "Golf-Club Varmert e.V.",
+      "kurzname": "Varmert",
+      "pccaddie_code": "0494483",
+      "website": "https://www.golfclub-varmert.de/",
+      "kalender_link": ""
+    },
+    {
+      "name": "Golfpark Renneshof",
+      "kurzname": "Renneshof",
+      "pccaddie_code": "0494587",
+      "website": "https://gc-renneshof.de/",
+      "kalender_link": ""
+    },
+    {
+      "name": "Land-Golf-Club Schloss Moyland e.V.",
+      "kurzname": "Schloss Moyland",
+      "pccaddie_code": "0494439",
+      "website": "https://landgolfclub.de/",
+      "kalender_link": ""
+    }
+  ],
   "twilight_regel": "Täglich bei Start ab drei Stunden vor Sonnenuntergang.",
   "twilight_stunden": 3,
   "club_geo": "51.145, 7.344",

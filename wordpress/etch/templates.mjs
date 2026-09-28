@@ -391,7 +391,8 @@ pages.push({
   ),
 });
 
-// Turniere: Turnierkalender und Ergebnisse aus PC CADDIE (golfplatz-turniere.php), dazu das Lochwettspiel (auf der Website gepflegt)
+// Turniere: Turnierkalender des Heimatclubs, Platzbelegung Heimatclub + GOLFHOCHZEHN-Partnerclubs (beides aus PC CADDIE,
+// golfplatz-turniere.php), das Lochwettspiel (auf der Website gepflegt) und die Ergebnisse des Heimatclubs
 pages.push({
   slug: 'turniere',
   title: 'Turniere & Kalender',
@@ -401,22 +402,30 @@ pages.push({
       krumen: [['Turniere & Kalender']],
       eyebrow: 'Spielbetrieb',
       titel: 'Turniere & Kalender',
-      lead: 'Alle Clubturniere mit Anmeldeschluss und freien Plätzen – angemeldet wird direkt in PC CADDIE. Dazu unser Lochwettspiel im K.-o.-System.',
+      lead: 'Alle Clubturniere mit Anmeldeschluss und freien Plätzen – angemeldet wird direkt in PC CADDIE. Dazu die Platzbelegung bei uns und unseren GOLFHOCHZEHN-Partnerclubs und unser Lochwettspiel.',
       aktionen: [
         t('a', 'btn btn--secondary', 'Turnierkalender', { attrs: { href: '#turnierkalender' } }),
-        t('a', 'btn btn--ghost', 'Ergebnisse', { attrs: { href: '#turnierergebnisse' } }),
+        t('a', 'btn btn--ghost', 'Platzbelegung', { attrs: { href: '#platzbelegung' } }),
         t('a', 'btn btn--ghost', 'Lochwettspiel', { attrs: { href: '#lochwettspiel' } }),
+        t('a', 'btn btn--ghost', 'Ergebnisse', { attrs: { href: '#turnierergebnisse' } }),
       ],
     }),
     el('section', 'section', [el('div', 'container', [t('h2', '', 'Turnierkalender'), komponente('Turnierkalender')])], { attrs: { id: 'turnierkalender' }, name: 'Turnierkalender' }),
     el('section', 'section section--tint', [
+      el('div', 'container', [
+        t('h2', '', 'Platzbelegung Heimatclub und Partnerclubs'),
+        t('p', 'lead', 'Auf einen Blick: an welchen Tagen bei uns und bei unseren GOLFHOCHZEHN-Partnerclubs Turniere stattfinden. Als Mitglied spielen Sie dort greenfeefrei – so planen Sie Ihren Besuch.'),
+        komponente('Platzbelegung'),
+      ]),
+    ], { attrs: { id: 'platzbelegung' }, name: 'Platzbelegung' }),
+    el('section', 'section', [
       el('div', 'container', [
         t('h2', '', 'Lochwettspiel'),
         t('p', 'lead', 'Einmal im Jahr spielen Zweier-Teams im Lochwettspiel um den Titel. Jede Runde hat einen festen Zeitraum, in dem die Teams ihr Spiel selbst verabreden.'),
         komponente('Lochwettspiel', { jahr: 'aktuell' }),
       ]),
     ], { attrs: { id: 'lochwettspiel' }, name: 'Lochwettspiel' }),
-    el('section', 'section', [el('div', 'container', [t('h2', '', 'Ergebnisse'), komponente('Turnierergebnisse')])], { attrs: { id: 'turnierergebnisse' }, name: 'Turnierergebnisse' }),
+    el('section', 'section section--tint', [el('div', 'container', [t('h2', '', 'Ergebnisse'), komponente('Turnierergebnisse')])], { attrs: { id: 'turnierergebnisse' }, name: 'Turnierergebnisse' }),
   ),
 });
 

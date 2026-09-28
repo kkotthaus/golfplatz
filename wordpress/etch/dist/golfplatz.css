@@ -892,6 +892,32 @@ background: var(--warning-ultra-light); box-shadow: inset 0 0 0 1px var(--warnin
 .results__title { margin: 0; font-weight: 600; }
 .results__subtitle { font-weight: 400; color: var(--base-semi-dark); }
 .results__link { font-size: var(--text-s); font-weight: 600; color: var(--primary-dark); white-space: nowrap; }
+.occupancy { display: grid; gap: var(--space-s); }
+.occupancy__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs) var(--space-m); }
+.occupancy__range { margin: 0; font-weight: 700; }
+.occupancy__nav { display: flex; gap: var(--space-s); font-size: var(--text-s); }
+.occupancy__step { font-weight: 600; color: var(--primary-dark); }
+.occupancy__wrap { border: 1px solid var(--base-light); border-radius: var(--radius); background: var(--white); }
+.occupancy__table { display: grid; grid-template-columns: 6.5rem repeat(var(--clubs, 8), minmax(7.25rem, 1fr)); min-width: calc(6.5rem + var(--clubs, 8) * 7.25rem); font-size: var(--text-s); }
+.occupancy__row { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; }
+.occupancy__row > *, .occupancy__cell, .occupancy__date, .occupancy__club { padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--base-ultra-light); border-left: 1px solid var(--base-ultra-light); }
+.occupancy__date { position: sticky; left: 0; z-index: 1; border-left: 0; background: var(--white); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.occupancy__row--head .occupancy__date, .occupancy__club { background: var(--primary); color: var(--white); font-weight: 600; font-size: var(--text-xs); letter-spacing: 0.04em; }
+.occupancy__club a { color: var(--white); }
+.occupancy__club--heim { background: var(--secondary); }
+.occupancy__cell--heim { border-right: 2px solid var(--base-light); }
+.occupancy__row--wochenende .occupancy__date { font-weight: 700; background: var(--base-ultra-light); }
+.occupancy__row--heute .occupancy__date { box-shadow: inset 4px 0 0 var(--secondary); font-weight: 700; }
+.occupancy__row--vergangen .occupancy__date, .occupancy__row--vergangen .occupancy__free { color: var(--base-semi-light); }
+.occupancy__cell--belegt { background: var(--warning-ultra-light); color: var(--warning); }
+.occupancy__cell { min-width: 0; }
+.occupancy__event { margin: 0; line-height: 1.3; overflow-wrap: break-word; hyphens: auto; }
+.occupancy__event + .occupancy__event { margin-top: 0.3rem; }
+.occupancy__time { display: block; font-weight: 700; font-variant-numeric: tabular-nums; }
+.occupancy__holes { display: block; font-size: var(--text-xs); }
+.occupancy__free { color: var(--success); font-size: var(--text-xs); }
+.occupancy__note { margin: 0; color: var(--base-semi-dark); }
+.occupancy__extern { margin-right: var(--space-s); }
 .dwc-nest-header.dwc-nest-header,
 .dwce-nav-nested.dwce-nav-nested {
 --primary-clr: var(--primary);

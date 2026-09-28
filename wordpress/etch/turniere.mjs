@@ -1,11 +1,14 @@
-// Etch-Komponenten „Turnierkalender“ und „Turnierergebnisse“ (Seite /turniere/).
+// Etch-Komponenten „Turnierkalender“, „Platzbelegung“ und „Turnierergebnisse“ (Seite /turniere/).
 // Daten: {options.golfplatz.turniere} aus mu-plugins/golfplatz-turniere.php – stündlich aus PC CADDIE://online gelesen.
 // Anmeldung, Startlisten und Ergebnislisten bleiben bei PC CADDIE (Links); Namen von Spielern übernimmt die Website nicht.
-// Filter per URL: ?kategorie=s (Kalender), ?jahr=2025 (Ergebnisse); Auswahl als Pillen wie bei den Ligaspielen.
+// Turnierkalender und Ergebnisse: nur der Heimatclub. Platzbelegung: Heimatclub (erste Spalte) und GOLFHOCHZEHN-Partnerclubs als Tabelle Tag × Club
+// zur Planung eines Besuchs. Filter per URL: ?kategorie=s (Kalender), ?jahr=2025 (Ergebnisse), ?ab=JJJJ-MM-TT (Platzbelegung).
+// Tabellen als CSS-Grid aus divs mit Tabellen-Rollen (Konvention, wie Preistabelle und Ligaspiele).
 
 import { el, t, text, loop, wenn } from './lib.mjs';
 
 const TU = 'options.golfplatz.turniere';
+const PB = `${TU}.belegung`;
 
 /** Pillen-Navigation (Kategorie bzw. Jahr), aktive Pille als Text mit aria-current. */
 const pillen = (target, label, feld) =>
@@ -44,7 +47,7 @@ const turnier = () =>
 export const turnierkalenderKomponente = {
   key: 'Turnierkalender',
   name: 'Turnierkalender',
-  description: 'Kommende Turniere aus PC CADDIE, nach Monat, mit Kategorie-Filter (?kategorie=d|h|s|j|c), Anmeldeschluss, freien Plätzen und Links zu Anmeldung, Ausschreibung und Details bei PC CADDIE. Daten: {options.golfplatz.turniere} (golfplatz-turniere.php, stündlicher Abgleich).',
+  description: 'Kommende Turniere des Heimatclubs aus PC CADDIE, nach Monat, Filter nach Kategorie (?kategorie=d|h|s|j|c), „Heute auf dem Platz“, Anmeldeschluss, freie Plätze und Links zu Anmeldung, Ausschreibung und Details bei PC CADDIE. Daten: {options.golfplatz.turniere} (golfplatz-turniere.php, stündlicher Abgleich).',
   properties: [],
   content: el('div', 'tournaments', [
     wenn(`${TU}.hat_heute`, [
@@ -69,10 +72,74 @@ export const turnierkalenderKomponente = {
   ], { name: 'Turnierkalender' }),
 };
 
+/** Eine Zelle der Platzbelegung: Turniere des Tages oder „frei“. Für Screenreader ein ganzer Satz ({z.vorlesen}). */
+const belegungZelle = () =>
+  el('div', 'occupancy__cell occupancy__cell--{z.mod} occupancy__cell--{z.club_mod}', [
+    t('span', 'visually-hidden', '{z.vorlesen}'),
+    el('div', 'occupancy__content', [
+      wenn('z.belegt', [
+        loop({ target: 'z.turniere', itemId: 'e' }, [
+          el('p', 'occupancy__event', [
+            wenn('e.zeit', [t('span', 'occupancy__time', '{e.zeit}')]),
+            t('span', 'occupancy__name', '{e.titel}'),
+            wenn('e.loecher', [t('span', 'occupancy__holes', '{e.loecher}')]),
+          ]),
+        ]),
+      ]),
+      wenn('z.belegt', [t('span', 'occupancy__free', 'frei')], 'isFalsy'),
+    ], { attrs: { 'aria-hidden': 'true' } }),
+  ], { attrs: { role: 'cell' } });
+
+export const platzbelegungKomponente = {
+  key: 'Platzbelegung',
+  name: 'Platzbelegung',
+  description: 'Tabelle Tag × Club für 4 Wochen – erste Spalte der Heimatclub, dann die GOLFHOCHZEHN-Partnerclubs (Clubdaten → Partnerclubs): an welchem Tag ist bei welchem Club ein Turnier (Uhrzeit, Name, Löcher) und wo ist der Platz frei – zur Planung eines Besuchs. Blättern per ?ab=JJJJ-MM-TT. Daten: {options.golfplatz.turniere.belegung}.',
+  properties: [],
+  content: wenn(`${PB}.hat_clubs`, [
+    el('div', 'occupancy', [
+      el('div', 'occupancy__bar', [
+        t('p', 'occupancy__range', `{${PB}.zeitraum}`),
+        el('nav', 'occupancy__nav', [
+          wenn(`${PB}.hat_zurueck`, [t('a', 'occupancy__step', '← vorige 4 Wochen', { attrs: { href: `{${PB}.zurueck}` } })]),
+          t('a', 'occupancy__step', 'nächste 4 Wochen →', { attrs: { href: `{${PB}.weiter}` } }),
+        ], { attrs: { 'aria-label': 'Zeitraum wählen' } }),
+      ]),
+      el('div', 'table-wrap occupancy__wrap', [
+        el('div', 'occupancy__table', [
+          el('div', 'occupancy__row occupancy__row--head', [
+            t('div', 'occupancy__date', 'Tag', { attrs: { role: 'columnheader' } }),
+            loop({ target: `${PB}.clubs`, itemId: 'c' }, [
+              el('div', 'occupancy__club occupancy__club--{c.mod}', [
+                wenn('c.hat_website', [t('a', '', '{c.kurz}', { attrs: { href: '{c.website}', title: '{c.name}', rel: 'noopener' } })]),
+                wenn('c.hat_website', [t('span', '', '{c.kurz}', { attrs: { title: '{c.name}' } })], 'isFalsy'),
+              ], { attrs: { role: 'columnheader' } }),
+            ]),
+          ], { attrs: { role: 'row' } }),
+          loop({ target: `${PB}.tage`, itemId: 'd' }, [
+            el('div', 'occupancy__row occupancy__row--{d.mod} occupancy__row--{d.heute_mod}', [
+              el('div', 'occupancy__date', [t('span', 'visually-hidden', '{d.datum_lang}'), t('span', '', '{d.datum}', { attrs: { 'aria-hidden': 'true' } })], { attrs: { role: 'rowheader' } }),
+              loop({ target: 'd.zellen', itemId: 'z' }, [belegungZelle()]),
+            ], { attrs: { role: 'row' } }),
+          ]),
+        ], { attrs: { role: 'table', 'aria-label': `Platzbelegung, {${PB}.zeitraum}`, style: `--clubs: {${PB}.anzahl}` } }),
+      ]),
+      el('p', 'occupancy__note small', [
+        text('„Belegt“ heißt: Laut PC CADDIE findet an diesem Tag ein Turnier statt – der Platz ist dann ganz oder zu bestimmten Zeiten gesperrt. Startzeit bitte vorher beim Club erfragen.'),
+      ]),
+      wenn(`${PB}.hat_ohne_pcc`, [
+        el('p', 'occupancy__note small', [
+          text('Nicht in der Tabelle: '),
+          loop({ target: `${PB}.ohne_pcc`, itemId: 'o' }, [t('a', 'occupancy__extern', '{o.name} (eigener Turnierkalender)', { attrs: { href: '{o.link}', rel: 'noopener' } })]),
+        ]),
+      ]),
+    ], { name: 'Platzbelegung' }),
+  ]),
+};
+
 export const turnierergebnisseKomponente = {
   key: 'Turnierergebnisse',
   name: 'Turnierergebnisse',
-  description: 'Gespielte Turniere eines Jahres (?jahr=2025) mit Link zur Ergebnisliste bei PC CADDIE. Daten: {options.golfplatz.turniere}.',
+  description: 'Gespielte Turniere des Heimatclubs eines Jahres (?jahr=2025) mit Link zur Ergebnisliste bei PC CADDIE. Daten: {options.golfplatz.turniere}.',
   properties: [],
   content: wenn(`${TU}.hat_gespielt`, [
     el('div', 'results', [

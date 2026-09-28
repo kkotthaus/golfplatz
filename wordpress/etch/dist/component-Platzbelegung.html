@@ -1,0 +1,100 @@
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.belegung.hat_clubs","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.turniere.belegung.hat_clubs"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"occupancy"},"metadata":{"name":"Platzbelegung"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"occupancy__bar"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"occupancy__range"}} -->
+<!-- wp:etch/text {"content":"{options.golfplatz.turniere.belegung.zeitraum}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"nav","attributes":{"aria-label":"Zeitraum wählen","class":"occupancy__nav"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.belegung.hat_zurueck","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.turniere.belegung.hat_zurueck"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{options.golfplatz.turniere.belegung.zurueck}","class":"occupancy__step"}} -->
+<!-- wp:etch/text {"content":"← vorige 4 Wochen"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{options.golfplatz.turniere.belegung.weiter}","class":"occupancy__step"}} -->
+<!-- wp:etch/text {"content":"nächste 4 Wochen →"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"table-wrap occupancy__wrap"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Platzbelegung, {options.golfplatz.turniere.belegung.zeitraum}","style":"\u002d\u002dclubs: {options.golfplatz.turniere.belegung.anzahl}","class":"occupancy__table"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"occupancy__row occupancy__row\u002d\u002dhead"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"occupancy__date"}} -->
+<!-- wp:etch/text {"content":"Tag"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.turniere.belegung.clubs","itemId":"c"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"columnheader","class":"occupancy__club occupancy__club\u002d\u002d{c.mod}"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"c.hat_website","operator":"isTruthy","rightHand":null},"conditionString":"c.hat_website"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{c.website}","title":"{c.name}","rel":"noopener"}} -->
+<!-- wp:etch/text {"content":"{c.kurz}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"c.hat_website","operator":"isFalsy","rightHand":null},"conditionString":"!c.hat_website"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"title":"{c.name}"}} -->
+<!-- wp:etch/text {"content":"{c.kurz}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"options.golfplatz.turniere.belegung.tage","itemId":"d"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"row","class":"occupancy__row occupancy__row\u002d\u002d{d.mod} occupancy__row\u002d\u002d{d.heute_mod}"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"rowheader","class":"occupancy__date"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"visually-hidden"}} -->
+<!-- wp:etch/text {"content":"{d.datum_lang}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true"}} -->
+<!-- wp:etch/text {"content":"{d.datum}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/loop {"target":"d.zellen","itemId":"z"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"cell","class":"occupancy__cell occupancy__cell\u002d\u002d{z.mod} occupancy__cell\u002d\u002d{z.club_mod}"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"visually-hidden"}} -->
+<!-- wp:etch/text {"content":"{z.vorlesen}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"aria-hidden":"true","class":"occupancy__content"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.belegt","operator":"isTruthy","rightHand":null},"conditionString":"z.belegt"} -->
+<!-- wp:etch/loop {"target":"z.turniere","itemId":"e"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"occupancy__event"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"e.zeit","operator":"isTruthy","rightHand":null},"conditionString":"e.zeit"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"occupancy__time"}} -->
+<!-- wp:etch/text {"content":"{e.zeit}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"occupancy__name"}} -->
+<!-- wp:etch/text {"content":"{e.titel}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"e.loecher","operator":"isTruthy","rightHand":null},"conditionString":"e.loecher"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"occupancy__holes"}} -->
+<!-- wp:etch/text {"content":"{e.loecher}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.belegt","operator":"isFalsy","rightHand":null},"conditionString":"!z.belegt"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"occupancy__free"}} -->
+<!-- wp:etch/text {"content":"frei"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"occupancy__note small"}} -->
+<!-- wp:etch/text {"content":"„Belegt“ heißt: Laut PC CADDIE findet an diesem Tag ein Turnier statt – der Platz ist dann ganz oder zu bestimmten Zeiten gesperrt. Startzeit bitte vorher beim Club erfragen."} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.belegung.hat_ohne_pcc","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.turniere.belegung.hat_ohne_pcc"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"occupancy__note small"}} -->
+<!-- wp:etch/text {"content":"Nicht in der Tabelle: "} /-->
+<!-- wp:etch/loop {"target":"options.golfplatz.turniere.belegung.ohne_pcc","itemId":"o"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{o.link}","rel":"noopener","class":"occupancy__extern"}} -->
+<!-- wp:etch/text {"content":"{o.name} (eigener Turnierkalender)"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->

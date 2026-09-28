@@ -28,9 +28,41 @@ function golfplatz_pcc_club(): string {
 	return preg_replace( '/\D/', '', (string) ( $club['pccaddie_code'] ?? '' ) );
 }
 
-/** Eine öffentliche Seite von PC CADDIE als DOMXPath, oder WP_Error. */
-function golfplatz_pcc_seite( string $cat ) {
-	$club = golfplatz_pcc_club();
+/**
+ * Eigener Club und GOLFHOCHZEHN-Partnerclubs (Clubdaten → Gäste & Systeme → Partnerclubs).
+ * Je Club: code (PC CADDIE, leer = nicht abgleichbar), name, kurz, website, kalender (Link ohne PC CADDIE), eigen.
+ */
+function golfplatz_pcc_clubs(): array {
+	$daten = (array) get_option( 'clubdaten', array() );
+	$clubs = array(
+		array(
+			'code'     => golfplatz_pcc_club(),
+			'name'     => (string) ( $daten['club_name'] ?? '' ),
+			'kurz'     => (string) ( $daten['club_kurzname'] ?? '' ) ?: 'Heimatclub',
+			'website'  => home_url( '/' ),
+			'kalender' => '',
+			'eigen'    => true,
+		),
+	);
+	foreach ( (array) ( $daten['partnerclubs'] ?? array() ) as $p ) {
+		if ( ! is_array( $p ) || '' === trim( (string) ( $p['name'] ?? '' ) ) ) {
+			continue;
+		}
+		$clubs[] = array(
+			'code'     => preg_replace( '/\D/', '', (string) ( $p['pccaddie_code'] ?? '' ) ),
+			'name'     => trim( (string) $p['name'] ),
+			'kurz'     => trim( (string) ( $p['kurzname'] ?? '' ) ) ?: trim( (string) $p['name'] ),
+			'website'  => (string) ( $p['website'] ?? '' ),
+			'kalender' => (string) ( $p['kalender_link'] ?? '' ),
+			'eigen'    => false,
+		);
+	}
+	return $clubs;
+}
+
+/** Eine öffentliche Seite von PC CADDIE als DOMXPath, oder WP_Error. $club leer = eigener Club. */
+function golfplatz_pcc_seite( string $cat, string $club = '' ) {
+	$club = $club ?: golfplatz_pcc_club();
 	if ( '' === $club ) {
 		return new WP_Error( 'golfplatz_pcc', 'Keine PC-CADDIE-Kennung in den Clubdaten (pccaddie_code).' );
 	}
@@ -78,7 +110,17 @@ function golfplatz_pcc_turniere_lesen( DOMXPath $x ): array {
 			$a = $x->query( './/a[' . $bed . ']', $tr )->item( 0 );
 			return $a ? golfplatz_pcc_link( $a->getAttribute( 'href' ) ) : '';
 		};
-		$kat = array_values( array_intersect( preg_split( '/\s+/', trim( $tr->getAttribute( 'data-kat' ) ) ), array_keys( GOLFPLATZ_PCC_KATEGORIEN ) ) );
+		// Kategorien vergibt jeder Club anders (Dreibäumen: D, H, S …; Schloss Haag: DAM, HER, SEN; Varmert: keine).
+		// Deshalb Kürzel vereinheitlichen und zusätzlich am Namen erkennen.
+		$codes = preg_split( '/\s+/', strtoupper( trim( $tr->getAttribute( 'data-kat' ) ) ) );
+		$codes = array_map( fn( $k ) => array( 'DAM' => 'D', 'HER' => 'H', 'SEN' => 'S', 'JUG' => 'J' )[ $k ] ?? $k, $codes );
+		$name  = implode( ' ', $namen );
+		foreach ( array( 'D' => '/damen|ladies/iu', 'H' => '/herren|\bmen\b/iu', 'S' => '/senior|\bAK\s?(50|55|60|65|70)\b/iu', 'J' => '/jugend|junior|kinder|\bU\s?1[0-8]\b/iu' ) as $k => $muster ) {
+			if ( preg_match( $muster, $name ) ) {
+				$codes[] = $k;
+			}
+		}
+		$kat = array_values( array_unique( array_intersect( $codes, array_keys( GOLFPLATZ_PCC_KATEGORIEN ) ) ) );
 		preg_match( '/Anmeldeschluss:\s*(.+?Uhr)/u', $art, $schluss );
 		preg_match( '/Teilnehmer maximal:\s*(\d+)/u', $art, $max );
 		preg_match( '/Freie Plätze online:\s*(\d+)/u', $art, $frei );
@@ -109,77 +151,117 @@ function golfplatz_pcc_turniere_lesen( DOMXPath $x ): array {
 	return $liste;
 }
 
-/** Abgleich: Kalender (kommende) und Ergebnisliste (gespielte) lesen, Einträge anlegen/aktualisieren. */
-function golfplatz_pcc_abgleich(): array {
-	$log = array( 'zeit' => time(), 'neu' => 0, 'aktualisiert' => 0, 'unveraendert' => 0, 'abgesagt' => 0, 'fehler' => array() );
-	$kal = golfplatz_pcc_seite( 'ts_calendar' );
-	$erg = golfplatz_pcc_seite( 'ts_resultlist' );
-	if ( is_wp_error( $kal ) || is_wp_error( $erg ) ) {
-		$log['fehler'][] = ( is_wp_error( $kal ) ? $kal : $erg )->get_error_message();
-		return golfplatz_pcc_log( $log );
+/**
+ * Kommende Turniere eines Clubs. Manche Clubs haben den Standardkalender abgeschaltet und zeigen nur die Ansicht
+ * „ts_calendar_turn_only“ (z. B. Velbert, Marienfeld) – dann diese lesen. Gibt array oder WP_Error zurück.
+ */
+function golfplatz_pcc_kalender( string $club ) {
+	$letzter = null;
+	foreach ( array( 'ts_calendar', 'ts_calendar_turn_only' ) as $cat ) {
+		$x = golfplatz_pcc_seite( $cat, $club );
+		if ( ! is_wp_error( $x ) ) {
+			return golfplatz_pcc_turniere_lesen( $x );
+		}
+		$letzter = $x;
 	}
-	$kommend  = golfplatz_pcc_turniere_lesen( $kal );
-	$gespielt = golfplatz_pcc_turniere_lesen( $erg );
-	if ( ! $kommend && ! $gespielt ) {
-		$log['fehler'][] = 'Keine Turniere gelesen – hat PC CADDIE den Aufbau der Seiten geändert?';
-		return golfplatz_pcc_log( $log );
-	}
-	// Ein Turnier kann in beiden Listen stehen (heute); die Kalenderzeile hat die aktuelleren Plätze, die Ergebnisliste den Ergebnislink
-	$alle = $gespielt;
-	foreach ( $kommend as $id => $t ) {
-		$alle[ $id ] = isset( $alle[ $id ] ) ? array_merge( $alle[ $id ], array_filter( $t, fn( $v ) => '' !== $v && null !== $v ) ) : $t;
-	}
+	return $letzter;
+}
 
+/**
+ * Abgleich: eigener Club (Kalender und Ergebnisliste) und Partnerclubs (nur Kalender).
+ * Je Turnier ein Eintrag „turnier“, Schlüssel = Club + PC-CADDIE-Kennung des Turniers.
+ */
+function golfplatz_pcc_abgleich(): array {
+	$log   = array( 'zeit' => time(), 'neu' => 0, 'aktualisiert' => 0, 'unveraendert' => 0, 'abgesagt' => 0, 'clubs' => 0, 'fehler' => array() );
+	$heute = gmmktime( 0, 0, 0, (int) wp_date( 'n' ), (int) wp_date( 'j' ), (int) wp_date( 'Y' ) );
+	$eigen = golfplatz_pcc_club();
+
+	// Vorhandene Einträge je Club; ältere Einträge ohne Club gehören zum eigenen Club
 	$vorhanden = array();
 	foreach ( get_posts( array( 'post_type' => 'turnier', 'post_status' => 'any', 'posts_per_page' => -1, 'fields' => 'ids' ) ) as $pid ) {
-		$vorhanden[ (string) get_post_meta( $pid, 'turnier_extern_id', true ) ] = $pid;
+		$club = (string) get_post_meta( $pid, 'turnier_club', true ) ?: $eigen;
+		$vorhanden[ $club ][ (string) get_post_meta( $pid, 'turnier_extern_id', true ) ] = $pid;
 	}
-	foreach ( $alle as $id => $t ) {
-		$meta = array(
-			'turnier_extern_id'          => $id,
-			'turnier_beginn'             => $t['beginn'],
-			'turnier_hat_uhrzeit'        => $t['hat_uhrzeit'] ? 1 : 0,
-			'turnier_kategorien'         => $t['kategorien'],
-			'turnier_untertitel'         => $t['untertitel'],
-			'turnier_spielform'          => $t['spielform'],
-			'turnier_loecher'            => $t['loecher'] ?: '',
-			'turnier_vorgabewirksam'     => $t['vorgabe'] ? 1 : 0,
-			'turnier_gaeste'             => $t['gaeste'] ? 1 : 0,
-			'turnier_anmeldeschluss'     => $t['schluss'],
-			'turnier_teilnehmer_max'     => $t['max'] ?: '',
-			'turnier_plaetze_frei'       => $t['frei'] ?? '',
-			'turnier_link_anmeldung'     => $t['anmeldung'],
-			'turnier_link_details'       => $t['details'],
-			'turnier_link_ausschreibung' => $t['ausschreibung'],
-			'turnier_link_ergebnisse'    => $t['ergebnisse'],
-			'turnier_link_startliste'    => $t['startliste'],
-		);
-		$pid = $vorhanden[ (string) $id ] ?? 0;
-		if ( $pid ) {
-			$alt = array_map( fn( $k ) => (string) get_post_meta( $pid, $k, true ), array_keys( $meta ) );
-			if ( array_combine( array_keys( $meta ), $alt ) == array_map( 'strval', $meta ) && html_entity_decode( get_post_field( 'post_title', $pid ) ) === $t['titel'] /* Rohtitel: get_the_title() setzt typografische Striche */ && 'publish' === get_post_status( $pid ) ) {
-				++$log['unveraendert'];
-				continue;
-			}
-			wp_update_post( array( 'ID' => $pid, 'post_title' => $t['titel'], 'post_status' => 'publish' ) );
-			++$log['aktualisiert'];
-		} else {
-			$pid = wp_insert_post( array( 'post_type' => 'turnier', 'post_status' => 'publish', 'post_title' => $t['titel'], 'post_name' => 'pcc-' . $id ) );
-			++$log['neu'];
+
+	foreach ( golfplatz_pcc_clubs() as $c ) {
+		if ( '' === $c['code'] ) {
+			continue; // ohne PC CADDIE (z. B. PDF-Kalender)
 		}
-		foreach ( $meta as $k => $v ) {
-			update_post_meta( $pid, $k, $v );
+		$kommend = golfplatz_pcc_kalender( $c['code'] );
+		if ( is_wp_error( $kommend ) ) {
+			$log['fehler'][] = $c['kurz'] . ': ' . $kommend->get_error_message();
+			continue;
 		}
-	}
-	// Kommende Turniere, die nicht mehr im Kalender stehen, sind abgesagt (nur wenn der Kalender gelesen werden konnte)
-	$heute = gmmktime( 0, 0, 0, (int) wp_date( 'n' ), (int) wp_date( 'j' ), (int) wp_date( 'Y' ) );
-	if ( $kommend ) {
-		foreach ( $vorhanden as $id => $pid ) {
-			if ( ! isset( $alle[ $id ] ) && (int) get_post_meta( $pid, 'turnier_beginn', true ) >= $heute && 'publish' === get_post_status( $pid ) ) {
-				wp_trash_post( $pid );
-				++$log['abgesagt'];
+		$alle = array();
+		if ( $c['eigen'] ) {
+			$erg = golfplatz_pcc_seite( 'ts_resultlist', $c['code'] );
+			if ( is_wp_error( $erg ) ) {
+				$log['fehler'][] = $c['kurz'] . ' (Ergebnisse): ' . $erg->get_error_message();
+			} else {
+				$alle = golfplatz_pcc_turniere_lesen( $erg );
 			}
 		}
+		// Ein Turnier kann in beiden Listen stehen (heute); die Kalenderzeile hat die aktuelleren Plätze, die Ergebnisliste den Ergebnislink
+		foreach ( $kommend as $id => $t ) {
+			$alle[ $id ] = isset( $alle[ $id ] ) ? array_merge( $alle[ $id ], array_filter( $t, fn( $v ) => '' !== $v && null !== $v ) ) : $t;
+		}
+		if ( ! $alle ) {
+			continue;
+		}
+		++$log['clubs'];
+
+		foreach ( $alle as $id => $t ) {
+			$meta = array(
+				'turnier_extern_id'          => $id,
+				'turnier_club'               => $c['code'],
+				'turnier_club_name'          => $c['name'],
+				'turnier_beginn'             => $t['beginn'],
+				'turnier_hat_uhrzeit'        => $t['hat_uhrzeit'] ? 1 : 0,
+				'turnier_kategorien'         => $t['kategorien'],
+				'turnier_untertitel'         => $t['untertitel'],
+				'turnier_spielform'          => $t['spielform'],
+				'turnier_loecher'            => $t['loecher'] ?: '',
+				'turnier_vorgabewirksam'     => $t['vorgabe'] ? 1 : 0,
+				'turnier_gaeste'             => $t['gaeste'] ? 1 : 0,
+				'turnier_anmeldeschluss'     => $t['schluss'],
+				'turnier_teilnehmer_max'     => $t['max'] ?: '',
+				'turnier_plaetze_frei'       => $t['frei'] ?? '',
+				'turnier_link_anmeldung'     => $t['anmeldung'],
+				'turnier_link_details'       => $t['details'],
+				'turnier_link_ausschreibung' => $t['ausschreibung'],
+				'turnier_link_ergebnisse'    => $t['ergebnisse'],
+				'turnier_link_startliste'    => $t['startliste'],
+			);
+			$pid = $vorhanden[ $c['code'] ][ (string) $id ] ?? 0;
+			if ( $pid ) {
+				$alt = array_map( fn( $k ) => (string) get_post_meta( $pid, $k, true ), array_keys( $meta ) );
+				if ( array_combine( array_keys( $meta ), $alt ) == array_map( 'strval', $meta ) && html_entity_decode( get_post_field( 'post_title', $pid ) ) === $t['titel'] /* Rohtitel: get_the_title() setzt typografische Striche */ && 'publish' === get_post_status( $pid ) ) {
+					++$log['unveraendert'];
+					continue;
+				}
+				wp_update_post( array( 'ID' => $pid, 'post_title' => $t['titel'], 'post_status' => 'publish' ) );
+				++$log['aktualisiert'];
+			} else {
+				$pid = wp_insert_post( array( 'post_type' => 'turnier', 'post_status' => 'publish', 'post_title' => $t['titel'], 'post_name' => 'pcc-' . $c['code'] . '-' . $id ) );
+				++$log['neu'];
+			}
+			foreach ( $meta as $k => $v ) {
+				update_post_meta( $pid, $k, $v );
+			}
+		}
+		// Kommende Turniere dieses Clubs, die nicht mehr im Kalender stehen, sind abgesagt (nur wenn der Kalender Turniere hatte)
+		if ( $kommend ) {
+			foreach ( $vorhanden[ $c['code'] ] ?? array() as $id => $pid ) {
+				if ( ! isset( $alle[ $id ] ) && (int) get_post_meta( $pid, 'turnier_beginn', true ) >= $heute && 'publish' === get_post_status( $pid ) ) {
+					wp_trash_post( $pid );
+					++$log['abgesagt'];
+				}
+			}
+		}
+		usleep( 200000 ); // Server von PC CADDIE schonen
+	}
+	if ( ! $log['clubs'] ) {
+		$log['fehler'][] = 'Keine Turniere gelesen – hat PC CADDIE den Aufbau der Seiten geändert?';
 	}
 	return golfplatz_pcc_log( $log );
 }
@@ -192,13 +274,13 @@ function golfplatz_pcc_log( array $log ): array {
 }
 
 function golfplatz_pcc_log_text( array $l ): string {
-	return wp_date( 'd.m.Y H:i', $l['zeit'] ) . ': ' . $l['neu'] . ' neu, ' . $l['aktualisiert'] . ' aktualisiert, ' . $l['unveraendert'] . ' unverändert' . ( $l['abgesagt'] ? ', ' . $l['abgesagt'] . ' abgesagt (Papierkorb)' : '' ) . ( $l['fehler'] ? '; Probleme: ' . implode( ' ', $l['fehler'] ) : '' );
+	return wp_date( 'd.m.Y H:i', $l['zeit'] ) . ': ' . ( isset( $l['clubs'] ) ? $l['clubs'] . ' Clubs, ' : '' ) . $l['neu'] . ' neu, ' . $l['aktualisiert'] . ' aktualisiert, ' . $l['unveraendert'] . ' unverändert' . ( $l['abgesagt'] ? ', ' . $l['abgesagt'] . ' abgesagt (Papierkorb)' : '' ) . ( $l['fehler'] ? '; Probleme: ' . implode( ' ', $l['fehler'] ) : '' );
 }
 
 /* ---------- Daten für Etch: {options.golfplatz.turniere} ---------- */
 
 /** Ein Turnier für die Ausgabe. */
-function golfplatz_turnier_zeile( WP_Post $p, int $heute ): array {
+function golfplatz_turnier_zeile( WP_Post $p, int $heute, array $clubs = array() ): array {
 	$m      = fn( string $k ) => get_post_meta( $p->ID, $k, true );
 	$ts     = (int) $m( 'turnier_beginn' );
 	$tz     = new DateTimeZone( 'UTC' ); // Ortszeit als Unix-Zeit
@@ -218,8 +300,19 @@ function golfplatz_turnier_zeile( WP_Post $p, int $heute ): array {
 			$m( 'turnier_gaeste' ) ? 'offen für Gäste' : '',
 		)
 	);
+	// Club des Turniers (eigener Club oder GOLFHOCHZEHN-Partner); ältere Einträge ohne Club gehören zum eigenen
+	$code = (string) $m( 'turnier_club' ) ?: golfplatz_pcc_club();
+	$club = $clubs[ $code ] ?? array( 'kurz' => (string) $m( 'turnier_club_name' ), 'name' => (string) $m( 'turnier_club_name' ), 'eigen' => false, 'website' => '' );
 	return array(
+		'club'              => $code,
+		'club_kurz'         => $club['kurz'],
+		'club_name'         => $club['name'],
+		'club_website'      => $club['website'],
+		'eigen'             => $club['eigen'],
+		'club_mod'          => $club['eigen'] ? 'heim' : 'partner',
 		'titel'             => html_entity_decode( get_the_title( $p ) ),
+		'uhrzeit'           => $m( 'turnier_hat_uhrzeit' ) ? wp_date( 'H:i', $ts, $tz ) : '',
+		'loecher'           => (int) $m( 'turnier_loecher' ),
 		'untertitel'        => (string) $m( 'turnier_untertitel' ),
 		'datum_iso'         => wp_date( 'Y-m-d', $ts, $tz ),
 		'tag'               => wp_date( 'j', $ts, $tz ),
@@ -251,7 +344,7 @@ function golfplatz_turnier_zeile( WP_Post $p, int $heute ): array {
 
 /**
  * Turnierkalender (kommende, nach Monat gruppiert) und gespielte Turniere eines Jahres.
- * Filter per URL: ?kategorie=S (Kalender), ?jahr=2025 (Ergebnisse) – auf /turniere/.
+ * Filter per URL: ?kategorie=S (Kalender), ?jahr=2025 (Ergebnisse), ?ab=JJJJ-MM-TT (Platzbelegung) – auf /turniere/.
  */
 function golfplatz_turniere_etch(): array {
 	static $cache = null;
@@ -259,47 +352,127 @@ function golfplatz_turniere_etch(): array {
 		return $cache;
 	}
 	$heute = gmmktime( 0, 0, 0, (int) wp_date( 'n' ), (int) wp_date( 'j' ), (int) wp_date( 'Y' ) );
-	$alle  = array();
-	foreach ( get_posts( array( 'post_type' => 'turnier', 'post_status' => 'publish', 'posts_per_page' => -1, 'meta_key' => 'turnier_beginn', 'orderby' => 'meta_value_num', 'order' => 'ASC', 'no_found_rows' => true ) ) as $p ) {
-		$alle[] = golfplatz_turnier_zeile( $p, $heute );
+	$clubs = array();
+	foreach ( golfplatz_pcc_clubs() as $c ) {
+		$clubs[ $c['code'] ?: 'ohne-' . sanitize_title( $c['kurz'] ) ] = $c;
 	}
-	$seite = get_permalink( get_page_by_path( 'turniere' ) ) ?: home_url( '/turniere/' );
+	$alle = array();
+	foreach ( get_posts( array( 'post_type' => 'turnier', 'post_status' => 'publish', 'posts_per_page' => -1, 'meta_key' => 'turnier_beginn', 'orderby' => 'meta_value_num', 'order' => 'ASC', 'no_found_rows' => true ) ) as $p ) {
+		$alle[] = golfplatz_turnier_zeile( $p, $heute, $clubs );
+	}
+	$eigene  = array_values( array_filter( $alle, fn( $t ) => $t['eigen'] ) );
+	$seite   = get_permalink( get_page_by_path( 'turniere' ) ) ?: home_url( '/turniere/' );
 	// phpcs:disable WordPress.Security.NonceVerification
 	$kat  = isset( $_GET['kategorie'] ) ? strtoupper( sanitize_key( $_GET['kategorie'] ) ) : '';
 	$kat  = isset( GOLFPLATZ_PCC_KATEGORIEN[ $kat ] ) ? $kat : '';
 	$jahr = isset( $_GET['jahr'] ) ? (int) $_GET['jahr'] : 0;
+	$ab   = isset( $_GET['ab'] ) && preg_match( '/^\d{4}-\d{2}-\d{2}$/', $_GET['ab'] ) ? strtotime( $_GET['ab'] . ' 00:00:00 UTC' ) : 0;
 	// phpcs:enable
 
-	$kommend = array_values( array_filter( $alle, fn( $t ) => $t['kommend'] && ( ! $kat || in_array( $kat, $t['kategorie_keys'], true ) ) ) );
+	// Turnierkalender: nur der Heimatclub, Filter nach Kategorie
+	$kommend = array_values( array_filter( $eigene, fn( $t ) => $t['kommend'] && ( ! $kat || in_array( $kat, $t['kategorie_keys'], true ) ) ) );
 	$monate  = array();
 	foreach ( $kommend as $t ) {
 		$monate[ $t['monat_key'] ]['name']       = $t['monat_name'];
 		$monate[ $t['monat_key'] ]['turniere'][] = $t;
 	}
-	$gespielt = array_reverse( array_values( array_filter( $alle, fn( $t ) => ! $t['kommend'] ) ) );
-	$jahre    = array_values( array_unique( array_column( $gespielt, 'jahr' ) ) );
-	$jahr     = in_array( $jahr, $jahre, true ) ? $jahr : ( $jahre[0] ?? (int) wp_date( 'Y' ) );
-
 	$filter = array( array( 'name' => 'Alle', 'link' => $seite . '#turnierkalender', 'aktiv' => $kat ? '' : 'aktiv' ) );
 	foreach ( array( 'D', 'H', 'S', 'J', 'C' ) as $k ) {
 		$filter[] = array( 'name' => GOLFPLATZ_PCC_KATEGORIEN[ $k ], 'link' => add_query_arg( 'kategorie', strtolower( $k ), $seite ) . '#turnierkalender', 'aktiv' => $k === $kat ? 'aktiv' : '' );
 	}
-	$heutige = array_values( array_filter( $alle, fn( $t ) => $t['heute'] ) );
-	$cache   = array(
-		'monate'        => array_values( $monate ),
-		'hat_kommende'  => (bool) $kommend,
-		'filter'        => $filter,
-		'filter_name'   => $kat ? GOLFPLATZ_PCC_KATEGORIEN[ $kat ] : '',
-		'gespielt'      => array_values( array_filter( $gespielt, fn( $t ) => $t['jahr'] === $jahr ) ),
-		'hat_gespielt'  => (bool) $gespielt,
-		'jahr'          => (string) $jahr,
-		'jahre'         => array_map( fn( $j ) => array( 'jahr' => (string) $j, 'link' => add_query_arg( 'jahr', $j, $seite ) . '#turnierergebnisse', 'aktiv' => $j === $jahr ? 'aktiv' : '' ), $jahre ),
-		'heute'         => $heutige,
-		'hat_heute'     => (bool) $heutige,
-		'naechste'      => array_slice( array_values( array_filter( $alle, fn( $t ) => $t['kommend'] ) ), 0, 4 ),
-		'pcc_kalender'  => GOLFPLATZ_PCC_WEB . golfplatz_pcc_club() . '/app.php?cat=ts_calendar',
+
+	// Ergebnisse des Heimatclubs
+	$gespielt = array_reverse( array_values( array_filter( $eigene, fn( $t ) => ! $t['kommend'] ) ) );
+	$jahre    = array_values( array_unique( array_column( $gespielt, 'jahr' ) ) );
+	$jahr     = in_array( $jahr, $jahre, true ) ? $jahr : ( $jahre[0] ?? (int) wp_date( 'Y' ) );
+	$heutige  = array_values( array_filter( $eigene, fn( $t ) => $t['heute'] ) );
+
+	$cache = array(
+		'monate'       => array_values( $monate ),
+		'hat_kommende' => (bool) $kommend,
+		'filter'       => $filter,
+		'filter_name'  => $kat ? GOLFPLATZ_PCC_KATEGORIEN[ $kat ] : '',
+		'gespielt'     => array_values( array_filter( $gespielt, fn( $t ) => $t['jahr'] === $jahr ) ),
+		'hat_gespielt' => (bool) $gespielt,
+		'jahr'         => (string) $jahr,
+		'jahre'        => array_map( fn( $j ) => array( 'jahr' => (string) $j, 'link' => add_query_arg( 'jahr', $j, $seite ) . '#turnierergebnisse', 'aktiv' => $j === $jahr ? 'aktiv' : '' ), $jahre ),
+		'heute'        => $heutige,
+		'hat_heute'    => (bool) $heutige,
+		'naechste'     => array_slice( array_values( array_filter( $eigene, fn( $t ) => $t['kommend'] ) ), 0, 4 ),
+		'pcc_kalender' => GOLFPLATZ_PCC_WEB . golfplatz_pcc_club() . '/app.php?cat=ts_calendar',
+		'belegung'     => golfplatz_platzbelegung( $alle, $clubs, $heute, $ab, $seite ),
 	);
 	return $cache;
+}
+
+/**
+ * Platzbelegung als Tabelle: Zeilen = Tage (4 Wochen ab Montag), Spalten = Heimatclub (erste Spalte) und Partnerclubs mit PC CADDIE.
+ * Zelle: Turniere des Tages mit Uhrzeit und Löchern oder „frei“. Blättern per ?ab=JJJJ-MM-TT (nie vor die laufende Woche).
+ */
+function golfplatz_platzbelegung( array $turniere, array $clubs, int $heute, int $ab, string $seite ): array {
+	$tage_anzahl = 28;
+	$montag      = $heute - ( (int) gmdate( 'N', $heute ) - 1 ) * DAY_IN_SECONDS; // Montag der laufenden Woche
+	$start       = max( $montag, $ab ? $ab - ( (int) gmdate( 'N', $ab ) - 1 ) * DAY_IN_SECONDS : $montag );
+	$ende        = $start + $tage_anzahl * DAY_IN_SECONDS;
+	$tz          = new DateTimeZone( 'UTC' ); // Ortszeit als Unix-Zeit
+
+	// Heimatclub zuerst (golfplatz_pcc_clubs() liefert ihn als ersten), dann die Partnerclubs mit PC CADDIE
+	$spalten = array_values( array_filter( $clubs, fn( $c ) => '' !== $c['code'] ) );
+	usort( $spalten, fn( $a, $b ) => (int) $b['eigen'] <=> (int) $a['eigen'] );
+	$ohne    = array_values( array_filter( $clubs, fn( $c ) => ! $c['eigen'] && '' === $c['code'] ) );
+
+	// Turniere je Tag und Club
+	$je = array();
+	foreach ( $turniere as $t ) {
+		$ts = strtotime( $t['datum_iso'] . ' 00:00:00 UTC' );
+		if ( $ts >= $start && $ts < $ende ) {
+			$je[ $t['datum_iso'] ][ $t['club'] ][] = array(
+				'zeit'    => $t['uhrzeit'],
+				'titel'   => $t['titel'],
+				'loecher' => $t['loecher'] ? $t['loecher'] . ' Loch' : '',
+				'link'    => $t['link_details'] ?: $t['link_ausschreibung'],
+			);
+		}
+	}
+	$tage = array();
+	for ( $ts = $start; $ts < $ende; $ts += DAY_IN_SECONDS ) {
+		$iso    = gmdate( 'Y-m-d', $ts );
+		$zellen = array();
+		foreach ( $spalten as $c ) {
+			$liste    = $je[ $iso ][ $c['code'] ] ?? array();
+			$zellen[] = array(
+				'belegt'    => (bool) $liste,
+				'mod'       => $liste ? 'belegt' : 'frei',
+				'turniere'  => $liste,
+				'club'      => $c['kurz'],
+				'club_mod'  => $c['eigen'] ? 'heim' : 'partner',
+				'vorlesen'  => $c['kurz'] . ': ' . ( $liste ? implode( '; ', array_map( fn( $e ) => trim( $e['zeit'] . ' ' . $e['titel'] ), $liste ) ) : 'kein Turnier' ),
+			);
+		}
+		$wt     = (int) gmdate( 'N', $ts );
+		$tage[] = array(
+			'iso'       => $iso,
+			'datum'     => wp_date( 'D, d.m.', $ts, $tz ),
+			'datum_lang' => wp_date( 'l, j. F', $ts, $tz ),
+			'mod'       => $ts < $heute ? 'vergangen' : ( $wt >= 6 ? 'wochenende' : 'werktag' ),
+			'heute'     => $ts === $heute,
+			'heute_mod' => $ts === $heute ? 'heute' : 'tag',
+			'zellen'    => $zellen,
+		);
+	}
+	$link = fn( int $ts ) => add_query_arg( 'ab', gmdate( 'Y-m-d', $ts ), $seite ) . '#platzbelegung';
+	return array(
+		'clubs'        => array_map( fn( $c ) => array( 'mod' => $c['eigen'] ? 'heim' : 'partner', 'kurz' => $c['kurz'], 'name' => $c['name'], 'website' => $c['website'], 'hat_website' => '' !== $c['website'] ), $spalten ),
+		'anzahl'       => count( $spalten ),
+		'hat_clubs'    => (bool) $spalten,
+		'tage'         => $tage,
+		'zeitraum'     => wp_date( 'j. F', $start, $tz ) . ' – ' . wp_date( 'j. F Y', $ende - DAY_IN_SECONDS, $tz ),
+		'zurueck'      => $link( $start - $tage_anzahl * DAY_IN_SECONDS ),
+		'hat_zurueck'  => $start > $montag,
+		'weiter'       => $link( $ende ),
+		'ohne_pcc'     => array_map( fn( $c ) => array( 'name' => $c['name'], 'link' => $c['kalender'] ?: $c['website'] ), $ohne ),
+		'hat_ohne_pcc' => (bool) $ohne,
+	);
 }
 
 add_filter(

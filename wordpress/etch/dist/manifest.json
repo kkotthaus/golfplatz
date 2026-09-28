@@ -182,13 +182,19 @@
     {
       "key": "Turnierkalender",
       "name": "Turnierkalender",
-      "description": "Kommende Turniere aus PC CADDIE, nach Monat, mit Kategorie-Filter (?kategorie=d|h|s|j|c), Anmeldeschluss, freien Plätzen und Links zu Anmeldung, Ausschreibung und Details bei PC CADDIE. Daten: {options.golfplatz.turniere} (golfplatz-turniere.php, stündlicher Abgleich).",
+      "description": "Kommende Turniere des Heimatclubs aus PC CADDIE, nach Monat, Filter nach Kategorie (?kategorie=d|h|s|j|c), „Heute auf dem Platz“, Anmeldeschluss, freie Plätze und Links zu Anmeldung, Ausschreibung und Details bei PC CADDIE. Daten: {options.golfplatz.turniere} (golfplatz-turniere.php, stündlicher Abgleich).",
+      "properties": []
+    },
+    {
+      "key": "Platzbelegung",
+      "name": "Platzbelegung",
+      "description": "Tabelle Tag × Club für 4 Wochen – erste Spalte der Heimatclub, dann die GOLFHOCHZEHN-Partnerclubs (Clubdaten → Partnerclubs): an welchem Tag ist bei welchem Club ein Turnier (Uhrzeit, Name, Löcher) und wo ist der Platz frei – zur Planung eines Besuchs. Blättern per ?ab=JJJJ-MM-TT. Daten: {options.golfplatz.turniere.belegung}.",
       "properties": []
     },
     {
       "key": "Turnierergebnisse",
       "name": "Turnierergebnisse",
-      "description": "Gespielte Turniere eines Jahres (?jahr=2025) mit Link zur Ergebnisliste bei PC CADDIE. Daten: {options.golfplatz.turniere}.",
+      "description": "Gespielte Turniere des Heimatclubs eines Jahres (?jahr=2025) mit Link zur Ergebnisliste bei PC CADDIE. Daten: {options.golfplatz.turniere}.",
       "properties": []
     },
     {
