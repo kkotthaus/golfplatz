@@ -205,6 +205,18 @@ Stand 2026-09-28, Aufbau wie im Prototyp.
 - **Offen:** Das Antragsformular aus dem Prototyp fehlt, weil kein Formular-Plugin installiert ist. Sobald eines feststeht, das Formular mit den Modellen aus `preis` und Datenschutzhinweis ergänzen. Das PDF liegt noch auf dreibaeumen.de, besser in die Mediathek übernehmen.
 - **CSS:** `.price-card__button` setzt `--btn-width: 100%`, weil ACSS die Buttonbreite über diese Variable steuert und nach dem Golfplatz-Stylesheet lädt. Abstände in der Karte sind ausdrücklich gesetzt (ACSS setzt Überschriften- und Absatzabstände auf 0).
 
+### Club & Kontakt `/club/`
+
+Stand 2026-09-28, Aufbau wie im Prototyp. Daten aus `mu-plugins/golfplatz-club.php`, Markup aus `wordpress/etch/club.mjs`.
+
+- **Personen:** Etch-Komponente „Personenkarten“ (Eigenschaften `liste`, `spalten`). Daten `{options.golfplatz.personen.listen}` aus dem Beitragstyp `person`, gruppiert nach Personengruppe: `vorstand`, `team` (Betreibergesellschaft, Clubmanagement, Sekretariat, Service & Proshop, Greenkeeping), `captains`, `golfschule`, `jugend`. Solange es keine Gruppe „Jugend“ gibt, findet die Liste Personen, deren Funktion „Jugend“ enthält. Reihenfolge über „Reihenfolge“ an der Person, Foto aus dem Beitragsbild, sonst Initialen.
+- **Abschnitte:** Sprungnavigation (auf schmalen Bildschirmen `top: 6.3rem` unter dem niedrigeren Header), Vorstand, Team, Abteilungen (Captains), Jugend (Links Golfschule und Mannschaften), Anfahrt, Kontakt mit Öffnungszeiten des Sekretariats.
+- **Anfahrt:** `{options.golfplatz.anfahrt}` enthält den Routenlink (`club_routenlink` oder Google-Maps-Route zur Clubadresse), die Texte `club_anfahrt_auto`/`club_anfahrt_oepnv` und den Lageplan `club_karte`. Es gibt keine eingebettete Karte, weil sonst eine Einwilligung nötig wäre. Ohne Lageplan erscheint ein Hinweis.
+- **Offen:**
+  - Anfahrtstexte und Lageplan in den Clubdaten pflegen.
+  - Kontaktformular ergänzen, sobald ein Formular-Plugin feststeht.
+  - Jugendtext prüfen.
+
 ### Lochwettspiel (Turnierbaum)
 
 Einmal im Jahr, Teams aus zwei Spielern, K.-o.-System. Jede Runde hat einen vorgeschriebenen Spielzeitraum. Stand 2026-09-28.

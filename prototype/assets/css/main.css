@@ -1072,3 +1072,9 @@ html.scheme--dark {
 .occupancy__free { color: var(--success); font-size: var(--text-xs); }
 .occupancy__note { margin: 0; color: var(--base-semi-dark); }
 .occupancy__extern { margin-right: var(--space-s); }
+
+/* Club & Kontakt: Foto statt Initialen (Beitragsbild der Person), Lageplan als Bild */
+.person-card__avatar--bild { object-fit: cover; padding: 0; }
+.club-map { width: 100%; height: auto; border-radius: var(--radius-l); }
+/* Sprungnavigation unter dem EMMP-Header: auf schmalen Bildschirmen ist der Header niedriger (Top-Bar + Logo-Zeile ≈ 101 px) */
+@media (max-width: 63.99em) { .subnav { top: 6.3rem; } }

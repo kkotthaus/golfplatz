@@ -8,6 +8,7 @@ import { oeffnungszeitenKomponente, oeffnungszeitenAlleKomponente } from './zeit
 import { preistabelleKomponente, preiskartenKomponente } from './preise.mjs';
 import { zaehlkarteKomponente } from './zaehlkarte.mjs';
 import { lochwettspielKomponente } from './lochwettspiel.mjs';
+import { personenkartenKomponente } from './club.mjs';
 import { turnierkalenderKomponente, platzbelegungKomponente, turnierergebnisseKomponente } from './turniere.mjs';
 
 /** Öffnungszeiten eines Bereichs als Etch-Komponente (wordpress/etch/zeiten.mjs). */
@@ -47,6 +48,7 @@ export const components = [
   oeffnungszeitenAlleKomponente,
   preistabelleKomponente,
   preiskartenKomponente,
+  personenkartenKomponente,
   platzstatusKurzKomponente,
   platzstatusKomponente,
   scorekarteKomponente,

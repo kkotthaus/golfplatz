@@ -918,6 +918,9 @@ background: var(--warning-ultra-light); box-shadow: inset 0 0 0 1px var(--warnin
 .occupancy__free { color: var(--success); font-size: var(--text-xs); }
 .occupancy__note { margin: 0; color: var(--base-semi-dark); }
 .occupancy__extern { margin-right: var(--space-s); }
+.person-card__avatar--bild { object-fit: cover; padding: 0; }
+.club-map { width: 100%; height: auto; border-radius: var(--radius-l); }
+@media (max-width: 63.99em) { .subnav { top: 6.3rem; } }
 .dwc-nest-header.dwc-nest-header,
 .dwce-nav-nested.dwce-nav-nested {
 --primary-clr: var(--primary);

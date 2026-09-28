@@ -114,6 +114,29 @@
       ]
     },
     {
+      "key": "Personenkarten",
+      "name": "Personenkarten",
+      "description": "Personen einer Liste als Karten (Name, Funktion, Text, Telefon, E-Mail, Foto oder Initialen). Eigenschaft liste: vorstand, team (Betreibergesellschaft, Clubmanagement, Sekretariat, Service & Proshop, Greenkeeping), captains, golfschule, jugend; spalten: Modifier des Rasters (3 = grid--3, 1 = eine Karte). Daten: {options.golfplatz.personen} aus golfplatz-club.php; Reihenfolge über „Reihenfolge“ an der Person.",
+      "properties": [
+        {
+          "key": "liste",
+          "name": "Liste",
+          "type": {
+            "primitive": "string"
+          },
+          "default": "vorstand"
+        },
+        {
+          "key": "spalten",
+          "name": "Spalten (3 oder 1)",
+          "type": {
+            "primitive": "string"
+          },
+          "default": "3"
+        }
+      ]
+    },
+    {
       "key": "PlatzstatusKurz",
       "name": "Platzstatus kurz",
       "description": "Kurzfassung im Hero der Startseite: Zustand jetzt, heutige Sperren von Platz und Abschlägen, Spielbedingungen als Chips (inkl. Fahnen), Link auf den ausführlichen Platzstatus. Daten: {options.golfplatz.platzstatus.kurz}.",
@@ -307,11 +330,6 @@
       "order": 50
     },
     {
-      "slug": "club",
-      "title": "Club & Kontakt",
-      "order": 50
-    },
-    {
       "slug": "mitglieder",
       "title": "Mitgliederbereich",
       "order": 50
@@ -329,6 +347,11 @@
     {
       "slug": "mitgliedschaft",
       "title": "Mitgliedschaft",
+      "order": 50
+    },
+    {
+      "slug": "club",
+      "title": "Club & Kontakt",
       "order": 50
     },
     {

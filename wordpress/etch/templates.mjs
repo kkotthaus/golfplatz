@@ -4,6 +4,7 @@
 import { el, t, text, raw, wenn, markup, komponente, club, telHref, icon, svgEl, postContent, loop, CLUB } from './lib.mjs';
 import { header } from './header.mjs';
 import { birdiebookKomponente, bahnenRaster } from './birdiebook.mjs';
+import { anfahrt } from './club.mjs';
 import { MS, BERICHT, teamKarten, alleLigaspiele, teamInhalt, teamKader, berichtMeta, berichtBilder, berichtRuecklink } from './mannschaften.mjs';
 
 // Hero-Illustration der Startseite (wie im Prototyp). Platzhalter, bis ein Foto des Platzes vorliegt.
@@ -332,7 +333,6 @@ pages.push(
   platzhalter('golfschule', 'Golfschule', 'Golf lernen', 'Vom ersten Schwung bis zur DGV-Platzreife mit unseren Professionals.'),
   platzhalter('restaurant', 'Restaurant', 'Gastronomie', 'Für Golfer und alle anderen Gäste.'),
   platzhalter('news', 'Aktuelles', 'News', 'Neues aus dem Club.'),
-  platzhalter('club', 'Club & Kontakt', 'Über uns', 'Golf im Bergischen Land – in Hückeswagen. Ansprechpartner, Anfahrt und Kontakt.'),
   platzhalter('mitglieder', 'Mitgliederbereich', 'Intern', 'Melden Sie sich an, um die internen Inhalte zu sehen.'),
   platzhalter('impressum', 'Impressum', '', ''),
   platzhalter('datenschutz', 'Datenschutz', '', ''),
@@ -388,6 +388,61 @@ pages.push({
         ], { name: 'Häufige Fragen' }),
       ]),
     ], { attrs: { id: 'antrag' }, name: 'Aufnahmeantrag' }),
+  ),
+});
+
+// Club & Kontakt: Personen aus dem Beitragstyp „person“ (Komponente Personenkarten), Anfahrt und Kontakt aus den Clubdaten.
+// Aufbau wie im Prototyp; Kontaktformular folgt mit einem Formular-Plugin, Karte nur als Bild bzw. Routenlink (kein Kartendienst ohne Einwilligung).
+const abschnittKopf = (eyebrow, titel, lead) =>
+  el('header', 'section-head', [t('p', 'section-head__eyebrow', eyebrow), t('h2', 'section-head__title', titel), lead && t('p', 'section-head__lead', lead)]);
+pages.push({
+  slug: 'club',
+  title: 'Club & Kontakt',
+  order: 50,
+  content: markup(
+    seitenkopf({ krumen: [['Club & Kontakt']], eyebrow: 'Über uns', titel: 'Club & Kontakt', lead: 'Golf im Bergischen Land – in ' + club('club_ort') + '. Ansprechpartner, Anfahrt und Kontakt.' }),
+    el('nav', 'section section--compact subnav', [
+      el('div', 'container', [
+        el('ul', 'subnav__list', [['vorstand', 'Vorstand'], ['team', 'Team'], ['abteilungen', 'Abteilungen'], ['jugend', 'Jugend'], ['anfahrt', 'Anfahrt'], ['kontakt', 'Kontakt']].map(([id, label]) =>
+          el('li', 'subnav__item', [t('a', 'subnav__link', label, { attrs: { href: '#' + id } })]))),
+      ]),
+    ], { attrs: { 'aria-label': 'Auf dieser Seite' }, name: 'Sprungnavigation' }),
+    el('section', 'section', [el('div', 'container', [abschnittKopf('Ehrenamt', 'Vorstand'), komponente('Personenkarten', { liste: 'vorstand', spalten: '3' })])], { attrs: { id: 'vorstand' }, name: 'Vorstand' }),
+    el('section', 'section section--tint', [
+      el('div', 'container', [
+        abschnittKopf('Für Sie da', 'Clubmanagement, Sekretariat & Team'),
+        komponente('Personenkarten', { liste: 'team', spalten: '3' }),
+        t('p', 'small spacer-top', 'Betreibergesellschaft des Golfplatzes ist die Dohrmann Golfplatz AG. Das Greenkeeping erfolgt in Zusammenarbeit mit der Sommerfeld AG.'),
+      ]),
+    ], { attrs: { id: 'team' }, name: 'Team' }),
+    el('section', 'section', [
+      el('div', 'container', [abschnittKopf('Abteilungen', 'Damen-, Herren- und Seniorengolf', 'Ansprechpartner für die Spielgruppen des Clubs.'), komponente('Personenkarten', { liste: 'captains', spalten: '3' })]),
+    ], { attrs: { id: 'abteilungen' }, name: 'Abteilungen' }),
+    el('section', 'section section--tint', [
+      el('div', 'container split', [
+        el('div', 'prose', [
+          t('h2', '', 'Jugend'),
+          t('p', '', 'Golf für Kinder und Jugendliche: Training mit unseren Professionals, eigene Jugendturniere und zwei Jugendmannschaften in der Liga.'),
+          el('p', '', [t('a', 'btn btn--outline', 'Golfschule', { attrs: { href: '/golfschule/' } }), text(' '), t('a', 'btn btn--outline', 'Jugendmannschaften', { attrs: { href: '/mannschaften/' } })]),
+        ]),
+        komponente('Personenkarten', { liste: 'jugend', spalten: '1' }),
+      ]),
+    ], { attrs: { id: 'jugend' }, name: 'Jugend' }),
+    el('section', 'section', [el('div', 'container split', anfahrt(club))], { attrs: { id: 'anfahrt' }, name: 'Anfahrt' }),
+    el('section', 'section section--tint', [
+      el('div', 'container split', [
+        el('div', '', [
+          t('h2', 'h3', 'Kontakt'),
+          el('p', '', [
+            el('a', 'contact-line', [icon('phone'), text(' ' + club('club_telefon'))], { attrs: { href: telHref('club_telefon') } }),
+            el('br', '', []),
+            el('a', 'contact-line', [icon('mail'), text(' ' + club('club_email'))], { attrs: { href: 'mailto:' + club('club_email') } }),
+          ]),
+          t('p', 'small', 'Schreiben Sie uns gern eine E-Mail – ein Kontaktformular folgt.'),
+        ], { name: 'Kontakt' }),
+        el('div', '', [t('h3', 'h4', 'Sekretariat'), komponente('Oeffnungszeiten', { bereich: 'sekretariat', variante: 'compact', liste: 'compact', titel: '0' })], { name: 'Öffnungszeiten' }),
+      ]),
+    ], { attrs: { id: 'kontakt' }, name: 'Kontakt' }),
   ),
 });
 

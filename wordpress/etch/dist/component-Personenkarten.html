@@ -1,0 +1,45 @@
+<!-- wp:etch/loop {"target":"options.golfplatz.personen.listen","itemId":"l"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"l.key","operator":"===","rightHand":"props.liste"},"conditionString":"l.key === props.liste"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"grid grid\u002d\u002d{props.spalten} person-grid"},"metadata":{"name":"Personen"}} -->
+<!-- wp:etch/loop {"target":"l.personen","itemId":"p"} -->
+<!-- wp:etch/element {"tag":"article","attributes":{"class":"person-card"},"metadata":{"name":"Personenkarte"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"p.hat_bild","operator":"isTruthy","rightHand":null},"conditionString":"p.hat_bild"} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{p.bild}","alt":"","loading":"lazy","class":"person-card__avatar person-card__avatar\u002d\u002dbild"}} -->
+
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"p.hat_bild","operator":"isFalsy","rightHand":null},"conditionString":"!p.hat_bild"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"aria-hidden":"true","class":"person-card__avatar"}} -->
+<!-- wp:etch/text {"content":"{p.initialen}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"person-card__body"}} -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"person-card__name"}} -->
+<!-- wp:etch/text {"content":"{p.name}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"p.funktion","operator":"isTruthy","rightHand":null},"conditionString":"p.funktion"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"person-card__role"}} -->
+<!-- wp:etch/text {"content":"{p.funktion}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"p.text","operator":"isTruthy","rightHand":null},"conditionString":"p.text"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"person-card__text"}} -->
+<!-- wp:etch/text {"content":"{p.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"p.telefon","operator":"isTruthy","rightHand":null},"conditionString":"p.telefon"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{p.tel_href}","class":"person-card__link"}} -->
+<!-- wp:etch/text {"content":"{p.telefon}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"p.email","operator":"isTruthy","rightHand":null},"conditionString":"p.email"} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"mailto:{p.email}","class":"person-card__link"}} -->
+<!-- wp:etch/text {"content":"{p.email}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/loop -->
