@@ -488,4 +488,5 @@ Die Person, die die Website technisch betreut. Beschreiben Sie, was Sie gemacht 
 
 - **Sicherungen** macht **Duplicator Pro** (Menü **Duplicator Pro › Backups**). Vor jedem größeren Umbau und vor Updates eine Sicherung anlegen.
 - **Updates** von WordPress und Plugins werden bewusst von Hand eingespielt, nicht automatisch. Erst auf der Testumgebung prüfen, dann live.
+- **Veröffentlichen:** Die Live-Seite entsteht mit **Duplicator Pro** als vollständige Kopie der Entwicklungsumgebung. Achtung: Ein erneutes Veröffentlichen ersetzt die **gesamte** Live-Datenbank, also auch alles, was inzwischen live eingetragen wurde (Platzstatus, Nachrichten, Sperrungen, Benutzer). Nach dem Livegang Inhalte nur noch live pflegen und Änderungen am Aufbau gezielt übertragen. Die Checkliste steht im Repository unter `wordpress/README.md` › „Veröffentlichen mit Duplicator“.
 - Die technischen Bausteine (eigene PHP-Erweiterungen als Snippets in WPCodeBox, Ordner „Golfplatz“) sind im Repository der Website dokumentiert. Dieses Handbuch entsteht ebenfalls dort (`docs/handbuch.md`).

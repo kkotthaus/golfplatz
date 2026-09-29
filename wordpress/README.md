@@ -70,7 +70,30 @@ Danach `etch/dist/*` nach `wp-content/golfplatz/` kopieren (Konstante `GOLFPLATZ
 - Ein Snippet mit Fehler schaltet WPCodeBox selbst ab. Prüfen mit `wpcodebox/list-errored-snippets` bzw. `enabled` in `wpcodebox/list-snippets`.
   - Das Feld `error` bleibt nach einer Korrektur stehen, bis das Snippet einmal in der WPCodeBox-Oberfläche gespeichert wird. Maßgeblich ist `enabled`.
 - In den WPCodeBox-MCP-Einstellungen freigegeben: Create Folder, Create/Update/Enable/Disable Snippet.
-- **Live-Seite:** WPCodeBox installieren und die Werkzeuge freigeben. Dann einmal `golfplatz-mcp.php` als Snippet anlegen (im WPCodeBox-Editor einfügen, Einfügepunkt Root, einschalten). Danach die übrigen Snippets mit `golfplatz/snippets-sync` übernehmen und die alten mu-plugins entfernen, bevor sie eingeschaltet werden.
+- **`golfplatz-mcp` nur in der Entwicklung:** Das Snippet registriert seine Funktionen nur, wenn `wp_get_environment_type()` „local“ oder „development“ meldet (Local: „local“; live ohne Angabe „production“). Bewusst live nutzen: `define( 'GOLFPLATZ_MCP_LIVE', true );` in der `wp-config.php`.
+
+## Veröffentlichen mit Duplicator
+
+Die Live-Seite entsteht als Kopie der lokalen Seite mit **Duplicator Pro** (Dateien und Datenbank). Damit kommen WPCodeBox und seine Snippets (Tabellen `wp_wpcb_*`), der Ordner `wp-content/golfplatz/` und die Einstellungen automatisch mit. Duplicator ersetzt die Adresse `golfplatz.local` durch die Live-Domain.
+
+**Vorher (lokal):**
+
+1. `node wordpress/etch/build.mjs`, `dist` nach `wp-content/golfplatz/` kopieren, `golfplatz/sync-from-files` (`all`) und `golfplatz/snippets-sync` ausführen.
+2. `wpcodebox/list-snippets` prüfen: alle 13 Golfplatz-Snippets `enabled`.
+3. Beispiel- und Testinhalte entfernen (siehe „Offen“ in `docs/umsetzung.md`: Beispiel-News, Beispiel-Lochwettspiele 2025/2026, Beispiel-Sperrungen).
+4. Paket in Duplicator Pro erstellen; `wp-content/golfplatz` und die Tabellen `wp_wpcb_*` nicht ausschließen.
+
+**Nachher (live):**
+
+1. **WPCodeBox › MCP:** Endpunkt ausschalten bzw. die schreibenden Werkzeuge (Create/Update/Enable Snippet) entziehen. Die Freigaben stehen in der Datenbank (`wpcb_mcp_enabled`, `wpcb_mcp_allowed_tools`) und kommen sonst mit.
+2. Plugin **MCP Adapter** deaktivieren, wenn live keine KI-Werkzeuge gebraucht werden.
+3. Prüfen, dass live **nicht** `WP_ENVIRONMENT_TYPE` = `local`/`development` gesetzt ist (sonst wäre `golfplatz-mcp` aktiv).
+4. Startseite (Platzstatus), `/turniere/`, Handbuch im Backend ansehen. Die Abgleiche (PC CADDIE stündlich, Liga täglich) laufen über WP-Cron beim ersten Seitenaufruf an.
+
+**Achtung nach dem Livegang:** Ein erneutes Veröffentlichen mit Duplicator überschreibt die **komplette Live-Datenbank**, also auch alles, was inzwischen live gepflegt wurde (Platzstatus, Nachrichten, Sperrungen, Turnier-Absagen, Benutzer). Spätere Code-Änderungen deshalb nicht per Duplicator übertragen, sondern gezielt:
+
+- **PHP:** Snippet im WPCodeBox-Editor der Live-Seite aktualisieren, per WPCodeBox Cloud abgleichen oder vorübergehend `GOLFPLATZ_MCP_LIVE` setzen und `golfplatz/snippets-sync` nutzen.
+- **Etch-Seiten, Komponenten, CSS:** entsprechend `golfplatz/sync-from-files` live oder im Etch-Editor.
 
 Anschließend die MCP-Funktion `golfplatz/sync-from-files` aufrufen (`what`: `all`, `loops`, `components`, `templates`, `pages` oder `stylesheet`). Vorhandene Templates und Seiten werden per Slug bzw. Pfad aktualisiert, nicht doppelt angelegt.
 

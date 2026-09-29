@@ -14,6 +14,12 @@ defined( 'ABSPATH' ) || exit;
 // __DIR__ zeigt deshalb nicht auf diesen Ordner.
 defined( 'GOLFPLATZ_DATEN' ) || define( 'GOLFPLATZ_DATEN', WP_CONTENT_DIR . '/golfplatz' );
 
+// Nur in der Entwicklungsumgebung (Local meldet „local“). Die Live-Seite entsteht per Duplicator als Kopie der lokalen Seite
+// und bekommt dieses Snippet mit – dort bleibt es ohne Funktion. Bewusst live nutzen: define( 'GOLFPLATZ_MCP_LIVE', true ) in wp-config.php.
+if ( ! in_array( wp_get_environment_type(), array( 'local', 'development' ), true ) && ! defined( 'GOLFPLATZ_MCP_LIVE' ) ) {
+	return;
+}
+
 if ( ! class_exists( 'WP_Ability' ) ) {
 	return;
 }

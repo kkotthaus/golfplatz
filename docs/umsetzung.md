@@ -336,7 +336,8 @@ Stand 2026-09-29, lokal umgestellt. Alle 13 PHP-Dateien (`wordpress/snippets/`, 
 - Das Handbuch ist dort als `handbuch.php` mit Schutzzeile gespeichert. Vorher war `handbuch.html` öffentlich abrufbar.
 - Umgestellt: 32 `const` → `define()`, `__DIR__` → `GOLFPLATZ_DATEN`, `WPMU_PLUGIN_URL` → `content_url()`.
 - Geprüft: Alle Snippets bleiben nach Seitenaufrufen eingeschaltet, Seitengrößen identisch mit vorher, Cron-Ereignisse geplant, PC-CADDIE-Abgleich und Tee-Belegung laufen, Handbuch-Datei über die URL leer.
-- **Offen:** Live-Seite umstellen (Ablauf im README). Die alten mu-plugins liegen lokal nur noch als Sicherung außerhalb von `wp-content`.
+- **Veröffentlichen:** mit Duplicator Pro als Kopie der lokalen Seite (Snippets in den Tabellen `wp_wpcb_*` kommen mit). `golfplatz-mcp` ist außerhalb von „local“/„development“ ohne Funktion (geprüft mit simulierter Umgebung „production“). Checkliste vor und nach dem Veröffentlichen: [wordpress/README.md](../wordpress/README.md) › „Veröffentlichen mit Duplicator“.
+- **Offen:** Nach dem Veröffentlichen live die WPCodeBox-MCP-Freigaben entziehen und den MCP Adapter deaktivieren. Klären, wie spätere Code-Änderungen live gehen, ohne die Live-Datenbank zu überschreiben (WPCodeBox Cloud, Editor oder `GOLFPLATZ_MCP_LIVE`). Die alten mu-plugins liegen lokal nur noch als Sicherung außerhalb von `wp-content`.
 
 ## Noch von Hand zu erledigen
 
