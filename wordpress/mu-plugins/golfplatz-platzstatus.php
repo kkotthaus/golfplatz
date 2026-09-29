@@ -62,6 +62,8 @@ function golfplatz_platzstatus_daten(): array {
 			'beginn'  => (int) get_post_meta( $p->ID, 'sperr_beginn', true ),
 			'ende'    => (int) get_post_meta( $p->ID, 'sperr_ende', true ),
 			'grund'   => (string) get_post_meta( $p->ID, 'sperr_grund', true ),
+			// Nur bei Sperrungen aus Turnieren (golfplatz-tee-belegung.php): Turnierstart, getrennt von der Sperrzeit
+			'start'   => (string) get_post_meta( $p->ID, 'sperr_start_text', true ),
 			'schnell' => false,
 		);
 	}
@@ -515,7 +517,7 @@ function golfplatz_status_kurz_etch(): array {
 		'heute'     => array_map(
 			fn( $s ) => array(
 				'bereich' => GOLFPLATZ_BEREICHE[ $s['bereich'] ],
-				'text'    => golfplatz_zeitraum( $s, $tag ) . ' · ' . $s['grund'],
+				'text'    => golfplatz_zeitraum( $s, $tag ) . ( ! empty( $s['start'] ) ? ' gesperrt · ' . $s['grund'] . ' · ' . $s['start'] : ' · ' . $s['grund'] ),
 				'klasse'  => 'platz' === $s['bereich'] ? 'status-summary__item--platz' : '',
 			),
 			array_slice( $heute, 0, 3 )
@@ -612,6 +614,7 @@ function golfplatz_platzstatus_etch(): array {
 				'bereich' => GOLFPLATZ_BEREICHE[ $s['bereich'] ],
 				'zeit'    => golfplatz_zeitraum( $s, $tag ),
 				'grund'   => $s['grund'],
+				'start'   => $s['start'] ?? '',
 				'laeuft'  => $laeuft,
 				'klasse'  => trim( ( 'platz' === $s['bereich'] ? 'status-entry--platz' : '' ) . ( $laeuft ? ' status-entry--active' : '' ) ),
 			);

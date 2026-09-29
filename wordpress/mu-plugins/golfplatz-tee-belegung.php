@@ -38,8 +38,8 @@ function golfplatz_tb_standard(): array {
 	return array(
 		'regeln' => array(
 			array( 'name' => 'Weihnachtsfeiern (kein Spielbetrieb)', 'muster' => 'Weihnachtsfeier', 'loecher' => '', 'startform' => 'keine', 'tee' => '1', 'vorlauf' => '', 'dauer' => '', 'intervall' => '', 'flight' => '', 'grund' => '' ),
-			array( 'name' => '9-Loch Afterwork (B) – Tee 10', 'muster' => 'Afterwork (B)', 'loecher' => '', 'startform' => 'kanonenstart', 'tee' => '10', 'vorlauf' => 120, 'dauer' => '', 'intervall' => '', 'flight' => '', 'grund' => 'Turnier: {turnier} (Kanonenstart)' ),
-			array( 'name' => '9-Loch Afterwork (A) und übrige Afterwork – Tee 1', 'muster' => 'Afterwork', 'loecher' => '', 'startform' => 'kanonenstart', 'tee' => '1', 'vorlauf' => 120, 'dauer' => '', 'intervall' => '', 'flight' => '', 'grund' => 'Turnier: {turnier} (Kanonenstart)' ),
+			array( 'name' => '9-Loch Afterwork (B) – Tee 10', 'muster' => 'Afterwork (B)', 'loecher' => '', 'startform' => 'kanonenstart', 'tee' => '10', 'vorlauf' => 120, 'dauer' => '', 'intervall' => '', 'flight' => '', 'grund' => 'Turnier: {turnier}' ),
+			array( 'name' => '9-Loch Afterwork (A) und übrige Afterwork – Tee 1', 'muster' => 'Afterwork', 'loecher' => '', 'startform' => 'kanonenstart', 'tee' => '1', 'vorlauf' => 120, 'dauer' => '', 'intervall' => '', 'flight' => '', 'grund' => 'Turnier: {turnier}' ),
 			array( 'name' => 'Monats-Cup', 'muster' => 'Monats-Cup', 'loecher' => '', 'startform' => 'tee_times', 'tee' => '1', 'vorlauf' => 60, 'dauer' => '', 'intervall' => '', 'flight' => '', 'grund' => 'Turnier: {turnier}' ),
 			array( 'name' => 'Herrengolf, Damengolf, AK 50+ – Tee 1', 'muster' => 'Herrengolf, Damengolf, AK 50+', 'loecher' => '', 'startform' => 'tee_times', 'tee' => '1', 'vorlauf' => 60, 'dauer' => '', 'intervall' => '', 'flight' => '', 'grund' => 'Turnier: {turnier}' ),
 		),
@@ -87,7 +87,7 @@ add_filter(
 			array( 'id' => 'dauer', 'name' => 'Gesperrt bis … Minuten nach dem Start', 'type' => 'number', 'min' => 0, 'step' => 5, 'desc' => 'Leer = automatisch: Kanonenstart Spielzeit je Loch × Löcher, Tee-Times bis der letzte Flight gestartet ist (Standardwerte in Clubdaten → Platz & Abschläge).' ),
 			array( 'id' => 'intervall', 'name' => 'Startabstand (Minuten)', 'type' => 'number', 'min' => 1, 'desc' => 'Leer = Standard aus den Clubdaten.', 'visible' => array( 'startform', 'tee_times' ) ),
 			array( 'id' => 'flight', 'name' => 'Spieler je Flight', 'type' => 'number', 'min' => 1, 'max' => 4, 'desc' => 'Leer = Standard aus den Clubdaten.', 'visible' => array( 'startform', 'tee_times' ) ),
-			array( 'id' => 'grund', 'name' => 'Grund (öffentlich)', 'type' => 'text', 'std' => 'Turnier: {turnier}', 'desc' => '{turnier} wird durch den Turniernamen ersetzt.' ),
+			array( 'id' => 'grund', 'name' => 'Grund (öffentlich)', 'type' => 'text', 'std' => 'Turnier: {turnier}', 'desc' => '{turnier} wird durch den Turniernamen ersetzt. Der Turnierstart („Kanonenstart 16:30 Uhr“ bzw. „Erster Start 10:00 Uhr“) erscheint automatisch als eigene Zeile unter der Sperrzeit.' ),
 		);
 		$boxen[] = array(
 			'id'             => 'tee-belegung-regeln',
@@ -210,12 +210,14 @@ function golfplatz_tb_plan( int $pid, ?array $regeln = null ): array {
 			$info  = $flights ? $n . ' Teilnehmer, ' . $flights . ' Flights je Tee à ' . $iv . ' Min.' : 'Teilnehmerzahl unbekannt, 2 Stunden';
 		}
 	}
-	$grund   = str_replace( '{turnier}', $titel, (string) ( $r['grund'] ?: 'Turnier: {turnier}' ) );
-	$beginn  = $start - (int) $r['vorlauf'] * MINUTE_IN_SECONDS;
-	$ende    = $start + $dauer * MINUTE_IN_SECONDS;
-	$sperren = array_map( fn( $tee ) => array( 'tee' => $tee, 'beginn' => $beginn, 'ende' => $ende, 'grund' => $grund ), $tees );
 	$uhr     = fn( int $ts ) => gmdate( 'H:i', $ts );
-	$text    = $woher . ': ' . GOLFPLATZ_TB_TEES[ 'beide' === $r['tee'] ? 'beide' : $tees[0] ] . ' gesperrt ' . $uhr( $beginn ) . '–' . $uhr( $ende ) . ' Uhr (' . GOLFPLATZ_TB_STARTFORMEN[ $r['startform'] ] . ( $info ? ', ' . $info : '' ) . ')';
+	// Turnierstart und Tee-Sperre sind zwei Angaben: Das Tee ist ab „vorlauf“ vor dem Start gesperrt.
+	$start_text = ( 'kanonenstart' === $r['startform'] ? 'Kanonenstart ' : 'Erster Start ' ) . $uhr( $start ) . ' Uhr' . ( 'beide' === $r['tee'] ? ' an Tee 1 und 10' : '' );
+	$grund      = str_replace( '{turnier}', $titel, (string) ( $r['grund'] ?: 'Turnier: {turnier}' ) );
+	$beginn     = $start - (int) $r['vorlauf'] * MINUTE_IN_SECONDS;
+	$ende       = $start + $dauer * MINUTE_IN_SECONDS;
+	$sperren    = array_map( fn( $tee ) => array( 'tee' => $tee, 'beginn' => $beginn, 'ende' => $ende, 'grund' => $grund, 'start' => $start, 'start_text' => $start_text ), $tees );
+	$text       = $woher . ': Turnierstart ' . $uhr( $start ) . ' Uhr (' . GOLFPLATZ_TB_STARTFORMEN[ $r['startform'] ] . ') · ' . GOLFPLATZ_TB_TEES[ 'beide' === $r['tee'] ? 'beide' : $tees[0] ] . ' gesperrt ' . $uhr( $beginn ) . '–' . $uhr( $ende ) . ' Uhr (' . (int) $r['vorlauf'] . ' Min. vor dem Start' . ( $info ? ', ' . $info : '' ) . ')';
 	return array( 'sperren' => $sperren, 'text' => $text );
 }
 
@@ -297,7 +299,7 @@ function golfplatz_tb_abgleich(): array {
 	$soll = golfplatz_tb_soll( $regeln )['sperren'];
 
 	foreach ( $soll as $quelle => $s ) {
-		$meta = array( 'sperr_bereich' => 'abschlag_' . $s['tee'], 'sperr_beginn' => $s['beginn'], 'sperr_ende' => $s['ende'], 'sperr_grund' => $s['grund'], 'sperr_quelle' => $quelle );
+		$meta = array( 'sperr_bereich' => 'abschlag_' . $s['tee'], 'sperr_beginn' => $s['beginn'], 'sperr_ende' => $s['ende'], 'sperr_grund' => $s['grund'], 'sperr_turnierstart' => $s['start'], 'sperr_start_text' => $s['start_text'], 'sperr_quelle' => $quelle );
 		$sid  = $vorhanden[ $quelle ] ?? 0;
 		unset( $vorhanden[ $quelle ] );
 		$titel = $s['titel'] . ' – Tee ' . $s['tee'] . ' (automatisch)';
@@ -385,7 +387,8 @@ add_action(
 		}
 		$quelle = (string) get_post_meta( (int) ( $_GET['post'] ?? 0 ), 'sperr_quelle', true ); // phpcs:ignore WordPress.Security.NonceVerification
 		if ( preg_match( '/^turnier:(\d+):/', $quelle, $t ) ) {
-			echo '<div class="notice notice-info"><p>Diese Sperrung entsteht automatisch aus dem Turnier <a href="' . esc_url( get_edit_post_link( (int) $t[1] ) ) . '">' . esc_html( html_entity_decode( get_the_title( (int) $t[1] ) ) ) . '</a>. Änderungen hier werden bei der nächsten Berechnung überschrieben – bitte die <a href="' . esc_url( admin_url( 'edit.php?post_type=sperrung&page=tee-belegung' ) ) . '">Turnier-Regeln</a> oder die Tee-Belegung am Turnier ändern.</p></div>';
+			$start = (string) get_post_meta( (int) ( $_GET['post'] ?? 0 ), 'sperr_start_text', true ); // phpcs:ignore WordPress.Security.NonceVerification
+			echo '<div class="notice notice-info"><p>Diese Sperrung entsteht automatisch aus dem Turnier <a href="' . esc_url( get_edit_post_link( (int) $t[1] ) ) . '">' . esc_html( html_entity_decode( get_the_title( (int) $t[1] ) ) ) . '</a>' . ( $start ? ' (' . esc_html( $start ) . '; Beginn und Ende unten sind die Sperrzeit des Tees)' : '' ) . '. Änderungen hier werden bei der nächsten Berechnung überschrieben – bitte die <a href="' . esc_url( admin_url( 'edit.php?post_type=sperrung&page=tee-belegung' ) ) . '">Turnier-Regeln</a> oder die Tee-Belegung am Turnier ändern.</p></div>';
 		}
 	}
 );

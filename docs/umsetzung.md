@@ -224,6 +224,9 @@ Stand 2026-09-29, `mu-plugins/golfplatz-tee-belegung.php`.
 - **Turnierpuffer:** `golfplatz_tb_soll()` sortiert alle Sperren je Tee. Beginnt das nächste Turnier am selben Tee vor Ende + Puffer, gelten beide als hintereinander: Die frühere Sperre reicht bis zum Beginn des nächsten (Lücke geschlossen, bei Überschneidung unverändert). Nur das letzte Turnier der Kette bekommt den Puffer. Vorschau und Turnier-Kasten nennen Puffer bzw. Folgeturnier.
 - **Dauer:** Ohne Angabe gilt beim Kanonenstart Spielzeit je Loch × Löcher. Bei Tee-Times gilt Flights × Startabstand; die Flights ergeben sich aus den Angemeldeten (maximal minus frei, sonst maximal), bei zwei Tees geteilt. Ohne Teilnehmerzahl gilt 2 Stunden.
 - **Sperrungen:** normale Einträge `sperrung` (`abschlag_1`/`abschlag_10`) mit `sperr_quelle` = `turnier:<ID>:<tee>` und Titelzusatz „(automatisch)“.
+  - **Sperrzeit und Turnierstart getrennt:** `sperr_beginn`/`sperr_ende` sind die Sperrzeit des Tees (Vorlauf, Dauer, Puffer). Den Turnierstart speichern `sperr_turnierstart` (Zeitstempel) und `sperr_start_text` („Kanonenstart 16:30 Uhr“, „Erster Start 10:00 Uhr [an Tee 1 und 10]“).
+  - Der Platzstatus zeigt den Turnierstart als eigene Zeile (`status-entry__start`, `{e.start}`), die Kurzfassung als „14:30–19:15 Uhr gesperrt · Turnier: … · Kanonenstart 16:30 Uhr“.
+  - Der Grund enthält keine Startform mehr.
   - Bei jedem Lauf werden sie angelegt oder angepasst.
   - Nicht mehr benötigte kommende Sperrungen kommen in den Papierkorb, abgelaufene nach 14 Tagen.
   - Nur Turniere des Heimatclubs mit Uhrzeit ab heute.

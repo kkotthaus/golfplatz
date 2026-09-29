@@ -67,6 +67,7 @@ const tage = () =>
               el('span', 'status-entry__area', [text('{e.bereich}'), wenn('e.laeuft', [t('span', 'status-entry__live', '· jetzt')])]),
               t('span', 'status-entry__time', '{e.zeit}'),
               t('span', 'status-entry__reason', '{e.grund}'),
+              wenn('e.start', [t('span', 'status-entry__start', '{e.start}')]),
             ]),
           ]),
         ]),

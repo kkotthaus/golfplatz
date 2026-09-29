@@ -135,6 +135,14 @@ Für Turniere aus PC CADDIE müssen Sie keine Sperrungen von Hand anlegen. Die W
 - **Gesperrt bis … Minuten nach dem Start**: leer lassen, dann rechnet die Website selbst. Bei einem Kanonenstart ist das die Spielzeit je Loch aus den Clubdaten mal Löcher (15 Minuten × 9 Loch = 2:15 Stunden). Bei Tee-Times dauert die Sperre, bis der letzte Flight gestartet ist; dafür nimmt die Website die angemeldeten Spieler aus PC CADDIE, **Startabstand** und **Spieler je Flight**. Bleiben diese beiden Felder leer, gelten die Standardwerte des Clubs.
 - **Grund (öffentlich)**: der Text für Golfer; {turnier} wird durch den Turniernamen ersetzt.
 
+Die Website unterscheidet dabei zwischen **Sperrung des Tees** und **Start des Turniers**. Im Platzstatus steht zum Beispiel:
+
+- Abschlag 1 · **14:30–19:15 Uhr**: So lange ist das Tee gesperrt, mit Vorlauf und Puffer.
+- Turnier: 9-Loch Afterwork (A)
+- **Kanonenstart 16:30 Uhr** bzw. bei Tee-Times **Erster Start 10:00 Uhr**: So beginnt das Turnier.
+
+Den Turnierstart übernimmt die Website aus PC CADDIE. Er gehört deshalb nicht in den Grund.
+
 Für jedes Turnier gilt die **erste passende Regel**. Die Reihenfolge ändern Sie, indem Sie eine Regel am Kopf nach oben oder unten ziehen. Speichern Sie mit **Speichern und Sperrungen neu berechnen**. Unter den Regeln zeigt die Seite die Turniere der nächsten 4 Wochen und was sie sperren. So sehen Sie sofort, ob die Regeln greifen.
 
 **Standardwerte des Clubs:** **Clubdaten › Platz & Abschläge**, Abschnitt **Starts bei Turnieren**: Startabstand der Flights (8 Minuten), Spieler je Flight (3), Spielzeit je Loch beim Kanonenstart (15 Minuten) und **Turnierpuffer** (30 Minuten). Ändern Sie einen Wert dort, rechnen alle Regeln ohne eigenen Wert damit; die Sperrungen passen sich beim Speichern sofort an.
