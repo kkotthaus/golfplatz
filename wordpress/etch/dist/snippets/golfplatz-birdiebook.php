@@ -371,7 +371,7 @@ add_action(
 		if ( ! isset( $_GET["golfplatz_manifest"] ) ) {
 			return;
 		}
-		$farbe = "#1D8475";
+		$farbe = "#2E6B4E"; // nur Rückfall ohne ACSS; maßgeblich ist color-primary
 		if ( class_exists( '\Automatic_CSS\API' ) ) {
 			$acss  = (array) \Automatic_CSS\API::get_settings();
 			$farbe = preg_match( "/^#[0-9a-f]{6}$/i", (string) ( $acss["color-primary"] ?? "" ) ) ? $acss["color-primary"] : $farbe;

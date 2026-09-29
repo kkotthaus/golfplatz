@@ -1,133 +1,85 @@
 {
-  "club_name": "Golfclub Dreibäumen e. V.",
-  "club_kurzname": "GC Dreibäumen",
-  "club_claim": "Einer der schönsten Golfplätze im Bergischen Land.",
+  "club_name": "Golfclub Musterclub e. V.",
+  "club_kurzname": "GC Musterclub",
+  "club_claim": "Golf in schöner Landschaft – für Mitglieder und Gäste.",
   "club_gegruendet": "",
-  "club_strasse": "Stoote 1",
-  "club_plz": "42499",
-  "club_ort": "Hückeswagen",
-  "club_telefon": "02192 8547-20",
-  "club_fax": "02192 8547-19",
-  "club_email": "sekretariat@dreibaeumen.de",
+  "club_strasse": "Musterstraße 1",
+  "club_plz": "12345",
+  "club_ort": "Musterstadt",
+  "club_telefon": "01234 5678-0",
+  "club_fax": "01234 5678-99",
+  "club_email": "info@example.org",
   "club_anfahrt_auto": "",
   "club_anfahrt_oepnv": "",
-  "anmeldung_telefon": "02192 8547-12",
-  "anmeldung_hinweis": "Wir verzichten bewusst auf feste Startzeiten – kommen Sie einfach vorbei. Am Wochenende und an Feiertagen bitten wir um eine kurze telefonische Anmeldung.",
+  "anmeldung_telefon": "01234 5678-10",
+  "anmeldung_hinweis": "Gäste sind herzlich willkommen. Bitte melden Sie sich vor Ihrer Runde im Sekretariat an – am Wochenende und an Feiertagen am besten telefonisch.",
   "ruhetag_hinweis": "Montags ist Greenkeeper-Tag: Es kann zu Einschränkungen im Spielbetrieb kommen.",
   "greenfee_hinweise": [
     "Gültiger Mitgliedsausweis eines Golfclubs",
     "Handicap: Mo–Fr bis 54, Sa, So und Feiertag bis 36",
-    "Schüler und Studierende unter 27 Jahren: 50 % Ermäßigung mit Ausweis",
-    "Mitglieder können täglich bis zu drei Gäste anmelden und auf der Runde begleiten: 10 € Ermäßigung auf das 18-Loch-Tagesgreenfee, je Gast höchstens zweimal im Jahr pro Mitglied"
+    "Schüler und Studierende unter 27 Jahren: 50 % Ermäßigung mit Ausweis"
   ],
-  "greenfee_fussnote": "„R“ = DGV-Ausweis mit R-Kennzeichnung.",
+  "greenfee_fussnote": "",
   "kooperationen_hinweis": "Ermäßigtes Greenfee für Mitglieder der Partnerclubs. Es ist nur eine Ermäßigung möglich.",
-  "pccaddie_code": "0494538",
-  "partnerclubs": [
-    {
-      "name": "Golfclub Velbert – Gut Kuhlendahl e.V.",
-      "kurzname": "Velbert",
-      "pccaddie_code": "0494503",
-      "website": "https://golfclub-velbert.de/",
-      "kalender_link": ""
-    },
-    {
-      "name": "Golf-Club Marienfeld e.V.",
-      "kurzname": "Marienfeld",
-      "pccaddie_code": "0494449",
-      "website": "https://www.gc-marienfeld.de/",
-      "kalender_link": ""
-    },
-    {
-      "name": "Golfclub Gut Berge Gevelsberg/Wetter e.V.",
-      "kurzname": "Gut Berge",
-      "pccaddie_code": "0494529",
-      "website": "https://www.aufgutberge.de/",
-      "kalender_link": ""
-    },
-    {
-      "name": "Golfclub Schloss Haag e.V.",
-      "kurzname": "Schloss Haag",
-      "pccaddie_code": "0494523",
-      "website": "https://www.gc-schloss-haag.de/",
-      "kalender_link": ""
-    },
-    {
-      "name": "Golfclub Schwarze Heide Bottrop-Kirchhellen e.V.",
-      "kurzname": "Schwarze Heide",
-      "pccaddie_code": "0494412",
-      "website": "https://www.gc-schwarze-heide.de/",
-      "kalender_link": ""
-    },
-    {
-      "name": "Golfclub Siegen-Olpe e.V.",
-      "kurzname": "Siegen-Olpe",
-      "pccaddie_code": "",
-      "website": "https://www.gcso.de/",
-      "kalender_link": "https://gcso-backend.web.reaze.dev/fileadmin/user_upload/downloads/GSCO-Wettspielkalender_2026_RZ_WEB.pdf"
-    },
-    {
-      "name": "Golf-Club Varmert e.V.",
-      "kurzname": "Varmert",
-      "pccaddie_code": "0494483",
-      "website": "https://www.golfclub-varmert.de/",
-      "kalender_link": ""
-    },
-    {
-      "name": "Golfpark Renneshof",
-      "kurzname": "Renneshof",
-      "pccaddie_code": "0494587",
-      "website": "https://gc-renneshof.de/",
-      "kalender_link": ""
-    },
-    {
-      "name": "Land-Golf-Club Schloss Moyland e.V.",
-      "kurzname": "Schloss Moyland",
-      "pccaddie_code": "0494439",
-      "website": "https://landgolfclub.de/",
-      "kalender_link": ""
-    }
-  ],
+  "pccaddie_code": "",
+  "partnerclubs": [],
+  "verband_name": "Landesverband",
+  "verband_liga_web": "",
+  "verband_liga_api": "",
+  "verband_suchbegriff": "",
   "twilight_regel": "Täglich bei Start ab drei Stunden vor Sonnenuntergang.",
   "twilight_stunden": 3,
   "startabstand": 8,
   "flight_groesse": 3,
   "spielzeit_loch": 15,
   "turnier_puffer": 30,
-  "club_geo": "51.145, 7.344",
+  "club_geo": "51.163, 10.448",
+  "club_logoname": "Golfclub Musterclub",
+  "club_region": "Musterregion",
+  "club_logo": null,
+  "club_logo_hell": null,
+  "club_karte": null,
+  "club_routenlink": "",
+  "platz_beschreibung": "Unser 18-Loch-Platz liegt eingebettet in eine abwechslungsreiche Landschaft. Große Grüns und breite Fairways, Teiche und Bunker an den richtigen Stellen – und schöne Ausblicke von fast jeder Bahn.",
+  "mitgliedschaft_lead": "Unbegrenzt spielen, mit DGV-Mitgliedschaft und vielen Vorteilen bei unseren Partnerclubs. Wir beraten Sie gern persönlich.",
+  "mitgliedschaft_kontakt": "Ihre Ansprechpartnerin ist Erika Musterfrau (Clubmanagement).",
+  "aufnahmeantrag_url": "",
+  "club_betreiber_hinweis": "",
+  "recht_datenschutz_kontakt": "Golfclub Musterclub e. V., Musterstraße 1, 12345 Musterstadt, info@example.org",
+  "social_youtube": "",
   "restaurant_name": "Clubrestaurant",
   "restaurant_telefon": "",
   "restaurant_hinweis": "Unsere Gastronomie startet unter neuer Leitung. Öffnungszeiten und Speisekarte folgen.",
-  "recht_vertretung": "Michael Dattner, Erich Buchholz, Friedhelm Klüting, Susanne Kessler, Angelika Rahm, Marc Rogge",
-  "recht_registergericht": "Amtsgericht Köln",
-  "recht_registernummer": "VR 800575",
-  "recht_steuernummer": "221/5711/2525",
-  "recht_verantwortlich": "Erich Buchholz, Stoote 1, 42499 Hückeswagen",
-  "social_facebook": "https://www.facebook.com/golfclubdreibaeumen/",
-  "social_instagram": "https://www.instagram.com/dreibaeumen/",
+  "recht_vertretung": "Max Mustermann (Präsident), Erika Musterfrau (Vizepräsidentin), Peter Beispiel (Schatzmeister)",
+  "recht_registergericht": "Amtsgericht Musterstadt",
+  "recht_registernummer": "VR 00000",
+  "recht_steuernummer": "000/0000/0000",
+  "recht_verantwortlich": "Max Mustermann, Musterstraße 1, 12345 Musterstadt",
+  "social_facebook": "",
+  "social_instagram": "",
   "abschlag_gelb": {
     "geschlecht": "herren",
-    "cr": 71.2,
-    "slope": 132,
-    "par": 71
+    "cr": 71,
+    "slope": 130,
+    "par": 72
   },
   "abschlag_blau": {
     "geschlecht": "herren",
-    "cr": 69.4,
-    "slope": 124,
-    "par": 71
+    "cr": 69.2,
+    "slope": 125,
+    "par": 72
   },
   "abschlag_rot": {
     "geschlecht": "damen",
-    "cr": 73,
-    "slope": 131,
-    "par": 69
+    "cr": 72.6,
+    "slope": 128,
+    "par": 72
   },
   "abschlag_orange": {
     "geschlecht": "damen",
-    "cr": 71,
-    "slope": 125,
-    "par": 69
+    "cr": 70.6,
+    "slope": 122,
+    "par": 72
   },
   "zeiten_sekretariat_standard": [
     {
@@ -185,8 +137,8 @@
     }
   ],
   "zeiten_proshop_ausnahmen": [],
-  "zeiten_proshop_hinweis": "Betrieben von Golf und Günstig OHG.",
-  "zeiten_proshop_link": "https://www.golfundguenstig.de/",
+  "zeiten_proshop_hinweis": "",
+  "zeiten_proshop_link": "",
   "zeiten_restaurant_standard": [],
   "zeiten_restaurant_ausnahmen": [],
   "zeiten_restaurant_hinweis": "Öffnungszeiten folgen.",

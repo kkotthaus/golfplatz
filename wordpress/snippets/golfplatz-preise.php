@@ -28,7 +28,7 @@ define( 'GOLFPLATZ_PREIS_EINHEITEN', array(
 	'einmalig' => 'einmalig',
 ) );
 
-/** Spalten der Matrix. Sonntag und Feiertag teilen sich eine Spalte (wie auf dreibaeumen.de). */
+/** Spalten der Matrix. Sonntag und Feiertag teilen sich eine Spalte. */
 define( 'GOLFPLATZ_PREIS_SPALTEN', array(
 	array( 'kurz' => 'Mo', 'lang' => 'Montag' ),
 	array( 'kurz' => 'Di', 'lang' => 'Dienstag' ),

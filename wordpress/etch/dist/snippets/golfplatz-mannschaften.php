@@ -173,6 +173,8 @@ function golfplatz_mannschaften_etch(): array {
 	return array(
 		'anzahl'         => $anzahl,
 		'anzahl_text'    => 1 === $anzahl ? '1 Mannschaft' : $anzahl . ' Mannschaften',
+		// Name des Verbands aus den Clubdaten (golfplatz-liga-sync.php), sonst neutral
+		'verband'        => function_exists( 'golfplatz_liga_verband' ) ? golfplatz_liga_verband() : 'Landesverband',
 		'liste'          => $liste,
 		'kommende'       => $kommende,
 		'vergangene'     => $vergangen,

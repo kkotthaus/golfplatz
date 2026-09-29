@@ -280,19 +280,19 @@ page({
       <a class="entry-card" href="${r}mitgliedschaft/">
         <span class="entry-card__number">01</span>
         <h3 class="entry-card__title">Mitglied werden</h3>
-        <p class="entry-card__text">Mit Aktie oder Spielberechtigung: unbegrenzt spielen, ohne Startzeiten, dazu GOLFHOCHZEHN und Urlaubspartner.</p>
+        <p class="entry-card__text">Unbegrenzt spielen und Teil des Clubs werden – wir beraten Sie gern persönlich.</p>
         <span class="entry-card__more">Mitgliedschaften ${icon('arrow')}</span>
       </a>
       <a class="entry-card" href="${r}greenfee/">
         <span class="entry-card__number">02</span>
         <h3 class="entry-card__title">Als Gast spielen</h3>
-        <p class="entry-card__text">Greenfee ab ${euro(minGreenfee)}. Keine festen Startzeiten – am Wochenende bitte kurz anmelden.</p>
+        <p class="entry-card__text">Greenfee ab ${euro(minGreenfee)}. Bitte vor der Runde kurz anmelden.</p>
         <span class="entry-card__more">Greenfee & Preise ${icon('arrow')}</span>
       </a>
       <a class="entry-card" href="${r}golfschule/">
         <span class="entry-card__number">03</span>
         <h3 class="entry-card__title">Golf lernen</h3>
-        <p class="entry-card__text">Schnupperkurs für 35 €, Unterricht und DGV-Platzreife mit unseren PGA-Professionals.</p>
+        <p class="entry-card__text">Schnupperkurs, Unterricht und DGV-Platzreife mit unseren PGA-Professionals.</p>
         <span class="entry-card__more">Golfschule ${icon('arrow')}</span>
       </a>
       <a class="entry-card" href="${r}restaurant/">
@@ -308,7 +308,7 @@ page({
 <section class="section section--tint">
   <div class="container split">
     <div class="split__text">
-      ${sectionHead({ eyebrow: 'Der Platz', title: '18 Bahnen im Bergischen Land', lead: 'Harmonisch in das für die Region vergleichsweise flache Gelände eingebettet: große Grüns, breite Fairways, Teiche und Bunker – und weite Ausblicke.' })}
+      ${sectionHead({ eyebrow: 'Der Platz', title: `18 Bahnen in ${esc(club.ort)}`, lead: esc(club.texte.platzBeschreibung) })}
       <dl class="stats">
         <div class="stats__item"><dt class="stats__label">Bahnen</dt><dd class="stats__value">18</dd></div>
         <div class="stats__item"><dt class="stats__label">Par Herren/Damen</dt><dd class="stats__value">${parGesamt(bahnen)}</dd></div>
@@ -415,8 +415,8 @@ ${pageHero({ r, crumbs: [['Platz & Bahnen']], eyebrow: 'Der Platz', title: 'Plat
 <section class="section">
   <div class="container split">
     <div class="split__text prose">
-      <h2>Golf im Bergischen Land</h2>
-      <p>Unser Platz in Hückeswagen ist harmonisch in das für die Region vergleichsweise flache Gelände eingebettet. Große Grüns und breite Fairways, Teiche und Bunker an den richtigen Stellen – und weite Ausblicke von fast jeder Bahn.</p>
+      <h2>Unser Platz</h2>
+      <p>${esc(club.texte.platzBeschreibung)}</p>
       <p>Zum Üben gibt es Driving Range, Kurzspielbereich und Putting-Grün.</p>
       <p><a class="link-arrow" href="spielvorgaben/">Spielvorgaben und Rechner ${icon('arrow')}</a></p>
     </div>
@@ -622,7 +622,7 @@ page({
   title: 'Greenfee & Preise',
   aktiv: 'greenfee',
   body: (r) => `
-${pageHero({ r, crumbs: [['Greenfee & Preise']], eyebrow: 'Für Gäste', title: 'Greenfee & Preise', lead: 'Gäste sind jeden Tag willkommen – ohne feste Startzeiten. Am Wochenende und an Feiertagen bitte kurz telefonisch anmelden.' })}
+${pageHero({ r, crumbs: [['Greenfee & Preise']], eyebrow: 'Für Gäste', title: 'Greenfee & Preise', lead: 'Gäste sind jeden Tag herzlich willkommen. Bitte melden Sie sich vor Ihrer Runde im Sekretariat an.' })}
 <section class="section">
   <div class="container split split--wide-left">
     <div>
@@ -666,7 +666,7 @@ page({
   title: 'Mitgliedschaft',
   aktiv: 'mitgliedschaft',
   body: (r) => `
-${pageHero({ r, crumbs: [['Mitgliedschaft']], eyebrow: 'Mitglied werden', title: 'Ihr Heimatclub', lead: 'Unbegrenzt spielen – ohne Startzeiten, mit DGV-Mitgliedschaft, GOLFHOCHZEHN und Urlaubspartnern. Mitglied werden Sie mit einer Aktie der Dohrmann Golfplatz AG oder mit einer Spielberechtigung.' })}
+${pageHero({ r, crumbs: [['Mitgliedschaft']], eyebrow: 'Mitglied werden', title: 'Ihr Heimatclub', lead: esc(club.texte.mitgliedschaftLead) })}
 <section class="section">
   <div class="container">
     <div class="grid grid--2 price-cards">
@@ -686,7 +686,7 @@ ${pageHero({ r, crumbs: [['Mitgliedschaft']], eyebrow: 'Mitglied werden', title:
     ${sectionHead({ eyebrow: 'In drei Schritten', title: 'So werden Sie Mitglied', align: 'center' })}
     <ol class="steps">
       <li class="steps__item"><h3 class="steps__title">Kennenlernen</h3><p class="steps__text">Spielen Sie eine Runde als Gast oder besuchen Sie einen <a href="${r}golfschule/">Schnupperkurs</a>.</p></li>
-      <li class="steps__item"><h3 class="steps__title">Persönliches Gespräch</h3><p class="steps__text">Aktie oder Spielberechtigung? Wir beraten Sie und nennen Ihnen die aktuellen Konditionen.</p></li>
+      <li class="steps__item"><h3 class="steps__title">Persönliches Gespräch</h3><p class="steps__text">Welches Modell passt zu Ihnen? Wir beraten Sie und nennen Ihnen die aktuellen Konditionen.</p></li>
       <li class="steps__item"><h3 class="steps__title">Aufnahmeantrag</h3><p class="steps__text">Antrag unten ausfüllen oder als PDF herunterladen und im Sekretariat abgeben.</p></li>
     </ol>
   </div>
@@ -695,12 +695,12 @@ ${pageHero({ r, crumbs: [['Mitgliedschaft']], eyebrow: 'Mitglied werden', title:
   <div class="container split">
     <div class="prose">
       <h2>Aufnahmeantrag</h2>
-      <p>Schreiben Sie uns, wir melden uns für ein persönliches Gespräch. Ansprechpartner ist Erich Buchholz (Clubmanagement). Lieber auf Papier? <a href="https://dreibaeumen.de/wp-content/uploads/2020/07/Aufnahmeantrag_GC3B.pdf">Aufnahmeantrag als PDF</a>.</p>
+      <p>Schreiben Sie uns, wir melden uns für ein persönliches Gespräch. ${esc(club.texte.mitgliedschaftKontakt)}${club.texte.aufnahmeantragUrl ? ` Lieber auf Papier? <a href="${esc(club.texte.aufnahmeantragUrl)}">Aufnahmeantrag als PDF</a>.` : ''}</p>
       <h3>Häufige Fragen</h3>
       <div class="accordion">
-        <details class="accordion__item"><summary class="accordion__summary">Warum eine Aktie?</summary><div class="accordion__content"><p>Voraussetzung für die ordentliche Mitgliedschaft ist eine der 800 Aktien der Dohrmann Golfplatz AG. Sie können eine Aktie kaufen und später verkaufen, verschenken oder vererben – oder eine Spielberechtigung erwerben (Aktienmiete).</p></div></details>
-        <details class="accordion__item"><summary class="accordion__summary">Muss ich Startzeiten buchen?</summary><div class="accordion__content"><p>Nein. Auf unserem Platz gibt es keine festen Startzeiten.</p></div></details>
-        <details class="accordion__item"><summary class="accordion__summary">Was ist GOLFHOCHZEHN?</summary><div class="accordion__content"><p>Ein Verbund von Golfclubs, auf deren Plätzen Mitglieder greenfeefrei spielen.</p></div></details>
+        <details class="accordion__item"><summary class="accordion__summary">Was brauche ich für die Aufnahme?</summary><div class="accordion__content"><p>Für das Spiel auf dem Platz die DGV-Platzreife oder ein Handicap. Beides können Sie auch bei uns in der Golfschule erwerben.</p></div></details>
+        <details class="accordion__item"><summary class="accordion__summary">Kann ich vorher auf dem Platz spielen?</summary><div class="accordion__content"><p>Ja. Spielen Sie eine Runde als Gast – im persönlichen Gespräch rechnen wir Ihr Greenfee auf Wunsch an.</p></div></details>
+        <details class="accordion__item"><summary class="accordion__summary">Gibt es Partnerclubs?</summary><div class="accordion__content"><p>Ja. Auf den Plätzen unserer Partnerclubs spielen Mitglieder zu besonderen Konditionen – Details auf der Seite Greenfee &amp; Preise.</p></div></details>
       </div>
     </div>
     ${prototypeForm({
@@ -968,7 +968,7 @@ page({
   title: 'Club & Kontakt',
   aktiv: 'club',
   body: (r) => `
-${pageHero({ r, crumbs: [['Club & Kontakt']], eyebrow: 'Über uns', title: 'Club & Kontakt', lead: `Golf im Bergischen Land – in Hückeswagen. Ansprechpartner, Anfahrt und Kontakt.` })}
+${pageHero({ r, crumbs: [['Club & Kontakt']], eyebrow: 'Über uns', title: 'Club & Kontakt', lead: `Golf in ${esc(club.ort)}. Ansprechpartner, Anfahrt und Kontakt.` })}
 <nav class="section section--compact subnav" aria-label="Auf dieser Seite">
   <div class="container">
     <ul class="subnav__list">
@@ -986,7 +986,7 @@ ${pageHero({ r, crumbs: [['Club & Kontakt']], eyebrow: 'Über uns', title: 'Club
   <div class="container">
     ${sectionHead({ eyebrow: 'Für Sie da', title: 'Clubmanagement, Sekretariat & Team' })}
     <div class="grid grid--3">${personenIn('betreiber', 'clubmanagement', 'sekretariat', 'service', 'greenkeeping').map(personCard).join('')}</div>
-    <p class="small spacer-top">Betreibergesellschaft des Golfplatzes ist die Dohrmann Golfplatz AG. Das Greenkeeping erfolgt in Zusammenarbeit mit der Sommerfeld AG.</p>
+    ${club.texte.betreiberHinweis ? `<p class="small spacer-top">${esc(club.texte.betreiberHinweis)}</p>` : ''}
   </div>
 </section>
 <section class="section" id="abteilungen">

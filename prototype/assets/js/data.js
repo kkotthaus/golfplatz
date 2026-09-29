@@ -180,7 +180,8 @@ window.GC_DATA = {
           "beispiel": true
         }
       ],
-      "hinweis": "Betrieben von Golf und Günstig OHG."
+      "hinweis": "",
+      "link": ""
     },
     "restaurant": {
       "name": "Clubrestaurant",
@@ -199,33 +200,33 @@ window.GC_DATA = {
       "id": "gelb",
       "name": "Gelb",
       "geschlecht": "herren",
-      "cr": 71.2,
-      "slope": 132,
-      "par": 71
+      "cr": 71,
+      "slope": 130,
+      "par": 72
     },
     {
       "id": "blau",
       "name": "Blau",
       "geschlecht": "herren",
-      "cr": 69.4,
-      "slope": 124,
-      "par": 71
+      "cr": 69.2,
+      "slope": 125,
+      "par": 72
     },
     {
       "id": "rot",
       "name": "Rot",
       "geschlecht": "damen",
-      "cr": 73,
-      "slope": 131,
-      "par": 69
+      "cr": 72.6,
+      "slope": 128,
+      "par": 72
     },
     {
       "id": "orange",
       "name": "Orange",
       "geschlecht": "damen",
-      "cr": 71,
-      "slope": 125,
-      "par": 69
+      "cr": 70.6,
+      "slope": 122,
+      "par": 72
     }
   ]
 };

@@ -77,7 +77,7 @@ export const logo = (r) => `
   </svg>
   <span class="site-logo__text">
     <span class="site-logo__name">${esc(club.logoName)}</span>
-    <span class="site-logo__since">${esc(club.ort)}</span>
+    <span class="site-logo__since">${esc([club.ort, club.region].filter(Boolean).join(' · '))}</span>
   </span>
 </a>`;
 
@@ -117,12 +117,12 @@ export const hoursList = (zeilen, mod = '') => `
   ${zeilen.map((z) => `<div class="hours__row"><dt class="hours__days">${esc(z.tage)}</dt><dd class="hours__time">${esc(z.zeit)}</dd></div>`).join('')}
 </dl>`;
 
-// Gäste: Es gibt keine festen Startzeiten. Anmeldung am Wochenende empfohlen (Clubdaten › Gäste & Systeme).
+// Gäste: Hinweis und Anmeldung aus den Clubdaten › Gäste & Systeme.
 export const guestInfo = ({ id = '', mod = '' } = {}) => `
 <aside class="guest-info${mod ? ' guest-info--' + mod : ''}"${id ? ` id="${id}"` : ''} aria-labelledby="guest-info-title${id}">
   <div class="guest-info__intro">
     <p class="guest-info__eyebrow">Als Gast spielen</p>
-    <h2 class="guest-info__title" id="guest-info-title${id}">Einfach spielen – ohne feste Startzeiten</h2>
+    <h2 class="guest-info__title" id="guest-info-title${id}">Herzlich willkommen auf unserem Platz</h2>
     <p class="guest-info__text">${esc(club.anmeldung.hinweis)}</p>
     ${club.anmeldung.ruhetag ? `<p class="guest-info__note">${esc(club.anmeldung.ruhetag)}</p>` : ''}
   </div>

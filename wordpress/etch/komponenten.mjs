@@ -30,10 +30,14 @@ const farbschemaKomponente = {
 
 const logo = () =>
   el('a', 'site-logo', [
-    el('span', 'site-logo__text', [
-      t('span', 'site-logo__name', club('club_name')),
-      t('span', 'site-logo__since', club('club_ort') + ' · Bergisches Land'),
-    ]),
+    // Fußzeile (dunkle Fläche): club_logo_hell, sonst club_logo; ohne Bild die Wortmarke
+    wenn('options.golfplatz.club.hat_logo', [el('img', 'site-logo__bild', [], { attrs: { src: '{options.golfplatz.club.logo_hell}', alt: club('club_name') } })]),
+    wenn('options.golfplatz.club.hat_logo', [
+      el('span', 'site-logo__text', [
+        t('span', 'site-logo__name', club('club_name')),
+        t('span', 'site-logo__since', '{options.golfplatz.club.unterzeile}'),
+      ]),
+    ], 'isFalsy'),
   ], { attrs: { href: '/' }, name: 'Logo' });
 
 const navListe = (titel, links) =>
@@ -71,12 +75,12 @@ export const components = [
     // Übernimmt die frühere Komponente „Startzeit reservieren“ (gleiche WordPress-ID).
     ersetzt: 'BookingCta',
     name: 'Als Gast spielen',
-    description: 'Hinweis für Gäste: keine festen Startzeiten, Anmeldung am Wochenende empfohlen. Telefon, E-Mail und Öffnungszeiten aus den Clubdaten.',
+    description: 'Hinweis für Gäste (Text aus den Clubdaten › Gäste & Systeme), Telefon, E-Mail und Öffnungszeiten aus den Clubdaten.',
     properties: [{ key: 'anker', name: 'Anker (id)', type: { primitive: 'string' }, default: 'spielen' }],
     content: el('aside', 'guest-info', [
       el('div', 'guest-info__intro', [
         t('p', 'guest-info__eyebrow', 'Als Gast spielen'),
-        t('h2', 'guest-info__title', 'Einfach spielen – ohne feste Startzeiten'),
+        t('h2', 'guest-info__title', 'Herzlich willkommen auf unserem Platz'),
         t('p', 'guest-info__text', club('anmeldung_hinweis')),
         wenn(`${CLUB}.ruhetag_hinweis`, [t('p', 'guest-info__note', club('ruhetag_hinweis'))]),
       ]),

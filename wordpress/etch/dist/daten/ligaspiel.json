@@ -1,0 +1,805 @@
+{
+  "key": "slug",
+  "items": [
+    {
+      "title": "Clubmannschaft · 1. Spieltag",
+      "slug": "clubmannschaft-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:clubmannschaft"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778229000,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 1,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga Nord"
+      }
+    },
+    {
+      "title": "Clubmannschaft · 2. Spieltag",
+      "slug": "clubmannschaft-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:clubmannschaft"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781253000,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 3,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga Nord"
+      }
+    },
+    {
+      "title": "Clubmannschaft · 3. Spieltag",
+      "slug": "clubmannschaft-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:clubmannschaft"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784278800,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": 5,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga Nord"
+      }
+    },
+    {
+      "title": "Clubmannschaft · 4. Spieltag",
+      "slug": "clubmannschaft-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:clubmannschaft"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787301000,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 2,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga Nord"
+      }
+    },
+    {
+      "title": "Clubmannschaft · 5. Spieltag",
+      "slug": "clubmannschaft-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:clubmannschaft"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790325000,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga Nord"
+      }
+    },
+    {
+      "title": "AK30 Damen · 1. Spieltag",
+      "slug": "ak30-damen-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-damen"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778315400,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 2,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Regionalliga"
+      }
+    },
+    {
+      "title": "AK30 Damen · 2. Spieltag",
+      "slug": "ak30-damen-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-damen"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781341200,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": 4,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Regionalliga"
+      }
+    },
+    {
+      "title": "AK30 Damen · 3. Spieltag",
+      "slug": "ak30-damen-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-damen"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784363400,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 1,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Regionalliga"
+      }
+    },
+    {
+      "title": "AK30 Damen · 4. Spieltag",
+      "slug": "ak30-damen-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-damen"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787387400,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 3,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Regionalliga"
+      }
+    },
+    {
+      "title": "AK30 Damen · 5. Spieltag",
+      "slug": "ak30-damen-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-damen"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790411400,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Regionalliga"
+      }
+    },
+    {
+      "title": "AK30 Herren · 1. Spieltag",
+      "slug": "ak30-herren-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-herren"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778403600,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": 3,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK30 Herren · 2. Spieltag",
+      "slug": "ak30-herren-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-herren"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781425800,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 5,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK30 Herren · 3. Spieltag",
+      "slug": "ak30-herren-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-herren"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784449800,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 2,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK30 Herren · 4. Spieltag",
+      "slug": "ak30-herren-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-herren"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787473800,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 4,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK30 Herren · 5. Spieltag",
+      "slug": "ak30-herren-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak30-herren"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790497800,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK50/1 Damen · 1. Spieltag",
+      "slug": "ak50-1-damen-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-damen"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778229000,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 4,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK50/1 Damen · 2. Spieltag",
+      "slug": "ak50-1-damen-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-damen"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781253000,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 1,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK50/1 Damen · 3. Spieltag",
+      "slug": "ak50-1-damen-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-damen"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784277000,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 3,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK50/1 Damen · 4. Spieltag",
+      "slug": "ak50-1-damen-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-damen"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787301000,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 5,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK50/1 Damen · 5. Spieltag",
+      "slug": "ak50-1-damen-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-damen"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790326800,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK50/1 Herren · 1. Spieltag",
+      "slug": "ak50-1-herren-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-herren"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778315400,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 5,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK50/1 Herren · 2. Spieltag",
+      "slug": "ak50-1-herren-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-herren"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781339400,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 2,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK50/1 Herren · 3. Spieltag",
+      "slug": "ak50-1-herren-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-herren"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784363400,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 4,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK50/1 Herren · 4. Spieltag",
+      "slug": "ak50-1-herren-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-herren"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787389200,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": 1,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK50/1 Herren · 5. Spieltag",
+      "slug": "ak50-1-herren-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-1-herren"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790411400,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK50/2 Herren · 1. Spieltag",
+      "slug": "ak50-2-herren-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-2-herren"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778401800,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 1,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK50/2 Herren · 2. Spieltag",
+      "slug": "ak50-2-herren-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-2-herren"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781425800,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 3,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK50/2 Herren · 3. Spieltag",
+      "slug": "ak50-2-herren-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-2-herren"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784451600,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": 5,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK50/2 Herren · 4. Spieltag",
+      "slug": "ak50-2-herren-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-2-herren"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787473800,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 2,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK50/2 Herren · 5. Spieltag",
+      "slug": "ak50-2-herren-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak50-2-herren"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790497800,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/1 Damen · 1. Spieltag",
+      "slug": "ak65-1-damen-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-damen"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778229000,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 2,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Damen · 2. Spieltag",
+      "slug": "ak65-1-damen-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-damen"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781254800,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": 4,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Damen · 3. Spieltag",
+      "slug": "ak65-1-damen-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-damen"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784277000,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 1,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Damen · 4. Spieltag",
+      "slug": "ak65-1-damen-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-damen"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787301000,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 3,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Damen · 5. Spieltag",
+      "slug": "ak65-1-damen-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-damen"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790325000,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Herren · 1. Spieltag",
+      "slug": "ak65-1-herren-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-herren"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778317200,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": 3,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Herren · 2. Spieltag",
+      "slug": "ak65-1-herren-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-herren"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781339400,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 5,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Herren · 3. Spieltag",
+      "slug": "ak65-1-herren-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-herren"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784363400,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 2,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Herren · 4. Spieltag",
+      "slug": "ak65-1-herren-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-herren"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787387400,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 4,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Herren · 5. Spieltag",
+      "slug": "ak65-1-herren-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-1-herren"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790411400,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/2 Damen · 1. Spieltag",
+      "slug": "ak65-2-damen-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-damen"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778401800,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 4,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Damen · 2. Spieltag",
+      "slug": "ak65-2-damen-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-damen"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781425800,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 1,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Damen · 3. Spieltag",
+      "slug": "ak65-2-damen-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-damen"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784449800,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 3,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Damen · 4. Spieltag",
+      "slug": "ak65-2-damen-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-damen"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787473800,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 5,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Damen · 5. Spieltag",
+      "slug": "ak65-2-damen-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-damen"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790499600,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Herren · 1. Spieltag",
+      "slug": "ak65-2-herren-1",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-herren"
+        },
+        "ligaspiel_spieltag": 1,
+        "ligaspiel_termin": 1778229000,
+        "ligaspiel_spielort": "GC Burg Beispiel",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 5,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Herren · 2. Spieltag",
+      "slug": "ak65-2-herren-2",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-herren"
+        },
+        "ligaspiel_spieltag": 2,
+        "ligaspiel_termin": 1781253000,
+        "ligaspiel_spielort": "GC Nachbarort",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 2,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Herren · 3. Spieltag",
+      "slug": "ak65-2-herren-3",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-herren"
+        },
+        "ligaspiel_spieltag": 3,
+        "ligaspiel_termin": 1784277000,
+        "ligaspiel_spielort": "Golfpark Am See",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": 4,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Herren · 4. Spieltag",
+      "slug": "ak65-2-herren-4",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-herren"
+        },
+        "ligaspiel_spieltag": 4,
+        "ligaspiel_termin": 1787302800,
+        "ligaspiel_spielort": "GC Musterclub",
+        "ligaspiel_heimspiel": 1,
+        "ligaspiel_platzierung": 1,
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Herren · 5. Spieltag",
+      "slug": "ak65-2-herren-5",
+      "meta": {
+        "ligaspiel_mannschaft": {
+          "@post": "mannschaft:ak65-2-herren"
+        },
+        "ligaspiel_spieltag": 5,
+        "ligaspiel_termin": 1790325000,
+        "ligaspiel_spielort": "Golf & Country Club Hügelland",
+        "ligaspiel_heimspiel": 0,
+        "ligaspiel_platzierung": "",
+        "ligaspiel_saison": 2026,
+        "ligaspiel_liga": "Bezirksliga"
+      }
+    }
+  ]
+}

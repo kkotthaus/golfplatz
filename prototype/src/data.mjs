@@ -1,39 +1,54 @@
-// Inhalte für Prototyp und WordPress-Import.
+// Inhalte für Prototyp und WordPress-Import – ZENTRALE KONFIGURATION DES CLUBS.
 // Die Struktur entspricht den Meta-Box-Feldern in WordPress (siehe docs/umsetzung.md).
 //
-// ECHTE DATEN (Quelle: dreibaeumen.de, Stand 2026-09-25): Clubdaten, Kontakt, Öffnungszeiten,
-// Scorekarte 2024 (Bahnen, Abschläge, CR/Slope), alle Preise (Greenfee, Turnier, Kooperationen,
-// Leihgeräte, Mitgliedschaft), Golfschule-Angebote, Vorstand und Team.
-// PLATZHALTER (noch vom Club zu liefern): Gründungsjahr, Bahnbeschreibungen, Restaurant,
-// Mannschaften, Ligaspiele, Spielberichte, News, Sperrungen (Beispiele), Lochwettspiele (Beispiele).
+// BLUEPRINT: Alle Angaben sind neutrale Platzhalter („Musterclub“). Für einen neuen Club diese Datei
+// (und die Farben in wordpress/etch/acss-farben.mjs) anpassen, bauen und importieren – siehe docs/neuer-club.md.
+// Adressen unter example.org und Telefonnummern 01234 … sind bewusst ungültig.
 
 export const club = {
-  name: 'Golfclub Dreibäumen e. V.',
-  kurzname: 'GC Dreibäumen',
-  logoName: 'Golfclub Dreibäumen',
-  ort: 'Hückeswagen · Bergisches Land',
-  claim: 'Einer der schönsten Golfplätze im Bergischen Land.',
-  adresse: ['Stoote 1', '42499 Hückeswagen'],
-  telefon: '02192 8547-20',
-  fax: '02192 8547-19',
-  email: 'sekretariat@dreibaeumen.de',
-  // Keine festen Startzeiten. Anmeldung nur empfohlen (Clubdaten › Gäste & Systeme).
+  name: 'Golfclub Musterclub e. V.',
+  kurzname: 'GC Musterclub',
+  logoName: 'Golfclub Musterclub', // Clubdaten › Club › „Name im Logo“
+  ort: 'Musterstadt',
+  region: 'Musterregion',
+  claim: 'Golf in schöner Landschaft – für Mitglieder und Gäste.',
+  adresse: ['Musterstraße 1', '12345 Musterstadt'],
+  telefon: '01234 5678-0',
+  fax: '01234 5678-99',
+  email: 'info@example.org',
+  // Anmeldung für Gäste (Clubdaten › Gäste & Systeme).
   anmeldung: {
-    telefon: '02192 8547-12',
-    hinweis: 'Wir verzichten bewusst auf feste Startzeiten – kommen Sie einfach vorbei. Am Wochenende und an Feiertagen bitten wir um eine kurze telefonische Anmeldung.',
+    telefon: '01234 5678-10',
+    hinweis: 'Gäste sind herzlich willkommen. Bitte melden Sie sich vor Ihrer Runde im Sekretariat an – am Wochenende und an Feiertagen am besten telefonisch.',
     ruhetag: 'Montags ist Greenkeeper-Tag: Es kann zu Einschränkungen im Spielbetrieb kommen.',
   },
   social: {
-    facebook: 'https://www.facebook.com/golfclubdreibaeumen/',
-    instagram: 'https://www.instagram.com/dreibaeumen/',
+    facebook: '',
+    instagram: '',
   },
   recht: {
-    vertretung: 'Michael Dattner, Erich Buchholz, Friedhelm Klüting, Susanne Kessler, Angelika Rahm, Marc Rogge',
-    registergericht: 'Amtsgericht Köln',
-    registernummer: 'VR 800575',
-    steuernummer: '221/5711/2525',
-    verantwortlich: 'Erich Buchholz, Stoote 1, 42499 Hückeswagen',
+    vertretung: 'Max Mustermann (Präsident), Erika Musterfrau (Vizepräsidentin), Peter Beispiel (Schatzmeister)',
+    registergericht: 'Amtsgericht Musterstadt',
+    registernummer: 'VR 00000',
+    steuernummer: '000/0000/0000',
+    verantwortlich: 'Max Mustermann, Musterstraße 1, 12345 Musterstadt',
   },
+  // Ort für den Sonnenuntergang (Twilight-Greenfee): Breite, Länge. Platzhalter = geografische Mitte Deutschlands.
+  geo: '51.163, 10.448',
+  // Clubeigene Texte (Clubdaten › Club › Auftritt & Texte)
+  texte: {
+    platzBeschreibung: 'Unser 18-Loch-Platz liegt eingebettet in eine abwechslungsreiche Landschaft. Große Grüns und breite Fairways, Teiche und Bunker an den richtigen Stellen – und schöne Ausblicke von fast jeder Bahn.',
+    mitgliedschaftLead: 'Unbegrenzt spielen, mit DGV-Mitgliedschaft und vielen Vorteilen bei unseren Partnerclubs. Wir beraten Sie gern persönlich.',
+    mitgliedschaftKontakt: 'Ihre Ansprechpartnerin ist Erika Musterfrau (Clubmanagement).',
+    aufnahmeantragUrl: '',
+    betreiberHinweis: '',
+  },
+  // PC CADDIE://online: Club-Kennung (leer = kein Turnierabgleich)
+  pccaddieCode: '',
+  // Partnerclubs für die Platzbelegung (je { name, kurzname, pccaddie_code, website, kalender_link }), leer = nur Heimatclub
+  partnerclubs: [],
+  // Ligaportal des Landesverbands auf liga.golf (leer = kein Abgleich, Mannschaften werden von Hand gepflegt)
+  verband: { name: 'Landesverband', ligaWeb: '', ligaApi: '', suchbegriff: '' },
 };
 
 export const restaurant = {
@@ -42,35 +57,35 @@ export const restaurant = {
   hinweis: 'Unsere Gastronomie startet unter neuer Leitung. Öffnungszeiten und Speisekarte folgen.',
 };
 
-// Scorekarte 2024: Jeder Abschlag ist für ein Geschlecht bewertet.
+// Scorekarte (Platzhalter, fiktiver Par-72-Platz): Jeder Abschlag ist für ein Geschlecht bewertet.
 export const abschlaege = [
-  { id: 'gelb', name: 'Gelb', geschlecht: 'herren', cr: 71.2, slope: 132, par: 71 },
-  { id: 'blau', name: 'Blau', geschlecht: 'herren', cr: 69.4, slope: 124, par: 71 },
-  { id: 'rot', name: 'Rot', geschlecht: 'damen', cr: 73.0, slope: 131, par: 69 },
-  { id: 'orange', name: 'Orange', geschlecht: 'damen', cr: 71.0, slope: 125, par: 69 },
+  { id: 'gelb', name: 'Gelb', geschlecht: 'herren', cr: 71.0, slope: 130, par: 72 },
+  { id: 'blau', name: 'Blau', geschlecht: 'herren', cr: 69.2, slope: 125, par: 72 },
+  { id: 'rot', name: 'Rot', geschlecht: 'damen', cr: 72.6, slope: 128, par: 72 },
+  { id: 'orange', name: 'Orange', geschlecht: 'damen', cr: 70.6, slope: 122, par: 72 },
 ];
 
-// Scorekarte 2024: nr, Par Herren, Par Damen, Vorgabe (HCP), Längen Gelb, Blau, Rot, Orange.
+// Scorekarte (Platzhalter): nr, Par Herren, Par Damen, Vorgabe (HCP), Längen Gelb, Blau, Rot, Orange.
 // Form und Wasser nur für die Platzhalter-Bahngrafik im Prototyp.
 const rohBahnen = [
-  [1, 4, 4, 7, 368, 346, 322, 303, 'gerade', false],
-  [2, 3, 3, 11, 182, 171, 160, 151, 'gerade', false],
-  [3, 4, 4, 5, 364, 342, 320, 301, 'links', false],
-  [4, 3, 3, 17, 107, 102, 95, 90, 'gerade', true],
-  [5, 5, 5, 9, 484, 456, 425, 401, 'rechts', true],
-  [6, 4, 4, 1, 391, 366, 342, 321, 'rechts', true],
-  [7, 4, 4, 15, 286, 276, 256, 240, 'links', false],
-  [8, 3, 3, 13, 182, 172, 160, 151, 'gerade', false],
-  [9, 5, 4, 3, 470, 428, 414, 378, 'rechts', false],
-  [10, 4, 4, 2, 381, 375, 356, 347, 'links', false],
-  [11, 4, 4, 12, 290, 273, 254, 242, 'rechts', false],
-  [12, 3, 3, 18, 119, 119, 108, 108, 'gerade', false],
-  [13, 5, 4, 14, 445, 420, 394, 371, 'links', false],
-  [14, 4, 4, 16, 298, 275, 260, 242, 'rechts', false],
-  [15, 4, 4, 10, 403, 382, 357, 337, 'links', false],
-  [16, 4, 4, 4, 359, 338, 316, 297, 'rechts', false],
-  [17, 3, 3, 8, 203, 184, 180, 162, 'gerade', false],
-  [18, 5, 5, 6, 548, 518, 470, 436, 'links', false],
+  [1, 4, 4, 9, 360, 340, 310, 290, 'gerade', false],
+  [2, 5, 5, 3, 480, 460, 420, 400, 'rechts', false],
+  [3, 3, 3, 15, 160, 150, 135, 120, 'gerade', true],
+  [4, 4, 4, 1, 400, 380, 345, 325, 'links', false],
+  [5, 4, 4, 11, 340, 320, 290, 270, 'rechts', true],
+  [6, 3, 3, 17, 145, 135, 120, 105, 'gerade', false],
+  [7, 5, 5, 5, 500, 475, 430, 410, 'links', false],
+  [8, 4, 4, 13, 330, 315, 285, 265, 'rechts', false],
+  [9, 4, 4, 7, 375, 355, 320, 300, 'gerade', false],
+  [10, 4, 4, 10, 365, 345, 315, 295, 'links', false],
+  [11, 3, 3, 16, 170, 155, 140, 125, 'gerade', false],
+  [12, 5, 5, 2, 510, 485, 440, 415, 'rechts', true],
+  [13, 4, 4, 8, 380, 360, 325, 305, 'links', false],
+  [14, 4, 4, 14, 320, 305, 275, 255, 'rechts', false],
+  [15, 3, 3, 18, 135, 125, 110, 100, 'gerade', true],
+  [16, 4, 4, 4, 395, 375, 340, 320, 'links', false],
+  [17, 5, 5, 6, 470, 450, 410, 390, 'rechts', false],
+  [18, 4, 4, 12, 355, 335, 305, 285, 'gerade', false],
 ];
 
 export const bahnen = rohBahnen.map(([nr, parHerren, parDamen, hcp, gelb, blau, rot, orange, form, wasser]) => ({
@@ -103,7 +118,6 @@ export const sperrungen = [
 // Clubdaten › Öffnungszeiten: je Bereich Standardzeiten (Wochentage + Uhrzeit) und Ausnahmen für einen Zeitraum.
 // tage: mo di mi do fr sa so. Ausnahme: datum von–bis (JJJJ-MM-TT), geschlossen oder eigene Zeiten.
 // Die Website berechnet daraus „heute“, „jetzt geöffnet/geschlossen“ und die nächste Öffnung.
-// ACHTUNG: dreibaeumen.de nennt nur die aktuellen Uhrzeiten ohne Wochentage – die Tage sind vom Club zu bestätigen.
 export const WOCHE = ['mo', 'di', 'mi', 'do', 'fr', 'sa', 'so'];
 export const oeffnungszeiten = {
   sekretariat: {
@@ -132,8 +146,8 @@ export const oeffnungszeiten = {
     ausnahmen: [
       { titel: 'Beispiel: Inventur', von: '2026-10-05', bis: '2026-10-05', geschlossen: true, zeiten: [], beispiel: true },
     ],
-    hinweis: 'Betrieben von Golf und Günstig OHG.',
-    link: 'https://www.golfundguenstig.de/',
+    hinweis: '',
+    link: '',
   },
   restaurant: {
     name: 'Clubrestaurant',
@@ -157,11 +171,11 @@ export const platzstatus = {
   buggy: { gesperrt: false, grund: 'Fairways zu nass', bisStunden: 0 },
   gruens: 'sommer',
   gruensHinweis: '',
-  // Wie auf dreibaeumen.de: aktuell werden Gelb und Rot gespielt.
+  // Aktuell gespielte Abschläge
   abschlaegeOffen: ['gelb', 'rot'],
 };
 
-// dreibaeumen.de › Club (Stand 2026-09-25). gruppen = Taxonomie „personengruppe“.
+// Vorstand und Team (Platzhalter, fiktive Personen). gruppen = Taxonomie „personengruppe“.
 // Kontakt nur, wenn persönlich (Durchwahl, eigene E-Mail); die allgemeine Sekretariatsnummer steht in den Clubdaten.
 export const personengruppen = {
   vorstand: 'Vorstand',
@@ -175,58 +189,44 @@ export const personengruppen = {
 };
 
 export const personen = [
-  { name: 'Michael Dattner', funktion: 'Präsident', gruppen: ['vorstand'] },
-  { name: 'Erich Buchholz', funktion: 'Vizepräsident, Spielführer · Clubmanagement', gruppen: ['vorstand', 'clubmanagement'], telefon: '02192 8547-15', email: 'erich.buchholz@dreibaeumen.de' },
-  { name: 'Friedhelm Klüting', funktion: 'Vorstand Finanzen/Platz', gruppen: ['vorstand'], email: 'friedhelm.klueting@dreibaeumen.de' },
-  { name: 'Dr. Anne Schindler', funktion: 'Vorstand, Schriftführerin', gruppen: ['vorstand'], email: 'dr.anne.schindler@dreibaeumen.de' },
-  { name: 'Angelika Rahm', funktion: 'Vorstand Events', gruppen: ['vorstand'] },
-  { name: 'Dr. Julia Wolf', funktion: 'Vorstand Jugend', gruppen: ['vorstand'], email: 'dr.julia.wolf@dreibaeumen.de' },
-  { name: 'Graham Thomas', funktion: 'Geschäftsführer Dohrmann Golfplatz AG · verantwortlich für den Golfplatz', gruppen: ['betreiber'], telefon: '02192 8547-14', email: 'graham.thomas@dreibaeumen.de' },
-  { name: 'Dominik Margenberg', funktion: 'Sekretariat', gruppen: ['sekretariat'], telefon: '02192 8547-20', email: 'sekretariat@dreibaeumen.de' },
-  { name: 'Claudia Buchholz', funktion: 'Service-Team · Captain Damengolf', gruppen: ['service', 'captains'], telefon: '02192 8547-12', email: 'proshop@dreibaeumen.de' },
-  { name: 'Anita Thomas', funktion: 'Service-Team', gruppen: ['service'], telefon: '02192 8547-12', email: 'proshop@dreibaeumen.de' },
-  { name: 'Christian Durchner', funktion: 'PGA-Professional', gruppen: ['golfschule'], telefon: '0171 2610639', email: 'info@christiandurchner.de' },
-  { name: 'Bastian Klabunde', funktion: 'PGA-Professional', gruppen: ['golfschule'], telefon: '0176 61877244', email: 'bastian-klabunde@live.de' },
-  { name: 'Tristan Giovanni Iser', funktion: 'Professional', gruppen: ['golfschule'], telefon: '0173 2711300' },
-  { name: 'Felix Pregl', funktion: 'Headgreenkeeper', gruppen: ['greenkeeping'] },
-  { name: 'Klaus Herder', funktion: 'Captain Herrengolf', gruppen: ['captains'] },
-  { name: 'Dieter W. Krause', funktion: 'Captain Seniorengolf „AK 50 Plus“', gruppen: ['captains'], email: 'dwkrause@dreibaeumen.de' },
+  { name: 'Max Mustermann', funktion: 'Präsident', gruppen: ['vorstand'] },
+  { name: 'Erika Musterfrau', funktion: 'Vizepräsidentin · Clubmanagement', gruppen: ['vorstand', 'clubmanagement'], telefon: '01234 5678-15', email: 'clubmanagement@example.org' },
+  { name: 'Peter Beispiel', funktion: 'Schatzmeister', gruppen: ['vorstand'], email: 'finanzen@example.org' },
+  { name: 'Sabine Vorlage', funktion: 'Schriftführerin', gruppen: ['vorstand'] },
+  { name: 'Thomas Platzhalter', funktion: 'Vorstand Jugend', gruppen: ['vorstand'], email: 'jugend@example.org' },
+  { name: 'Jonas Exempel', funktion: 'Geschäftsführer der Betreibergesellschaft', gruppen: ['betreiber'], telefon: '01234 5678-14' },
+  { name: 'Laura Muster', funktion: 'Sekretariat', gruppen: ['sekretariat'], telefon: '01234 5678-0', email: 'info@example.org' },
+  { name: 'Nina Probe', funktion: 'Service-Team · Captain Damengolf', gruppen: ['service', 'captains'], telefon: '01234 5678-12', email: 'proshop@example.org' },
+  { name: 'Tom Schwung', funktion: 'PGA-Professional', gruppen: ['golfschule'], telefon: '01234 5678-30', email: 'golfschule@example.org' },
+  { name: 'Lisa Abschlag', funktion: 'Professional', gruppen: ['golfschule'] },
+  { name: 'Karl Rasen', funktion: 'Headgreenkeeper', gruppen: ['greenkeeping'] },
+  { name: 'Heinz Beispiel', funktion: 'Captain Herrengolf', gruppen: ['captains'] },
 ];
 
 /** Personen einer oder mehrerer Gruppen, in der Reihenfolge oben. */
 export const personenIn = (...gruppen) => personen.filter((p) => p.gruppen.some((g) => gruppen.includes(g)));
 
-// dreibaeumen.de › Gäste › Greenfee und › Mitgliedschaft (Stand 2026-09-25).
+// Greenfee und Mitgliedschaft (Platzhalter-Preise).
 // Felder wie Beitragstyp „Preis“: titel, betrag (null = auf Anfrage), tage (Gültig an), einheit, zusatz.
 // einheit: runde18 | runde9 | tag | runde | monat | jahr | einmalig
 export const preise = {
   greenfee: [
-    { titel: '18 Loch', betrag: 80, tage: 'Mo–Fr', einheit: 'runde18' },
-    { titel: '18 Loch', betrag: 90, tage: 'Sa, So, Feiertag', einheit: 'runde18' },
-    { titel: '18 Loch mit DGV-Ausweis „R“', betrag: 70, tage: 'Mo–Fr', einheit: 'runde18' },
-    { titel: '18 Loch mit DGV-Ausweis „R“', betrag: 80, tage: 'Sa, So, Feiertag', einheit: 'runde18' },
-    { titel: '9 Loch', betrag: 45, tage: 'Mo–Sa', einheit: 'runde9' },
-    { titel: '9 Loch', betrag: 50, tage: 'So, Feiertag', einheit: 'runde9' },
-    { titel: '9 Loch mit DGV-Ausweis „R“', betrag: 40, tage: 'Mo–Sa', einheit: 'runde9' },
-    { titel: '9 Loch mit DGV-Ausweis „R“', betrag: 45, tage: 'So, Feiertag', einheit: 'runde9' },
-    { titel: 'Twilight', betrag: 50, tage: 'Mo–Sa', einheit: 'runde' },
-    { titel: 'Twilight', betrag: 55, tage: 'So, Feiertag', einheit: 'runde' },
-    { titel: 'Twilight mit DGV-Ausweis „R“', betrag: 45, tage: 'Mo–Sa', einheit: 'runde' },
-    { titel: 'Twilight mit DGV-Ausweis „R“', betrag: 50, tage: 'So, Feiertag', einheit: 'runde' },
+    { titel: '18 Loch', betrag: 70, tage: 'Mo–Fr', einheit: 'runde18' },
+    { titel: '18 Loch', betrag: 85, tage: 'Sa, So, Feiertag', einheit: 'runde18' },
+    { titel: '9 Loch', betrag: 40, tage: 'Mo–Fr', einheit: 'runde9' },
+    { titel: '9 Loch', betrag: 50, tage: 'Sa, So, Feiertag', einheit: 'runde9' },
+    { titel: 'Twilight', betrag: 45, tage: 'Mo–Fr', einheit: 'runde' },
+    { titel: 'Twilight', betrag: 55, tage: 'Sa, So, Feiertag', einheit: 'runde' },
     { titel: 'Rangefee', betrag: 5, tage: 'täglich', einheit: 'tag' },
   ],
   turnier: [
-    { titel: 'Freundschaftsspiel', betrag: 40, tage: 'täglich', einheit: 'runde18' },
-    { titel: 'Offenes Turnier', betrag: 50, tage: 'Mo–Fr', einheit: 'runde18' },
-    { titel: 'Offenes Turnier', betrag: 60, tage: 'Sa, So', einheit: 'runde18' },
+    { titel: 'Offenes Turnier', betrag: 45, tage: 'Mo–Fr', einheit: 'runde18' },
+    { titel: 'Offenes Turnier', betrag: 55, tage: 'Sa, So', einheit: 'runde18' },
     { titel: 'Offenes Turnier', betrag: 30, tage: 'täglich', einheit: 'runde9' },
   ],
   kooperationen: [
-    { titel: 'Golf-Club Kürten e. V. Bergerhöhe', betrag: 40, tage: 'freitags', einheit: 'runde18', zusatz: 'Handicap bis 54' },
-    { titel: 'Golfclub Mettmann e. V.', betrag: 40, tage: 'Di–Fr', einheit: 'runde18', zusatz: 'Handicap bis 54' },
-    { titel: 'Golfclub Haan-Düsseltal e. V.', betrag: 40, tage: 'mittwochs, freitags', einheit: 'runde18', zusatz: 'Handicap bis 54' },
-    { titel: 'Golf Club Clostermanns Hof e. V.', betrag: 50, tage: 'mittwochs, freitags', einheit: 'runde18', zusatz: 'Handicap bis 54' },
-    { titel: 'Golfclub Der Lüderich e. V.', betrag: 40, tage: 'freitags', einheit: 'runde18', zusatz: 'Handicap bis 54' },
+    { titel: 'Golfclub Beispielstadt e. V.', betrag: 45, tage: 'Mo–Fr', einheit: 'runde18', zusatz: 'Handicap bis 54' },
+    { titel: 'Golfpark Am See', betrag: 45, tage: 'mittwochs, freitags', einheit: 'runde18', zusatz: 'Handicap bis 54' },
   ],
   kooperationenHinweis: 'Ermäßigtes Greenfee für Mitglieder der Partnerclubs. Es ist nur eine Ermäßigung möglich.',
   leihe: [
@@ -239,29 +239,27 @@ export const preise = {
     'Gültiger Mitgliedsausweis eines Golfclubs',
     'Handicap: Mo–Fr bis 54, Sa, So und Feiertag bis 36',
     'Schüler und Studierende unter 27 Jahren: 50 % Ermäßigung mit Ausweis',
-    'Mitglieder können täglich bis zu drei Gäste anmelden und auf der Runde begleiten: 10 € Ermäßigung auf das 18-Loch-Tagesgreenfee, je Gast höchstens zweimal im Jahr pro Mitglied',
   ],
   mitgliedschaft: [
     {
       titel: 'Ordentliche Mitgliedschaft',
       betrag: null,
       einheit: 'jahr',
-      zusatz: 'Mit eigener Aktie der Dohrmann Golfplatz AG oder mit Spielberechtigung (Aktienmiete). Die jährliche Spielberechtigungsgebühr nennen wir Ihnen im persönlichen Gespräch.',
+      zusatz: 'Die aktuellen Beiträge und die Aufnahmegebühr nennen wir Ihnen im persönlichen Gespräch.',
       hervorheben: true,
       leistungen: [
         'DGV-Mitgliedschaft und Handicapverwaltung',
-        'Unbegrenztes Spielrecht auf 18 Loch – ohne Startzeiten',
+        'Unbegrenztes Spielrecht auf 18 Loch',
         'Nutzung der Übungsanlagen',
-        'GOLFHOCHZEHN: greenfeefrei in den Partnerclubs des Verbunds',
-        'Urlaubspartner-Netzwerk',
+        'Ermäßigtes Greenfee bei unseren Partnerclubs',
         'Teilnahme an Turnieren',
       ],
     },
     {
-      titel: 'Partner eines Vollmitglieds',
-      betrag: 115,
+      titel: 'Partnermitgliedschaft',
+      betrag: 100,
       einheit: 'monat',
-      zusatz: 'Angebot 2026, bei jährlicher Zahlung. Spielrecht Mo–So mit Handicap 54 oder DGV-Platzreife.',
+      zusatz: 'Für Partner eines ordentlichen Mitglieds, bei jährlicher Zahlung.',
       leistungen: [],
     },
   ],
@@ -277,13 +275,13 @@ export const einheitText = {
   einmalig: 'einmalig',
 };
 
-// dreibaeumen.de › Sport › Golfen lernen. preis null = auf Anfrage.
+// Golfschule (Platzhalter). preis null = auf Anfrage.
 export const kurse = [
   { titel: 'Schnupperkurs', typ: 'Schnupperkurs', preis: 35, dauer: '', max: null, termine: [], text: 'Einzeln oder in kleinen Gruppen: ein Gefühl für Schläger und Ball bekommen und die Basics lernen.' },
   { titel: 'Golfunterricht', typ: 'Training', preis: null, dauer: '', max: null, termine: ['nach Absprache'], text: 'Einzelstunden oder Unterricht in kleinen Gruppen – auch zur Vorbereitung auf die DGV-Platzreife.' },
   { titel: 'DGV-Platzreife', typ: 'Platzreife', preis: null, dauer: '', max: null, termine: ['nach Absprache'], text: 'Mit der Platzreife dürfen Sie eigenständig auf dem Platz spielen.' },
 ];
-export const kurseAnmeldung = { telefon: '02192 8547-12', email: 'info@dreibaeumen.de' };
+export const kurseAnmeldung = { telefon: '01234 5678-30', email: 'golfschule@example.org' };
 
 const vornamen = {
   weiblich: ['Anna', 'Birgit', 'Claudia', 'Doris', 'Eva', 'Friederike', 'Gabi', 'Heike', 'Ines', 'Julia', 'Karin', 'Lea', 'Monika', 'Nina', 'Petra', 'Renate', 'Susanne', 'Ute'],

@@ -64,7 +64,7 @@ export const teamKarten = () =>
 /** Übersicht: alle Ligaspiele (früher als eigene Seite /mannschaften/ligaspiele/ geplant, die URL kollidiert mit den Mannschaften). */
 export const alleLigaspiele = () => [
   t('h2', '', `Alle Ligaspiele · Saison {${MS}.saison}`),
-  t('p', '', 'Termine und Ergebnisse aller Mannschaften. Heimspiele sind hervorgehoben. Die Daten kommen vom Golfverband NRW.'),
+  t('p', '', `Termine und Ergebnisse aller Mannschaften. Heimspiele sind hervorgehoben. Die Daten kommen vom {${MS}.verband}.`),
   wenn(`${MS}.hat_saisons`, [
     el('nav', 'season-nav', [
       t('span', 'season-nav__label', 'Saison:'),
@@ -86,7 +86,7 @@ const saison = (offen) =>
     el('summary', 'season__summary', [t('h3', 'season__title', '{z.titel}')]),
     el('div', 'season__body', [
       spielTabelle('z.spiele', 'Ligaspiele {this.title} {z.jahr}', false),
-      wenn('z.hat_verband_link', [el('p', 'season__source', [t('a', 'link-arrow', 'Tabelle beim Golfverband NRW', { attrs: { href: '{z.verband_link}', rel: 'noopener' } })])]),
+      wenn('z.hat_verband_link', [el('p', 'season__source', [t('a', 'link-arrow', `Tabelle beim {${MS}.verband}`, { attrs: { href: '{z.verband_link}', rel: 'noopener' } })])]),
     ]),
   ], { attrs: offen ? { open: '' } : {}, name: 'Saison' });
 

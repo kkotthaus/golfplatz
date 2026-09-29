@@ -118,7 +118,7 @@ add_filter(
 			'fields'         => array(
 				array( 'type' => 'heading', 'name' => 'Starts bei Turnieren', 'desc' => 'Standardwerte für die automatische Tee-Belegung (Sperrungen → Turnier-Regeln). Eine Regel kann eigene Werte haben.' ),
 				array( 'id' => 'startabstand', 'name' => 'Startabstand der Flights (Minuten)', 'type' => 'number', 'min' => 1, 'std' => 8 ),
-				array( 'id' => 'flight_groesse', 'name' => 'Spieler je Flight', 'type' => 'number', 'min' => 1, 'max' => 4, 'std' => 3, 'desc' => 'So viele Spieler starten in der Regel zusammen (GC Dreibäumen: 3).' ),
+				array( 'id' => 'flight_groesse', 'name' => 'Spieler je Flight', 'type' => 'number', 'min' => 1, 'max' => 4, 'std' => 3, 'desc' => 'So viele Spieler starten in der Regel zusammen (meist 3 oder 4).' ),
 				array( 'id' => 'spielzeit_loch', 'name' => 'Spielzeit je Loch beim Kanonenstart (Minuten)', 'type' => 'number', 'min' => 1, 'std' => 15, 'desc' => 'Daraus ergibt sich, wie lange ein Tee nach einem Kanonenstart belegt ist (9 Loch × 15 Min. = 2:15 h).' ),
 				array( 'id' => 'turnier_puffer', 'name' => 'Turnierpuffer (Minuten)', 'type' => 'number', 'min' => 0, 'std' => 30, 'desc' => 'Wird an die Sperre des letzten Turniers angehängt. Spielen mehrere Turniere am selben Tee hintereinander, bekommt nur das letzte den Puffer; die Sperre davor reicht bis zum Beginn des nächsten. 0 = kein Puffer.' ),
 			),

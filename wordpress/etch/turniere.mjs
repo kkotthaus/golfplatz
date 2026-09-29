@@ -1,7 +1,7 @@
 // Etch-Komponenten „Turnierkalender“, „Platzbelegung“ und „Turnierergebnisse“ (Seite /turniere/).
 // Daten: {options.golfplatz.turniere} aus snippets/golfplatz-turniere.php – stündlich aus PC CADDIE://online gelesen.
 // Anmeldung, Startlisten und Ergebnislisten bleiben bei PC CADDIE (Links); Namen von Spielern übernimmt die Website nicht.
-// Turnierkalender und Ergebnisse: nur der Heimatclub. Platzbelegung: Heimatclub (erste Spalte) und GOLFHOCHZEHN-Partnerclubs als Tabelle Tag × Club
+// Turnierkalender und Ergebnisse: nur der Heimatclub. Platzbelegung: Heimatclub (erste Spalte) und Partnerclubs aus den Clubdaten als Tabelle Tag × Club
 // zur Planung eines Besuchs. Filter per URL: ?kategorie=s (Kalender), ?jahr=2025 (Ergebnisse), ?ab=JJJJ-MM-TT (Platzbelegung).
 // Tabellen als CSS-Grid aus divs mit Tabellen-Rollen (Konvention, wie Preistabelle und Ligaspiele).
 
@@ -96,7 +96,7 @@ const belegungZelle = () =>
 export const platzbelegungKomponente = {
   key: 'Platzbelegung',
   name: 'Platzbelegung',
-  description: 'Tabelle Tag × Club für 4 Wochen – erste Spalte der Heimatclub, dann die GOLFHOCHZEHN-Partnerclubs (Clubdaten → Partnerclubs): an welchem Tag ist bei welchem Club ein Turnier (Uhrzeit, Name, Löcher) und wo ist der Platz frei – zur Planung eines Besuchs. Blättern per ?ab=JJJJ-MM-TT. Daten: {options.golfplatz.turniere.belegung}.',
+  description: 'Tabelle Tag × Club für 4 Wochen – erste Spalte der Heimatclub, dann die Partnerclubs (Clubdaten → Partnerclubs): an welchem Tag ist bei welchem Club ein Turnier (Uhrzeit, Name, Löcher) und wo ist der Platz frei – zur Planung eines Besuchs. Blättern per ?ab=JJJJ-MM-TT. Daten: {options.golfplatz.turniere.belegung}.',
   properties: [],
   content: wenn(`${PB}.hat_clubs`, [
     el('div', 'occupancy', [

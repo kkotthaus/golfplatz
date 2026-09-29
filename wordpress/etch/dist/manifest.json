@@ -232,7 +232,7 @@
     {
       "key": "Platzbelegung",
       "name": "Platzbelegung",
-      "description": "Tabelle Tag × Club für 4 Wochen – erste Spalte der Heimatclub, dann die GOLFHOCHZEHN-Partnerclubs (Clubdaten → Partnerclubs): an welchem Tag ist bei welchem Club ein Turnier (Uhrzeit, Name, Löcher) und wo ist der Platz frei – zur Planung eines Besuchs. Blättern per ?ab=JJJJ-MM-TT. Daten: {options.golfplatz.turniere.belegung}.",
+      "description": "Tabelle Tag × Club für 4 Wochen – erste Spalte der Heimatclub, dann die Partnerclubs (Clubdaten → Partnerclubs): an welchem Tag ist bei welchem Club ein Turnier (Uhrzeit, Name, Löcher) und wo ist der Platz frei – zur Planung eines Besuchs. Blättern per ?ab=JJJJ-MM-TT. Daten: {options.golfplatz.turniere.belegung}.",
       "properties": []
     },
     {
@@ -257,7 +257,7 @@
       "key": "GastInfo",
       "ersetzt": "BookingCta",
       "name": "Als Gast spielen",
-      "description": "Hinweis für Gäste: keine festen Startzeiten, Anmeldung am Wochenende empfohlen. Telefon, E-Mail und Öffnungszeiten aus den Clubdaten.",
+      "description": "Hinweis für Gäste (Text aus den Clubdaten › Gäste & Systeme), Telefon, E-Mail und Öffnungszeiten aus den Clubdaten.",
       "properties": [
         {
           "key": "anker",

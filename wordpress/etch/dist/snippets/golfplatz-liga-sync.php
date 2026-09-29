@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Golfplatz – Ligaspiele vom Golfverband NRW
- * Description: Holt Spieltage, Spielorte und Ergebnisse der Club-Mannschaften von gvnrw.liga.golf (GraphQL-Schnittstelle der Seite) und legt daraus Mannschaften und Ligaspiele an bzw. aktualisiert sie. Täglich per WP-Cron für die laufende Saison, von Hand unter Mannschaften → Verband-Abgleich. Spielberichte und von Hand gepflegte Spiele bleiben unberührt.
+ * Plugin Name: Golfplatz – Ligaspiele vom Landesverband
+ * Description: Holt Spieltage, Spielorte und Ergebnisse der Club-Mannschaften aus dem Ligaportal des Landesverbands auf liga.golf (GraphQL-Schnittstelle der Seite; Adressen und Suchbegriff in den Clubdaten › Gäste & Systeme, leer = kein Abgleich) und legt daraus Mannschaften und Ligaspiele an bzw. aktualisiert sie. Täglich per WP-Cron für die laufende Saison, von Hand unter Mannschaften → Verband-Abgleich. Spielberichte und von Hand gepflegte Spiele bleiben unberührt.
  * Version: 1.0.0
  *
  * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-liga-sync.php
@@ -12,16 +12,46 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'GOLFPLATZ_LIGA_API', 'https://gvnrw-backend.liga.golf' );
-define( 'GOLFPLATZ_LIGA_WEB', 'https://gvnrw.liga.golf' );
 define( 'GOLFPLATZ_LIGA_AB', 2023 ); // frühestes Jahr des Abgleichs
 define( 'GOLFPLATZ_LIGA_TEAMS', 'golfplatz_liga_teams' ); // Option: gefundene Teams je Jahr
 define( 'GOLFPLATZ_LIGA_LOG', 'golfplatz_liga_log' );   // Option: letzte Abgleiche
 
+/** Wert aus den Clubdaten › Gäste & Systeme › Ligaportal. */
+function golfplatz_liga_einstellung( string $feld ): string {
+	$club = (array) get_option( 'clubdaten', array() );
+	return trim( (string) ( $club[ $feld ] ?? '' ) );
+}
+
+/** Schnittstelle des Ligaportals, z. B. https://gvnrw-backend.liga.golf */
+function golfplatz_liga_api(): string {
+	return untrailingslashit( golfplatz_liga_einstellung( 'verband_liga_api' ) );
+}
+
+/** Öffentliche Seite des Ligaportals, z. B. https://gvnrw.liga.golf (Links zu den Tabellen). */
+function golfplatz_liga_web(): string {
+	return untrailingslashit( golfplatz_liga_einstellung( 'verband_liga_web' ) );
+}
+
+/** Name des Verbands für Texte, z. B. „Golfverband NRW“. */
+function golfplatz_liga_verband(): string {
+	return golfplatz_liga_einstellung( 'verband_name' ) ?: 'Landesverband';
+}
+
+/** Kennung vor den externen IDs der Ligaspiele: Subdomain des Portals (gvnrw.liga.golf → „gvnrw“). */
+function golfplatz_liga_praefix(): string {
+	$host = (string) wp_parse_url( golfplatz_liga_web() ?: golfplatz_liga_api(), PHP_URL_HOST );
+	return strtok( str_replace( '-backend', '', $host ), '.' ) ?: 'liga';
+}
+
+/** Abgleich nur, wenn Schnittstelle und Suchbegriff in den Clubdaten stehen (im Blueprint leer = aus). */
+function golfplatz_liga_eingerichtet(): bool {
+	return '' !== golfplatz_liga_api() && '' !== golfplatz_liga_suchbegriff();
+}
+
 /** GraphQL-Abfrage. Liefert data oder WP_Error. */
 function golfplatz_liga_gql( string $query, array $variables ) {
 	$res = wp_remote_post(
-		GOLFPLATZ_LIGA_API,
+		golfplatz_liga_api(),
 		array(
 			'timeout'    => 20,
 			'headers'    => array( 'Content-Type' => 'application/json' ),
@@ -34,7 +64,7 @@ function golfplatz_liga_gql( string $query, array $variables ) {
 	}
 	$json = json_decode( wp_remote_retrieve_body( $res ), true );
 	if ( 200 !== wp_remote_retrieve_response_code( $res ) || ! is_array( $json ) || ! empty( $json['errors'] ) ) {
-		return new WP_Error( 'golfplatz_liga_api', 'Antwort von gvnrw-backend.liga.golf nicht verwendbar (HTTP ' . wp_remote_retrieve_response_code( $res ) . ').' );
+		return new WP_Error( 'golfplatz_liga_api', 'Antwort von ' . wp_parse_url( golfplatz_liga_api(), PHP_URL_HOST ) . ' nicht verwendbar (HTTP ' . wp_remote_retrieve_response_code( $res ) . ').' );
 	}
 	return $json['data'] ?? array();
 }
@@ -67,10 +97,9 @@ function golfplatz_liga_team_orte( int $team_id ) {
 	return $orte;
 }
 
-/** Suchbegriff aus den Clubdaten („Dreibäumen“). */
+/** Suchbegriff aus den Clubdaten (Name des Clubs in den Ligatabellen). Leer = kein Abgleich. */
 function golfplatz_liga_suchbegriff(): string {
-	$club = (array) get_option( 'clubdaten', array() );
-	return trim( (string) ( $club['verband_suchbegriff'] ?? '' ) ) ?: 'Dreibäumen';
+	return golfplatz_liga_einstellung( 'verband_suchbegriff' );
 }
 
 /**
@@ -85,12 +114,12 @@ function golfplatz_liga_wettbewerb( string $name ): array {
 	return array( $name, '' );
 }
 
-/** Teamname ohne Zusatz in Klammern: „Dreibäumen  (abgemeldet am 14.04.23)“ → „Dreibäumen“. */
+/** Teamname ohne Zusatz in Klammern: „Musterclub  (abgemeldet am 14.04.23)“ → „Musterclub“. */
 function golfplatz_liga_team_name( string $team ): string {
 	return trim( preg_replace( '/\s*\(.*\)\s*$/u', '', $team ) );
 }
 
-/** Teamname zum Vergleich: „Dreibäumen 1“ gilt wie „Dreibäumen“. */
+/** Teamname zum Vergleich: „Musterclub 1“ gilt wie „Musterclub“. */
 function golfplatz_liga_team_schluessel( string $team ): string {
 	return mb_strtolower( preg_replace( '/\s+1$/', '', golfplatz_liga_team_name( $team ) ) );
 }
@@ -253,7 +282,7 @@ function golfplatz_liga_team_abgleichen( int $jahr, array $e, array $wettbewerb,
 				'post_status'    => 'any',
 				'posts_per_page' => -1,
 				'fields'         => 'ids',
-				'meta_query'     => array( array( 'key' => 'ligaspiel_extern_id', 'value' => 'gvnrw:' . $e['liga_id'] . ':' . $e['team_id'] . ':', 'compare' => 'LIKE' ) ),
+				'meta_query'     => array( array( 'key' => 'ligaspiel_extern_id', 'value' => golfplatz_liga_praefix() . ':' . $e['liga_id'] . ':' . $e['team_id'] . ':', 'compare' => 'LIKE' ) ),
 			)
 		);
 		array_map( 'wp_trash_post', $alt );
@@ -285,7 +314,7 @@ function golfplatz_liga_team_abgleichen( int $jahr, array $e, array $wettbewerb,
 	}
 	$brutto = in_array( 'Brutto', array_column( $spalten, 'name' ), true );
 	$such   = golfplatz_liga_suchbegriff();
-	$link   = GOLFPLATZ_LIGA_WEB . '/' . $e['wettbewerb_id'] . '/' . $e['liga_id'] . '/?year=' . $jahr;
+	$link   = golfplatz_liga_web() . '/' . $e['wettbewerb_id'] . '/' . $e['liga_id'] . '/?year=' . $jahr;
 
 	foreach ( $spalten as $i => $sp ) {
 		if ( empty( $sp['date'] ) || ! preg_match( '/^(\d+)\.\s*Spieltag/u', $sp['name'], $m ) ) {
@@ -320,7 +349,7 @@ function golfplatz_liga_team_abgleichen( int $jahr, array $e, array $wettbewerb,
 				}
 			}
 		}
-		$extern = 'gvnrw:' . $e['liga_id'] . ':' . $e['team_id'] . ':' . $nr;
+		$extern = golfplatz_liga_praefix() . ':' . $e['liga_id'] . ':' . $e['team_id'] . ':' . $nr;
 		$titel  = get_the_title( $mannschaft ) . ' · ' . $e['liga'] . ' · ' . $nr . '. Spieltag ' . $jahr;
 		$meta   = array(
 			'ligaspiel_mannschaft'   => $mannschaft,
@@ -363,6 +392,9 @@ function golfplatz_liga_team_abgleichen( int $jahr, array $e, array $wettbewerb,
  * Gibt das Protokoll zurück und hängt es an GOLFPLATZ_LIGA_LOG an.
  */
 function golfplatz_liga_abgleich( int $jahr, bool $suche = false ): array {
+	if ( ! golfplatz_liga_eingerichtet() ) {
+		return array( 'jahr' => $jahr, 'zeit' => time(), 'neu' => 0, 'aktualisiert' => 0, 'unveraendert' => 0, 'mannschaften_neu' => array(), 'gastclubs_neu' => array(), 'teams' => 0, 'fehler' => array( 'Ligaportal nicht eingerichtet (Clubdaten › Gäste & Systeme).' ) );
+	}
 	if ( function_exists( 'set_time_limit' ) ) {
 		@set_time_limit( 600 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
 	}
@@ -426,7 +458,7 @@ add_action(
 		}
 	}
 );
-add_action( 'golfplatz_liga_sync', fn() => golfplatz_liga_abgleich( (int) wp_date( 'Y' ) ) );
+add_action( 'golfplatz_liga_sync', fn() => golfplatz_liga_eingerichtet() && golfplatz_liga_abgleich( (int) wp_date( 'Y' ) ) );
 
 /* ---------- Mannschaften → Verband-Abgleich ---------- */
 
@@ -449,8 +481,12 @@ function golfplatz_liga_seite(): void {
 	}
 	$teams = (array) get_option( GOLFPLATZ_LIGA_TEAMS, array() );
 	$log   = (array) get_option( GOLFPLATZ_LIGA_LOG, array() );
-	echo '<div class="wrap"><h1>Verband-Abgleich (gvnrw.liga.golf)</h1>';
-	echo '<p>Spieltage, Spielorte und Ergebnisse der Mannschaften kommen vom Golfverband NRW. Gesucht wird nach „' . esc_html( golfplatz_liga_suchbegriff() ) . '“ (Clubdaten → Gäste &amp; Systeme). Die laufende Saison wird jeden Morgen automatisch abgeglichen; Spielberichte bleiben erhalten.</p>';
+	echo '<div class="wrap"><h1>Verband-Abgleich</h1>';
+	if ( ! golfplatz_liga_eingerichtet() ) {
+		echo '<div class="notice notice-info inline"><p>Noch nicht eingerichtet: Unter Clubdaten → Gäste &amp; Systeme die Adressen des Ligaportals und den Namen des Clubs in den Ligatabellen eintragen. Bis dahin werden Mannschaften und Ligaspiele von Hand gepflegt.</p></div></div>';
+		return;
+	}
+	echo '<p>Spieltage, Spielorte und Ergebnisse der Mannschaften kommen vom ' . esc_html( golfplatz_liga_verband() ) . '. Gesucht wird nach „' . esc_html( golfplatz_liga_suchbegriff() ) . '“ (Clubdaten → Gäste &amp; Systeme). Die laufende Saison wird jeden Morgen automatisch abgeglichen; Spielberichte bleiben erhalten.</p>';
 	if ( $ergebnis ) {
 		$klasse = $ergebnis['fehler'] ? 'notice-warning' : 'notice-success';
 		echo '<div class="notice ' . esc_attr( $klasse ) . '"><p>' . esc_html( golfplatz_liga_log_text( $ergebnis ) ) . '</p></div>';
@@ -469,7 +505,7 @@ function golfplatz_liga_seite(): void {
 	krsort( $teams );
 	foreach ( $teams as $jahr => $eintrag ) {
 		foreach ( $eintrag['teams'] as $e ) {
-			$url = GOLFPLATZ_LIGA_WEB . '/' . $e['wettbewerb_id'] . '/' . $e['liga_id'] . '/?year=' . $jahr;
+			$url = golfplatz_liga_web() . '/' . $e['wettbewerb_id'] . '/' . $e['liga_id'] . '/?year=' . $jahr;
 			echo '<tr><td>' . (int) $jahr . '</td><td>' . esc_html( $e['wettbewerb'] ) . '</td><td><a href="' . esc_url( $url ) . '" target="_blank" rel="noopener">' . esc_html( $e['liga'] ) . '</a></td><td>' . esc_html( $e['team'] ) . '</td></tr>';
 		}
 	}
@@ -493,3 +529,26 @@ function golfplatz_liga_log_text( array $l ): string {
 	}
 	return $text;
 }
+
+/*
+ * Clubdaten › Gäste & Systeme: Ligaportal des Landesverbands (Feldgruppe im Code). Der Suchbegriff
+ * („Name in den Ligatabellen“, verband_suchbegriff) steht in der Builder-Gruppe darüber.
+ */
+add_filter(
+	'rwmb_meta_boxes',
+	function ( $boxen ) {
+		$boxen[] = array(
+			'id'             => 'clubdaten-ligaportal',
+			'title'          => 'Clubdaten · Ligaportal',
+			'settings_pages' => array( 'clubdaten' ),
+			'tab'            => 'systeme',
+			'fields'         => array(
+				array( 'type' => 'heading', 'name' => 'Ligaportal des Landesverbands', 'desc' => 'Für den automatischen Abgleich der Ligaspiele (Mannschaften → Verband-Abgleich). Leer = kein Abgleich, Mannschaften und Ligaspiele werden von Hand gepflegt.' ),
+				array( 'id' => 'verband_name', 'name' => 'Name des Verbands', 'type' => 'text', 'columns' => 4, 'placeholder' => 'z. B. Golfverband NRW', 'desc' => 'Erscheint in Texten, z. B. „Tabelle beim …“.' ),
+				array( 'id' => 'verband_liga_web', 'name' => 'Adresse Ligaportal', 'type' => 'url', 'columns' => 4, 'placeholder' => 'https://gvnrw.liga.golf' ),
+				array( 'id' => 'verband_liga_api', 'name' => 'Adresse Schnittstelle', 'type' => 'url', 'columns' => 4, 'placeholder' => 'https://gvnrw-backend.liga.golf' ),
+			),
+		);
+		return $boxen;
+	}
+);

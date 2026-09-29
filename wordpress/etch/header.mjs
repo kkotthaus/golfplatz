@@ -2,7 +2,7 @@
 // Die EMMP-Komponenten sind in Etch hinterlegt; eingebunden werden sie per WordPress-ID.
 // Hüllen-Elemente und Style-IDs stammen aus dem EMMP-Beispiel-Header, damit das EMMP-Styling greift.
 
-import { el, t, text, emmp, gruppe, club, telHref, icon, svgEl, komponente } from './lib.mjs';
+import { el, t, text, emmp, gruppe, club, telHref, icon, svgEl, komponente, wenn } from './lib.mjs';
 
 // WordPress-IDs der EMMP-Komponenten (golfplatz.local; bei einer Migration mit Duplicator bleiben sie erhalten)
 export const EMMP = { header: 71, nav: 69, dropdown: 68, menuItem: 67, toggle: 70 };
@@ -44,19 +44,22 @@ const dropdown = (text_, kinder) =>
     { Nested_Dropdown_Content: kinder.map(([t_, l]) => menuItem(t_, l)), Mega_Menu_Content: '' },
   );
 
-// Clublogo: Wortmarke mit Fahnen-Signet (bis ein Logo in den Clubdaten hinterlegt ist)
+// Clublogo: Bild aus den Clubdaten (club_logo); ohne Bild Wortmarke mit Fahnen-Signet, „Name im Logo“ und Ort · Region
 const logo = () =>
   el('a', 'dwc-nest-menu__logo site-logo', [
-    el('svg', 'site-logo__mark', [
-      svgEl('circle', { cx: 24, cy: 24, r: 22.5, fill: 'none', stroke: 'currentColor', 'stroke-width': 1.5 }),
-      svgEl('circle', { cx: 24, cy: 24, r: 19, fill: 'none', stroke: 'currentColor', 'stroke-width': 0.6 }),
-      svgEl('path', { d: 'M21 34V12l11 5-9 4', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.8, 'stroke-linejoin': 'round' }),
-      svgEl('path', { d: 'M12 35c5-3 19-3 24 0', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.4 }),
-    ], { attrs: { viewBox: '0 0 48 48', 'aria-hidden': 'true' } }),
-    el('span', 'site-logo__text', [
-      t('span', 'site-logo__name', 'Golfclub Dreibäumen'),
-      t('span', 'site-logo__since', club('club_ort') + ' · Bergisches Land'),
-    ]),
+    wenn('options.golfplatz.club.hat_logo', [el('img', 'site-logo__bild', [], { attrs: { src: '{options.golfplatz.club.logo}', alt: club('club_name') } })]),
+    wenn('options.golfplatz.club.hat_logo', [
+      el('svg', 'site-logo__mark', [
+        svgEl('circle', { cx: 24, cy: 24, r: 22.5, fill: 'none', stroke: 'currentColor', 'stroke-width': 1.5 }),
+        svgEl('circle', { cx: 24, cy: 24, r: 19, fill: 'none', stroke: 'currentColor', 'stroke-width': 0.6 }),
+        svgEl('path', { d: 'M21 34V12l11 5-9 4', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.8, 'stroke-linejoin': 'round' }),
+        svgEl('path', { d: 'M12 35c5-3 19-3 24 0', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.4 }),
+      ], { attrs: { viewBox: '0 0 48 48', 'aria-hidden': 'true' } }),
+      el('span', 'site-logo__text', [
+        t('span', 'site-logo__name', '{options.golfplatz.club.logoname}'),
+        t('span', 'site-logo__since', '{options.golfplatz.club.unterzeile}'),
+      ]),
+    ], 'isFalsy'),
   ], { attrs: { href: '/', 'aria-label': club('club_name'), 'data-breakout': '' }, name: 'Logo', styles: ['pk20gtg'] });
 
 // Top-Bar: Platzstatus-Ampel, Telefon, Mitglieder-Login

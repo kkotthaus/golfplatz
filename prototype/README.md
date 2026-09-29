@@ -1,6 +1,6 @@
 # Prototyp Golfclub-Website
 
-Klickbarer, statischer Prototyp aller Seiten der Sitemap. Er ist die Vorlage für den Aufbau in Etch. Clubdaten, Platz (Scorekarte 2024), Greenfee, Vorstand und Team stammen vom Golfclub Dreibäumen (dreibaeumen.de). Mitgliedschaften, Kurse, Mannschaften, Ligaspiele, News und Sperrungen sind Platzhalter (siehe Kopf von `src/data.mjs`).
+Klickbarer, statischer Prototyp aller Seiten der Sitemap. Er ist die Vorlage für den Aufbau in Etch. Alle Inhalte sind neutrale Platzhalter („Golfclub Musterclub“) aus `src/data.mjs`, der zentralen Konfiguration des Clubs.
 
 ## Starten
 

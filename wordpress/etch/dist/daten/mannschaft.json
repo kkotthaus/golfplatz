@@ -1,0 +1,115 @@
+{
+  "key": "slug",
+  "items": [
+    {
+      "title": "Clubmannschaft",
+      "slug": "clubmannschaft",
+      "order": 10,
+      "meta": {
+        "mannschaft_altersklasse": "club",
+        "mannschaft_nummer": "",
+        "mannschaft_geschlecht": "gemischt",
+        "mannschaft_liga": "Landesliga Nord"
+      }
+    },
+    {
+      "title": "AK30 Damen",
+      "slug": "ak30-damen",
+      "order": 20,
+      "meta": {
+        "mannschaft_altersklasse": "ak30",
+        "mannschaft_nummer": "",
+        "mannschaft_geschlecht": "weiblich",
+        "mannschaft_liga": "Regionalliga"
+      }
+    },
+    {
+      "title": "AK30 Herren",
+      "slug": "ak30-herren",
+      "order": 30,
+      "meta": {
+        "mannschaft_altersklasse": "ak30",
+        "mannschaft_nummer": "",
+        "mannschaft_geschlecht": "maennlich",
+        "mannschaft_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK50/1 Damen",
+      "slug": "ak50-1-damen",
+      "order": 40,
+      "meta": {
+        "mannschaft_altersklasse": "ak50",
+        "mannschaft_nummer": "1",
+        "mannschaft_geschlecht": "weiblich",
+        "mannschaft_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK50/1 Herren",
+      "slug": "ak50-1-herren",
+      "order": 50,
+      "meta": {
+        "mannschaft_altersklasse": "ak50",
+        "mannschaft_nummer": "1",
+        "mannschaft_geschlecht": "maennlich",
+        "mannschaft_liga": "Oberliga"
+      }
+    },
+    {
+      "title": "AK50/2 Herren",
+      "slug": "ak50-2-herren",
+      "order": 60,
+      "meta": {
+        "mannschaft_altersklasse": "ak50",
+        "mannschaft_nummer": "2",
+        "mannschaft_geschlecht": "maennlich",
+        "mannschaft_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/1 Damen",
+      "slug": "ak65-1-damen",
+      "order": 70,
+      "meta": {
+        "mannschaft_altersklasse": "ak65",
+        "mannschaft_nummer": "1",
+        "mannschaft_geschlecht": "weiblich",
+        "mannschaft_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/1 Herren",
+      "slug": "ak65-1-herren",
+      "order": 80,
+      "meta": {
+        "mannschaft_altersklasse": "ak65",
+        "mannschaft_nummer": "1",
+        "mannschaft_geschlecht": "maennlich",
+        "mannschaft_liga": "Landesliga"
+      }
+    },
+    {
+      "title": "AK65/2 Damen",
+      "slug": "ak65-2-damen",
+      "order": 90,
+      "meta": {
+        "mannschaft_altersklasse": "ak65",
+        "mannschaft_nummer": "2",
+        "mannschaft_geschlecht": "weiblich",
+        "mannschaft_liga": "Bezirksliga"
+      }
+    },
+    {
+      "title": "AK65/2 Herren",
+      "slug": "ak65-2-herren",
+      "order": 100,
+      "meta": {
+        "mannschaft_altersklasse": "ak65",
+        "mannschaft_nummer": "2",
+        "mannschaft_geschlecht": "maennlich",
+        "mannschaft_liga": "Bezirksliga"
+      }
+    }
+  ]
+}

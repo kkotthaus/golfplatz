@@ -2,12 +2,14 @@
 
 Fachlicher Rahmen der Website. Den technischen Stack beschreibt [development-environment.md](development-environment.md).
 
+Dieses Repository ist ein **neutraler Blueprint für Golfclub-Websites**. Alle Inhalte sind Platzhalter („Golfclub Musterclub“). Wie ein neuer Club eingerichtet wird, steht in [neuer-club.md](neuer-club.md).
+
 ## Eckdaten
 
 | Punkt | Festlegung |
 | --- | --- |
-| Name des Clubs | Golfclub Dreibäumen e. V. ([dreibaeumen.de](https://dreibaeumen.de/)) |
-| Ort | Stoote 1, 42499 Hückeswagen (Bergisches Land) |
+| Name des Clubs | Platzhalter: Golfclub Musterclub e. V. (Clubdaten › Club) |
+| Ort | Platzhalter: Musterstraße 1, 12345 Musterstadt (Clubdaten › Kontakt & Anfahrt) |
 | Art der Anlage | Golfclub mit Mitgliedern, Gäste willkommen |
 | Platz | 18 Loch |
 | Sprache | Nur Deutsch |
@@ -16,7 +18,7 @@ Fachlicher Rahmen der Website. Den technischen Stack beschreibt [development-env
 ## Ziele der Website
 
 1. **Neue Mitglieder gewinnen:** Interessenten informieren und zur Mitgliedschaft führen.
-2. **Greenfee-Gäste gewinnen:** Gästen den Platz vorstellen und zeigen, wie einfach sie spielen können: keine festen Startzeiten, am Wochenende kurze Anmeldung.
+2. **Greenfee-Gäste gewinnen:** Gästen den Platz vorstellen und zeigen, wie einfach sie spielen können (Anmeldung, Preise, Öffnungszeiten).
 3. **Mitglieder informieren:** News, Turniere und Ergebnisse für bestehende Mitglieder bereitstellen.
 4. **Events und Gastronomie vermarkten:** Restaurant, Firmenevents und Feiern bewerben.
 
@@ -46,7 +48,7 @@ Inhalte je Seite, Templates und Verknüpfungen im Detail: [seitenstruktur.md](se
 ## Funktionale Anforderungen
 
 - **Mitgliederbereich:** Mitglieder melden sich direkt auf der Website mit einem WordPress-Login an. Die geschützten Inhalte sehen nur angemeldete Mitglieder.
-- **Startzeiten:** Der Club verzichtet **bewusst auf feste Startzeiten**, Startzeiten werden nicht gebucht. Die Website sagt das deutlich und nennt die empfohlene telefonische Anmeldung am Wochenende und an Feiertagen (Anmeldung 02192 8547-12) sowie den Greenkeeper-Tag am Montag.
+- **Startzeiten:** Der Blueprint bucht keine Startzeiten. Die Website nennt den Anmeldehinweis, das Anmeldetelefon und den Pflegetag aus den Clubdaten (Gäste & Systeme). Eine Online-Startzeitbuchung kann ein Club später ergänzen.
 - **Turniere:** Sie werden in **PC CADDIE** organisiert, einschließlich Ausschreibung, Meldung und Ergebnissen. Die Website pflegt Turniere deshalb nicht doppelt, sondern **bettet PC CADDIE ein**. Turnierkalender, Meldung und Ergebnisse erscheinen damit direkt auf den Seiten der Website. Die Ligaspiele der Mannschaften werden dagegen **ausschließlich auf der Website** gepflegt und nicht in PC CADDIE (siehe unten).
 - **Platzstatus und Abschlagsperren:** Abschlag 1, Abschlag 10 und der ganze Platz lassen sich zeitlich sperren, die Startseite zeigt die Sperren an (siehe [Platzstatus & Abschlagsperren](#platzstatus--abschlagsperren)).
 - **Pflegbare Inhalte:** News, Bahnen, Kurse und Preise werden als strukturierte Inhalte angelegt, z. B. als eigene Beitragstypen mit Meta Box, und nicht als freier Seiteninhalt.
@@ -179,7 +181,7 @@ Die Pflege ist aufgeteilt:
 
 ## Offene Punkte
 
-- [x] Name und Ort des Clubs: Golfclub Dreibäumen e. V., Hückeswagen
+- [ ] Name und Ort des Clubs eintragen (Blueprint: Platzhalter „Musterclub“, siehe [neuer-club.md](neuer-club.md))
 - [ ] Einbettung von PC CADDIE technisch klären: Einbettungscode bzw. Zugangsdaten vom Club, welche Module (Turnierkalender, Meldung, Ergebnisse), Anpassung an das Design, Datenschutz und Cookie-Consent
 - [ ] CI-Vorgaben klären (Logo, Farben, Schriften)
 - [ ] Inhalte des Mitgliederbereichs definieren

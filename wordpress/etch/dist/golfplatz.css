@@ -126,6 +126,7 @@ html.scheme--dark {
 @media (min-width: 64em) { .site-header__inner { max-width: calc(var(--content-width) + 2 * var(--gutter)); border-bottom: 0; } }
 .site-logo { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--primary-dark); flex: 0 1 auto; min-width: 0; }
 .site-logo__mark { width: 2.75rem; height: 2.75rem; flex: none; }
+.site-logo__bild { display: block; height: 3rem; width: auto; max-width: 14rem; object-fit: contain; }
 .site-logo__text { display: flex; flex-direction: column; line-height: 1.1; min-width: 0; }
 .site-logo__name { font-family: var(--heading-font-family); font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.2rem); color: var(--primary-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .site-logo__since { font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--secondary-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

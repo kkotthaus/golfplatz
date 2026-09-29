@@ -11,7 +11,7 @@
         "kurs_preis": 35,
         "kurs_dauer": "",
         "kurs_max_teilnehmer": "",
-        "kurs_anmeldung": "Anmeldung unter 02192 8547-12 oder info@dreibaeumen.de."
+        "kurs_anmeldung": "Anmeldung unter 01234 5678-30 oder golfschule@example.org."
       }
     },
     {
@@ -24,7 +24,7 @@
         "kurs_preis": "",
         "kurs_dauer": "",
         "kurs_max_teilnehmer": "",
-        "kurs_anmeldung": "nach Absprache. Anmeldung unter 02192 8547-12 oder info@dreibaeumen.de."
+        "kurs_anmeldung": "nach Absprache. Anmeldung unter 01234 5678-30 oder golfschule@example.org."
       }
     },
     {
@@ -37,7 +37,7 @@
         "kurs_preis": "",
         "kurs_dauer": "",
         "kurs_max_teilnehmer": "",
-        "kurs_anmeldung": "nach Absprache. Anmeldung unter 02192 8547-12 oder info@dreibaeumen.de."
+        "kurs_anmeldung": "nach Absprache. Anmeldung unter 01234 5678-30 oder golfschule@example.org."
       }
     }
   ]

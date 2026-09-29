@@ -136,6 +136,7 @@ html.scheme--dark {
 
 .site-logo { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--primary-dark); flex: 0 1 auto; min-width: 0; }
 .site-logo__mark { width: 2.75rem; height: 2.75rem; flex: none; }
+.site-logo__bild { display: block; height: 3rem; width: auto; max-width: 14rem; object-fit: contain; }
 .site-logo__text { display: flex; flex-direction: column; line-height: 1.1; min-width: 0; }
 .site-logo__name { font-family: var(--heading-font-family); font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.2rem); color: var(--primary-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .site-logo__since { font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--secondary-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -1065,7 +1066,7 @@ html.scheme--dark {
 .results__subtitle { font-weight: 400; color: var(--base-semi-dark); }
 .results__link { font-size: var(--text-s); font-weight: 600; color: var(--primary-dark); white-space: nowrap; }
 
-/* Platzbelegung der GOLFHOCHZEHN-Partnerclubs (Etch-Komponente Platzbelegung): Tabelle Tag × Club als CSS-Grid,
+/* Platzbelegung von Heimatclub und Partnerclubs (Etch-Komponente Platzbelegung): Tabelle Tag × Club als CSS-Grid,
    Zeilen per subgrid, erste Spalte beim seitlichen Scrollen fest. Belegt/frei steht immer als Text in der Zelle. */
 .occupancy { display: grid; gap: var(--space-s); }
 .occupancy__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-xs) var(--space-m); }

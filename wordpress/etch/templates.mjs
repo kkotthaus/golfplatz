@@ -9,6 +9,9 @@ import { kategorienNav, seitenNav, keineBeitraege, beitragInhalt } from './news.
 import { anmeldung, kursInhalt } from './golfschule.mjs';
 import { MS, BERICHT, teamKarten, alleLigaspiele, teamInhalt, teamKader, berichtMeta, berichtBilder, berichtRuecklink } from './mannschaften.mjs';
 
+// Auftritt und clubeigene Texte aus den Clubdaten (golfplatz-club.php › golfplatz_club_etch)
+const CL = 'options.golfplatz.club';
+
 // Hero-Illustration der Startseite (wie im Prototyp). Platzhalter, bis ein Foto des Platzes vorliegt.
 const heroArt = () =>
   el('svg', 'home-hero__art', [
@@ -112,8 +115,8 @@ export const pages = [
             t('h2', 'section-head__title', 'Wie möchten Sie uns kennenlernen?'),
           ]),
           el('div', 'grid grid--4 entry-cards', [
-            einstieg('01', 'Mitglied werden', 'Vier Modelle, vom Einsteiger bis zur Vollmitgliedschaft – ohne Aufnahmegebühr im Einsteigermodell.', 'Mitgliedschaften', '/mitgliedschaft/'),
-            einstieg('02', 'Als Gast spielen', 'Greenfee ab 40 €. Keine festen Startzeiten – am Wochenende bitte kurz anmelden.', 'Greenfee & Preise', '/greenfee/'),
+            einstieg('01', 'Mitglied werden', 'Unbegrenzt spielen und Teil des Clubs werden – wir beraten Sie gern persönlich.', 'Mitgliedschaften', '/mitgliedschaft/'),
+            einstieg('02', 'Als Gast spielen', 'Greenfee, Twilight und Leihgeräte – alle Preise auf einen Blick. Bitte vor der Runde kurz anmelden.', 'Greenfee & Preise', '/greenfee/'),
             einstieg('03', 'Golf lernen', 'Schnupperkurs, Platzreife oder Training mit unseren PGA-Pros – für jedes Alter.', 'Golfschule', '/golfschule/'),
             einstieg('04', 'Genießen & Feiern', 'Clubrestaurant mit Terrasse, Feiern und Firmenevents – auch für Nicht-Golfer.', 'Restaurant', '/restaurant/'),
           ]),
@@ -164,8 +167,8 @@ export const pages = [
       el('section', 'section', [
         el('div', 'container split', [
           el('div', 'split__text prose', [
-            t('h2', '', 'Golf im Bergischen Land'),
-            t('p', '', 'Unser Platz in Hückeswagen ist harmonisch in das für die Region vergleichsweise flache Gelände eingebettet. Große Grüns und breite Fairways, Teiche und Bunker an den richtigen Stellen – und weite Ausblicke von fast jeder Bahn.'),
+            t('h2', '', 'Unser Platz'),
+            wenn(`${CL}.hat_platz_beschreibung`, [raw(`{${CL}.platz_beschreibung}`)]),
             t('p', '', 'Zum Üben gibt es Driving Range, Kurzspielbereich und Putting-Grün.'),
             el('p', '', [el('a', 'link-arrow', [text('Spielvorgaben und Rechner ')], { attrs: { href: '/platz/spielvorgaben/' } })]),
           ], { name: 'Platzbeschreibung' }),
@@ -206,7 +209,7 @@ export const pages = [
         krumen: [['Greenfee & Preise']],
         eyebrow: 'Für Gäste',
         titel: 'Greenfee & Preise',
-        lead: 'Gäste sind jeden Tag willkommen – ohne feste Startzeiten. Am Wochenende und an Feiertagen bitte kurz telefonisch anmelden.',
+        lead: 'Gäste sind jeden Tag herzlich willkommen. Bitte melden Sie sich vor Ihrer Runde im Sekretariat an.',
       }),
       el('section', 'section', [
         el('div', 'container split split--wide-left', [
@@ -366,7 +369,7 @@ pages.push({
       krumen: [['Mitgliedschaft']],
       eyebrow: 'Mitglied werden',
       titel: 'Ihr Heimatclub',
-      lead: 'Unbegrenzt spielen – ohne Startzeiten, mit DGV-Mitgliedschaft, GOLFHOCHZEHN und Urlaubspartnern. Mitglied werden Sie mit einer Aktie der Dohrmann Golfplatz AG oder mit einer Spielberechtigung.',
+      lead: `{${CL}.mitgliedschaft_lead}`,
     }),
     el('section', 'section', [el('div', 'container', [komponente('Preiskarten', { kategorie: 'mitgliedschaft', ziel: '#antrag' })])], { name: 'Modelle' }),
     el('section', 'section section--tint', [
@@ -374,8 +377,8 @@ pages.push({
         el('header', 'section-head section-head--center', [t('p', 'section-head__eyebrow', 'In drei Schritten'), t('h2', 'section-head__title', 'So werden Sie Mitglied')]),
         el('ol', 'steps', [
           schritt('Kennenlernen', [text('Spielen Sie eine Runde als Gast oder besuchen Sie einen '), t('a', '', 'Schnupperkurs', { attrs: { href: '/golfschule/' } }), text('.')]),
-          schritt('Persönliches Gespräch', [text('Aktie oder Spielberechtigung? Wir beraten Sie und nennen Ihnen die aktuellen Konditionen.')]),
-          schritt('Aufnahmeantrag', [text('Antrag als PDF herunterladen, ausfüllen und im Sekretariat abgeben – oder uns anrufen oder schreiben.')]),
+          schritt('Persönliches Gespräch', [text('Welches Modell passt zu Ihnen? Wir beraten Sie und nennen Ihnen die aktuellen Konditionen.')]),
+          schritt('Aufnahmeantrag', [text('Antrag ausfüllen und im Sekretariat abgeben – oder uns anrufen oder schreiben.')]),
         ]),
       ]),
     ], { name: 'In drei Schritten' }),
@@ -383,21 +386,22 @@ pages.push({
       el('div', 'container split', [
         el('div', 'prose', [
           t('h2', '', 'Aufnahmeantrag'),
-          t('p', '', 'Rufen Sie uns an oder schreiben Sie uns, wir melden uns für ein persönliches Gespräch. Ansprechpartner ist Erich Buchholz (Clubmanagement).'),
+          t('p', '', 'Rufen Sie uns an oder schreiben Sie uns, wir melden uns für ein persönliches Gespräch.'),
+          wenn(`${CL}.hat_mitgliedschaft_kontakt`, [raw(`{${CL}.mitgliedschaft_kontakt}`)]),
           // Kontaktzeilen wie auf „Club & Kontakt“ im Prototyp: Link mit Symbol
           el('p', '', [
             el('a', 'contact-line', [icon('phone'), text(' ' + club('club_telefon'))], { attrs: { href: telHref('club_telefon') } }),
             el('br', '', []),
             el('a', 'contact-line', [icon('mail'), text(' ' + club('club_email'))], { attrs: { href: 'mailto:' + club('club_email') } }),
           ]),
-          el('p', '', [t('a', 'btn btn--primary', 'Aufnahmeantrag als PDF', { attrs: { href: 'https://dreibaeumen.de/wp-content/uploads/2020/07/Aufnahmeantrag_GC3B.pdf' } })]),
+          wenn(`${CL}.hat_aufnahmeantrag_url`, [el('p', '', [t('a', 'btn btn--primary', 'Aufnahmeantrag als PDF', { attrs: { href: `{${CL}.aufnahmeantrag_url}` } })])]),
         ], { name: 'Kontakt' }),
         el('div', '', [
           t('h3', '', 'Häufige Fragen'),
           el('div', 'accordion', [
-            faq('Warum eine Aktie?', 'Voraussetzung für die ordentliche Mitgliedschaft ist eine der 800 Aktien der Dohrmann Golfplatz AG. Sie können eine Aktie kaufen und später verkaufen, verschenken oder vererben – oder eine Spielberechtigung erwerben (Aktienmiete).'),
-            faq('Muss ich Startzeiten buchen?', 'Nein. Auf unserem Platz gibt es keine festen Startzeiten.'),
-            faq('Was ist GOLFHOCHZEHN?', 'Ein Verbund von Golfclubs, auf deren Plätzen Mitglieder greenfeefrei spielen.'),
+            faq('Was brauche ich für die Aufnahme?', 'Für das Spiel auf dem Platz die DGV-Platzreife oder ein Handicap. Beides können Sie auch bei uns in der Golfschule erwerben.'),
+            faq('Kann ich vorher auf dem Platz spielen?', 'Ja. Spielen Sie eine Runde als Gast – im persönlichen Gespräch rechnen wir Ihr Greenfee auf Wunsch an.'),
+            faq('Gibt es Partnerclubs?', 'Ja. Auf den Plätzen unserer Partnerclubs spielen Mitglieder zu besonderen Konditionen – Details auf der Seite Greenfee & Preise.'),
           ]),
         ], { name: 'Häufige Fragen' }),
       ]),
@@ -414,7 +418,7 @@ pages.push({
   title: 'Club & Kontakt',
   order: 50,
   content: markup(
-    seitenkopf({ krumen: [['Club & Kontakt']], eyebrow: 'Über uns', titel: 'Club & Kontakt', lead: 'Golf im Bergischen Land – in ' + club('club_ort') + '. Ansprechpartner, Anfahrt und Kontakt.' }),
+    seitenkopf({ krumen: [['Club & Kontakt']], eyebrow: 'Über uns', titel: 'Club & Kontakt', lead: 'Golf in ' + club('club_ort') + '. Ansprechpartner, Anfahrt und Kontakt.'}),
     el('nav', 'section section--compact subnav', [
       el('div', 'container', [
         el('ul', 'subnav__list', [['vorstand', 'Vorstand'], ['team', 'Team'], ['abteilungen', 'Abteilungen'], ['jugend', 'Jugend'], ['anfahrt', 'Anfahrt'], ['kontakt', 'Kontakt']].map(([id, label]) =>
@@ -426,7 +430,7 @@ pages.push({
       el('div', 'container', [
         abschnittKopf('Für Sie da', 'Clubmanagement, Sekretariat & Team'),
         komponente('Personenkarten', { liste: 'team', spalten: '3' }),
-        t('p', 'small spacer-top', 'Betreibergesellschaft des Golfplatzes ist die Dohrmann Golfplatz AG. Das Greenkeeping erfolgt in Zusammenarbeit mit der Sommerfeld AG.'),
+        wenn(`${CL}.hat_club_betreiber_hinweis`, [el('div', 'small spacer-top', [raw(`{${CL}.club_betreiber_hinweis}`)])]),
       ]),
     ], { attrs: { id: 'team' }, name: 'Team' }),
     el('section', 'section', [
@@ -493,7 +497,7 @@ pages.push({
   ),
 });
 
-// Turniere: Turnierkalender des Heimatclubs, Platzbelegung Heimatclub + GOLFHOCHZEHN-Partnerclubs (beides aus PC CADDIE,
+// Turniere: Turnierkalender des Heimatclubs, Platzbelegung Heimatclub + Partnerclubs aus den Clubdaten (beides aus PC CADDIE,
 // golfplatz-turniere.php), das Lochwettspiel (auf der Website gepflegt) und die Ergebnisse des Heimatclubs
 pages.push({
   slug: 'turniere',
@@ -504,7 +508,7 @@ pages.push({
       krumen: [['Turniere & Kalender']],
       eyebrow: 'Spielbetrieb',
       titel: 'Turniere & Kalender',
-      lead: 'Alle Clubturniere mit Anmeldeschluss und freien Plätzen – angemeldet wird direkt in PC CADDIE. Dazu die Platzbelegung bei uns und unseren GOLFHOCHZEHN-Partnerclubs und unser Lochwettspiel.',
+      lead: 'Alle Clubturniere mit Anmeldeschluss und freien Plätzen – angemeldet wird direkt in PC CADDIE. Dazu die Platzbelegung bei uns und unseren Partnerclubs und unser Lochwettspiel.',
       aktionen: [
         t('a', 'btn btn--secondary', 'Turnierkalender', { attrs: { href: '#turnierkalender' } }),
         t('a', 'btn btn--ghost', 'Platzbelegung', { attrs: { href: '#platzbelegung' } }),
@@ -516,7 +520,7 @@ pages.push({
     el('section', 'section section--tint', [
       el('div', 'container', [
         t('h2', '', 'Platzbelegung Heimatclub und Partnerclubs'),
-        t('p', 'lead', 'Auf einen Blick: an welchen Tagen bei uns und bei unseren GOLFHOCHZEHN-Partnerclubs Turniere stattfinden. Als Mitglied spielen Sie dort greenfeefrei – so planen Sie Ihren Besuch.'),
+        t('p', 'lead', 'Auf einen Blick: an welchen Tagen bei uns und bei unseren Partnerclubs Turniere stattfinden – so planen Sie Ihren Besuch.'),
         komponente('Platzbelegung'),
       ]),
     ], { attrs: { id: 'platzbelegung' }, name: 'Platzbelegung' }),
@@ -544,7 +548,7 @@ export const templates = [
         krumen: [['Mannschaften']],
         eyebrow: 'Ligabetrieb',
         titel: 'Unsere Mannschaften',
-        lead: `{${MS}.anzahl_text} spielen für den Club in den Ligen des Golfverbands NRW – von der Jugend bis zur AK65.`,
+        lead: `{${MS}.anzahl_text} spielen für den Club in den Ligen des Landesverbands – von der Jugend bis zur AK65.`,
       }),
       el('section', 'section', [
         el('div', 'container', [

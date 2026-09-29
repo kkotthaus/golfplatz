@@ -1,6 +1,6 @@
 // Etch-Komponente „Preistabelle“: Preise einer Kategorie (Greenfee, Turnier-Greenfee, Kooperationen, Leihgeräte).
 // Daten: {options.golfplatz.preise} aus snippets/golfplatz-preise.php.
-// Mit Wochentagen: kompakte Matrix wie auf dreibaeumen.de – je Tarif eine Zeile, Spalten Mo–Sa und So/Feiertag,
+// Mit Wochentagen: kompakte Matrix – je Tarif eine Zeile, Spalten Mo–Sa und So/Feiertag,
 // Varianten („mit DGV-Ausweis „R““) als Unterzeile. Ohne Wochentage (Leihgeräte): einfache Liste.
 //
 // Bewusst keine <table>: Der Etch-Builder packt Loops und Bedingungen in <div style="display: contents">. In einer

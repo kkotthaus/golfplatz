@@ -6,7 +6,7 @@ Dieses Handbuch erklärt Schritt für Schritt, wie Sie die Website des Golfclubs
 
 ### Anmelden
 
-1. Öffnen Sie im Browser die Adresse der Website mit dem Zusatz **/wp-admin/**, zum Beispiel `https://www.dreibaeumen.de/wp-admin/`.
+1. Öffnen Sie im Browser die Adresse der Website mit dem Zusatz **/wp-admin/**, zum Beispiel `https://www.example.org/wp-admin/`.
 2. Geben Sie Benutzername und Passwort ein. Die Zugangsdaten bekommen Sie von der Person, die die Website betreut.
 3. Sie landen im **Dashboard**, dem „Backend“ der Website. Besucher sehen diesen Bereich nie.
 
@@ -203,7 +203,7 @@ Für Feiertage, Betriebsferien oder die Winterzeit: **+ Ausnahme** klicken.
 
 Eine Ausnahme ersetzt an ihren Tagen die normalen Öffnungszeiten. Die Website zeigt kommende Ausnahmen rechtzeitig an und rechnet „Jetzt geöffnet“ bzw. „Öffnet morgen um 9 Uhr“ selbst aus.
 
-**Website (optional)**, zum Beispiel die des Betreibers, erscheint als Link unter den Zeiten (beim Proshop: golfundguenstig.de). **Hinweis (öffentlich)** (optional) erscheint ebenfalls unter den Zeiten, zum Beispiel „Rangefee 5 €“ oder „Letzter Einlass 30 Minuten vor Schluss“.
+**Website (optional)**, zum Beispiel die des Betreibers, erscheint als Link unter den Zeiten (zum Beispiel beim Proshop, wenn ihn ein Partner betreibt). **Hinweis (öffentlich)** (optional) erscheint ebenfalls unter den Zeiten, zum Beispiel „Rangefee 5 €“ oder „Letzter Einlass 30 Minuten vor Schluss“.
 
 > Ist ein Bereich per Schnellsperre im **Platzstatus** geschlossen, zeigt die Website ihn als geschlossen, auch wenn laut Öffnungszeiten geöffnet wäre.
 
@@ -276,7 +276,7 @@ Rückgängig machen: Status wieder auf **Findet statt (laut PC CADDIE)** stellen
 
 ### Platzbelegung der Partnerclubs
 
-Auf der Turnierseite zeigt eine Tabelle vier Wochen lang, an welchen Tagen der eigene Platz und die Plätze der GOLFHOCHZEHN-Partnerclubs durch Turniere belegt sind. Das hilft bei der Planung eines Besuchs.
+Auf der Turnierseite zeigt eine Tabelle vier Wochen lang, an welchen Tagen der eigene Platz und die Plätze der Partnerclubs (zum Beispiel eines Greenfee-Verbunds) durch Turniere belegt sind. Ohne eingetragene Partnerclubs zeigt sie nur den eigenen Platz. Das hilft bei der Planung eines Besuchs.
 
 Die Partnerclubs pflegen Sie unter **Clubdaten › Gäste & Systeme › Partnerclubs**:
 
@@ -317,7 +317,7 @@ Der Sieger rückt automatisch in die nächste Runde. Spiele der nächsten Runde 
 
 ### Was automatisch passiert
 
-Die Ligaspiele aller Mannschaften kommen jeden Morgen um 5:30 Uhr automatisch vom Golfverband NRW (gvnrw.liga.golf): Spieltag, Datum, Austragungsort, Ergebnis und Platzierung. Fehlt eine Mannschaft auf der Website, legt der Abgleich sie an.
+Ist unter **Clubdaten › Gäste & Systeme › Ligaportal** das Ligaportal des Landesverbands eingetragen (Adresse, Schnittstelle, Name des Clubs in den Ligatabellen), kommen die Ligaspiele aller Mannschaften jeden Morgen um 5:30 Uhr automatisch von dort: Spieltag, Datum, Austragungsort, Ergebnis und Platzierung. Fehlt eine Mannschaft auf der Website, legt der Abgleich sie an. Ohne Ligaportal pflegen Sie Mannschaften und Ligaspiele von Hand.
 
 Von Hand abgleichen: **Mannschaften › Verband-Abgleich**, Saison wählen und starten. Bei einer neuen Mannschaft zusätzlich **alle Ligen neu durchsuchen** anhaken. Darunter steht das Protokoll.
 
@@ -416,16 +416,18 @@ Menü **Clubdaten**. Hier stehen die Stammdaten des Clubs, verteilt auf Reiter:
 
 | Reiter | Inhalt |
 | --- | --- |
-| **Club** | Vereinsname, Kurzname (für Seitentitel), Claim, Logo |
+| **Club** | Vereinsname, Kurzname (für Seitentitel), Claim, Logo und Logo für dunkle Flächen; darunter **Auftritt & Texte**: Name im Logo, Region, Platzbeschreibung, Einleitung Mitgliedschaft, Ansprechpartner Aufnahme, Link zum Aufnahmeantrag (PDF), Hinweis zum Betreiber |
 | **Kontakt & Anfahrt** | Adresse, Telefon, E-Mail, Anfahrt mit Auto bzw. Bus und Bahn, Kartenbild, Link „Route planen“, Koordinaten |
 | **Öffnungszeiten** | siehe Kapitel „Öffnungszeiten“ |
-| **Gäste & Systeme** | Telefon und Hinweis für Gäste, Pflegetag, Greenfee-Hinweise, Twilight, Name in den Ligatabellen, PC-CADDIE-Kennung, Partnerclubs |
+| **Gäste & Systeme** | Telefon und Hinweis für Gäste, Pflegetag, Greenfee-Hinweise, Twilight, Name in den Ligatabellen, PC-CADDIE-Kennung, Partnerclubs; darunter **Ligaportal** (Name des Verbands, Adresse Ligaportal und Schnittstelle) |
 | **Restaurant** | Name, Telefon, aktueller Hinweis, Speisekarte (PDF) |
 | **Platz & Abschläge** | Course Rating, Slope, Par je Abschlag; Starts bei Turnieren (Startabstand, Spieler je Flight, Spielzeit je Loch, Turnierpuffer) |
 | **Rechtliches** | Angaben für Impressum und Datenschutz |
 | **Social Media** | Links zu Instagram, Facebook, YouTube |
 
 Nach Änderungen unten auf **Änderungen speichern** klicken.
+
+> **Logo:** Ist unter **Club › Logo** ein Bild hinterlegt, erscheint es im Kopf jeder Seite; im Fuß das **Logo für dunkle Flächen** (sonst dasselbe Logo). Ohne Bild zeigt die Website eine Wortmarke aus „Name im Logo“ sowie Ort und Region.
 
 > **Anfahrt:** Die Website bettet bewusst keine Google-Karte ein, weil dafür eine Einwilligung der Besucher nötig wäre. Stattdessen gibt es den Knopf „Route planen“ und optional ein Kartenbild (Lageplan).
 

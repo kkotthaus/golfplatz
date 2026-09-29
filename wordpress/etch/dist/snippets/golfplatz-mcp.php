@@ -344,8 +344,8 @@ add_action(
 		golfplatz_mcp_ability(
 			'liga-sync',
 			array(
-				'label'            => 'Ligaspiele vom Golfverband NRW abgleichen',
-				'description'      => 'Gleicht Mannschaften, Ligaspiele (Spieltag, Datum, Ort, Ergebnis) und Gastclubs einer Saison mit gvnrw.liga.golf ab (golfplatz-liga-sync.php). suche: alle Ligen neu durchsuchen (1–2 Minuten).',
+				'label'            => 'Ligaspiele vom Landesverband abgleichen',
+				'description'      => 'Gleicht Mannschaften, Ligaspiele (Spieltag, Datum, Ort, Ergebnis) und Gastclubs einer Saison mit dem Ligaportal aus den Clubdaten ab (golfplatz-liga-sync.php; nicht eingerichtet = Fehlermeldung). suche: alle Ligen neu durchsuchen (1–2 Minuten).',
 				'input_schema'     => array(
 					'type'       => 'object',
 					'required'   => array( 'jahr' ),

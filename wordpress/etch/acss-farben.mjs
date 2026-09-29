@@ -15,11 +15,12 @@ const STANDARD_L = { 'ultra-light': 0.95, light: 0.85, 'semi-light': 0.6, 'semi-
 // ultra-dark und base-dark werden im hellen Design nicht verwendet und sind deshalb auf das dunkle Schema abgestimmt
 // (Seitenhintergrund, Flächen, Rahmen).
 export const palette = {
-  // Clubfarben: Primary #1D8475 (Grün), Secondary #A31C39 (Rot). Barrierefreiheit (WCAG 2.1 AA), geprüft mit
-  // node wordpress/etch/kontrast.mjs: #1D8475 trägt nur weiße Schrift (4,56:1) und wird für Flächen genutzt;
-  // grüne Schrift läuft über primary-dark. Das Rot ist auf Weiß 7,5:1, auf Grün aber nur 1,7:1 – dort nie als Schrift.
-  primary: { main: '#1D8475', dark: '#0f5a50', light: '#d9ede8', 'ultra-light': '#eef6f4', 'ultra-dark': '#0e2b27', dunkel: { main: '#5ec4b2', hover: '#7fd2c3' } },
-  secondary: { main: '#A31C39', dark: '#7a1229', light: '#f6e3e7', 'ultra-light': '#faf9f8', 'ultra-dark': '#181a1a', dunkel: { main: '#ec8a9c', hover: '#f2a5b3' } },
+  // CLUBFARBEN – hier für einen neuen Club anpassen. Blueprint: neutrales Golf-Grün (Primary) und dezentes Blau (Secondary).
+  // Barrierefreiheit (WCAG 2.1 AA) nach jeder Änderung prüfen: node wordpress/etch/kontrast.mjs.
+  // Primary main trägt weiße Schrift und wird für Flächen genutzt; grüne Schrift läuft über primary-dark.
+  // Secondary ist auf Weiß gut lesbar, auf Grün aber nicht – dort nie als Schrift.
+  primary: { main: '#2E6B4E', hover: '#245A41', dark: '#1D4A35', light: '#D6E8DE', 'ultra-light': '#EEF5F1', 'ultra-dark': '#10271C', dunkel: { main: '#6CC39A', hover: '#8BD1AF' } },
+  secondary: { main: '#2C5A85', dark: '#1C3F60', light: '#DCE6F0', 'ultra-light': '#F8F9FA', 'ultra-dark': '#171A1C', dunkel: { main: '#8DB4DA', hover: '#A8C6E4' } },
   base: { main: '#232826', 'semi-dark': '#4a524f', 'semi-light': '#636d69', light: '#d3dbd8', 'ultra-light': '#eef2f0', dark: '#3a403e', 'ultra-dark': '#212524', dunkel: { main: '#e8eceb', hover: '#cfd6d3' } },
   success: { main: '#2f6b3f', light: '#9fd3aa', 'ultra-light': '#e3efe4', 'ultra-dark': '#1a2b1f', dunkel: { main: '#7fc08f', hover: '#98cfa5' } },
   warning: { main: '#8a5a0e', light: '#f0cf7e', 'ultra-light': '#fbefd8', 'ultra-dark': '#2e2310', dunkel: { main: '#e0b35a', hover: '#e8c47c' } },
@@ -58,7 +59,7 @@ export function acssEinstellungen() {
     'website-color-scheme': 'light only',
     'option-ref-color-tokens': 'on',
     'color-scheme-force-light-selectors': immerHell.join(', '),
-    // Buttons: ACSS setzt die Schrift standardmäßig auf -ultra-light; auf #1D8475 reicht das nicht (4,15:1). Weiß: 4,56:1.
+    // Buttons: ACSS setzt die Schrift standardmäßig auf -ultra-light; auf einem mittleren Primary reicht das oft nicht. Weiß ist sicher.
     'btn-primary-text': 'var(--white)',
     'btn-primary-hover-text': 'var(--white)',
     'btn-secondary-text': 'var(--white)',

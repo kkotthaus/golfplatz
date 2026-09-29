@@ -90,7 +90,7 @@ Nicht öffentlich und ohne eigene Seite: `sperrung`, `spieler`, `ligaspiel`, `pr
 | 5 | Aktuelles (`news-card`, 3×) | Die drei neuesten Beiträge | `post` | Beitrag, `/news/` |
 | 6 | Nächste Ligaspiele (`event-list`) | Die nächsten 4 Ligaspiele: Datum, Mannschaft, Spielort, Heimspiel | `ligaspiel`, `mannschaft` | Mannschaftsseite, `/turniere/` |
 | 7 | Restaurant (`feature-band`) | Teaser, Öffnungszeiten, Zitat | `zeiten_restaurant_*`, `restaurant_hinweis` | `/restaurant/`, `/restaurant/#feiern` |
-| 8 | Als Gast spielen (`guest-info`) | Keine festen Startzeiten, Anmeldung am Wochenende empfohlen, Pflegetag, Anmeldetelefon, E-Mail, Öffnungszeiten Sekretariat | `clubdaten` (`anmeldung_*`, `ruhetag_hinweis`, `club_email`, `club_oeffnungszeiten`) | `tel:`, `mailto:` |
+| 8 | Als Gast spielen (`guest-info`) | Hinweis für Gäste, Pflegetag, Anmeldetelefon, E-Mail, Öffnungszeiten Sekretariat | `clubdaten` (`anmeldung_*`, `ruhetag_hinweis`, `club_email`, `club_oeffnungszeiten`) | `tel:`, `mailto:` |
 
 **Anforderungen**
 
@@ -154,7 +154,7 @@ Nicht öffentlich und ohne eigene Seite: `sperrung`, `spieler`, `ligaspiel`, `pr
 | 1 | Seitenkopf | Titel, Hinweis zur Platzreife | Text | – |
 | 2 | Preisliste (`price-table`) | Greenfee-Preise mit Zusatz | `preis` mit `preiskategorie` = Greenfee, nach `menu_order` | – |
 | 3 | Gut zu wissen (`check-list`) | Voraussetzungen, E-Cart, Leihschläger, Range | Text der Seite | – |
-| 4 | Als Gast spielen (`guest-info`, Anker `#spielen`) | Keine festen Startzeiten, Anmeldung am Wochenende, Pflegetag, Kontakt, Öffnungszeiten | `clubdaten` | `tel:`, `mailto:` |
+| 4 | Als Gast spielen (`guest-info`, Anker `#spielen`) | Hinweis für Gäste, Pflegetag, Kontakt, Öffnungszeiten | `clubdaten` | `tel:`, `mailto:` |
 | 5 | Öffnungszeiten der Anlage (`facility-hours`, Anker `#oeffnungszeiten`) | Sekretariat, Driving Range, Kurzspielbereich, Proshop; gesperrte Einrichtungen rot markiert mit Grund und Ende | `clubdaten` › Öffnungszeiten, `platzstatus`, `sperrung` | – |
 | 6 | Kooperationen (`card`) | Partnerclubs und Vorteile | `preis` mit `preiskategorie` = Kooperation | – |
 

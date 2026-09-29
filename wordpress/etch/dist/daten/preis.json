@@ -6,7 +6,7 @@
       "slug": "greenfee-18-loch-mo-fr-runde18",
       "order": 100,
       "meta": {
-        "preis_betrag": 80,
+        "preis_betrag": 70,
         "preis_auf_anfrage": 0,
         "preis_einheit": "runde18",
         "preis_tage": "Mo–Fr",
@@ -25,7 +25,7 @@
       "slug": "greenfee-18-loch-sa-so-feiertag-runde18",
       "order": 101,
       "meta": {
-        "preis_betrag": 90,
+        "preis_betrag": 85,
         "preis_auf_anfrage": 0,
         "preis_einheit": "runde18",
         "preis_tage": "Sa, So, Feiertag",
@@ -40,13 +40,13 @@
       }
     },
     {
-      "title": "18 Loch mit DGV-Ausweis „R“",
-      "slug": "greenfee-18-loch-mit-dgv-ausweis-r-mo-fr-runde18",
+      "title": "9 Loch",
+      "slug": "greenfee-9-loch-mo-fr-runde9",
       "order": 102,
       "meta": {
-        "preis_betrag": 70,
+        "preis_betrag": 40,
         "preis_auf_anfrage": 0,
-        "preis_einheit": "runde18",
+        "preis_einheit": "runde9",
         "preis_tage": "Mo–Fr",
         "preis_zusatz": "",
         "preis_hervorheben": 0,
@@ -59,13 +59,13 @@
       }
     },
     {
-      "title": "18 Loch mit DGV-Ausweis „R“",
-      "slug": "greenfee-18-loch-mit-dgv-ausweis-r-sa-so-feiertag-runde18",
+      "title": "9 Loch",
+      "slug": "greenfee-9-loch-sa-so-feiertag-runde9",
       "order": 103,
       "meta": {
-        "preis_betrag": 80,
+        "preis_betrag": 50,
         "preis_auf_anfrage": 0,
-        "preis_einheit": "runde18",
+        "preis_einheit": "runde9",
         "preis_tage": "Sa, So, Feiertag",
         "preis_zusatz": "",
         "preis_hervorheben": 0,
@@ -78,90 +78,14 @@
       }
     },
     {
-      "title": "9 Loch",
-      "slug": "greenfee-9-loch-mo-sa-runde9",
+      "title": "Twilight",
+      "slug": "greenfee-twilight-mo-fr-runde",
       "order": 104,
       "meta": {
         "preis_betrag": 45,
         "preis_auf_anfrage": 0,
-        "preis_einheit": "runde9",
-        "preis_tage": "Mo–Sa",
-        "preis_zusatz": "",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Greenfee"
-        ]
-      }
-    },
-    {
-      "title": "9 Loch",
-      "slug": "greenfee-9-loch-so-feiertag-runde9",
-      "order": 105,
-      "meta": {
-        "preis_betrag": 50,
-        "preis_auf_anfrage": 0,
-        "preis_einheit": "runde9",
-        "preis_tage": "So, Feiertag",
-        "preis_zusatz": "",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Greenfee"
-        ]
-      }
-    },
-    {
-      "title": "9 Loch mit DGV-Ausweis „R“",
-      "slug": "greenfee-9-loch-mit-dgv-ausweis-r-mo-sa-runde9",
-      "order": 106,
-      "meta": {
-        "preis_betrag": 40,
-        "preis_auf_anfrage": 0,
-        "preis_einheit": "runde9",
-        "preis_tage": "Mo–Sa",
-        "preis_zusatz": "",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Greenfee"
-        ]
-      }
-    },
-    {
-      "title": "9 Loch mit DGV-Ausweis „R“",
-      "slug": "greenfee-9-loch-mit-dgv-ausweis-r-so-feiertag-runde9",
-      "order": 107,
-      "meta": {
-        "preis_betrag": 45,
-        "preis_auf_anfrage": 0,
-        "preis_einheit": "runde9",
-        "preis_tage": "So, Feiertag",
-        "preis_zusatz": "",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Greenfee"
-        ]
-      }
-    },
-    {
-      "title": "Twilight",
-      "slug": "greenfee-twilight-mo-sa-runde",
-      "order": 108,
-      "meta": {
-        "preis_betrag": 50,
-        "preis_auf_anfrage": 0,
         "preis_einheit": "runde",
-        "preis_tage": "Mo–Sa",
+        "preis_tage": "Mo–Fr",
         "preis_zusatz": "",
         "preis_hervorheben": 0,
         "preis_leistungen": ""
@@ -174,51 +98,13 @@
     },
     {
       "title": "Twilight",
-      "slug": "greenfee-twilight-so-feiertag-runde",
-      "order": 109,
+      "slug": "greenfee-twilight-sa-so-feiertag-runde",
+      "order": 105,
       "meta": {
         "preis_betrag": 55,
         "preis_auf_anfrage": 0,
         "preis_einheit": "runde",
-        "preis_tage": "So, Feiertag",
-        "preis_zusatz": "",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Greenfee"
-        ]
-      }
-    },
-    {
-      "title": "Twilight mit DGV-Ausweis „R“",
-      "slug": "greenfee-twilight-mit-dgv-ausweis-r-mo-sa-runde",
-      "order": 110,
-      "meta": {
-        "preis_betrag": 45,
-        "preis_auf_anfrage": 0,
-        "preis_einheit": "runde",
-        "preis_tage": "Mo–Sa",
-        "preis_zusatz": "",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Greenfee"
-        ]
-      }
-    },
-    {
-      "title": "Twilight mit DGV-Ausweis „R“",
-      "slug": "greenfee-twilight-mit-dgv-ausweis-r-so-feiertag-runde",
-      "order": 111,
-      "meta": {
-        "preis_betrag": 50,
-        "preis_auf_anfrage": 0,
-        "preis_einheit": "runde",
-        "preis_tage": "So, Feiertag",
+        "preis_tage": "Sa, So, Feiertag",
         "preis_zusatz": "",
         "preis_hervorheben": 0,
         "preis_leistungen": ""
@@ -232,7 +118,7 @@
     {
       "title": "Rangefee",
       "slug": "greenfee-rangefee-taeglich-tag",
-      "order": 112,
+      "order": 106,
       "meta": {
         "preis_betrag": 5,
         "preis_auf_anfrage": 0,
@@ -249,30 +135,11 @@
       }
     },
     {
-      "title": "Freundschaftsspiel",
-      "slug": "turnier-greenfee-freundschaftsspiel-taeglich-runde18",
-      "order": 200,
-      "meta": {
-        "preis_betrag": 40,
-        "preis_auf_anfrage": 0,
-        "preis_einheit": "runde18",
-        "preis_tage": "täglich",
-        "preis_zusatz": "",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Turnier-Greenfee"
-        ]
-      }
-    },
-    {
       "title": "Offenes Turnier",
       "slug": "turnier-greenfee-offenes-turnier-mo-fr-runde18",
-      "order": 201,
+      "order": 200,
       "meta": {
-        "preis_betrag": 50,
+        "preis_betrag": 45,
         "preis_auf_anfrage": 0,
         "preis_einheit": "runde18",
         "preis_tage": "Mo–Fr",
@@ -289,9 +156,9 @@
     {
       "title": "Offenes Turnier",
       "slug": "turnier-greenfee-offenes-turnier-sa-so-runde18",
-      "order": 202,
+      "order": 201,
       "meta": {
-        "preis_betrag": 60,
+        "preis_betrag": 55,
         "preis_auf_anfrage": 0,
         "preis_einheit": "runde18",
         "preis_tage": "Sa, So",
@@ -308,7 +175,7 @@
     {
       "title": "Offenes Turnier",
       "slug": "turnier-greenfee-offenes-turnier-taeglich-runde9",
-      "order": 203,
+      "order": 202,
       "meta": {
         "preis_betrag": 30,
         "preis_auf_anfrage": 0,
@@ -325,14 +192,14 @@
       }
     },
     {
-      "title": "Golf-Club Kürten e. V. Bergerhöhe",
-      "slug": "kooperation-golf-club-kuerten-e-v-bergerhoehe-freitags-runde18",
+      "title": "Golfclub Beispielstadt e. V.",
+      "slug": "kooperation-golfclub-beispielstadt-e-v-mo-fr-runde18",
       "order": 300,
       "meta": {
-        "preis_betrag": 40,
+        "preis_betrag": 45,
         "preis_auf_anfrage": 0,
         "preis_einheit": "runde18",
-        "preis_tage": "freitags",
+        "preis_tage": "Mo–Fr",
         "preis_zusatz": "Handicap bis 54",
         "preis_hervorheben": 0,
         "preis_leistungen": ""
@@ -344,71 +211,14 @@
       }
     },
     {
-      "title": "Golfclub Mettmann e. V.",
-      "slug": "kooperation-golfclub-mettmann-e-v-di-fr-runde18",
+      "title": "Golfpark Am See",
+      "slug": "kooperation-golfpark-am-see-mittwochs-freitags-runde18",
       "order": 301,
       "meta": {
-        "preis_betrag": 40,
-        "preis_auf_anfrage": 0,
-        "preis_einheit": "runde18",
-        "preis_tage": "Di–Fr",
-        "preis_zusatz": "Handicap bis 54",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Kooperation"
-        ]
-      }
-    },
-    {
-      "title": "Golfclub Haan-Düsseltal e. V.",
-      "slug": "kooperation-golfclub-haan-duesseltal-e-v-mittwochs-freitags-runde18",
-      "order": 302,
-      "meta": {
-        "preis_betrag": 40,
+        "preis_betrag": 45,
         "preis_auf_anfrage": 0,
         "preis_einheit": "runde18",
         "preis_tage": "mittwochs, freitags",
-        "preis_zusatz": "Handicap bis 54",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Kooperation"
-        ]
-      }
-    },
-    {
-      "title": "Golf Club Clostermanns Hof e. V.",
-      "slug": "kooperation-golf-club-clostermanns-hof-e-v-mittwochs-freitags-runde18",
-      "order": 303,
-      "meta": {
-        "preis_betrag": 50,
-        "preis_auf_anfrage": 0,
-        "preis_einheit": "runde18",
-        "preis_tage": "mittwochs, freitags",
-        "preis_zusatz": "Handicap bis 54",
-        "preis_hervorheben": 0,
-        "preis_leistungen": ""
-      },
-      "terms": {
-        "preiskategorie": [
-          "Kooperation"
-        ]
-      }
-    },
-    {
-      "title": "Golfclub Der Lüderich e. V.",
-      "slug": "kooperation-golfclub-der-luederich-e-v-freitags-runde18",
-      "order": 304,
-      "meta": {
-        "preis_betrag": 40,
-        "preis_auf_anfrage": 0,
-        "preis_einheit": "runde18",
-        "preis_tage": "freitags",
         "preis_zusatz": "Handicap bis 54",
         "preis_hervorheben": 0,
         "preis_leistungen": ""
@@ -504,9 +314,9 @@
         "preis_auf_anfrage": 1,
         "preis_einheit": "jahr",
         "preis_tage": "",
-        "preis_zusatz": "Mit eigener Aktie der Dohrmann Golfplatz AG oder mit Spielberechtigung (Aktienmiete). Die jährliche Spielberechtigungsgebühr nennen wir Ihnen im persönlichen Gespräch.",
+        "preis_zusatz": "Die aktuellen Beiträge und die Aufnahmegebühr nennen wir Ihnen im persönlichen Gespräch.",
         "preis_hervorheben": 1,
-        "preis_leistungen": "DGV-Mitgliedschaft und Handicapverwaltung\nUnbegrenztes Spielrecht auf 18 Loch – ohne Startzeiten\nNutzung der Übungsanlagen\nGOLFHOCHZEHN: greenfeefrei in den Partnerclubs des Verbunds\nUrlaubspartner-Netzwerk\nTeilnahme an Turnieren"
+        "preis_leistungen": "DGV-Mitgliedschaft und Handicapverwaltung\nUnbegrenztes Spielrecht auf 18 Loch\nNutzung der Übungsanlagen\nErmäßigtes Greenfee bei unseren Partnerclubs\nTeilnahme an Turnieren"
       },
       "terms": {
         "preiskategorie": [
@@ -515,15 +325,15 @@
       }
     },
     {
-      "title": "Partner eines Vollmitglieds",
-      "slug": "mitgliedschaft-partner-eines-vollmitglieds-monat",
+      "title": "Partnermitgliedschaft",
+      "slug": "mitgliedschaft-partnermitgliedschaft-monat",
       "order": 501,
       "meta": {
-        "preis_betrag": 115,
+        "preis_betrag": 100,
         "preis_auf_anfrage": 0,
         "preis_einheit": "monat",
         "preis_tage": "",
-        "preis_zusatz": "Angebot 2026, bei jährlicher Zahlung. Spielrecht Mo–So mit Handicap 54 oder DGV-Platzreife.",
+        "preis_zusatz": "Für Partner eines ordentlichen Mitglieds, bei jährlicher Zahlung.",
         "preis_hervorheben": 0,
         "preis_leistungen": ""
       },

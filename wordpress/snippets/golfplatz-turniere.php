@@ -29,7 +29,7 @@ function golfplatz_pcc_club(): string {
 }
 
 /**
- * Eigener Club und GOLFHOCHZEHN-Partnerclubs (Clubdaten → Gäste & Systeme → Partnerclubs).
+ * Eigener Club und Partnerclubs, z. B. eines Greenfee-Verbunds (Clubdaten → Gäste & Systeme → Partnerclubs).
  * Je Club: code (PC CADDIE, leer = nicht abgleichbar), name, kurz, website, kalender (Link ohne PC CADDIE), eigen.
  */
 function golfplatz_pcc_clubs(): array {
@@ -110,7 +110,7 @@ function golfplatz_pcc_turniere_lesen( DOMXPath $x ): array {
 			$a = $x->query( './/a[' . $bed . ']', $tr )->item( 0 );
 			return $a ? golfplatz_pcc_link( $a->getAttribute( 'href' ) ) : '';
 		};
-		// Kategorien vergibt jeder Club anders (Dreibäumen: D, H, S …; Schloss Haag: DAM, HER, SEN; Varmert: keine).
+		// Kategorien vergibt jeder Club anders (z. B. D, H, S … oder DAM, HER, SEN oder gar keine).
 		// Deshalb Kürzel vereinheitlichen und zusätzlich am Namen erkennen.
 		$codes = preg_split( '/\s+/', strtoupper( trim( $tr->getAttribute( 'data-kat' ) ) ) );
 		$codes = array_map( fn( $k ) => array( 'DAM' => 'D', 'HER' => 'H', 'SEN' => 'S', 'JUG' => 'J' )[ $k ] ?? $k, $codes );
@@ -153,7 +153,7 @@ function golfplatz_pcc_turniere_lesen( DOMXPath $x ): array {
 
 /**
  * Kommende Turniere eines Clubs. Manche Clubs haben den Standardkalender abgeschaltet und zeigen nur die Ansicht
- * „ts_calendar_turn_only“ (z. B. Velbert, Marienfeld) – dann diese lesen. Gibt array oder WP_Error zurück.
+ * „ts_calendar_turn_only“ (bei manchen Clubs) – dann diese lesen. Gibt array oder WP_Error zurück.
  */
 function golfplatz_pcc_kalender( string $club ) {
 	$letzter = null;
@@ -441,7 +441,7 @@ function golfplatz_turnier_zeile( WP_Post $p, int $heute, array $clubs = array()
 			$m( 'turnier_gaeste' ) ? 'offen für Gäste' : '',
 		)
 	);
-	// Club des Turniers (eigener Club oder GOLFHOCHZEHN-Partner); ältere Einträge ohne Club gehören zum eigenen
+	// Club des Turniers (eigener Club oder Partnerclub); ältere Einträge ohne Club gehören zum eigenen
 	$code = (string) $m( 'turnier_club' ) ?: golfplatz_pcc_club();
 	$club = $clubs[ $code ] ?? array( 'kurz' => (string) $m( 'turnier_club_name' ), 'name' => (string) $m( 'turnier_club_name' ), 'eigen' => false, 'website' => '' );
 	return array(
@@ -647,7 +647,8 @@ add_action(
 		}
 	}
 );
-add_action( 'golfplatz_pcc_sync', 'golfplatz_pcc_abgleich' );
+// Stündlich nur, wenn mindestens ein Club eine PC-CADDIE-Kennung hat (im Blueprint leer = kein Abruf, kein Fehlerprotokoll)
+add_action( 'golfplatz_pcc_sync', fn() => array_filter( array_column( golfplatz_pcc_clubs(), 'code' ) ) && golfplatz_pcc_abgleich() );
 
 add_action(
 	'admin_menu',

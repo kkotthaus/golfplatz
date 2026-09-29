@@ -9,7 +9,7 @@ import { components } from './komponenten.mjs';
 import { acssEinstellungen } from './acss-farben.mjs';
 import { loops } from './loops.mjs';
 import { handbuchHtml } from './handbuch.mjs';
-import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, news, preise, kurse, kurseAnmeldung, lochwettspiele } from '../../prototype/src/data.mjs';
+import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, news, preise, kurse, kurseAnmeldung, lochwettspiele, mannschaften, ligaspiele } from '../../prototype/src/data.mjs';
 
 const hier = dirname(fileURLToPath(import.meta.url));
 const dist = join(hier, 'dist');
@@ -145,7 +145,7 @@ writeFileSync(
 );
 console.log(`daten/post.json  (${news.length} Beispiel-Beiträge)`);
 
-// Preise (Beitragstyp „preis“) mit Preiskategorie. Reihenfolge über menu_order wie auf dreibaeumen.de.
+// Preise (Beitragstyp „preis“) mit Preiskategorie. Reihenfolge über menu_order wie in data.mjs.
 const preisKategorien = [
   ['greenfee', 'Greenfee'],
   ['turnier', 'Turnier-Greenfee'],
@@ -208,8 +208,59 @@ const lwItems = lochwettspiele.map((lw) => ({
 writeFileSync(join(dist, 'daten/lochwettspiel.json'), JSON.stringify({ key: 'lw_jahr', items: lwItems }, null, 2) + '\n');
 console.log(`daten/lochwettspiel.json  (${lwItems.length} Turniere)`);
 
-// Mannschaften, Ligaspiele und Gastclubs kommen vom Golfverband NRW (snippets/golfplatz-liga-sync.php),
-// Spieler und Spielberichte pflegt der Club. Die Platzhalter aus dem Prototyp werden nicht mehr importiert.
+// Mannschaften und Ligaspiele: Mit eingerichtetem Ligaportal (Clubdaten › Gäste & Systeme) kommen sie vom Landesverband
+// (snippets/golfplatz-liga-sync.php). Ohne Ligaportal – wie im Blueprint – importiert golfplatz/import-content die
+// Platzhalter aus dem Prototyp (erst mannschaft, dann ligaspiel). Spieler und Spielberichte pflegt der Club.
+const geschlechtVon = { weiblich: 'weiblich', maennlich: 'maennlich', gemischt: 'gemischt' };
+writeFileSync(
+  join(dist, 'daten/mannschaft.json'),
+  JSON.stringify(
+    {
+      key: 'slug',
+      items: mannschaften.map((m, i) => ({
+        title: m.titel,
+        slug: m.slug,
+        order: (i + 1) * 10,
+        meta: {
+          mannschaft_altersklasse: m.ak === 'Clubmannschaft' ? 'club' : m.ak.toLowerCase(),
+          mannschaft_nummer: m.nr,
+          mannschaft_geschlecht: geschlechtVon[m.geschlecht],
+          mannschaft_liga: m.liga,
+        },
+      })),
+    },
+    null,
+    2,
+  ) + '\n',
+);
+console.log(`daten/mannschaft.json  (${mannschaften.length} Platzhalter-Mannschaften)`);
+const ligaTitel = Object.fromEntries(mannschaften.map((m) => [m.slug, m]));
+writeFileSync(
+  join(dist, 'daten/ligaspiel.json'),
+  JSON.stringify(
+    {
+      key: 'slug',
+      items: ligaspiele.map((s) => ({
+        title: `${ligaTitel[s.mannschaft].titel} · ${s.spieltag}. Spieltag`,
+        slug: s.id,
+        meta: {
+          ligaspiel_mannschaft: { '@post': `mannschaft:${s.mannschaft}` },
+          ligaspiel_spieltag: s.spieltag,
+          // Meta Box datetime mit timestamp=true: Ortszeit als Unix-Zeit
+          ligaspiel_termin: Date.UTC(+s.datum.slice(0, 4), +s.datum.slice(5, 7) - 1, +s.datum.slice(8, 10), +s.uhrzeit.slice(0, 2), +s.uhrzeit.slice(3, 5)) / 1000,
+          ligaspiel_spielort: s.spielort,
+          ligaspiel_heimspiel: s.heim ? 1 : 0,
+          ligaspiel_platzierung: s.platzierung ?? '',
+          ligaspiel_saison: +s.datum.slice(0, 4),
+          ligaspiel_liga: ligaTitel[s.mannschaft].liga,
+        },
+      })),
+    },
+    null,
+    2,
+  ) + '\n',
+);
+console.log(`daten/ligaspiel.json  (${ligaspiele.length} Platzhalter-Ligaspiele)`);
 
 // Einstellungsseiten für golfplatz/import-settings. Nur die aufgeführten Felder werden überschrieben.
 // Öffnungszeiten je Bereich; Beispiel-Ausnahmen aus dem Prototyp werden nicht übernommen.
@@ -239,31 +290,37 @@ const einstellungen = {
     anmeldung_hinweis: club.anmeldung.hinweis,
     ruhetag_hinweis: club.anmeldung.ruhetag,
     greenfee_hinweise: preise.hinweise,
-    greenfee_fussnote: '„R“ = DGV-Ausweis mit R-Kennzeichnung.',
+    greenfee_fussnote: '',
     kooperationen_hinweis: preise.kooperationenHinweis,
-    // PC CADDIE://online, Club-Kennung aus der Einbindung auf dreibaeumen.de › Sport › Turniere
-    pccaddie_code: '0494538',
-    // GOLFHOCHZEHN-Partnerclubs in NRW (golfhochzehn.de/clubs, Stand 2026-09-28); Kennungen aus der Einbindung auf
-    // den Club-Websites bzw. der Clubauswahl von PC CADDIE. Siegen-Olpe nutzt kein PC CADDIE (PDF-Kalender).
-    partnerclubs: [
-      { name: 'Golfclub Velbert – Gut Kuhlendahl e.V.', kurzname: 'Velbert', pccaddie_code: '0494503', website: 'https://golfclub-velbert.de/', kalender_link: '' },
-      { name: 'Golf-Club Marienfeld e.V.', kurzname: 'Marienfeld', pccaddie_code: '0494449', website: 'https://www.gc-marienfeld.de/', kalender_link: '' },
-      { name: 'Golfclub Gut Berge Gevelsberg/Wetter e.V.', kurzname: 'Gut Berge', pccaddie_code: '0494529', website: 'https://www.aufgutberge.de/', kalender_link: '' },
-      { name: 'Golfclub Schloss Haag e.V.', kurzname: 'Schloss Haag', pccaddie_code: '0494523', website: 'https://www.gc-schloss-haag.de/', kalender_link: '' },
-      { name: 'Golfclub Schwarze Heide Bottrop-Kirchhellen e.V.', kurzname: 'Schwarze Heide', pccaddie_code: '0494412', website: 'https://www.gc-schwarze-heide.de/', kalender_link: '' },
-      { name: 'Golfclub Siegen-Olpe e.V.', kurzname: 'Siegen-Olpe', pccaddie_code: '', website: 'https://www.gcso.de/', kalender_link: 'https://gcso-backend.web.reaze.dev/fileadmin/user_upload/downloads/GSCO-Wettspielkalender_2026_RZ_WEB.pdf' },
-      { name: 'Golf-Club Varmert e.V.', kurzname: 'Varmert', pccaddie_code: '0494483', website: 'https://www.golfclub-varmert.de/', kalender_link: '' },
-      { name: 'Golfpark Renneshof', kurzname: 'Renneshof', pccaddie_code: '0494587', website: 'https://gc-renneshof.de/', kalender_link: '' },
-      { name: 'Land-Golf-Club Schloss Moyland e.V.', kurzname: 'Schloss Moyland', pccaddie_code: '0494439', website: 'https://landgolfclub.de/', kalender_link: '' },
-    ],
-    // Twilight laut dreibaeumen.de › Gäste › Greenfee; Koordinaten: Hückeswagen (für den Sonnenuntergang)
+    // Anbindungen (alle aus data.mjs; im Blueprint leer = kein Abruf)
+    pccaddie_code: club.pccaddieCode,
+    partnerclubs: club.partnerclubs,
+    verband_name: club.verband.name,
+    verband_liga_web: club.verband.ligaWeb,
+    verband_liga_api: club.verband.ligaApi,
+    verband_suchbegriff: club.verband.suchbegriff,
+    // Twilight: Regel und Ort für den Sonnenuntergang
     twilight_regel: 'Täglich bei Start ab drei Stunden vor Sonnenuntergang.',
     twilight_stunden: 3,
     startabstand: 8,
     flight_groesse: 3,
     spielzeit_loch: 15,
     turnier_puffer: 30,
-    club_geo: '51.145, 7.344',
+    club_geo: club.geo,
+    // Auftritt und clubeigene Texte (golfplatz-club.php)
+    club_logoname: club.logoName,
+    club_region: club.region,
+    club_logo: null,
+    club_logo_hell: null,
+    club_karte: null,
+    club_routenlink: '',
+    platz_beschreibung: club.texte.platzBeschreibung,
+    mitgliedschaft_lead: club.texte.mitgliedschaftLead,
+    mitgliedschaft_kontakt: club.texte.mitgliedschaftKontakt,
+    aufnahmeantrag_url: club.texte.aufnahmeantragUrl,
+    club_betreiber_hinweis: club.texte.betreiberHinweis,
+    recht_datenschutz_kontakt: `${club.name}, ${club.adresse.join(', ')}, ${club.email}`,
+    social_youtube: '',
     restaurant_name: restaurant.name,
     restaurant_telefon: restaurant.telefon,
     restaurant_hinweis: restaurant.hinweis,

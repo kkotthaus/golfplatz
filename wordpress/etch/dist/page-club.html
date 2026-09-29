@@ -19,7 +19,7 @@
 <!-- wp:etch/text {"content":"Club \u0026 Kontakt"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"page-hero__lead"}} -->
-<!-- wp:etch/text {"content":"Golf im Bergischen Land – in {options.metabox.clubdaten.club_ort}. Ansprechpartner, Anfahrt und Kontakt."} /-->
+<!-- wp:etch/text {"content":"Golf in {options.metabox.clubdaten.club_ort}. Ansprechpartner, Anfahrt und Kontakt."} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
@@ -87,9 +87,11 @@
 <!-- wp:etch/component {"ref":"__REF_Personenkarten__","attributes":{"liste":"team","spalten":"3"}} -->
 
 <!-- /wp:etch/component -->
-<!-- wp:etch/element {"tag":"p","attributes":{"class":"small spacer-top"}} -->
-<!-- wp:etch/text {"content":"Betreibergesellschaft des Golfplatzes ist die Dohrmann Golfplatz AG. Das Greenkeeping erfolgt in Zusammenarbeit mit der Sommerfeld AG."} /-->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.club.hat_club_betreiber_hinweis","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.club.hat_club_betreiber_hinweis"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"small spacer-top"}} -->
+<!-- wp:etch/raw-html {"content":"{options.golfplatz.club.club_betreiber_hinweis}"} /-->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"section","attributes":{"id":"abteilungen","class":"section"},"metadata":{"name":"Abteilungen"}} -->

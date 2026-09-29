@@ -19,7 +19,7 @@
 <!-- wp:etch/text {"content":"Ihr Heimatclub"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"page-hero__lead"}} -->
-<!-- wp:etch/text {"content":"Unbegrenzt spielen – ohne Startzeiten, mit DGV-Mitgliedschaft, GOLFHOCHZEHN und Urlaubspartnern. Mitglied werden Sie mit einer Aktie der Dohrmann Golfplatz AG oder mit einer Spielberechtigung."} /-->
+<!-- wp:etch/text {"content":"{options.golfplatz.club.mitgliedschaft_lead}"} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
@@ -58,7 +58,7 @@
 <!-- wp:etch/text {"content":"Persönliches Gespräch"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"steps__text"}} -->
-<!-- wp:etch/text {"content":"Aktie oder Spielberechtigung? Wir beraten Sie und nennen Ihnen die aktuellen Konditionen."} /-->
+<!-- wp:etch/text {"content":"Welches Modell passt zu Ihnen? Wir beraten Sie und nennen Ihnen die aktuellen Konditionen."} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"li","attributes":{"class":"steps__item"}} -->
@@ -66,7 +66,7 @@
 <!-- wp:etch/text {"content":"Aufnahmeantrag"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"steps__text"}} -->
-<!-- wp:etch/text {"content":"Antrag als PDF herunterladen, ausfüllen und im Sekretariat abgeben – oder uns anrufen oder schreiben."} /-->
+<!-- wp:etch/text {"content":"Antrag ausfüllen und im Sekretariat abgeben – oder uns anrufen oder schreiben."} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
@@ -79,8 +79,11 @@
 <!-- wp:etch/text {"content":"Aufnahmeantrag"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
-<!-- wp:etch/text {"content":"Rufen Sie uns an oder schreiben Sie uns, wir melden uns für ein persönliches Gespräch. Ansprechpartner ist Erich Buchholz (Clubmanagement)."} /-->
+<!-- wp:etch/text {"content":"Rufen Sie uns an oder schreiben Sie uns, wir melden uns für ein persönliches Gespräch."} /-->
 <!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.club.hat_mitgliedschaft_kontakt","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.club.hat_mitgliedschaft_kontakt"} -->
+<!-- wp:etch/raw-html {"content":"{options.golfplatz.club.mitgliedschaft_kontakt}"} /-->
+<!-- /wp:etch/condition -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
 <!-- wp:etch/element {"tag":"a","attributes":{"href":"tel:{options.metabox.clubdaten.club_telefon.replaceAll(' ', '').replaceAll('-', '')}","class":"contact-line"}} -->
 <!-- wp:etch/element {"tag":"svg","attributes":{"viewBox":"0 0 24 24","aria-hidden":"true","focusable":"false","class":"icon icon\u002d\u002dphone"}} -->
@@ -102,11 +105,13 @@
 <!-- wp:etch/text {"content":" {options.metabox.clubdaten.club_email}"} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.club.hat_aufnahmeantrag_url","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.club.hat_aufnahmeantrag_url"} -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
-<!-- wp:etch/element {"tag":"a","attributes":{"href":"https://dreibaeumen.de/wp-content/uploads/2020/07/Aufnahmeantrag_GC3B.pdf","class":"btn btn\u002d\u002dprimary"}} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{options.golfplatz.club.aufnahmeantrag_url}","class":"btn btn\u002d\u002dprimary"}} -->
 <!-- wp:etch/text {"content":"Aufnahmeantrag als PDF"} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"div","attributes":{},"metadata":{"name":"Häufige Fragen"}} -->
 <!-- wp:etch/element {"tag":"h3","attributes":{}} -->
@@ -115,31 +120,31 @@
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"accordion"}} -->
 <!-- wp:etch/element {"tag":"details","attributes":{"class":"accordion__item"}} -->
 <!-- wp:etch/element {"tag":"summary","attributes":{"class":"accordion__summary"}} -->
-<!-- wp:etch/text {"content":"Warum eine Aktie?"} /-->
+<!-- wp:etch/text {"content":"Was brauche ich für die Aufnahme?"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"accordion__content"}} -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
-<!-- wp:etch/text {"content":"Voraussetzung für die ordentliche Mitgliedschaft ist eine der 800 Aktien der Dohrmann Golfplatz AG. Sie können eine Aktie kaufen und später verkaufen, verschenken oder vererben – oder eine Spielberechtigung erwerben (Aktienmiete)."} /-->
+<!-- wp:etch/text {"content":"Für das Spiel auf dem Platz die DGV-Platzreife oder ein Handicap. Beides können Sie auch bei uns in der Golfschule erwerben."} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"details","attributes":{"class":"accordion__item"}} -->
 <!-- wp:etch/element {"tag":"summary","attributes":{"class":"accordion__summary"}} -->
-<!-- wp:etch/text {"content":"Muss ich Startzeiten buchen?"} /-->
+<!-- wp:etch/text {"content":"Kann ich vorher auf dem Platz spielen?"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"accordion__content"}} -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
-<!-- wp:etch/text {"content":"Nein. Auf unserem Platz gibt es keine festen Startzeiten."} /-->
+<!-- wp:etch/text {"content":"Ja. Spielen Sie eine Runde als Gast – im persönlichen Gespräch rechnen wir Ihr Greenfee auf Wunsch an."} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"details","attributes":{"class":"accordion__item"}} -->
 <!-- wp:etch/element {"tag":"summary","attributes":{"class":"accordion__summary"}} -->
-<!-- wp:etch/text {"content":"Was ist GOLFHOCHZEHN?"} /-->
+<!-- wp:etch/text {"content":"Gibt es Partnerclubs?"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"accordion__content"}} -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
-<!-- wp:etch/text {"content":"Ein Verbund von Golfclubs, auf deren Plätzen Mitglieder greenfeefrei spielen."} /-->
+<!-- wp:etch/text {"content":"Ja. Auf den Plätzen unserer Partnerclubs spielen Mitglieder zu besonderen Konditionen – Details auf der Seite Greenfee \u0026 Preise."} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->

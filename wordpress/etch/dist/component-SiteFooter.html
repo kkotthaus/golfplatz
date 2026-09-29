@@ -2,14 +2,21 @@
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"site-footer__inner container"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"site-footer__col site-footer__col\u002d\u002dbrand"}} -->
 <!-- wp:etch/element {"tag":"a","attributes":{"href":"/","class":"site-logo"},"metadata":{"name":"Logo"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.club.hat_logo","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.club.hat_logo"} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{options.golfplatz.club.logo_hell}","alt":"{options.metabox.clubdaten.club_name}","class":"site-logo__bild"}} -->
+
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.club.hat_logo","operator":"isFalsy","rightHand":null},"conditionString":"!options.golfplatz.club.hat_logo"} -->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"site-logo__text"}} -->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"site-logo__name"}} -->
 <!-- wp:etch/text {"content":"{options.metabox.clubdaten.club_name}"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"site-logo__since"}} -->
-<!-- wp:etch/text {"content":"{options.metabox.clubdaten.club_ort} · Bergisches Land"} /-->
+<!-- wp:etch/text {"content":"{options.golfplatz.club.unterzeile}"} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"address","attributes":{"class":"site-footer__address"}} -->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"site-footer__line"}} -->

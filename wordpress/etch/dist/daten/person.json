@@ -2,8 +2,8 @@
   "key": "slug",
   "items": [
     {
-      "title": "Michael Dattner",
-      "slug": "michael-dattner",
+      "title": "Max Mustermann",
+      "slug": "max-mustermann",
       "order": 10,
       "meta": {
         "person_funktion": "Präsident",
@@ -18,13 +18,13 @@
       }
     },
     {
-      "title": "Erich Buchholz",
-      "slug": "erich-buchholz",
+      "title": "Erika Musterfrau",
+      "slug": "erika-musterfrau",
       "order": 20,
       "meta": {
-        "person_funktion": "Vizepräsident, Spielführer · Clubmanagement",
-        "person_email": "erich.buchholz@dreibaeumen.de",
-        "person_telefon": "02192 8547-15",
+        "person_funktion": "Vizepräsidentin · Clubmanagement",
+        "person_email": "clubmanagement@example.org",
+        "person_telefon": "01234 5678-15",
         "person_text": ""
       },
       "terms": {
@@ -35,12 +35,12 @@
       }
     },
     {
-      "title": "Friedhelm Klüting",
-      "slug": "friedhelm-klueting",
+      "title": "Peter Beispiel",
+      "slug": "peter-beispiel",
       "order": 30,
       "meta": {
-        "person_funktion": "Vorstand Finanzen/Platz",
-        "person_email": "friedhelm.klueting@dreibaeumen.de",
+        "person_funktion": "Schatzmeister",
+        "person_email": "finanzen@example.org",
         "person_telefon": "",
         "person_text": ""
       },
@@ -51,27 +51,11 @@
       }
     },
     {
-      "title": "Dr. Anne Schindler",
-      "slug": "dr-anne-schindler",
+      "title": "Sabine Vorlage",
+      "slug": "sabine-vorlage",
       "order": 40,
       "meta": {
-        "person_funktion": "Vorstand, Schriftführerin",
-        "person_email": "dr.anne.schindler@dreibaeumen.de",
-        "person_telefon": "",
-        "person_text": ""
-      },
-      "terms": {
-        "personengruppe": [
-          "Vorstand"
-        ]
-      }
-    },
-    {
-      "title": "Angelika Rahm",
-      "slug": "angelika-rahm",
-      "order": 50,
-      "meta": {
-        "person_funktion": "Vorstand Events",
+        "person_funktion": "Schriftführerin",
         "person_email": "",
         "person_telefon": "",
         "person_text": ""
@@ -83,12 +67,12 @@
       }
     },
     {
-      "title": "Dr. Julia Wolf",
-      "slug": "dr-julia-wolf",
-      "order": 60,
+      "title": "Thomas Platzhalter",
+      "slug": "thomas-platzhalter",
+      "order": 50,
       "meta": {
         "person_funktion": "Vorstand Jugend",
-        "person_email": "dr.julia.wolf@dreibaeumen.de",
+        "person_email": "jugend@example.org",
         "person_telefon": "",
         "person_text": ""
       },
@@ -99,13 +83,13 @@
       }
     },
     {
-      "title": "Graham Thomas",
-      "slug": "graham-thomas",
-      "order": 70,
+      "title": "Jonas Exempel",
+      "slug": "jonas-exempel",
+      "order": 60,
       "meta": {
-        "person_funktion": "Geschäftsführer Dohrmann Golfplatz AG · verantwortlich für den Golfplatz",
-        "person_email": "graham.thomas@dreibaeumen.de",
-        "person_telefon": "02192 8547-14",
+        "person_funktion": "Geschäftsführer der Betreibergesellschaft",
+        "person_email": "",
+        "person_telefon": "01234 5678-14",
         "person_text": ""
       },
       "terms": {
@@ -115,13 +99,13 @@
       }
     },
     {
-      "title": "Dominik Margenberg",
-      "slug": "dominik-margenberg",
-      "order": 80,
+      "title": "Laura Muster",
+      "slug": "laura-muster",
+      "order": 70,
       "meta": {
         "person_funktion": "Sekretariat",
-        "person_email": "sekretariat@dreibaeumen.de",
-        "person_telefon": "02192 8547-20",
+        "person_email": "info@example.org",
+        "person_telefon": "01234 5678-0",
         "person_text": ""
       },
       "terms": {
@@ -131,13 +115,13 @@
       }
     },
     {
-      "title": "Claudia Buchholz",
-      "slug": "claudia-buchholz",
-      "order": 90,
+      "title": "Nina Probe",
+      "slug": "nina-probe",
+      "order": 80,
       "meta": {
         "person_funktion": "Service-Team · Captain Damengolf",
-        "person_email": "proshop@dreibaeumen.de",
-        "person_telefon": "02192 8547-12",
+        "person_email": "proshop@example.org",
+        "person_telefon": "01234 5678-12",
         "person_text": ""
       },
       "terms": {
@@ -148,61 +132,29 @@
       }
     },
     {
-      "title": "Anita Thomas",
-      "slug": "anita-thomas",
+      "title": "Tom Schwung",
+      "slug": "tom-schwung",
+      "order": 90,
+      "meta": {
+        "person_funktion": "PGA-Professional",
+        "person_email": "golfschule@example.org",
+        "person_telefon": "01234 5678-30",
+        "person_text": ""
+      },
+      "terms": {
+        "personengruppe": [
+          "Golfschule"
+        ]
+      }
+    },
+    {
+      "title": "Lisa Abschlag",
+      "slug": "lisa-abschlag",
       "order": 100,
-      "meta": {
-        "person_funktion": "Service-Team",
-        "person_email": "proshop@dreibaeumen.de",
-        "person_telefon": "02192 8547-12",
-        "person_text": ""
-      },
-      "terms": {
-        "personengruppe": [
-          "Service & Proshop"
-        ]
-      }
-    },
-    {
-      "title": "Christian Durchner",
-      "slug": "christian-durchner",
-      "order": 110,
-      "meta": {
-        "person_funktion": "PGA-Professional",
-        "person_email": "info@christiandurchner.de",
-        "person_telefon": "0171 2610639",
-        "person_text": ""
-      },
-      "terms": {
-        "personengruppe": [
-          "Golfschule"
-        ]
-      }
-    },
-    {
-      "title": "Bastian Klabunde",
-      "slug": "bastian-klabunde",
-      "order": 120,
-      "meta": {
-        "person_funktion": "PGA-Professional",
-        "person_email": "bastian-klabunde@live.de",
-        "person_telefon": "0176 61877244",
-        "person_text": ""
-      },
-      "terms": {
-        "personengruppe": [
-          "Golfschule"
-        ]
-      }
-    },
-    {
-      "title": "Tristan Giovanni Iser",
-      "slug": "tristan-giovanni-iser",
-      "order": 130,
       "meta": {
         "person_funktion": "Professional",
         "person_email": "",
-        "person_telefon": "0173 2711300",
+        "person_telefon": "",
         "person_text": ""
       },
       "terms": {
@@ -212,9 +164,9 @@
       }
     },
     {
-      "title": "Felix Pregl",
-      "slug": "felix-pregl",
-      "order": 140,
+      "title": "Karl Rasen",
+      "slug": "karl-rasen",
+      "order": 110,
       "meta": {
         "person_funktion": "Headgreenkeeper",
         "person_email": "",
@@ -228,28 +180,12 @@
       }
     },
     {
-      "title": "Klaus Herder",
-      "slug": "klaus-herder",
-      "order": 150,
+      "title": "Heinz Beispiel",
+      "slug": "heinz-beispiel",
+      "order": 120,
       "meta": {
         "person_funktion": "Captain Herrengolf",
         "person_email": "",
-        "person_telefon": "",
-        "person_text": ""
-      },
-      "terms": {
-        "personengruppe": [
-          "Captains"
-        ]
-      }
-    },
-    {
-      "title": "Dieter W. Krause",
-      "slug": "dieter-w-krause",
-      "order": 160,
-      "meta": {
-        "person_funktion": "Captain Seniorengolf „AK 50 Plus“",
-        "person_email": "dwkrause@dreibaeumen.de",
         "person_telefon": "",
         "person_text": ""
       },
