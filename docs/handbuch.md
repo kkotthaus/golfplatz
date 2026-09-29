@@ -220,6 +220,15 @@ Die Turniere kommen **automatisch** aus PC CADDIE. Einmal pro Stunde liest die W
 - Wird ein kommendes Turnier in PC CADDIE gelöscht, zeigt die Website es beim nächsten Abgleich als **abgesagt** an. Ändert sich in PC CADDIE das Datum, erscheint es als **„Verschoben vom …“**.
 - Namen aus Start- und Ergebnislisten übernimmt die Website aus Datenschutzgründen nicht. Sie verlinkt auf PC CADDIE.
 
+### Die Turnierliste im Backend
+
+**Turniere (PC CADDIE) › Alle Turniere** zeigt zunächst nur die **kommenden Turniere des eigenen Clubs**, nach Termin sortiert, mit den Spalten Termin, Club und Status (etwa „Abgesagt“). Über der Liste lässt sich umschalten:
+
+- **Club**: Heimatclub, einer der Partnerclubs oder alle Clubs.
+- **Zeitraum**: kommende, vergangene oder alle Turniere.
+
+Nach der Auswahl auf **Auswahl einschränken** klicken.
+
 ### Turnier absagen oder verschieben
 
 Fällt ein Turnier aus, etwa wegen Unwetter, oder wird es auf einen anderen Tag gelegt:

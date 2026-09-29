@@ -678,3 +678,111 @@ function golfplatz_pcc_seite_admin(): void {
 	}
 	echo '</ul></div>';
 }
+
+/* ---------- Backend-Liste „Alle Turniere“: standardmäßig nur kommende Turniere des Heimatclubs ---------- */
+
+/** Filter der Liste aus der URL: Club (heim, alle oder PC-CADDIE-Kennung) und Zeitraum (kommend, vergangen, alle). */
+function golfplatz_turnier_listenfilter(): array {
+	// phpcs:disable WordPress.Security.NonceVerification
+	$club     = isset( $_GET['turnier_club'] ) ? sanitize_key( wp_unslash( $_GET['turnier_club'] ) ) : 'heim';
+	$zeitraum = isset( $_GET['turnier_zeitraum'] ) ? sanitize_key( wp_unslash( $_GET['turnier_zeitraum'] ) ) : 'kommend';
+	// phpcs:enable
+	return array(
+		'club'     => $club ?: 'heim',
+		'zeitraum' => in_array( $zeitraum, array( 'kommend', 'vergangen', 'alle' ), true ) ? $zeitraum : 'kommend',
+	);
+}
+
+add_action(
+	'pre_get_posts',
+	function ( WP_Query $q ) {
+		if ( ! is_admin() || ! $q->is_main_query() || 'turnier' !== $q->get( 'post_type' ) || 'edit.php' !== ( $GLOBALS['pagenow'] ?? '' ) ) {
+			return;
+		}
+		$f     = golfplatz_turnier_listenfilter();
+		$heute = gmmktime( 0, 0, 0, (int) wp_date( 'n' ), (int) wp_date( 'j' ), (int) wp_date( 'Y' ) );
+		$meta  = array( 'relation' => 'AND' );
+		if ( 'heim' === $f['club'] ) {
+			// Ältere Einträge ohne Club gehören zum Heimatclub
+			$meta[] = array(
+				'relation' => 'OR',
+				array( 'key' => 'turnier_club', 'value' => golfplatz_pcc_club() ),
+				array( 'key' => 'turnier_club', 'compare' => 'NOT EXISTS' ),
+				array( 'key' => 'turnier_club', 'value' => '' ),
+			);
+		} elseif ( 'alle' !== $f['club'] ) {
+			$meta[] = array( 'key' => 'turnier_club', 'value' => $f['club'] );
+		}
+		if ( 'kommend' === $f['zeitraum'] ) {
+			// auch Turniere, die auf einen kommenden Termin verschoben sind
+			$meta[] = array(
+				'relation' => 'OR',
+				array( 'key' => 'turnier_beginn', 'value' => $heute, 'compare' => '>=', 'type' => 'NUMERIC' ),
+				array( 'key' => 'turnier_neuer_termin', 'value' => $heute, 'compare' => '>=', 'type' => 'NUMERIC' ),
+			);
+		} elseif ( 'vergangen' === $f['zeitraum'] ) {
+			$meta[] = array( 'key' => 'turnier_beginn', 'value' => $heute, 'compare' => '<', 'type' => 'NUMERIC' );
+		}
+		$q->set( 'meta_query', $meta );
+		// Sortierung nach Termin: kommende aufsteigend, sonst neueste zuerst (Spaltenkopf „Termin“ dreht sie um)
+		if ( ! $q->get( 'orderby' ) || 'termin' === $q->get( 'orderby' ) ) {
+			$q->set( 'meta_key', 'turnier_beginn' );
+			$q->set( 'orderby', 'meta_value_num' );
+			if ( ! isset( $_GET['order'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+				$q->set( 'order', 'kommend' === $f['zeitraum'] ? 'ASC' : 'DESC' );
+			}
+		}
+	}
+);
+
+// Auswahlfelder über der Liste
+add_action(
+	'restrict_manage_posts',
+	function ( $typ ) {
+		if ( 'turnier' !== $typ ) {
+			return;
+		}
+		$f     = golfplatz_turnier_listenfilter();
+		$clubs = array( 'heim' => 'Heimatclub' );
+		foreach ( golfplatz_pcc_clubs() as $c ) {
+			if ( ! $c['eigen'] && '' !== $c['code'] ) {
+				$clubs[ $c['code'] ] = $c['kurz'];
+			}
+		}
+		$clubs['alle'] = 'Alle Clubs';
+		echo '<label class="screen-reader-text" for="turnier_club">Club</label><select name="turnier_club" id="turnier_club">';
+		foreach ( $clubs as $wert => $label ) {
+			printf( '<option value="%s"%s>%s</option>', esc_attr( $wert ), selected( $f['club'], (string) $wert, false ), esc_html( $label ) );
+		}
+		echo '</select><label class="screen-reader-text" for="turnier_zeitraum">Zeitraum</label><select name="turnier_zeitraum" id="turnier_zeitraum">';
+		foreach ( array( 'kommend' => 'Kommende Turniere', 'vergangen' => 'Vergangene Turniere', 'alle' => 'Alle Termine' ) as $wert => $label ) {
+			printf( '<option value="%s"%s>%s</option>', esc_attr( $wert ), selected( $f['zeitraum'], $wert, false ), esc_html( $label ) );
+		}
+		echo '</select>';
+	}
+);
+
+// Spalten Termin, Club, Status statt Veröffentlichungsdatum
+add_filter(
+	'manage_turnier_posts_columns',
+	function ( $spalten ) {
+		unset( $spalten['date'] );
+		return array_slice( $spalten, 0, 2, true ) + array( 'termin' => 'Termin' ) + array_slice( $spalten, 2, null, true ) + array( 'club' => 'Club', 'status' => 'Status' );
+	}
+);
+add_filter( 'manage_edit-turnier_sortable_columns', fn( $s ) => $s + array( 'termin' => 'termin' ) );
+add_action(
+	'manage_turnier_posts_custom_column',
+	function ( $spalte, $id ) {
+		$s = golfplatz_turnier_status( (int) $id );
+		if ( 'termin' === $spalte ) {
+			echo esc_html( wp_date( 'D, d.m.Y', $s['beginn'], new DateTimeZone( 'UTC' ) ) . ( $s['hat_uhrzeit'] ? ', ' . gmdate( 'H:i', $s['beginn'] ) . ' Uhr' : '' ) );
+		} elseif ( 'club' === $spalte ) {
+			echo esc_html( (string) get_post_meta( $id, 'turnier_club_name', true ) ?: 'Heimatclub' );
+		} elseif ( 'status' === $spalte ) {
+			echo $s['text'] ? '<strong>' . esc_html( $s['text'] ) . '</strong>' : 'findet statt';
+		}
+	},
+	10,
+	2
+);
