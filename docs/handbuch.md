@@ -392,7 +392,7 @@ Menü **Spielbahnen**. Für jede der 18 Bahnen gibt es einen Eintrag „Bahn 1�
 - **Par Herren**, **Par Damen**, **Vorgabe (HCP-Reihenfolge)** (1 = schwerste Bahn).
 - **Längen in Metern je Abschlag** (Gelb, Blau, Rot, Orange). Die Gesamtlängen der Scorekarte rechnet die Website daraus.
 - **Beschreibung** und **Spieltipp** erscheinen auf der Seite der Bahn.
-- **Bahngrafik / Luftbild** erscheint auf der Seite der Bahn neben den Eckdaten (am besten quadratisch, mindestens 800 × 800 Pixel). Ohne Bild steht dort ein Platzhalter.
+- **Bahngrafik / Luftbild** erscheint auf der Seite der Bahn neben den Eckdaten (am besten quadratisch, mindestens 800 × 800 Pixel). Ohne Bild steht dort ein Platzhalter. Ein Klick auf das Bild zeigt es groß an (Lightbox, auch im Birdiebook); dafür wird das Original in voller Größe genutzt.
 - **Bilder**, **Video**.
 
 ### Birdiebook (Entfernungen und Grün)
@@ -407,7 +407,7 @@ Das Birdiebook ist das Bahnen-Heft für das Handy (Platz & Bahnen › Birdiebook
 
 Im Abschnitt **Pin-Positionen auf diesem Grün** einmalig für jede der sechs Positionen eintragen, wo sie liegt: **Tiefe** (vorne, Mitte, hinten; vorne = zum Abschlag hin), **Seite** (aus Sicht des Spielers) und optional **Meter ab Grünanfang**. Welche Position gerade gesteckt ist, stellen Sie im **Platzstatus** ein.
 
-Darunter im Feld **Grafik der Pin-Positionen** ein Bild des Grüns mit den Positionen 1–6 hochladen (Spielrichtung von unten, am besten PNG mit transparentem Hintergrund). Es erscheint auf der Seite der Bahn unter der Bahngrafik und im Birdiebook unter den Entfernungen. Ohne Bild entfällt der Block.
+Darunter im Feld **Grafik der Pin-Positionen** ein Bild des Grüns mit den Positionen 1–6 hochladen (Spielrichtung von unten, am besten PNG mit transparentem Hintergrund). Es erscheint auf der Seite der Bahn unter der Bahngrafik und im Birdiebook unter den Entfernungen. Ohne Bild entfällt der Block. Auch diese Grafik lässt sich per Klick vergrößern.
 
 ### Course Rating und Slope
 

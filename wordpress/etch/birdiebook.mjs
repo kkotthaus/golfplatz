@@ -30,12 +30,40 @@ const parWerte = () => [
 ];
 
 /**
+ * Lightbox von OhMyEtch (Komponenten „Lightbox“ und „Lightbox Item“, PhotoSwipe).
+ * lightbox: Rahmen; Bilder mit derselben gruppe blättern gemeinsam.
+ * lightboxBild: Vorschau als Auslöser, großes Bild mit festen Maßen (voll = Pfad zu { url, b, h } aus golfplatz_bild_voll).
+ */
+const OME = { lightbox: 25, lightboxItem: 26 };
+export const lightbox = (kinder, gruppeId = '') =>
+  emmp(OME.lightbox, {
+    identity: gruppe({ groupId: gruppeId }),
+    animation: gruppe({ showHideAnimationType: 'zoom', animationDuration: '250' }),
+    // dunkler als die Vorgabe 0.8, weil die Pin-Grafiken transparent sind
+    presentation: gruppe({ bgOpacity: '0.9', spacing: '0.12', htmlViewportPadding: '24' }),
+  }, { default: kinder }, 'Lightbox');
+export const lightboxBild = ({ vorschau, voll, alt, text: beschriftung }) =>
+  emmp(OME.lightboxItem, {}, {
+    trigger: vorschau,
+    full: el('img', '', [], { attrs: { src: `{${voll}.url}`, width: `{${voll}.b}`, height: `{${voll}.h}`, alt } }),
+    caption: beschriftung ? t('p', '', beschriftung) : '',
+  }, 'Lightbox-Bild');
+
+/**
  * Bahngrafik: hochgeladenes Bild oder aus den Daten gezeichnet (Grün oben, Abschlag unten).
  * mitEntfernung: Entfernung an den Hindernissen anzeigen (Birdiebook). bild: 'bild' (hochkant) oder 'bild_karte'.
+ * zoom: Bild per Klick vergrößern (nicht in Karten, die selbst ein Link sind).
  */
-const bahngrafik = ({ bild, mitEntfernung }) => [
+const bahngrafik = ({ bild, mitEntfernung, zoom = false }) => [
   wenn(`item.golfplatz.plan.hat_${bild}`, [
-    el('img', 'hole-plan__bild', [], { attrs: { src: G(`plan.${bild}`), alt: '', loading: 'lazy' } }),
+    zoom
+      ? lightbox([lightboxBild({
+        vorschau: el('img', 'hole-plan__bild', [], { attrs: { src: G(`plan.${bild}`), alt: `Bahngrafik Bahn ${NR} vergrößern`, loading: 'lazy' } }),
+        voll: `item.golfplatz.plan.${bild}_voll`,
+        alt: `Bahngrafik Bahn ${NR}`,
+        text: `Bahn ${NR} · Bahngrafik`,
+      })], `bahn-${NR}`)
+      : el('img', 'hole-plan__bild', [], { attrs: { src: G(`plan.${bild}`), alt: '', loading: 'lazy' } }),
   ]),
   wenn(`item.golfplatz.plan.hat_${bild}`, [
     el('span', `hole-plan hole-plan--par${G('plan.par')} hole-plan--${G('plan.richtung')}`, [
@@ -89,13 +117,18 @@ const bahnSlide = () =>
       ]),
       el('p', 'hole-sheet__meta', [text('Par '), ...parWerte(), text(' · HCP '), t('span', '', B('bahn_hcp'))]),
     ]),
-    el('figure', 'hole-sheet__plan', bahngrafik({ bild: 'bild', mitEntfernung: true }), { name: 'Bahngrafik' }),
+    el('figure', 'hole-sheet__plan', bahngrafik({ bild: 'bild', mitEntfernung: true, zoom: true }), { name: 'Bahngrafik' }),
     el('div', 'hole-sheet__info', [
       entfernungen(),
       // Grün mit den Fahnenpositionen 1–6 aus pin_grafik
       wenn('item.golfplatz.plan.hat_pin_karte', [
         el('figure', 'hole-sheet__pins', [
-          el('img', 'hole-sheet__pin-bild', [], { attrs: { src: G('plan.pin_karte'), alt: `Grün von Bahn ${NR} mit den Fahnenpositionen 1 bis 6`, loading: 'lazy' } }),
+          lightbox([lightboxBild({
+            vorschau: el('img', 'hole-sheet__pin-bild', [], { attrs: { src: G('plan.pin_karte'), alt: `Fahnenpositionen Bahn ${NR} vergrößern`, loading: 'lazy' } }),
+            voll: 'item.golfplatz.plan.pin_karte_voll',
+            alt: `Grün von Bahn ${NR} mit den Fahnenpositionen 1 bis 6`,
+            text: `Bahn ${NR} · Fahnenpositionen 1–6, Spielrichtung von unten`,
+          })], `bahn-${NR}`),
           t('figcaption', 'hole-sheet__pin-text', 'Fahnenpositionen 1–6 · Spielrichtung von unten'),
         ], { name: 'Pin-Positionen' }),
       ]),

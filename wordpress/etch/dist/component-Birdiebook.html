@@ -68,9 +68,29 @@
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"figure","attributes":{"class":"hole-sheet__plan"},"metadata":{"name":"Bahngrafik"}} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"item.golfplatz.plan.hat_bild","operator":"isTruthy","rightHand":null},"conditionString":"item.golfplatz.plan.hat_bild"} -->
-<!-- wp:etch/element {"tag":"img","attributes":{"src":"{item.golfplatz.plan.bild}","alt":"","loading":"lazy","class":"hole-plan__bild"}} -->
+<!-- wp:etch/component {"ref":25,"attributes":{"identity":"{{\u0022groupId\u0022:\u0022bahn-{item.metabox.bahn_nummer}\u0022}}","animation":"{{\u0022showHideAnimationType\u0022:\u0022zoom\u0022,\u0022animationDuration\u0022:\u0022250\u0022}}","presentation":"{{\u0022bgOpacity\u0022:\u00220.9\u0022,\u0022spacing\u0022:\u00220.12\u0022,\u0022htmlViewportPadding\u0022:\u002224\u0022}}"},"metadata":{"name":"Lightbox"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":26,"attributes":{},"metadata":{"name":"Lightbox-Bild"}} -->
+<!-- wp:etch/slot-content {"name":"trigger"} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{item.golfplatz.plan.bild}","alt":"Bahngrafik Bahn {item.metabox.bahn_nummer} vergrößern","loading":"lazy","class":"hole-plan__bild"}} -->
 
 <!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+
+<!-- wp:etch/slot-content {"name":"full"} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{item.golfplatz.plan.bild_voll.url}","width":"{item.golfplatz.plan.bild_voll.b}","height":"{item.golfplatz.plan.bild_voll.h}","alt":"Bahngrafik Bahn {item.metabox.bahn_nummer}"}} -->
+
+<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+
+<!-- wp:etch/slot-content {"name":"caption"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{}} -->
+<!-- wp:etch/text {"content":"Bahn {item.metabox.bahn_nummer} · Bahngrafik"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
 <!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"item.golfplatz.plan.hat_bild","operator":"isFalsy","rightHand":null},"conditionString":"!item.golfplatz.plan.hat_bild"} -->
 <!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","class":"hole-plan hole-plan\u002d\u002dpar{item.golfplatz.plan.par} hole-plan\u002d\u002d{item.golfplatz.plan.richtung}"}} -->
@@ -141,9 +161,29 @@
 <!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"item.golfplatz.plan.hat_pin_karte","operator":"isTruthy","rightHand":null},"conditionString":"item.golfplatz.plan.hat_pin_karte"} -->
 <!-- wp:etch/element {"tag":"figure","attributes":{"class":"hole-sheet__pins"},"metadata":{"name":"Pin-Positionen"}} -->
-<!-- wp:etch/element {"tag":"img","attributes":{"src":"{item.golfplatz.plan.pin_karte}","alt":"Grün von Bahn {item.metabox.bahn_nummer} mit den Fahnenpositionen 1 bis 6","loading":"lazy","class":"hole-sheet__pin-bild"}} -->
+<!-- wp:etch/component {"ref":25,"attributes":{"identity":"{{\u0022groupId\u0022:\u0022bahn-{item.metabox.bahn_nummer}\u0022}}","animation":"{{\u0022showHideAnimationType\u0022:\u0022zoom\u0022,\u0022animationDuration\u0022:\u0022250\u0022}}","presentation":"{{\u0022bgOpacity\u0022:\u00220.9\u0022,\u0022spacing\u0022:\u00220.12\u0022,\u0022htmlViewportPadding\u0022:\u002224\u0022}}"},"metadata":{"name":"Lightbox"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":26,"attributes":{},"metadata":{"name":"Lightbox-Bild"}} -->
+<!-- wp:etch/slot-content {"name":"trigger"} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{item.golfplatz.plan.pin_karte}","alt":"Fahnenpositionen Bahn {item.metabox.bahn_nummer} vergrößern","loading":"lazy","class":"hole-sheet__pin-bild"}} -->
 
 <!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+
+<!-- wp:etch/slot-content {"name":"full"} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{item.golfplatz.plan.pin_karte_voll.url}","width":"{item.golfplatz.plan.pin_karte_voll.b}","height":"{item.golfplatz.plan.pin_karte_voll.h}","alt":"Grün von Bahn {item.metabox.bahn_nummer} mit den Fahnenpositionen 1 bis 6"}} -->
+
+<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+
+<!-- wp:etch/slot-content {"name":"caption"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{}} -->
+<!-- wp:etch/text {"content":"Bahn {item.metabox.bahn_nummer} · Fahnenpositionen 1–6, Spielrichtung von unten"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
 <!-- wp:etch/element {"tag":"figcaption","attributes":{"class":"hole-sheet__pin-text"}} -->
 <!-- wp:etch/text {"content":"Fahnenpositionen 1–6 · Spielrichtung von unten"} /-->
 <!-- /wp:etch/element -->

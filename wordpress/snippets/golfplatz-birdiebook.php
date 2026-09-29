@@ -121,6 +121,12 @@ function golfplatz_fahne_stil( array $bahn ): string {
 	return sprintf( '--pin-x:%s;--pin-y:%s', $x, round( $y, 2 ) );
 }
 
+/** Großes Bild für die Lightbox (OhMyEtch braucht feste Maße): URL, Breite b, Höhe h. */
+function golfplatz_bild_voll( int $id ): array {
+	$b = $id ? wp_get_attachment_image_src( $id, 'full' ) : false;
+	return $b ? array( 'url' => $b[0], 'b' => (int) $b[1], 'h' => (int) $b[2] ) : array( 'url' => '', 'b' => 0, 'h' => 0 );
+}
+
 /**
  * Daten einer Bahn für Etch: {this.golfplatz.…} bzw. {item.golfplatz.…} im Loop.
  * plan: Werte für die gezeichnete Bahngrafik; status: Zustand jetzt; fahne: Fahnenposition; entfernungen: Liste zur Grafik.
@@ -184,9 +190,12 @@ function golfplatz_bahn_etch( array $bahn ): array {
 			'hat_bild'      => (bool) $bild_hoch,
 			'bild'          => $bild_hoch ? (string) wp_get_attachment_image_url( $bild_hoch, 'large' ) : '',
 			'hat_bild_karte' => (bool) $bahn['grafik'],
+			'bild_voll'     => golfplatz_bild_voll( $bild_hoch ),
 			'bild_karte'    => $bahn['grafik'] ? (string) wp_get_attachment_image_url( $bahn['grafik'], 'medium_large' ) : '',
+			'bild_karte_voll' => golfplatz_bild_voll( $bahn['grafik'] ),
 			'hat_pin_karte' => (bool) $bahn['pin_grafik'],
 			'pin_karte'     => $bahn['pin_grafik'] ? (string) wp_get_attachment_image_url( $bahn['pin_grafik'], 'full' ) : '',
+			'pin_karte_voll' => golfplatz_bild_voll( $bahn['pin_grafik'] ),
 		),
 		'status'       => $status,
 		'fahne'        => $fahne,

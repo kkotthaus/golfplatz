@@ -3,7 +3,7 @@
 
 import { el, t, text, raw, wenn, markup, komponente, club, telHref, icon, svgEl, postContent, loop, CLUB } from './lib.mjs';
 import { header } from './header.mjs';
-import { birdiebookKomponente, bahnenRaster } from './birdiebook.mjs';
+import { birdiebookKomponente, bahnenRaster, lightbox, lightboxBild } from './birdiebook.mjs';
 import { anfahrt } from './club.mjs';
 import { kategorienNav, seitenNav, keineBeitraege, beitragInhalt } from './news.mjs';
 import { anmeldung, kursInhalt } from './golfschule.mjs';
@@ -650,14 +650,24 @@ export const templates = [
               // Bild aus bahn_grafik; ohne Bild bleibt der Platzhalter
               el('figure', 'hole-detail__map', [
                 wenn('this.golfplatz.plan.hat_bild_karte', [
-                  el('img', 'hole-detail__bild', [], { attrs: { src: '{this.golfplatz.plan.bild_karte}', alt: 'Bahngrafik {this.title}', width: '768', height: '768' } }),
+                  lightbox([lightboxBild({
+                    vorschau: el('img', 'hole-detail__bild', [], { attrs: { src: '{this.golfplatz.plan.bild_karte}', alt: 'Bahngrafik {this.title} vergrößern', width: '768', height: '768' } }),
+                    voll: 'this.golfplatz.plan.bild_karte_voll',
+                    alt: 'Bahngrafik {this.title}',
+                    text: '{this.title} · Bahngrafik',
+                  })], 'bahnseite'),
                 ]),
                 wenn('this.golfplatz.plan.hat_bild_karte', [t('figcaption', 'hole-detail__caption', 'Bahngrafik / Luftbild')], 'isFalsy'),
               ], { name: 'Bahngrafik' }),
               // Grün mit den Fahnenpositionen 1–6 aus pin_grafik
               wenn('this.golfplatz.plan.hat_pin_karte', [
                 el('figure', 'hole-detail__pins', [
-                  el('img', 'hole-detail__pin-bild', [], { attrs: { src: '{this.golfplatz.plan.pin_karte}', alt: 'Grün von {this.title} mit den Fahnenpositionen 1 bis 6', loading: 'lazy' } }),
+                  lightbox([lightboxBild({
+                    vorschau: el('img', 'hole-detail__pin-bild', [], { attrs: { src: '{this.golfplatz.plan.pin_karte}', alt: 'Fahnenpositionen {this.title} vergrößern', loading: 'lazy' } }),
+                    voll: 'this.golfplatz.plan.pin_karte_voll',
+                    alt: 'Grün von {this.title} mit den Fahnenpositionen 1 bis 6',
+                    text: '{this.title} · Fahnenpositionen 1–6, Spielrichtung von unten',
+                  })], 'bahnseite'),
                   t('figcaption', 'hole-detail__caption', 'Fahnenpositionen 1–6 · Spielrichtung von unten'),
                 ], { name: 'Pin-Positionen' }),
               ]),
