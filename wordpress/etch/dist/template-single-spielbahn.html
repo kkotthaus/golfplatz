@@ -185,6 +185,7 @@
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"section","attributes":{"class":"section"},"metadata":{"name":"Bahn"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"container hole-detail"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"hole-detail__aside"}} -->
 <!-- wp:etch/element {"tag":"figure","attributes":{"class":"hole-detail__map"},"metadata":{"name":"Bahngrafik"}} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.plan.hat_bild_karte","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.plan.hat_bild_karte"} -->
 <!-- wp:etch/element {"tag":"img","attributes":{"src":"{this.golfplatz.plan.bild_karte}","alt":"Bahngrafik {this.title}","width":"768","height":"768","class":"hole-detail__bild"}} -->
@@ -194,6 +195,17 @@
 <!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.plan.hat_bild_karte","operator":"isFalsy","rightHand":null},"conditionString":"!this.golfplatz.plan.hat_bild_karte"} -->
 <!-- wp:etch/element {"tag":"figcaption","attributes":{"class":"hole-detail__caption"}} -->
 <!-- wp:etch/text {"content":"Bahngrafik / Luftbild"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.plan.hat_pin_karte","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.plan.hat_pin_karte"} -->
+<!-- wp:etch/element {"tag":"figure","attributes":{"class":"hole-detail__pins"},"metadata":{"name":"Pin-Positionen"}} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{this.golfplatz.plan.pin_karte}","alt":"Grün von {this.title} mit den Fahnenpositionen 1 bis 6","loading":"lazy","class":"hole-detail__pin-bild"}} -->
+
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"figcaption","attributes":{"class":"hole-detail__caption"}} -->
+<!-- wp:etch/text {"content":"Fahnenpositionen 1–6 · Spielrichtung von unten"} /-->
+<!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->

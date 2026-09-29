@@ -646,13 +646,22 @@ export const templates = [
         }),
         el('section', 'section', [
           el('div', 'container hole-detail', [
-            // Bild aus bahn_grafik; ohne Bild bleibt der Platzhalter
-            el('figure', 'hole-detail__map', [
-              wenn('this.golfplatz.plan.hat_bild_karte', [
-                el('img', 'hole-detail__bild', [], { attrs: { src: '{this.golfplatz.plan.bild_karte}', alt: 'Bahngrafik {this.title}', width: '768', height: '768' } }),
+            el('div', 'hole-detail__aside', [
+              // Bild aus bahn_grafik; ohne Bild bleibt der Platzhalter
+              el('figure', 'hole-detail__map', [
+                wenn('this.golfplatz.plan.hat_bild_karte', [
+                  el('img', 'hole-detail__bild', [], { attrs: { src: '{this.golfplatz.plan.bild_karte}', alt: 'Bahngrafik {this.title}', width: '768', height: '768' } }),
+                ]),
+                wenn('this.golfplatz.plan.hat_bild_karte', [t('figcaption', 'hole-detail__caption', 'Bahngrafik / Luftbild')], 'isFalsy'),
+              ], { name: 'Bahngrafik' }),
+              // Grün mit den Fahnenpositionen 1–6 aus pin_grafik
+              wenn('this.golfplatz.plan.hat_pin_karte', [
+                el('figure', 'hole-detail__pins', [
+                  el('img', 'hole-detail__pin-bild', [], { attrs: { src: '{this.golfplatz.plan.pin_karte}', alt: 'Grün von {this.title} mit den Fahnenpositionen 1 bis 6', loading: 'lazy' } }),
+                  t('figcaption', 'hole-detail__caption', 'Fahnenpositionen 1–6 · Spielrichtung von unten'),
+                ], { name: 'Pin-Positionen' }),
               ]),
-              wenn('this.golfplatz.plan.hat_bild_karte', [t('figcaption', 'hole-detail__caption', 'Bahngrafik / Luftbild')], 'isFalsy'),
-            ], { name: 'Bahngrafik' }),
+            ]),
             el('div', 'hole-detail__content', [
               el('dl', 'hole-facts', [
                 fakt('Par Herren', '{this.metabox.bahn_par_herren}'),

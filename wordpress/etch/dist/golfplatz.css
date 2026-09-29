@@ -426,6 +426,10 @@ html.scheme--dark {
 .hole-detail__map { margin: 0; }
 .hole-detail__map .hole-map { border-radius: var(--radius-l); box-shadow: var(--shadow-m); }
 .hole-detail__bild { display: block; width: 100%; height: auto; border-radius: var(--radius-l); box-shadow: var(--shadow-m); }
+.hole-detail__aside { display: grid; gap: var(--space-l); align-content: start; }
+@media (min-width: 56em) { .hole-detail__aside { position: sticky; top: 8rem; } .hole-detail__aside .hole-detail__map { position: static; } }
+.hole-detail__pins { margin: 0; }
+.hole-detail__pin-bild { display: block; width: auto; height: auto; max-width: 100%; max-height: 20rem; margin-inline: auto; }
 .hole-detail__caption { font-size: var(--text-xs); color: var(--base-semi-light); margin-top: var(--space-xs); text-align: center; }
 .hole-detail__content { display: grid; gap: var(--space-l); }
 .hole-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: var(--space-xs); margin: 0; }
@@ -612,6 +616,9 @@ html.scheme--dark {
 .hole-sheet__plan { margin: 0; display: flex; justify-content: center; }
 .hole-sheet__plan .hole-plan, .hole-sheet__plan .hole-plan__bild { width: min(100%, 15rem); max-height: 52svh; }
 .hole-sheet__info { display: grid; gap: var(--space-s); align-content: start; }
+.hole-sheet__pins { margin: 0; display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); text-align: center; }
+.hole-sheet__pin-bild { display: block; width: auto; height: auto; max-width: 9rem; max-height: 11rem; flex-shrink: 0; }
+.hole-sheet__pin-text { font-size: var(--text-xs); color: var(--base-semi-dark); }
 .hole-sheet__tip { margin: 0; padding: var(--space-s); border-left: 3px solid var(--secondary); background: var(--secondary-light); color: var(--base); font-size: var(--text-s); }
 .hole-sheet__more { justify-self: start; font-size: var(--text-s); }
 @media (min-width: 48em) {

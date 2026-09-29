@@ -92,6 +92,13 @@ const bahnSlide = () =>
     el('figure', 'hole-sheet__plan', bahngrafik({ bild: 'bild', mitEntfernung: true }), { name: 'Bahngrafik' }),
     el('div', 'hole-sheet__info', [
       entfernungen(),
+      // Grün mit den Fahnenpositionen 1–6 aus pin_grafik
+      wenn('item.golfplatz.plan.hat_pin_karte', [
+        el('figure', 'hole-sheet__pins', [
+          el('img', 'hole-sheet__pin-bild', [], { attrs: { src: G('plan.pin_karte'), alt: `Grün von Bahn ${NR} mit den Fahnenpositionen 1 bis 6`, loading: 'lazy' } }),
+          t('figcaption', 'hole-sheet__pin-text', 'Fahnenpositionen 1–6 · Spielrichtung von unten'),
+        ], { name: 'Pin-Positionen' }),
+      ]),
       wenn('item.metabox.bahn_spieltipp', [
         el('p', 'hole-sheet__tip', [t('strong', '', 'Tipp: '), text(B('bahn_spieltipp'))]),
       ]),

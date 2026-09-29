@@ -34,7 +34,7 @@ News sind normale **Beiträge** (`post`).
 
 | Gruppe | Ziel | Felder (IDs) |
 | --- | --- | --- |
-| Spielbahn | `spielbahn` | `bahn_nummer`, `bahn_par_herren`, `bahn_par_damen`, `bahn_hcp`, `laenge_gelb`, `laenge_blau`, `laenge_rot`, `laenge_orange`, `bahn_beschreibung`, `bahn_spieltipp`, `bahn_grafik`, `bahn_bilder`, `bahn_video` (nur MP4), `bahn_video_poster` |
+| Spielbahn | `spielbahn` | `bahn_nummer`, `bahn_par_herren`, `bahn_par_damen`, `bahn_hcp`, `laenge_gelb`, `laenge_blau`, `laenge_rot`, `laenge_orange`, `bahn_beschreibung`, `bahn_spieltipp`, `bahn_grafik`, `bahn_bilder`, `bahn_video` (nur MP4), `bahn_video_poster`, `pin_positionen`, `pin_grafik` |
 | Sperrung | `sperrung` | `sperr_bereich` (`abschlag_1`, `abschlag_10`, `platz`, `range`, `kurzspiel`, `proshop`, `trolley`, `buggy`), `sperr_beginn`, `sperr_ende` (beide als Unix-Timestamp), `sperr_grund` |
 | Mannschaft | `mannschaft` | `mannschaft_altersklasse`, `mannschaft_nummer`, `mannschaft_geschlecht`, `mannschaft_liga` (setzt der Abgleich), `mannschaft_spielfuehrer` → Spieler, `mannschaft_kader` → Spieler (mehrfach), `mannschaft_verband_wettbewerb`, `mannschaft_verband_team` |
 | Spieler | `spieler` | `spieler_vorname`, `spieler_nachname`, `spieler_geschlecht`, `spieler_jahrgang`, `spieler_einwilligung` |
@@ -336,7 +336,8 @@ Jedes Grün hat **6 nummerierte Fahnenpositionen (1–6)**. Gesteckt wird eine P
   - Pläne gestern, heute und morgen: Es gilt der Plan von heute.
   - Ohne heutigen Plan gilt der von gestern.
   - Liegt nur ein Plan in der Zukunft, erscheint nichts.
-- **Offen:** Der Club trägt die Lage der 6 Positionen je Grün ein, zum Beispiel aus seinem Pin-Plan.
+- **Grafik je Grün** (`pin_grafik`, Bild): Grün mit den Positionen 1–6, auf der Bahnseite unter der Bahngrafik (`{this.golfplatz.plan.pin_karte}`) und im Birdiebook unter den Entfernungen (`{item.golfplatz.plan.pin_karte}`).
+- **Eingetragen** am 2026-09-29 aus der „Pin Position Card 2024“ von dreibaeumen.de: Lage der 6 Positionen, Grüntiefe und je Grün eine freigestellte Grafik (18 PNGs aus der PDF).
 
 ### Platzstatus als Etch-Komponente
 

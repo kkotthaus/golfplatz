@@ -407,6 +407,8 @@ Das Birdiebook ist das Bahnen-Heft für das Handy (Platz & Bahnen › Birdiebook
 
 Im Abschnitt **Pin-Positionen auf diesem Grün** einmalig für jede der sechs Positionen eintragen, wo sie liegt: **Tiefe** (vorne, Mitte, hinten; vorne = zum Abschlag hin), **Seite** (aus Sicht des Spielers) und optional **Meter ab Grünanfang**. Welche Position gerade gesteckt ist, stellen Sie im **Platzstatus** ein.
 
+Darunter im Feld **Grafik der Pin-Positionen** ein Bild des Grüns mit den Positionen 1–6 hochladen (Spielrichtung von unten, am besten PNG mit transparentem Hintergrund). Es erscheint auf der Seite der Bahn unter der Bahngrafik und im Birdiebook unter den Entfernungen. Ohne Bild entfällt der Block.
+
 ### Course Rating und Slope
 
 Unter **Clubdaten › Platz & Abschläge** stehen je Abschlagfarbe Course Rating, Slope, Par und für wen der Abschlag bewertet ist. Ändert der Verband die Werte, passen Sie sie nur hier an. Spielvorgaben-Tabellen, Rechner und Zählkarte rechnen dann automatisch neu.

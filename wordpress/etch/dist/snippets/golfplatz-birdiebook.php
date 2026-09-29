@@ -82,7 +82,8 @@ function golfplatz_bahnen(): array {
 			'hindernisse' => $hindernisse,
 			'grafik'      => (int) $m( 'bahn_grafik' ),
 			'grafik_hoch' => (int) $m( 'bahn_grafik_hoch' ),
-			'link'        => get_permalink( $p ),
+			'pin_grafik'  => (int) $m( 'pin_grafik' ),
+			'link'      => get_permalink( $p ),
 		);
 	}
 	ksort( $cache );
@@ -184,6 +185,8 @@ function golfplatz_bahn_etch( array $bahn ): array {
 			'bild'          => $bild_hoch ? (string) wp_get_attachment_image_url( $bild_hoch, 'large' ) : '',
 			'hat_bild_karte' => (bool) $bahn['grafik'],
 			'bild_karte'    => $bahn['grafik'] ? (string) wp_get_attachment_image_url( $bahn['grafik'], 'medium_large' ) : '',
+			'hat_pin_karte' => (bool) $bahn['pin_grafik'],
+			'pin_karte'     => $bahn['pin_grafik'] ? (string) wp_get_attachment_image_url( $bahn['pin_grafik'], 'full' ) : '',
 		),
 		'status'       => $status,
 		'fahne'        => $fahne,
