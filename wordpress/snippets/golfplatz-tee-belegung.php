@@ -4,22 +4,22 @@
  * Description: Erzeugt aus den Turnieren des Heimatclubs (PC CADDIE) automatisch Sperrungen von Abschlag 1 und 10. Regeln je Turnierart (Startform, Start-Tee, Vorlauf, Dauer, Startabstand) unter Sperrungen → Turnier-Regeln; Ausnahmen je Turnier am Turnier selbst. Läuft nach jedem PC-CADDIE-Abgleich, nach dem Speichern der Regeln und eines Turniers. Die Anzeige übernimmt der Platzstatus (golfplatz-platzstatus.php) wie bei jeder Sperrung.
  * Version: 1.0.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-tee-belegung.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-tee-belegung.php
  */
 
 defined( 'ABSPATH' ) || exit;
 
-const GOLFPLATZ_TB_OPTION     = 'tee_belegung';
-const GOLFPLATZ_TB_STARTFORMEN = array(
+define( 'GOLFPLATZ_TB_OPTION', 'tee_belegung' );
+define( 'GOLFPLATZ_TB_STARTFORMEN', array(
 	'kanonenstart' => 'Kanonenstart',
 	'tee_times'    => 'Tee-Times (Einzelstart)',
 	'keine'        => 'Keine Sperre',
-);
-const GOLFPLATZ_TB_TEES = array(
+) );
+define( 'GOLFPLATZ_TB_TEES', array(
 	'1'     => 'Tee 1',
 	'10'    => 'Tee 10',
 	'beide' => 'Tee 1 und 10',
-);
+) );
 
 /**
  * Standardwerte des Clubs aus den Clubdaten (Reiter „Platz & Abschläge“): Startabstand, Spieler je Flight, Spielzeit je Loch,

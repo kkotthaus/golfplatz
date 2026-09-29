@@ -488,4 +488,4 @@ Die Person, die die Website technisch betreut. Beschreiben Sie, was Sie gemacht 
 
 - **Sicherungen** macht **Duplicator Pro** (Menü **Duplicator Pro › Backups**). Vor jedem größeren Umbau und vor Updates eine Sicherung anlegen.
 - **Updates** von WordPress und Plugins werden bewusst von Hand eingespielt, nicht automatisch. Erst auf der Testumgebung prüfen, dann live.
-- Die technischen Bausteine (eigene Erweiterungen im Ordner `wp-content/mu-plugins`) sind im Repository der Website dokumentiert. Dieses Handbuch entsteht ebenfalls dort (`docs/handbuch.md`).
+- Die technischen Bausteine (eigene PHP-Erweiterungen als Snippets in WPCodeBox, Ordner „Golfplatz“) sind im Repository der Website dokumentiert. Dieses Handbuch entsteht ebenfalls dort (`docs/handbuch.md`).

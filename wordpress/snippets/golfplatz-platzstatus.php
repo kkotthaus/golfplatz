@@ -4,7 +4,7 @@
  * Description: Berechnet Platzstatus, Fahnenpositionen und Öffnungszeiten aus Sperrungen, der Einstellungsseite „Platzstatus“ und den Clubdaten und stellt sie Etch als dynamische Daten bereit ({options.golfplatz.platzstatus.…}, {options.golfplatz.zeiten}). Keine Shortcodes: das Markup bauen die Etch-Komponenten (wordpress/etch/platzstatus.mjs, komponenten.mjs).
  * Version: 1.0.0
  *
- * Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-platzstatus.php
+ * Quelle: Repository golfplatz, wordpress/snippets/golfplatz-platzstatus.php
  *
  * Zeiten: Meta Box speichert datetime-Felder mit timestamp=true als „Ortszeit als Unix-Zeit“.
  * Deshalb wird überall mit current_time( 'timestamp' ) verglichen und mit gmdate()/date_i18n() formatiert.
@@ -12,7 +12,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const GOLFPLATZ_BEREICHE = array(
+define( 'GOLFPLATZ_BEREICHE', array(
 	'abschlag_1'  => 'Abschlag 1',
 	'abschlag_10' => 'Abschlag 10',
 	'platz'       => 'Ganzer Platz',
@@ -21,9 +21,9 @@ const GOLFPLATZ_BEREICHE = array(
 	'proshop'     => 'Proshop',
 	'trolley'     => 'Trolleys',
 	'buggy'       => 'Buggies / E-Carts',
-);
-const GOLFPLATZ_PLATZ         = array( 'abschlag_1', 'abschlag_10', 'platz' );
-const GOLFPLATZ_EINRICHTUNGEN = array( 'range', 'kurzspiel', 'proshop' );
+) );
+define( 'GOLFPLATZ_PLATZ', array( 'abschlag_1', 'abschlag_10', 'platz' ) );
+define( 'GOLFPLATZ_EINRICHTUNGEN', array( 'range', 'kurzspiel', 'proshop' ) );
 
 /**
  * Liest Sperrungen und Schnellsperren und bereitet sie auf.
@@ -204,8 +204,8 @@ function golfplatz_ampel_zustand(): array {
  * ---------------------------------------------------------------------------
  */
 
-const GOLFPLATZ_PIN_TIEFE = array( 'vorne' => 'vorne', 'mitte' => 'Mitte', 'hinten' => 'hinten' );
-const GOLFPLATZ_PIN_SEITE = array( 'links' => 'links', 'mitte' => 'Mitte', 'rechts' => 'rechts' );
+define( 'GOLFPLATZ_PIN_TIEFE', array( 'vorne' => 'vorne', 'mitte' => 'Mitte', 'hinten' => 'hinten' ) );
+define( 'GOLFPLATZ_PIN_SEITE', array( 'links' => 'links', 'mitte' => 'Mitte', 'rechts' => 'rechts' ) );
 
 /**
  * Datum als „JJJJ-MM-TT“ oder null. Meta Box speichert Datumsfelder in Gruppen im Anzeigeformat („25.09.2026“),
@@ -349,14 +349,14 @@ function golfplatz_fahne_text( array $p ): string {
  * ---------------------------------------------------------------------------
  */
 
-const GOLFPLATZ_ZEITEN_BEREICHE = array(
+define( 'GOLFPLATZ_ZEITEN_BEREICHE', array(
 	'sekretariat' => 'Sekretariat',
 	'range'       => 'Driving Range',
 	'kurzspiel'   => 'Kurzspielbereich & Putting-Grün',
 	'proshop'     => 'Proshop',
 	'restaurant'  => 'Clubrestaurant',
-);
-const GOLFPLATZ_WOCHE = array( 'mo', 'di', 'mi', 'do', 'fr', 'sa', 'so' );
+) );
+define( 'GOLFPLATZ_WOCHE', array( 'mo', 'di', 'mi', 'do', 'fr', 'sa', 'so' ) );
 
 /** Bereich aus den Clubdaten, normalisiert. */
 function golfplatz_zeiten_bereich( string $key ): array {

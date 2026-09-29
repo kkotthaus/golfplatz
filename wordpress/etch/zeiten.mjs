@@ -1,5 +1,5 @@
 // Etch-Komponenten „Öffnungszeiten“ (ein Bereich) und „Öffnungszeiten alle“ (Karten aller Bereiche).
-// Daten: {options.golfplatz.zeiten} aus mu-plugins/golfplatz-platzstatus.php – Liste der Bereiche
+// Daten: {options.golfplatz.zeiten} aus snippets/golfplatz-platzstatus.php – Liste der Bereiche
 // (sekretariat, range, kurzspiel, proshop, restaurant) mit Zustand jetzt, Standardzeiten, kommenden Ausnahmen, Hinweis.
 // Markup und Klassen wie der frühere Shortcode [golfplatz_oeffnungszeiten].
 

@@ -4,7 +4,7 @@
  * Description: Stellt Personen (Beitragstyp „person“, gruppiert nach Personengruppe) und die Anfahrt Etch als Daten bereit: {options.golfplatz.personen.listen[key, personen[]]} und {options.golfplatz.anfahrt}. Keine Shortcodes – das Markup bauen die Etch-Komponente „Personenkarten“ und die Seite /club/ (wordpress/etch/club.mjs).
  * Version: 1.0.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-club.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-club.php
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
  * Listen für die Seite: Schlüssel → Personengruppen (Slugs). „jugend“ findet die Person über die Funktion,
  * solange es keine eigene Gruppe „Jugend“ gibt (siehe docs/seitenstruktur.md › Offene Punkte).
  */
-const GOLFPLATZ_PERSONEN_LISTEN = array(
+define( 'GOLFPLATZ_PERSONEN_LISTEN', array(
 	'vorstand'   => array( 'vorstand' ),
 	'team'       => array( 'betreibergesellschaft', 'clubmanagement', 'sekretariat', 'service-proshop', 'greenkeeping' ),
 	'captains'   => array( 'captains' ),
 	'golfschule' => array( 'golfschule' ),
 	'jugend'     => array( 'jugend' ),
-);
+) );
 
 /** Eine Person für die Ausgabe. */
 function golfplatz_person_etch( WP_Post $p ): array {

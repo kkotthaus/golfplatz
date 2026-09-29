@@ -1,5 +1,5 @@
 // Etch-Komponenten „Turnierkalender“, „Platzbelegung“ und „Turnierergebnisse“ (Seite /turniere/).
-// Daten: {options.golfplatz.turniere} aus mu-plugins/golfplatz-turniere.php – stündlich aus PC CADDIE://online gelesen.
+// Daten: {options.golfplatz.turniere} aus snippets/golfplatz-turniere.php – stündlich aus PC CADDIE://online gelesen.
 // Anmeldung, Startlisten und Ergebnislisten bleiben bei PC CADDIE (Links); Namen von Spielern übernimmt die Website nicht.
 // Turnierkalender und Ergebnisse: nur der Heimatclub. Platzbelegung: Heimatclub (erste Spalte) und GOLFHOCHZEHN-Partnerclubs als Tabelle Tag × Club
 // zur Planung eines Besuchs. Filter per URL: ?kategorie=s (Kalender), ?jahr=2025 (Ergebnisse), ?ab=JJJJ-MM-TT (Platzbelegung).

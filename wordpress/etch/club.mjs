@@ -1,5 +1,5 @@
 // Club & Kontakt: Etch-Komponente „Personenkarten“ und Bausteine der Seite /club/ (Aufbau wie im Prototyp).
-// Daten: {options.golfplatz.personen.listen} und {options.golfplatz.anfahrt} aus mu-plugins/golfplatz-club.php.
+// Daten: {options.golfplatz.personen.listen} und {options.golfplatz.anfahrt} aus snippets/golfplatz-club.php.
 
 import { el, t, text, raw, loop, wenn, icon } from './lib.mjs';
 

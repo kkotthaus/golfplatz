@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const GOLFPLATZ_FARBSCHEMA_SPEICHER = 'golfplatz-farbschema';
+define( 'GOLFPLATZ_FARBSCHEMA_SPEICHER', 'golfplatz-farbschema' );
 
 /**
  * Gespeicherte Wahl so früh wie möglich anwenden, damit die Seite nicht erst hell aufblitzt.

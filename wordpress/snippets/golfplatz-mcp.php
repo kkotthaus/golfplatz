@@ -4,11 +4,15 @@
  * Description: Eng begrenzte MCP-Funktionen zum Aufbau der Website: Seiten, Etch-Templates, Etch-Komponenten und globale Etch-Stylesheets lesen und speichern, Startseite festlegen. Nur für Administratoren und nur für die Entwicklungsumgebung. Zum Entfernen die Datei löschen.
  * Version: 1.1.0
  *
- * Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-mcp.php
- * Ziel:   wp-content/mu-plugins/golfplatz-mcp.php
+ * Quelle: Repository golfplatz, wordpress/snippets/golfplatz-mcp.php
+ * Ziel:   WPCodeBox-Snippet „Golfplatz – MCP“ (Ordner „Golfplatz“)
  */
 
 defined( 'ABSPATH' ) || exit;
+
+// Build-Dateien (wordpress/etch/build.mjs → dist) liegen in wp-content/golfplatz/. Als WPCodeBox-Snippet läuft der Code per eval(),
+// __DIR__ zeigt deshalb nicht auf diesen Ordner.
+defined( 'GOLFPLATZ_DATEN' ) || define( 'GOLFPLATZ_DATEN', WP_CONTENT_DIR . '/golfplatz' );
 
 if ( ! class_exists( 'WP_Ability' ) ) {
 	return;
@@ -56,13 +60,13 @@ function golfplatz_mcp_ability( string $name, array $args, bool $readonly ): voi
 }
 
 /** Beitragstypen, die diese Funktionen lesen und schreiben dürfen. */
-const GOLFPLATZ_MCP_TYPES = array( 'page', 'wp_template', 'wp_block' );
+define( 'GOLFPLATZ_MCP_TYPES', array( 'page', 'wp_template', 'wp_block' ) );
 
 /** Beitragstypen, auf die Etch-Loops aus dem Generator abfragen dürfen. */
-const GOLFPLATZ_MCP_LOOP_TYPES = array( 'spielbahn', 'preis', 'person', 'kurs', 'post', 'mannschaft', 'ligaspiel', 'spielbericht', 'sperrung', 'lochwettspiel' );
+define( 'GOLFPLATZ_MCP_LOOP_TYPES', array( 'spielbahn', 'preis', 'person', 'kurs', 'post', 'mannschaft', 'ligaspiel', 'spielbericht', 'sperrung', 'lochwettspiel' ) );
 
 /** Beitragstypen, deren Inhalte aus daten/<typ>.json importiert werden dürfen. */
-const GOLFPLATZ_MCP_IMPORT_TYPES = array( 'spielbahn', 'sperrung', 'person', 'post', 'preis', 'kurs', 'lochwettspiel', 'spieler', 'mannschaft', 'ligaspiel', 'spielbericht' );
+define( 'GOLFPLATZ_MCP_IMPORT_TYPES', array( 'spielbahn', 'sperrung', 'person', 'post', 'preis', 'kurs', 'lochwettspiel', 'spieler', 'mannschaft', 'ligaspiel', 'spielbericht' ) );
 
 add_action(
 	'wp_abilities_api_init',
@@ -186,7 +190,7 @@ add_action(
 			'sync-from-files',
 			array(
 				'label'            => 'Templates und Stylesheet aus dem Build übernehmen',
-				'description'      => 'Liest die gebauten Dateien aus dem festen Ordner wp-content/mu-plugins/golfplatz/ (manifest.json, template-<slug>.html, page-<slug>.html, golfplatz.css) und speichert sie: Etch-Loops (nur wp-query auf freigegebene Beitragstypen) per ID, Etch-Templates per Slug, Seiten per Pfad, globales Etch-Stylesheet „Golfplatz“ – jeweils anlegen oder aktualisieren.',
+				'description'      => 'Liest die gebauten Dateien aus dem festen Ordner wp-content/golfplatz/ (manifest.json, template-<slug>.html, page-<slug>.html, golfplatz.css) und speichert sie: Etch-Loops (nur wp-query auf freigegebene Beitragstypen) per ID, Etch-Templates per Slug, Seiten per Pfad, globales Etch-Stylesheet „Golfplatz“ – jeweils anlegen oder aktualisieren.',
 				'input_schema'     => array(
 					'type'       => 'object',
 					'properties' => array(
@@ -202,7 +206,7 @@ add_action(
 			'import-content',
 			array(
 				'label'            => 'Inhalte aus dem Build importieren',
-				'description'      => 'Liest wp-content/mu-plugins/golfplatz/daten/<post_type>.json und legt Einträge an oder aktualisiert sie. Erkannt wird ein Eintrag am Schlüsselfeld der Datei (z. B. bahn_nummer). Erlaubte Beitragstypen: ' . implode( ', ', GOLFPLATZ_MCP_IMPORT_TYPES ) . '. Verweise auf andere Beiträge als {"@post": "<typ>:<slug>"} oder Liste davon; sie werden zur ID aufgelöst (Reihenfolge: spieler, mannschaft, ligaspiel, spielbericht).',
+				'description'      => 'Liest wp-content/golfplatz/daten/<post_type>.json und legt Einträge an oder aktualisiert sie. Erkannt wird ein Eintrag am Schlüsselfeld der Datei (z. B. bahn_nummer). Erlaubte Beitragstypen: ' . implode( ', ', GOLFPLATZ_MCP_IMPORT_TYPES ) . '. Verweise auf andere Beiträge als {"@post": "<typ>:<slug>"} oder Liste davon; sie werden zur ID aufgelöst (Reihenfolge: spieler, mannschaft, ligaspiel, spielbericht).',
 				'input_schema'     => array(
 					'type'       => 'object',
 					'required'   => array( 'post_type' ),
@@ -224,7 +228,7 @@ add_action(
 					'type'       => 'object',
 					'properties' => array(
 						'werte' => array( 'type' => 'object', 'additionalProperties' => true, 'description' => 'z. B. {"color-primary":"#1e3a2b","option-secondary-clr":"on"}' ),
-						'aus_datei' => array( 'type' => 'boolean', 'description' => 'true: Werte aus mu-plugins/golfplatz/daten/acss-farben.json (erzeugt von etch/build.mjs) übernehmen' ),
+						'aus_datei' => array( 'type' => 'boolean', 'description' => 'true: Werte aus wp-content/golfplatz/daten/acss-farben.json (erzeugt von etch/build.mjs) übernehmen' ),
 					),
 				),
 				'execute_callback' => 'golfplatz_mcp_acss_colors',
@@ -236,7 +240,7 @@ add_action(
 			'import-settings',
 			array(
 				'label'            => 'Einstellungen aus dem Build importieren',
-				'description'      => 'Liest wp-content/mu-plugins/golfplatz/daten/einstellungen-<seite>.json und schreibt die enthaltenen Felder in die Meta-Box-Einstellungsseite. Nicht aufgeführte Felder bleiben unverändert, null entfernt ein Feld. Mit „felder“ nur die genannten Felder – sonst überschreibt der Import alles, was im Admin gepflegt wurde. Erlaubt: clubdaten, platzstatus.',
+				'description'      => 'Liest wp-content/golfplatz/daten/einstellungen-<seite>.json und schreibt die enthaltenen Felder in die Meta-Box-Einstellungsseite. Nicht aufgeführte Felder bleiben unverändert, null entfernt ein Feld. Mit „felder“ nur die genannten Felder – sonst überschreibt der Import alles, was im Admin gepflegt wurde. Erlaubt: clubdaten, platzstatus.',
 				'input_schema'     => array(
 					'type'       => 'object',
 					'required'   => array( 'seite' ),
@@ -354,8 +358,133 @@ add_action(
 			),
 			false
 		);
+
+		golfplatz_mcp_ability(
+			'snippets-sync',
+			array(
+				'label'            => 'PHP-Snippets nach WPCodeBox übernehmen',
+				'description'      => 'Liest wp-content/golfplatz/snippets/*.php (aus wordpress/snippets/, kopiert von etch/build.mjs) und legt sie in WPCodeBox im Ordner „Golfplatz“ an bzw. aktualisiert den Code – über die WPCodeBox-Funktionen wpcodebox/* (deren Freigaben gelten). Erkennung am Schlagwort = Dateiname. aktivieren: neue bzw. deaktivierte Snippets einschalten – nur, wenn keine gleichnamige Datei mehr in wp-content/mu-plugins liegt (sonst doppelte Funktionen). nur: Dateinamen ohne .php, leer = alle.',
+				'input_schema'     => array(
+					'type'       => 'object',
+					'properties' => array(
+						'aktivieren' => array( 'type' => 'boolean', 'default' => false ),
+						'nur'        => array( 'type' => 'array', 'items' => array( 'type' => 'string' ) ),
+					),
+				),
+				'execute_callback' => 'golfplatz_mcp_snippets_sync',
+			),
+			false
+		);
 	}
 );
+
+/** Eine WPCodeBox-Funktion aufrufen (Abilities API, damit Freigabe, Rechte und Protokoll von WPCodeBox greifen). */
+function golfplatz_mcp_wpcb( string $name, array $input = array() ) {
+	$ability = function_exists( 'wp_get_ability' ) ? wp_get_ability( 'wpcodebox/' . $name ) : null;
+	if ( ! $ability ) {
+		return new WP_Error( 'golfplatz_wpcb', 'WPCodeBox-Funktion wpcodebox/' . $name . ' fehlt (Plugin aktiv, Werkzeug in den MCP-Einstellungen freigegeben?).' );
+	}
+	return $ability->execute( $input );
+}
+
+/**
+ * Snippets aus wp-content/golfplatz/snippets/ in WPCodeBox anlegen oder aktualisieren.
+ * Titel = „Plugin Name“ aus dem Dateikopf, Beschreibung = „Description“, Schlagwörter: golfplatz + Dateiname (Erkennung).
+ */
+function golfplatz_mcp_snippets_sync( $input ) {
+	$dateien = glob( GOLFPLATZ_DATEN . '/snippets/*.php' ) ?: array();
+	$nur     = array_filter( (array) ( $input['nur'] ?? array() ) );
+	if ( ! $dateien ) {
+		return new WP_Error( 'golfplatz_snippets', 'Keine Dateien in wp-content/golfplatz/snippets/ – Build ausführen und dist kopieren.' );
+	}
+
+	// Ordner „Golfplatz“
+	$ordner = golfplatz_mcp_wpcb( 'list-folders' );
+	if ( is_wp_error( $ordner ) ) {
+		return $ordner;
+	}
+	$ordner_id = 0;
+	foreach ( (array) ( $ordner['folders'] ?? $ordner ) as $o ) {
+		if ( is_array( $o ) && 'Golfplatz' === ( $o['name'] ?? '' ) ) {
+			$ordner_id = (int) $o['id'];
+		}
+	}
+	if ( ! $ordner_id ) {
+		$neu = golfplatz_mcp_wpcb( 'create-folder', array( 'name' => 'Golfplatz' ) );
+		if ( is_wp_error( $neu ) ) {
+			return $neu;
+		}
+		$ordner_id = (int) $neu['id'];
+	}
+
+	// Vorhandene Snippets am Schlagwort (Dateiname) erkennen
+	$liste = golfplatz_mcp_wpcb( 'list-snippets' );
+	if ( is_wp_error( $liste ) ) {
+		return $liste;
+	}
+	$vorhanden = array();
+	foreach ( (array) ( $liste['snippets'] ?? array() ) as $s ) {
+		foreach ( (array) ( $s['snippetTags'] ?? $s['tags'] ?? array() ) as $tag ) {
+			$vorhanden[ is_array( $tag ) ? ( $tag['value'] ?? $tag['name'] ?? '' ) : (string) $tag ] = $s;
+		}
+	}
+
+	$log = array();
+	foreach ( $dateien as $datei ) {
+		$name = basename( $datei, '.php' );
+		if ( $nur && ! in_array( $name, $nur, true ) ) {
+			continue;
+		}
+		$code  = (string) file_get_contents( $datei );
+		$kopf  = get_file_data( $datei, array( 'titel' => 'Plugin Name', 'text' => 'Description' ) );
+		$daten = array(
+			'title'       => $kopf['titel'] ?: $name,
+			'description' => mb_substr( (string) $kopf['text'], 0, 2000 ),
+			'code'        => $code,
+			'folderId'    => $ordner_id,
+			'snippetTags' => array( 'golfplatz', $name ),
+			// „Root“: Code auf oberster Ebene, ausgeführt beim Laden von WPCodeBox. Beim Standard „Plugins Loaded“ legt WPCodeBox
+			// den Code in eine Funktion – dort sind const-Definitionen nicht erlaubt (syntax error, unexpected token "const").
+			'hooks'       => array( array( 'hook' => 'custom_root' ) ),
+		);
+		$eintrag = array( 'datei' => $name );
+		$s       = $vorhanden[ $name ] ?? null;
+		if ( $s ) {
+			$alt = golfplatz_mcp_wpcb( 'get-snippet', array( 'id' => (int) $s['id'] ) );
+			if ( ! is_wp_error( $alt ) && str_replace( "\r\n", "\n", (string) ( $alt['code'] ?? '' ) ) === str_replace( "\r\n", "\n", $code ) && 'custom_root' === ( $alt['hook'][0]['hook']['value'] ?? '' ) ) {
+				$eintrag['aktion'] = 'unverändert';
+			} else {
+				$r                 = golfplatz_mcp_wpcb( 'update-snippet', array( 'id' => (int) $s['id'] ) + $daten );
+				$eintrag['aktion'] = is_wp_error( $r ) ? 'Fehler: ' . $r->get_error_message() : 'aktualisiert';
+			}
+			$id      = (int) $s['id'];
+			$aktiv   = ! empty( $s['enabled'] );
+		} else {
+			$r = golfplatz_mcp_wpcb( 'create-snippet', $daten + array( 'codeType' => 'php' ) );
+			if ( is_wp_error( $r ) ) {
+				$log[] = $eintrag + array( 'aktion' => 'Fehler: ' . $r->get_error_message() );
+				continue;
+			}
+			$eintrag['aktion'] = 'angelegt (deaktiviert)';
+			$id                = (int) $r['id'];
+			$aktiv             = false;
+		}
+		$eintrag['id'] = $id;
+
+		if ( ! empty( $input['aktivieren'] ) && ! $aktiv ) {
+			if ( file_exists( WPMU_PLUGIN_DIR . '/' . $name . '.php' ) ) {
+				$eintrag['aktiv'] = 'nicht eingeschaltet: wp-content/mu-plugins/' . $name . '.php ist noch aktiv';
+			} else {
+				$r                = golfplatz_mcp_wpcb( 'enable-snippet', array( 'id' => $id ) );
+				$eintrag['aktiv'] = is_wp_error( $r ) ? 'Fehler: ' . $r->get_error_message() : 'eingeschaltet';
+			}
+		} else {
+			$eintrag['aktiv'] = $aktiv ? 'ja' : 'nein';
+		}
+		$log[] = $eintrag;
+	}
+	return $log;
+}
 
 /**
  * Prüft, ob ein Beitrag zu den erlaubten Typen gehört.
@@ -530,7 +659,7 @@ function golfplatz_mcp_save_stylesheet( $input ) {
 }
 
 function golfplatz_mcp_sync_from_files( $input ) {
-	$dir      = __DIR__ . '/golfplatz';
+	$dir      = GOLFPLATZ_DATEN;
 	$what     = $input['what'] ?? 'all';
 	$log      = array();
 	$manifest = json_decode( (string) @file_get_contents( $dir . '/manifest.json' ), true );

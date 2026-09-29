@@ -1,7 +1,7 @@
 // Birdiebook und Bahnen-Übersicht für /platz/ und /platz/birdiebook/ (Konzept: docs/konzept-birdiebook.md).
 // Slider: EtchSliderPro (DWC Slider Wrapper 240, DWC Slider 241). Die Slides erzeugt ein Etch-Loop über
 // alle Spielbahnen (loops.mjs › gp-bahnen). Grafik, Status, Fahne und Entfernungen rechnet
-// mu-plugins/golfplatz-birdiebook.php und stellt sie je Bahn als {item.golfplatz.…} bereit (Filter
+// snippets/golfplatz-birdiebook.php und stellt sie je Bahn als {item.golfplatz.…} bereit (Filter
 // etch/dynamic_data/post), Scorekarte und Rating als {options.golfplatz.platz.…}. Keine Shortcodes.
 // Abschlag-Wahl, Direktlink und Nummernleiste steuert das Skript desselben Moduls.
 
@@ -149,7 +149,7 @@ const bedienung = () =>
 export const birdiebookKomponente = {
   key: 'Birdiebook',
   name: 'Birdiebook',
-  description: 'Alle 18 Bahnen zum Durchwischen (EtchSliderPro) mit Abschlag-Wahl, Nummernleiste und Vor/Zurück. Daten: Spielbahnen (Loop gp-bahnen), Skript: mu-plugins/golfplatz-birdiebook.php.',
+  description: 'Alle 18 Bahnen zum Durchwischen (EtchSliderPro) mit Abschlag-Wahl, Nummernleiste und Vor/Zurück. Daten: Spielbahnen (Loop gp-bahnen), Skript: snippets/golfplatz-birdiebook.php.',
   properties: [],
   content: el('div', 'birdiebook', [emmp(ESP.wrapper, { backgroundColor: 'transparent' }, { Sliders_and_Controls: [slider()] }, 'Slider-Wrapper'), bedienung()], {
     attrs: { 'data-tee': 'gelb' },
@@ -198,7 +198,7 @@ const summenZeile = (pfad) =>
 export const scorekarteKomponente = {
   key: 'Scorekarte',
   name: 'Scorekarte',
-  description: 'Scorekarte: Loch, Par (Herren/Damen), HCP und Länge je Abschlag, Summen Out/In/Gesamt. Daten: {options.golfplatz.platz.scorekarte} aus mu-plugins/golfplatz-birdiebook.php.',
+  description: 'Scorekarte: Loch, Par (Herren/Damen), HCP und Länge je Abschlag, Summen Out/In/Gesamt. Daten: {options.golfplatz.platz.scorekarte} aus snippets/golfplatz-birdiebook.php.',
   properties: [],
   content: el('div', 'table-wrap', [
     el('div', 'scorecard', [
@@ -251,7 +251,7 @@ export const ratingKomponente = {
 
 // ---------- Spielvorgaben (/platz/spielvorgaben/) ----------
 // Daten: {options.golfplatz.platz.spielvorgaben} (je Abschlag CR/Slope/Par und Tabelle HI → Spielvorgabe).
-// Verhalten (Rechnen, Reiter) liefert das Skript in mu-plugins/golfplatz-birdiebook.php.
+// Verhalten (Rechnen, Reiter) liefert das Skript in snippets/golfplatz-birdiebook.php.
 const SV = `${PLATZ}.spielvorgaben`;
 
 export const spielvorgabenRechnerKomponente = {

@@ -4,16 +4,16 @@
  * Description: Liest Turnierkalender und Ergebnisliste des Clubs aus PC CADDIE://online (öffentliche Seiten, Club-Kennung aus den Clubdaten) und legt je Turnier einen Eintrag „turnier“ an bzw. aktualisiert ihn: Datum, Name, Kategorien, Spielform, Anmeldeschluss, freie Plätze und Links zu Anmeldung, Ausschreibung und Ergebnissen. Stündlich per WP-Cron und von Hand unter Turniere → PC-CADDIE-Abgleich. Die Daten stehen Etch als {options.golfplatz.turniere} zur Verfügung; Ergebnislisten mit Namen werden nicht übernommen, nur verlinkt.
  * Version: 1.0.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-turniere.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-turniere.php
  */
 
 defined( 'ABSPATH' ) || exit;
 
-const GOLFPLATZ_PCC_WEB = 'https://www.pccaddie.net/clubs/';
-const GOLFPLATZ_PCC_LOG = 'golfplatz_pcc_log';
+define( 'GOLFPLATZ_PCC_WEB', 'https://www.pccaddie.net/clubs/' );
+define( 'GOLFPLATZ_PCC_LOG', 'golfplatz_pcc_log' );
 
 /** Kategorien von PC CADDIE (data-kat, mehrere möglich). Andere Buchstaben sind intern und werden ignoriert. */
-const GOLFPLATZ_PCC_KATEGORIEN = array(
+define( 'GOLFPLATZ_PCC_KATEGORIEN', array(
 	'D' => 'Damen',
 	'H' => 'Herren',
 	'S' => 'Senioren',
@@ -21,7 +21,7 @@ const GOLFPLATZ_PCC_KATEGORIEN = array(
 	'C' => 'Club',
 	'M' => 'Mannschaften',
 	'T' => 'Clubmeisterschaft',
-);
+) );
 
 function golfplatz_pcc_club(): string {
 	$club = (array) get_option( 'clubdaten', array() );

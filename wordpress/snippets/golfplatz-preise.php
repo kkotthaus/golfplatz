@@ -4,21 +4,21 @@
  * Description: Stellt die Preise (Beitragstyp „preis“, gruppiert nach Preiskategorie) Etch als Daten bereit: {options.golfplatz.preise.tabellen}, je Kategorie auch als Karten (karten[], z. B. Mitgliedschaften). Tabellen mit Wochentagen werden als Matrix aufbereitet (Tarif je Zeile, Spalten Mo–Sa und So/Feiertag, Varianten wie „mit DGV-Ausweis „R““ als Unterzeile), die übrigen als Liste. Keine Shortcodes – das Markup baut die Etch-Komponente „Preistabelle“ (wordpress/etch/preise.mjs).
  * Version: 1.1.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-preise.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-preise.php
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /** Kategorie (Name des Begriffs) → Schlüssel für die Komponente (Eigenschaft „kategorie“). */
-const GOLFPLATZ_PREIS_KATEGORIEN = array(
+define( 'GOLFPLATZ_PREIS_KATEGORIEN', array(
 	'Greenfee'         => 'greenfee',
 	'Turnier-Greenfee' => 'turnier',
 	'Kooperation'      => 'kooperationen',
 	'Leihgeräte'       => 'leihe',
 	'Mitgliedschaft'   => 'mitgliedschaft',
-);
+) );
 
-const GOLFPLATZ_PREIS_EINHEITEN = array(
+define( 'GOLFPLATZ_PREIS_EINHEITEN', array(
 	'runde18'  => '18 Loch',
 	'runde9'   => '9 Loch',
 	'runde'    => 'pro Runde',
@@ -26,10 +26,10 @@ const GOLFPLATZ_PREIS_EINHEITEN = array(
 	'monat'    => 'pro Monat',
 	'jahr'     => 'pro Jahr',
 	'einmalig' => 'einmalig',
-);
+) );
 
 /** Spalten der Matrix. Sonntag und Feiertag teilen sich eine Spalte (wie auf dreibaeumen.de). */
-const GOLFPLATZ_PREIS_SPALTEN = array(
+define( 'GOLFPLATZ_PREIS_SPALTEN', array(
 	array( 'kurz' => 'Mo', 'lang' => 'Montag' ),
 	array( 'kurz' => 'Di', 'lang' => 'Dienstag' ),
 	array( 'kurz' => 'Mi', 'lang' => 'Mittwoch' ),
@@ -37,7 +37,7 @@ const GOLFPLATZ_PREIS_SPALTEN = array(
 	array( 'kurz' => 'Fr', 'lang' => 'Freitag' ),
 	array( 'kurz' => 'Sa', 'lang' => 'Samstag' ),
 	array( 'kurz' => 'So/Feiertag', 'lang' => 'Sonntag und Feiertag' ),
-);
+) );
 
 /** „40 €“, „37,50 €“ */
 function golfplatz_euro( $betrag ): string {

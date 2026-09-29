@@ -1,5 +1,5 @@
-// Handbuch: docs/handbuch.md → dist/handbuch.html (Inhaltsverzeichnis + Kapitel) für die Backend-Seite „Handbuch“
-// (mu-plugins/golfplatz-handbuch.php). Kleiner Markdown-Umwandler für genau die Formen, die das Handbuch nutzt:
+// Handbuch: docs/handbuch.md → dist/handbuch.php (Inhaltsverzeichnis + Kapitel) für die Backend-Seite „Handbuch“
+// (snippets/golfplatz-handbuch.php). Kleiner Markdown-Umwandler für genau die Formen, die das Handbuch nutzt:
 // Überschriften, Absätze, Listen (auch verschachtelt), Tabellen, Hinweise (> …), **fett**, `Code` und [Links](…).
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

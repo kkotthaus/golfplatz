@@ -1,5 +1,5 @@
 // Etch-Komponente „Preistabelle“: Preise einer Kategorie (Greenfee, Turnier-Greenfee, Kooperationen, Leihgeräte).
-// Daten: {options.golfplatz.preise} aus mu-plugins/golfplatz-preise.php.
+// Daten: {options.golfplatz.preise} aus snippets/golfplatz-preise.php.
 // Mit Wochentagen: kompakte Matrix wie auf dreibaeumen.de – je Tarif eine Zeile, Spalten Mo–Sa und So/Feiertag,
 // Varianten („mit DGV-Ausweis „R““) als Unterzeile. Ohne Wochentage (Leihgeräte): einfache Liste.
 //

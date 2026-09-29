@@ -1,5 +1,5 @@
 // Aktuelles: Etch-Komponente „Newskarten“ und Bausteine für die Seite /news/ und das Template single-post (Aufbau wie im Prototyp).
-// Daten: {options.golfplatz.news} und {this.golfplatz.news} aus mu-plugins/golfplatz-news.php. Filter per URL: ?kategorie=<slug>, ?seite=<n>.
+// Daten: {options.golfplatz.news} und {this.golfplatz.news} aus snippets/golfplatz-news.php. Filter per URL: ?kategorie=<slug>, ?seite=<n>.
 
 import { el, t, text, loop, wenn, icon, postContent } from './lib.mjs';
 

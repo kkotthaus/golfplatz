@@ -224,7 +224,7 @@ const einheitAnzeige = (p) => {
   return e && p.titel.toLowerCase().includes(e.toLowerCase()) ? '' : e;
 };
 
-// Preis-Matrix wie in WordPress (mu-plugins/golfplatz-preise.php): Tage aus „Gültig an“, Tarif je Zeile,
+// Preis-Matrix wie in WordPress (snippets/golfplatz-preise.php): Tage aus „Gültig an“, Tarif je Zeile,
 // Varianten („… mit DGV-Ausweis „R““) als Unterzeile. Spalten Mo–Sa und So/Feiertag.
 const SPALTEN = [['Mo', 'Montag'], ['Di', 'Dienstag'], ['Mi', 'Mittwoch'], ['Do', 'Donnerstag'], ['Fr', 'Freitag'], ['Sa', 'Samstag'], ['So/Feiertag', 'Sonntag und Feiertag']];
 const TAGNR = { mo: 0, di: 1, mi: 2, do: 3, fr: 4, sa: 5, so: 6 };

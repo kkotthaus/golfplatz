@@ -80,7 +80,7 @@ Alle Farben stehen in **Automatic.css → Farben** (Primary Clubgrün `#1D8475`,
 
 **Barrierefreiheit:** Alle Text-/Hintergrund-Kombinationen erfüllen WCAG 2.1 AA in Hell und Dunkel (Prüfskript `node wordpress/etch/kontrast.mjs`; zusätzlich per Browser-Audit auf Startseite, Greenfee, Platz, Club, Mitgliedschaft, Golfschule und den Prototyp-Seiten geprüft, Stand 2026-09-26). Umgesetzt: grüne Schrift in `--primary-dark`; Seiten-Hero und Tabellenköpfe auf `#1D8475` mit weißer Schrift; Top-Bar und Footer auf `--primary-ultra-dark`; ACSS-Buttons mit weißer Schrift (`btn-primary-text`, `btn-secondary-text` usw. = `var(--white)`, die ACSS-Vorgabe `-ultra-light` hatte nur 4,15:1); Danger etwas oranger (`#b42318`) als das Clubrot, damit Sperren nicht wie Markenfarbe wirken; Nebentext und Eingabefeld-Rahmen dunkler. Die Landschaftsgrafik im Startseiten-Hero (Platzhalter bis zum Foto) nutzt ebenfalls nur ACSS-Farben: Himmel und Hügel sind aus `--primary` und `--primary-ultra-light` gemischt, die Fahne ist Clubrot. Weil Text und Buttons je nach Bildschirm auf den Hügeln liegen, bleiben die Hügel hell. Der Button „Mitglied werden“ hat dort einen weißen Hintergrund. Geprüft bei 375, 768, 1280 und 1920 px.
 
-**Hell/Dunkel:** In ACSS ist „Auto Color Scheme“ an (`auto-color-scheme`, Website-Schema „light only“, Referenz-Tokens an). Hell ist Standard. Der Knopf in der Top-Bar (Etch-Komponente FarbschemaUmschalter, Skripte im mu-plugin `golfplatz-farbschema.php`) setzt `scheme--dark` am `<html>` und merkt sich die Wahl im Browser (`localStorage`, Schlüssel `golfplatz-farbschema`); die Systemeinstellung des Besuchers wird bewusst nicht übernommen. Die Dunkel-Werte (Hauptfarben, Seitenhintergrund, Flächen, Rahmen) stehen unter `dunkel` bzw. `ultra-dark`/`dark` in `acss-farben.mjs`. Top-Bar, Footer, Seiten-Hero, Startseiten-Hero und die Illustrationen bleiben hell gerechnet (ACSS „Force light selectors“).
+**Hell/Dunkel:** In ACSS ist „Auto Color Scheme“ an (`auto-color-scheme`, Website-Schema „light only“, Referenz-Tokens an). Hell ist Standard. Der Knopf in der Top-Bar (Etch-Komponente FarbschemaUmschalter, Skripte im Snippet `golfplatz-farbschema.php`) setzt `scheme--dark` am `<html>` und merkt sich die Wahl im Browser (`localStorage`, Schlüssel `golfplatz-farbschema`); die Systemeinstellung des Besuchers wird bewusst nicht übernommen. Die Dunkel-Werte (Hauptfarben, Seitenhintergrund, Flächen, Rahmen) stehen unter `dunkel` bzw. `ultra-dark`/`dark` in `acss-farben.mjs`. Top-Bar, Footer, Seiten-Hero, Startseiten-Hero und die Illustrationen bleiben hell gerechnet (ACSS „Force light selectors“).
 
 **Übernehmen:** `node wordpress/etch/build.mjs` schreibt `dist/daten/acss-farben.json`; nach dem Kopieren `golfplatz/acss-colors` mit `aus_datei: true` aufrufen.
 
@@ -102,7 +102,7 @@ Umsetzung des [Konzepts](konzept-birdiebook.md), Stand 2026-09-26.
   - Komponente „Birdiebook“ (Generator `wordpress/etch/birdiebook.mjs`) aus DWC Slider Wrapper (240) und DWC Slider (241).
   - Die Slides erzeugt der Loop `gp-bahnen` (`wordpress/etch/loops.mjs`: `spielbahn`, sortiert nach `bahn_nummer`).
   - Felder im Loop: `{item.metabox.<feld>}`, Link: `{item.permalink.relative}`.
-- **Live-Modul `mu-plugins/golfplatz-birdiebook.php`:**
+- **Live-Modul `snippets/golfplatz-birdiebook.php`:**
   - Daten je Bahn als `{item.golfplatz.…}`: `plan` (Par, Verlauf, Fahnenlage, Hindernisse, Bild), `status` (Platz- oder Abschlagsperre, Wintergrün, frei), `fahne`, `entfernungen`.
   - Scorekarte und Rating als `{options.golfplatz.platz.…}`.
   - Das Markup (Grafik, Status, Liste, Tabellen) steht in den Etch-Komponenten.
@@ -153,7 +153,7 @@ Umsetzung des [Konzepts](konzept-birdiebook.md), Stand 2026-09-26.
 
 ### Turniere aus PC CADDIE
 
-Stand 2026-09-28, `mu-plugins/golfplatz-turniere.php`.
+Stand 2026-09-28, `snippets/golfplatz-turniere.php`.
 
 - **Quelle:** die öffentlichen Seiten von PC CADDIE://online, die der Club schon auf dreibaeumen.de einbindet: Turnierkalender `pccaddie.net/clubs/<kennung>/app.php?cat=ts_calendar` (kommende Turniere) und Ergebnisliste `…?cat=ts_resultlist` (gespielte, 2024 bis heute). Club-Kennung **0494538** in den Clubdaten (`pccaddie_code`, Tab Gäste & Systeme). Gelesen werden die Tabellenzeilen `tr.pcco-xcal-list-item` (`data-id`, `data-kat`, `<time datetime>`, Anmeldeschluss, Teilnehmer, freie Plätze, Spielform, Löcher, Handicap-relevant, Links). Ändert PC CADDIE den Aufbau, meldet der Abgleich „Keine Turniere gelesen“ und lässt die Daten stehen.
 - **Abgleich:** stündlich per WP-Cron (`golfplatz_pcc_sync`), von Hand unter **Turniere (PC CADDIE) → PC-CADDIE-Abgleich** oder per MCP `golfplatz/turniere-sync`. Je Turnier ein Eintrag `turnier` (Schlüssel = PC-CADDIE-Kennung); nur Geändertes wird geschrieben. Kommende Turniere, die aus dem Kalender verschwinden, gelten als abgesagt und kommen in den Papierkorb.
@@ -179,7 +179,7 @@ Stand 2026-09-28, `mu-plugins/golfplatz-turniere.php`.
 
 ### Mannschaften & Ligaspiele
 
-**Ligaspiele vom Golfverband NRW** (seit 2026-09-28, `mu-plugins/golfplatz-liga-sync.php`):
+**Ligaspiele vom Golfverband NRW** (seit 2026-09-28, `snippets/golfplatz-liga-sync.php`):
 
 - **Quelle:** gvnrw.liga.golf lädt seine Tabellen von `https://gvnrw-backend.liga.golf` (GraphQL, ohne Anmeldung): `findLeagues(year)` (Wettbewerbe und Ligen), `findLeagueResult` (Tabelle einer Liga: Spieltage mit Datum, Werte je Team, `homeTeam` = Gastgeber), `findTeamResult(teamId)` (je Spieltag der Austragungsort mit vollem Clubnamen). Die Schnittstelle ist **nicht offiziell dokumentiert**; beim Golfverband NRW klären, ob der tägliche Abruf in Ordnung ist.
 - **Suche:** alle Ligen eines Jahres nach Teams mit dem Suchbegriff aus den Clubdaten (`verband_suchbegriff`, „Dreibäumen“), rund 250 Abrufe. Das Ergebnis steht je Jahr in der Option `golfplatz_liga_teams`; danach werden nur noch die bekannten Teams abgefragt (etwa 25 Abrufe).
@@ -217,7 +217,7 @@ Stand 2026-09-28, Aufbau wie im Prototyp.
 
 ### Tee-Belegung durch Turniere
 
-Stand 2026-09-29, `mu-plugins/golfplatz-tee-belegung.php`.
+Stand 2026-09-29, `snippets/golfplatz-tee-belegung.php`.
 
 - **Regeln** unter **Sperrungen → Turnier-Regeln**. Die Einstellungsseite `tee-belegung` ist in PHP registriert, Option `tee_belegung`, Recht `edit_sperrungen`.
   - Klonbare, sortierbare Gruppe `regeln` mit `name`, `muster` (Teile des Turniernamens, Komma-getrennt; leer = alle), `loecher` (9/18), `startform` (`kanonenstart`, `tee_times`, `keine`), `tee` (`1`, `10`, `beide`), `vorlauf`, `dauer` (Minuten), `intervall`, `flight`, `grund` (`{turnier}`).
@@ -247,7 +247,7 @@ Stand 2026-09-29, `mu-plugins/golfplatz-tee-belegung.php`.
 
 ### Club & Kontakt `/club/`
 
-Stand 2026-09-28, Aufbau wie im Prototyp. Daten aus `mu-plugins/golfplatz-club.php`, Markup aus `wordpress/etch/club.mjs`.
+Stand 2026-09-28, Aufbau wie im Prototyp. Daten aus `snippets/golfplatz-club.php`, Markup aus `wordpress/etch/club.mjs`.
 
 - **Personen:** Etch-Komponente „Personenkarten“ (Eigenschaften `liste`, `spalten`). Daten `{options.golfplatz.personen.listen}` aus dem Beitragstyp `person`, gruppiert nach Personengruppe: `vorstand`, `team` (Betreibergesellschaft, Clubmanagement, Sekretariat, Service & Proshop, Greenkeeping), `captains`, `golfschule`, `jugend`. Solange es keine Gruppe „Jugend“ gibt, findet die Liste Personen, deren Funktion „Jugend“ enthält. Reihenfolge über „Reihenfolge“ an der Person, Foto aus dem Beitragsbild, sonst Initialen.
 - **Abschnitte:** Sprungnavigation (auf schmalen Bildschirmen `top: 6.3rem` unter dem niedrigeren Header), Vorstand, Team, Abteilungen (Captains), Jugend (Links Golfschule und Mannschaften), Anfahrt, Kontakt mit Öffnungszeiten des Sekretariats.
@@ -259,7 +259,7 @@ Stand 2026-09-28, Aufbau wie im Prototyp. Daten aus `mu-plugins/golfplatz-club.p
 
 ### Aktuelles `/news/`
 
-Stand 2026-09-28. Daten aus `mu-plugins/golfplatz-news.php`, Markup aus `wordpress/etch/news.mjs`.
+Stand 2026-09-28. Daten aus `snippets/golfplatz-news.php`, Markup aus `wordpress/etch/news.mjs`.
 
 - **Beiträge:** News sind normale Beiträge (`post`) mit Kategorie, Textauszug (Teaser), Beitragsbild und dem Schalter `nur_mitglieder`.
   - Die URL lautet `/news/<slug>/`: eigene Rewrite-Regel und Filter `post_link`. Die Permalink-Struktur der übrigen Inhalte bleibt unverändert.
@@ -276,7 +276,7 @@ Stand 2026-09-28. Daten aus `mu-plugins/golfplatz-news.php`, Markup aus `wordpre
 
 ### Handbuch im Backend
 
-Stand 2026-09-28. Die Bedienungsanleitung für alle Funktionen steht in [handbuch.md](handbuch.md). Der Build macht daraus `dist/handbuch.html`, und `mu-plugins/golfplatz-handbuch.php` zeigt sie im Backend unter **Handbuch** (ganz oben im Menü) mit Kapitel-Verzeichnis, dazu ein Kasten im Dashboard.
+Stand 2026-09-28. Die Bedienungsanleitung für alle Funktionen steht in [handbuch.md](handbuch.md). Der Build macht daraus `dist/handbuch.php`, und `snippets/golfplatz-handbuch.php` zeigt sie im Backend unter **Handbuch** (ganz oben im Menü) mit Kapitel-Verzeichnis, dazu ein Kasten im Dashboard.
 
 - Sichtbar für angemeldete Benutzer mit `edit_posts` (Administrator, Redakteur, Autor, Mitarbeiter) oder `edit_sperrungen` (Rolle Platzstatus), nicht für Abonnenten bzw. künftige Mitglieder-Konten.
 - Bei neuen oder geänderten Funktionen das Handbuch mitpflegen.
@@ -328,6 +328,16 @@ Jedes Grün hat **6 nummerierte Fahnenpositionen (1–6)**. Gesteckt wird eine P
 
 Der große Platzstatus-Block der Startseite ist jetzt die Etch-Komponente „Platzstatus“ (`wordpress/etch/platzstatus.mjs`). Die Berechnung bleibt in `golfplatz-platzstatus.php`, die Daten liegen unter `{options.golfplatz.platzstatus.*}` (Filter `etch/dynamic_data/option`). Einzelheiten stehen in `wordpress/README.md`.
 
+## PHP als WPCodeBox-Snippets
+
+Stand 2026-09-29, lokal umgestellt. Alle 13 PHP-Dateien (`wordpress/snippets/`, früher `mu-plugins`) laufen als Snippets in WPCodeBox 2 (1.4.1), Ordner „Golfplatz“, IDs 1–13, Einfügepunkt Root. Abgleich per MCP `golfplatz/snippets-sync`. Einzelheiten und Regeln stehen in [wordpress/README.md](../wordpress/README.md).
+
+- Build-Dateien liegen jetzt in `wp-content/golfplatz/` (vorher `wp-content/mu-plugins/golfplatz/`).
+- Das Handbuch ist dort als `handbuch.php` mit Schutzzeile gespeichert. Vorher war `handbuch.html` öffentlich abrufbar.
+- Umgestellt: 32 `const` → `define()`, `__DIR__` → `GOLFPLATZ_DATEN`, `WPMU_PLUGIN_URL` → `content_url()`.
+- Geprüft: Alle Snippets bleiben nach Seitenaufrufen eingeschaltet, Seitengrößen identisch mit vorher, Cron-Ereignisse geplant, PC-CADDIE-Abgleich und Tee-Belegung laufen, Handbuch-Datei über die URL leer.
+- **Offen:** Live-Seite umstellen (Ablauf im README). Die alten mu-plugins liegen lokal nur noch als Sicherung außerhalb von `wp-content`.
+
 ## Noch von Hand zu erledigen
 
 1. ~~Einstellungsseiten anlegen~~ – erledigt am 2026-09-25 per MCP: `clubdaten` (mit Tabs) und `platzstatus` (Capability `edit_sperrungen`). Beide sind unter Meta Box → Einstellungsseiten bearbeitbar.
@@ -340,7 +350,7 @@ Der große Platzstatus-Block der Startseite ist jetzt die Etch-Komponente „Pla
 
 ## Seiten und Templates per MCP
 
-Seit 2026-09-25 legt ein Must-Use-Plugin zusätzliche MCP-Funktionen an. Damit werden Seiten, Etch-Templates und das CSS aus dem Repo übertragen. Ablauf und Stand: [wordpress/README.md](../wordpress/README.md).
+Seit 2026-09-25 legt ein WPCodeBox-Snippet zusätzliche MCP-Funktionen an. Damit werden Seiten, Etch-Templates und das CSS aus dem Repo übertragen. Ablauf und Stand: [wordpress/README.md](../wordpress/README.md).
 
 ## Prototyp → Etch
 

@@ -4,13 +4,13 @@
  * Description: News als normale Beiträge unter /news/<slug>/. Stellt Etch die Beitragsliste bereit ({options.golfplatz.news}: neueste, beitraege, kategorien, seiten – Filter ?kategorie=<slug>, Blättern ?seite=<n>) und je Beitrag Kategorie, Datum, Teaser und Mitglieder-Sperre ({this.golfplatz.news}). Beiträge mit „Nur für Mitglieder“ liefern ohne Anmeldung keinen Volltext. Keine Shortcodes – das Markup bauen die Etch-Komponente „Newskarten“, die Seite /news/ und das Template single-post (wordpress/etch/news.mjs).
  * Version: 1.0.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-news.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-news.php
  */
 
 defined( 'ABSPATH' ) || exit;
 
-const GOLFPLATZ_NEWS_PRO_SEITE = 9;
-const GOLFPLATZ_NEWS_REWRITE   = '1';
+define( 'GOLFPLATZ_NEWS_PRO_SEITE', 9 );
+define( 'GOLFPLATZ_NEWS_REWRITE', '1' );
 
 // Beitrags-URL /news/<slug>/ – nur für Beiträge, andere Beitragstypen behalten ihre URLs.
 add_action(

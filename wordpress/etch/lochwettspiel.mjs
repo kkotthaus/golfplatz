@@ -1,5 +1,5 @@
 // Etch-Komponente „Lochwettspiel“: Turnierbaum des jährlichen Lochwettspiels (Teams aus zwei Spielern, K.-o.-System).
-// Daten: {options.golfplatz.lochwettspiele} aus mu-plugins/golfplatz-lochwettspiel.php – PHP setzt die Teams ins
+// Daten: {options.golfplatz.lochwettspiele} aus snippets/golfplatz-lochwettspiel.php – PHP setzt die Teams ins
 // Tableau, lässt Sieger weiterrücken und bewertet die Spielzeiträume; hier steht nur das Markup.
 //
 // Aufbau: je Runde eine Spalte (Kopf mit Name, Zeitraum, Status), darin Paare aus zwei Spielen, deren Sieger sich in der

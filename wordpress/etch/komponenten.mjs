@@ -15,11 +15,11 @@ import { turnierkalenderKomponente, platzbelegungKomponente, turnierergebnisseKo
 /** Öffnungszeiten eines Bereichs als Etch-Komponente (wordpress/etch/zeiten.mjs). */
 export const zeiten = (bereich, variante = 'compact', liste = variante) => komponente('Oeffnungszeiten', { bereich, variante, liste, titel: '0' });
 
-// Umschalter Hell/Dunkel (Skripte: mu-plugins/golfplatz-farbschema.php, erkennt [data-scheme-toggle])
+// Umschalter Hell/Dunkel (Skripte: snippets/golfplatz-farbschema.php, erkennt [data-scheme-toggle])
 const farbschemaKomponente = {
   key: 'FarbschemaUmschalter',
   name: 'Farbschema-Umschalter',
-  description: 'Knopf Hell/Dunkel für die Top-Bar. Zustand, Beschriftung und Speichern übernimmt das Skript aus mu-plugins/golfplatz-farbschema.php.',
+  description: 'Knopf Hell/Dunkel für die Top-Bar. Zustand, Beschriftung und Speichern übernimmt das Skript aus snippets/golfplatz-farbschema.php.',
   properties: [],
   content: el('button', 'scheme-toggle', [
     el('span', 'scheme-toggle__icon', [], { attrs: { 'aria-hidden': 'true' } }),

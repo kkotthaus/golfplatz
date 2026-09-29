@@ -66,7 +66,7 @@
     {
       "key": "FarbschemaUmschalter",
       "name": "Farbschema-Umschalter",
-      "description": "Knopf Hell/Dunkel für die Top-Bar. Zustand, Beschriftung und Speichern übernimmt das Skript aus mu-plugins/golfplatz-farbschema.php.",
+      "description": "Knopf Hell/Dunkel für die Top-Bar. Zustand, Beschriftung und Speichern übernimmt das Skript aus snippets/golfplatz-farbschema.php.",
       "properties": []
     },
     {
@@ -160,7 +160,7 @@
     {
       "key": "Platzstatus",
       "name": "Platzstatus",
-      "description": "Platzstatus der Startseite: Schnellsperre, Spielbedingungen, Fahnenpositionen, Sperren heute/morgen, Übungsanlagen. Daten: {options.golfplatz.platzstatus.*} aus mu-plugins/golfplatz-platzstatus.php.",
+      "description": "Platzstatus der Startseite: Schnellsperre, Spielbedingungen, Fahnenpositionen, Sperren heute/morgen, Übungsanlagen. Daten: {options.golfplatz.platzstatus.*} aus snippets/golfplatz-platzstatus.php.",
       "properties": [
         {
           "key": "zeitenLink",
@@ -175,7 +175,7 @@
     {
       "key": "Scorekarte",
       "name": "Scorekarte",
-      "description": "Scorekarte: Loch, Par (Herren/Damen), HCP und Länge je Abschlag, Summen Out/In/Gesamt. Daten: {options.golfplatz.platz.scorekarte} aus mu-plugins/golfplatz-birdiebook.php.",
+      "description": "Scorekarte: Loch, Par (Herren/Damen), HCP und Länge je Abschlag, Summen Out/In/Gesamt. Daten: {options.golfplatz.platz.scorekarte} aus snippets/golfplatz-birdiebook.php.",
       "properties": []
     },
     {
@@ -244,7 +244,7 @@
     {
       "key": "Birdiebook",
       "name": "Birdiebook",
-      "description": "Alle 18 Bahnen zum Durchwischen (EtchSliderPro) mit Abschlag-Wahl, Nummernleiste und Vor/Zurück. Daten: Spielbahnen (Loop gp-bahnen), Skript: mu-plugins/golfplatz-birdiebook.php.",
+      "description": "Alle 18 Bahnen zum Durchwischen (EtchSliderPro) mit Abschlag-Wahl, Nummernleiste und Vor/Zurück. Daten: Spielbahnen (Loop gp-bahnen), Skript: snippets/golfplatz-birdiebook.php.",
       "properties": []
     },
     {

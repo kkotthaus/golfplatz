@@ -1,13 +1,17 @@
 <?php
 /**
  * Plugin Name: Golfplatz – Handbuch
- * Description: Handbuch zur Bedienung der Website als eigene Seite im WordPress-Backend (Menü „Handbuch“, dazu ein Hinweis im Dashboard). Nur für angemeldete Benutzer, die Inhalte bearbeiten (edit_posts) oder den Platzstatus pflegen (edit_sperrungen) – nicht für reine Mitglieder-Konten. Inhalt: golfplatz/handbuch.html, erzeugt von wordpress/etch/build.mjs aus docs/handbuch.md.
+ * Description: Handbuch zur Bedienung der Website als eigene Seite im WordPress-Backend (Menü „Handbuch“, dazu ein Hinweis im Dashboard). Nur für angemeldete Benutzer, die Inhalte bearbeiten (edit_posts) oder den Platzstatus pflegen (edit_sperrungen) – nicht für reine Mitglieder-Konten. Inhalt: golfplatz/handbuch.php, erzeugt von wordpress/etch/build.mjs aus docs/handbuch.md.
  * Version: 1.0.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-handbuch.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-handbuch.php
  */
 
 defined( 'ABSPATH' ) || exit;
+
+// Build-Dateien (wordpress/etch/build.mjs → dist) liegen in wp-content/golfplatz/. Als WPCodeBox-Snippet läuft der Code per eval(),
+// __DIR__ zeigt deshalb nicht auf diesen Ordner.
+defined( 'GOLFPLATZ_DATEN' ) || define( 'GOLFPLATZ_DATEN', WP_CONTENT_DIR . '/golfplatz' );
 
 function golfplatz_handbuch_erlaubt(): bool {
 	return current_user_can( 'edit_posts' ) || current_user_can( 'edit_sperrungen' );
@@ -26,9 +30,10 @@ function golfplatz_handbuch_seite(): void {
 	if ( ! golfplatz_handbuch_erlaubt() ) {
 		wp_die( 'Kein Zugriff.' );
 	}
-	$html = (string) @file_get_contents( __DIR__ . '/golfplatz/handbuch.html' );
+	// handbuch.php beginnt mit einer PHP-Schutzzeile (ABSPATH-Prüfung): Direkt aufgerufen liefert der Webserver nichts aus.
+	$html = preg_replace( '/^<\?php.*?\?>\n?/s', '', (string) @file_get_contents( GOLFPLATZ_DATEN . '/handbuch.php' ) );
 	echo '<div class="wrap golfplatz-handbuch">';
-	echo $html ? wp_kses_post( $html ) : '<h1>Handbuch</h1><p>Die Datei golfplatz/handbuch.html fehlt. Bitte den Build ausführen und den Ordner dist kopieren.</p>';
+	echo $html ? wp_kses_post( $html ) : '<h1>Handbuch</h1><p>Die Datei golfplatz/handbuch.php fehlt. Bitte den Build ausführen und den Ordner dist kopieren.</p>';
 	echo '</div>';
 }
 

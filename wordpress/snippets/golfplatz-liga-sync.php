@@ -4,7 +4,7 @@
  * Description: Holt Spieltage, Spielorte und Ergebnisse der Club-Mannschaften von gvnrw.liga.golf (GraphQL-Schnittstelle der Seite) und legt daraus Mannschaften und Ligaspiele an bzw. aktualisiert sie. Täglich per WP-Cron für die laufende Saison, von Hand unter Mannschaften → Verband-Abgleich. Spielberichte und von Hand gepflegte Spiele bleiben unberührt.
  * Version: 1.0.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-liga-sync.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-liga-sync.php
  *
  * Hinweis: Die Schnittstelle ist nicht offiziell dokumentiert und kann sich ändern. Fällt ein Abruf aus, bleiben
  * die zuletzt übernommenen Daten stehen; der Fehler steht im Protokoll unter Mannschaften → Verband-Abgleich.
@@ -12,11 +12,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const GOLFPLATZ_LIGA_API    = 'https://gvnrw-backend.liga.golf';
-const GOLFPLATZ_LIGA_WEB    = 'https://gvnrw.liga.golf';
-const GOLFPLATZ_LIGA_AB     = 2023; // frühestes Jahr des Abgleichs
-const GOLFPLATZ_LIGA_TEAMS  = 'golfplatz_liga_teams'; // Option: gefundene Teams je Jahr
-const GOLFPLATZ_LIGA_LOG    = 'golfplatz_liga_log';   // Option: letzte Abgleiche
+define( 'GOLFPLATZ_LIGA_API', 'https://gvnrw-backend.liga.golf' );
+define( 'GOLFPLATZ_LIGA_WEB', 'https://gvnrw.liga.golf' );
+define( 'GOLFPLATZ_LIGA_AB', 2023 ); // frühestes Jahr des Abgleichs
+define( 'GOLFPLATZ_LIGA_TEAMS', 'golfplatz_liga_teams' ); // Option: gefundene Teams je Jahr
+define( 'GOLFPLATZ_LIGA_LOG', 'golfplatz_liga_log' );   // Option: letzte Abgleiche
 
 /** GraphQL-Abfrage. Liefert data oder WP_Error. */
 function golfplatz_liga_gql( string $query, array $variables ) {

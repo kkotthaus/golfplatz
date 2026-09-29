@@ -1,7 +1,7 @@
 // Etch-Komponente „Zählkarte“: Handicap-Index und Abschlag wählen, Vorgabeschläge je Loch sehen, Schläge eintragen,
 // Ergebnis brutto/netto (Schläge und Stableford-Punkte).
 // Daten: {options.golfplatz.platz.spielvorgaben} (Abschläge mit CR/Slope/Par) und {options.golfplatz.platz.zaehlkarte}
-// (Löcher mit Par Herren/Damen und HCP) aus mu-plugins/golfplatz-birdiebook.php.
+// (Löcher mit Par Herren/Damen und HCP) aus snippets/golfplatz-birdiebook.php.
 // Rechnen, Speichern im Browser und Zurücksetzen: prototype/assets/js/zaehlkarte.js (liest alles aus den data-Attributen).
 // Tabelle als CSS-Grid mit Tabellen-Rollen wie Scorekarte und Preistabelle.
 

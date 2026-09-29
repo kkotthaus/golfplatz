@@ -1,5 +1,5 @@
 // Etch-Komponente „Platzstatus“ (Startseite, Anker #platzstatus).
-// Die Werte rechnet mu-plugins/golfplatz-platzstatus.php und stellt sie über den Etch-Filter
+// Die Werte rechnet snippets/golfplatz-platzstatus.php und stellt sie über den Etch-Filter
 // etch/dynamic_data/option bereit: {options.golfplatz.platzstatus.<feld>}. Hier steht nur das Markup –
 // Überschriften, Texte, Reihenfolge und Klassen lassen sich im Etch-Builder ändern.
 // Markup und Klassen wie der frühere Shortcode [golfplatz_platzstatus] (CSS in prototype/assets/css/main.css).
@@ -93,7 +93,7 @@ const einrichtungen = () =>
 export const platzstatusKomponente = {
   key: 'Platzstatus',
   name: 'Platzstatus',
-  description: 'Platzstatus der Startseite: Schnellsperre, Spielbedingungen, Fahnenpositionen, Sperren heute/morgen, Übungsanlagen. Daten: {options.golfplatz.platzstatus.*} aus mu-plugins/golfplatz-platzstatus.php.',
+  description: 'Platzstatus der Startseite: Schnellsperre, Spielbedingungen, Fahnenpositionen, Sperren heute/morgen, Übungsanlagen. Daten: {options.golfplatz.platzstatus.*} aus snippets/golfplatz-platzstatus.php.',
   properties: [{ key: 'zeitenLink', name: 'Link „Alle Öffnungszeiten“', type: { primitive: 'string' }, default: '/greenfee/#oeffnungszeiten' }],
   content: el('section', 'status-board', [kopf(), sperre(), bedingungen(), tage(), einrichtungen()], {
     attrs: { id: 'platzstatus', 'aria-labelledby': 'status-board-title' },

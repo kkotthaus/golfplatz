@@ -1,7 +1,7 @@
 // Schreibt das Block-Markup aller Etch-Templates nach wordpress/etch/dist/<slug>.html.
 // Übertragen nach WordPress: MCP-Funktion golfplatz/save-template (siehe wordpress/README.md).
 
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { templates, pages } from './templates.mjs';
@@ -42,9 +42,10 @@ writeFileSync(
   ) + '\n',
 );
 
-// Handbuch für die Backend-Seite „Handbuch“ (mu-plugins/golfplatz-handbuch.php), Quelle docs/handbuch.md.
-writeFileSync(join(dist, 'handbuch.html'), handbuchHtml(readFileSync(join(hier, '../../docs/handbuch.md'), 'utf8')));
-console.log('handbuch.html');
+// Handbuch für die Backend-Seite „Handbuch“ (snippets/golfplatz-handbuch.php), Quelle docs/handbuch.md.
+// Als .php mit Schutzzeile: Direkt über die URL aufgerufen gibt der Webserver nichts aus (das Handbuch ist nur im Backend sichtbar).
+writeFileSync(join(dist, 'handbuch.php'), "<?php defined( 'ABSPATH' ) || exit; ?>\n" + handbuchHtml(readFileSync(join(hier, '../../docs/handbuch.md'), 'utf8')));
+console.log('handbuch.php');
 
 // Inhalte für golfplatz/import-content, Quelle sind die Prototyp-Daten.
 mkdirSync(join(dist, 'daten'), { recursive: true });
@@ -207,7 +208,7 @@ const lwItems = lochwettspiele.map((lw) => ({
 writeFileSync(join(dist, 'daten/lochwettspiel.json'), JSON.stringify({ key: 'lw_jahr', items: lwItems }, null, 2) + '\n');
 console.log(`daten/lochwettspiel.json  (${lwItems.length} Turniere)`);
 
-// Mannschaften, Ligaspiele und Gastclubs kommen vom Golfverband NRW (mu-plugins/golfplatz-liga-sync.php),
+// Mannschaften, Ligaspiele und Gastclubs kommen vom Golfverband NRW (snippets/golfplatz-liga-sync.php),
 // Spieler und Spielberichte pflegt der Club. Die Platzhalter aus dem Prototyp werden nicht mehr importiert.
 
 // Einstellungsseiten für golfplatz/import-settings. Nur die aufgeführten Felder werden überschrieben.
@@ -326,6 +327,11 @@ const acss = acssEinstellungen();
 writeFileSync(join(dist, 'daten/acss-farben.json'), JSON.stringify(acss, null, 1) + '\n');
 console.log(`daten/acss-farben.json  (${Object.keys(acss).length} Einstellungen)`);
 
-// Skript der Zählkarte (gemeinsam mit dem Prototyp), eingebunden von mu-plugins/golfplatz-birdiebook.php
+// Skript der Zählkarte (gemeinsam mit dem Prototyp), eingebunden von snippets/golfplatz-birdiebook.php
 copyFileSync(new URL('../../prototype/assets/js/zaehlkarte.js', import.meta.url), join(dist, 'zaehlkarte.js'));
+
+// PHP-Snippets für WPCodeBox (MCP golfplatz/snippets-sync liest sie aus wp-content/golfplatz/snippets/). Jede Datei beginnt mit der ABSPATH-Prüfung.
+mkdirSync(join(dist, 'snippets'), { recursive: true });
+for (const f of readdirSync(join(hier, '../snippets')).filter((n) => n.endsWith('.php'))) copyFileSync(join(hier, '../snippets', f), join(dist, 'snippets', f));
+console.log('snippets/*.php');
 console.log('zaehlkarte.js');

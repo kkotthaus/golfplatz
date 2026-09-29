@@ -6,34 +6,34 @@ Seiten, Etch-Templates und das CSS werden im Repo als Code beschrieben, gebaut u
 
 | Pfad | Zweck |
 | --- | --- |
-| `mu-plugins/golfplatz-mcp.php` | Must-Use-Plugin: eng begrenzte MCP-Funktionen (nur Administratoren), nur für die Entwicklung |
-| `mu-plugins/golfplatz-platzstatus.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: berechnet Platzstatus, Ampel, Hero-Kurzfassung, Fahnenpositionen und Öffnungszeiten und stellt sie Etch als Daten bereit: `{options.golfplatz.platzstatus.…}` (inkl. `ampel`, `kurz`, `fahnen`) und `{options.golfplatz.zeiten}`. Keine Shortcodes – das Markup bauen die Komponenten Platzstatus, PlatzstatusKurz, Ampel, Oeffnungszeiten, OeffnungszeitenAlle. |
-| `mu-plugins/golfplatz-farbschema.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: Skripte zum Umschalter Hell/Dunkel (Knopf: Etch-Komponente FarbschemaUmschalter, `[data-scheme-toggle]`). Setzt die ACSS-Klasse `scheme--dark` am `<html>`, merkt sich die Wahl im Browser und setzt sie schon im `<head>`, damit nichts aufblitzt. |
+| `snippets/golfplatz-mcp.php` | WPCodeBox-Snippet: eng begrenzte MCP-Funktionen (nur Administratoren), nur für die Entwicklung |
+| `snippets/golfplatz-platzstatus.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: berechnet Platzstatus, Ampel, Hero-Kurzfassung, Fahnenpositionen und Öffnungszeiten und stellt sie Etch als Daten bereit: `{options.golfplatz.platzstatus.…}` (inkl. `ampel`, `kurz`, `fahnen`) und `{options.golfplatz.zeiten}`. Keine Shortcodes – das Markup bauen die Komponenten Platzstatus, PlatzstatusKurz, Ampel, Oeffnungszeiten, OeffnungszeitenAlle. |
+| `snippets/golfplatz-farbschema.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Skripte zum Umschalter Hell/Dunkel (Knopf: Etch-Komponente FarbschemaUmschalter, `[data-scheme-toggle]`). Setzt die ACSS-Klasse `scheme--dark` am `<html>`, merkt sich die Wahl im Browser und setzt sie schon im `<head>`, damit nichts aufblitzt. |
 | `etch/lib.mjs` | Erzeugt Etch-Block-Markup (`etch/element`, `etch/text`, `etch/raw-html`, `etch/condition`, `etch/loop`) |
 | `etch/templates.mjs` | Feste Seiten (`pages`) und Templates (`templates`) |
 | `etch/header.mjs` | Header mit Hauptnavigation auf Basis von EtchMegaMenuPro |
 | `etch/platzstatus.mjs` | Komponenten Platzstatus (Startseite), PlatzstatusKurz (Hero), Ampel (Top-Bar, App-Leiste) aus `{options.golfplatz.platzstatus.*}` |
 | `etch/preise.mjs` | Komponente Preistabelle (Eigenschaft `kategorie`: greenfee, turnier, kooperationen, leihe): Matrix Mo–So/Feiertag, wenn die Kategorie Tage hat, sonst Liste. Daten `{options.golfplatz.preise}` |
-| `mu-plugins/golfplatz-preise.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: Preise je Preiskategorie als `{options.golfplatz.preise.jahr|spalten|tabellen[key, name, matrix, bloecke[titel, zusatz, einheit, zellen[wert], unter[…]], zeilen[…], karten[titel, betrag, einheit, zusatz, aufnahme, leistungen[text], hervorheben, mod, button, button_mod]]}`, Texte fertig („40 €“, „auf Anfrage“, „18 Loch“). Tage aus „Gültig an“, Varianten als Unterzeilen. Dazu `{options.golfplatz.twilight.…}`: Regel aus den Clubdaten und heutige Startzeit (Sonnenuntergang am Platz minus `twilight_stunden`). Keine Shortcodes. |
+| `snippets/golfplatz-preise.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Preise je Preiskategorie als `{options.golfplatz.preise.jahr|spalten|tabellen[key, name, matrix, bloecke[titel, zusatz, einheit, zellen[wert], unter[…]], zeilen[…], karten[titel, betrag, einheit, zusatz, aufnahme, leistungen[text], hervorheben, mod, button, button_mod]]}`, Texte fertig („40 €“, „auf Anfrage“, „18 Loch“). Tage aus „Gültig an“, Varianten als Unterzeilen. Dazu `{options.golfplatz.twilight.…}`: Regel aus den Clubdaten und heutige Startzeit (Sonnenuntergang am Platz minus `twilight_stunden`). Keine Shortcodes. |
 | `etch/preise.mjs` (Preiskarten) | Komponente Preiskarten: Preise einer Kategorie als Karten (`kategorie`, `ziel`), genutzt auf `/mitgliedschaft/` |
 | `etch/zeiten.mjs` | Komponenten Oeffnungszeiten (ein Bereich, Eigenschaften `bereich`, `variante`, `liste`, `titel`) und OeffnungszeitenAlle aus `{options.golfplatz.zeiten}` |
 | `etch/birdiebook.mjs` | Komponenten Birdiebook (EtchSliderPro), Scorekarte, Rating, SpielvorgabenRechner, SpielvorgabenTabellen und das Bahnenraster für `/platz/` |
 | `etch/zaehlkarte.mjs` | Komponente Zählkarte: Handicap-Index und Abschlag wählen, Vorgabeschläge je Loch (nach Loch-HCP, Plus-Vorgabe ab HCP 18 zurück), Schläge eintragen → Netto je Loch, Stableford brutto/netto, Summen Out/In/Gesamt. Daten `{options.golfplatz.platz.spielvorgaben}` und `{options.golfplatz.platz.zaehlkarte}`; Skript `prototype/assets/js/zaehlkarte.js` (build kopiert es nach `dist/`, eingebunden von `golfplatz-birdiebook.php`), Eingaben nur im Browser (localStorage); „Ergebnis teilen“ als HTML-Datei (Web Share API) bzw. HTML-Tabelle in der Zwischenablage, „Als HTML speichern“ als Download, Link `#runde=…` |
 | `etch/lochwettspiel.mjs` | Komponente Lochwettspiel: Turnierbaum eines Jahres (Eigenschaft `jahr`: `aktuell` oder Jahreszahl) aus `{options.golfplatz.lochwettspiele}`; bei mehr als 16 Teams frühere Runden als aufklappbare Listen (`<details>`), Baum ab Achtelfinale |
-| `mu-plugins/golfplatz-lochwettspiel.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: rechnet aus Teams, Spielzeiträumen und Ergebnissen des Beitragstyps `lochwettspiel` den Turnierbaum (Setzung mit Freilosen, Sieger rücken weiter, Status je Runde und Spiel relativ zu heute) und liefert ihn als `{options.golfplatz.lochwettspiele}`. Keine Shortcodes. Bei Seitencache `/turniere/` höchstens einen Tag cachen. |
+| `snippets/golfplatz-lochwettspiel.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: rechnet aus Teams, Spielzeiträumen und Ergebnissen des Beitragstyps `lochwettspiel` den Turnierbaum (Setzung mit Freilosen, Sieger rücken weiter, Status je Runde und Spiel relativ zu heute) und liefert ihn als `{options.golfplatz.lochwettspiele}`. Keine Shortcodes. Bei Seitencache `/turniere/` höchstens einen Tag cachen. |
 | `etch/mannschaften.mjs` | Bausteine der Templates `archive-mannschaft` (Übersicht + `#ligaspiele`), `single-mannschaft` und `single-spielbericht`; Ligaspiel-Tabelle als CSS-Grid |
-| `mu-plugins/golfplatz-mannschaften.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: Mannschaften, Ligaspiele und Berichte als `{options.golfplatz.mannschaften}`, je Mannschaft `{this.golfplatz.team}`, je Bericht `{this.golfplatz.bericht}`; Spieler nur mit Einwilligung. Keine Shortcodes. |
-| `mu-plugins/golfplatz-liga-sync.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: Abgleich der Ligaspiele mit gvnrw.liga.golf (GraphQL): Mannschaften, Spieltage, Orte, Ergebnisse, Gastclubs; täglich per Cron, von Hand unter Mannschaften → Verband-Abgleich, per MCP `golfplatz/liga-sync` |
-| `mu-plugins/golfplatz-turniere.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: liest Turnierkalender und Ergebnisliste aus PC CADDIE://online (Club-Kennung `pccaddie_code`) sowie die Kalender der GOLFHOCHZEHN-Partnerclubs (Clubdaten `partnerclubs`), Beitragstyp `turnier`, stündlich per Cron, von Hand unter Turniere → PC-CADDIE-Abgleich, per MCP `golfplatz/turniere-sync`; Daten `{options.golfplatz.turniere}` |
-| `mu-plugins/golfplatz-tee-belegung.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: erzeugt aus den Turnieren des Heimatclubs Sperrungen von Abschlag 1/10 nach Regeln (Einstellungsseite `tee-belegung` unter Sperrungen, Option `tee_belegung`) und Ausnahmen am Turnier (`tb_startform`, `tb_tee`, `tb_vorlauf`, `tb_dauer`); nach jedem PC-CADDIE-Abgleich (Hook `golfplatz_pcc_nach_abgleich`) und beim Speichern. Erkennung der Sperrungen über `sperr_quelle` = `turnier:<ID>:<tee>` |
-| `mu-plugins/golfplatz-handbuch.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: Backend-Seite „Handbuch“ (und Dashboard-Hinweis) mit der Bedienungsanleitung aus `docs/handbuch.md`; nur für Benutzer mit `edit_posts` oder `edit_sperrungen`. Inhalt `golfplatz/handbuch.html` erzeugt `etch/build.mjs` über `etch/handbuch.mjs` |
-| `mu-plugins/golfplatz-news.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: News-Beiträge unter `/news/<slug>/`, Beitragsliste mit Kategorie-Filter und Seitenzahlen, Mitglieder-Sperre ohne Volltext; Daten `{options.golfplatz.news}` und `{this.golfplatz.news}` |
+| `snippets/golfplatz-mannschaften.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Mannschaften, Ligaspiele und Berichte als `{options.golfplatz.mannschaften}`, je Mannschaft `{this.golfplatz.team}`, je Bericht `{this.golfplatz.bericht}`; Spieler nur mit Einwilligung. Keine Shortcodes. |
+| `snippets/golfplatz-liga-sync.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Abgleich der Ligaspiele mit gvnrw.liga.golf (GraphQL): Mannschaften, Spieltage, Orte, Ergebnisse, Gastclubs; täglich per Cron, von Hand unter Mannschaften → Verband-Abgleich, per MCP `golfplatz/liga-sync` |
+| `snippets/golfplatz-turniere.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: liest Turnierkalender und Ergebnisliste aus PC CADDIE://online (Club-Kennung `pccaddie_code`) sowie die Kalender der GOLFHOCHZEHN-Partnerclubs (Clubdaten `partnerclubs`), Beitragstyp `turnier`, stündlich per Cron, von Hand unter Turniere → PC-CADDIE-Abgleich, per MCP `golfplatz/turniere-sync`; Daten `{options.golfplatz.turniere}` |
+| `snippets/golfplatz-tee-belegung.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: erzeugt aus den Turnieren des Heimatclubs Sperrungen von Abschlag 1/10 nach Regeln (Einstellungsseite `tee-belegung` unter Sperrungen, Option `tee_belegung`) und Ausnahmen am Turnier (`tb_startform`, `tb_tee`, `tb_vorlauf`, `tb_dauer`); nach jedem PC-CADDIE-Abgleich (Hook `golfplatz_pcc_nach_abgleich`) und beim Speichern. Erkennung der Sperrungen über `sperr_quelle` = `turnier:<ID>:<tee>` |
+| `snippets/golfplatz-handbuch.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Backend-Seite „Handbuch“ (und Dashboard-Hinweis) mit der Bedienungsanleitung aus `docs/handbuch.md`; nur für Benutzer mit `edit_posts` oder `edit_sperrungen`. Inhalt `wp-content/golfplatz/handbuch.php` (mit Schutzzeile) erzeugt `etch/build.mjs` über `etch/handbuch.mjs` |
+| `snippets/golfplatz-news.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: News-Beiträge unter `/news/<slug>/`, Beitragsliste mit Kategorie-Filter und Seitenzahlen, Mitglieder-Sperre ohne Volltext; Daten `{options.golfplatz.news}` und `{this.golfplatz.news}` |
 | `etch/news.mjs` | Komponente Newskarten (Startseite und `/news/`), Bausteine für die Übersicht und das Template `single-post` |
-| `mu-plugins/golfplatz-club.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: Personen je Liste (Vorstand, Team, Captains, Golfschule, Jugend) und Anfahrt (Routenlink, Texte, Lageplan) für `/club/`; Daten `{options.golfplatz.personen}` und `{options.golfplatz.anfahrt}` |
+| `snippets/golfplatz-club.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Personen je Liste (Vorstand, Team, Captains, Golfschule, Jugend) und Anfahrt (Routenlink, Texte, Lageplan) für `/club/`; Daten `{options.golfplatz.personen}` und `{options.golfplatz.anfahrt}` |
 | `etch/club.mjs` | Komponente Personenkarten und Anfahrt-Baustein für `/club/` |
 | `etch/turniere.mjs` | Komponenten Turnierkalender (Heimatclub), Platzbelegung (Partnerclubs, Tabelle Tag × Club) und Turnierergebnisse für `/turniere/` |
 | `etch/loops.mjs` | Etch-Loops (Presets in `etch_loops`), z. B. `gp-bahnen` über alle Spielbahnen |
-| `mu-plugins/golfplatz-birdiebook.php` | Must-Use-Plugin, **gehört auf die Live-Seite**: Bahndaten je Spielbahn als `{this|item.golfplatz.plan|status|fahne|entfernungen}` (Filter `etch/dynamic_data/post`), Scorekarte und Rating als `{options.golfplatz.platz.…}`, dazu Birdiebook-Skript und Web-App-Manifest. Keine Shortcodes. |
+| `snippets/golfplatz-birdiebook.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Bahndaten je Spielbahn als `{this|item.golfplatz.plan|status|fahne|entfernungen}` (Filter `etch/dynamic_data/post`), Scorekarte und Rating als `{options.golfplatz.platz.…}`, dazu Birdiebook-Skript und Web-App-Manifest. Keine Shortcodes. |
 | `etch/css/emmp.css` | EtchMegaMenuPro-Farben und -Schriftgrößen auf ACSS-Farben setzen |
 | `etch/komponenten.mjs` | Etch-Komponenten (`components`), eingebunden mit `komponente('<Key>')` |
 | `etch/css/tokens.css` | Tokens, die Automatic.css nicht kennt (Abschlagfarben, Schriften, Schatten) – keine Farbwerte |
@@ -49,7 +49,30 @@ Das CSS der Komponenten ist dasselbe wie im Prototyp (`prototype/assets/css/main
 node wordpress/etch/build.mjs
 ```
 
-Danach `etch/dist/*` nach `wp-content/mu-plugins/golfplatz/` und `mu-plugins/golfplatz-mcp.php` nach `wp-content/mu-plugins/` kopieren. Anschließend die MCP-Funktion `golfplatz/sync-from-files` aufrufen (`what`: `all`, `loops`, `components`, `templates`, `pages` oder `stylesheet`). Vorhandene Templates und Seiten werden per Slug bzw. Pfad aktualisiert, nicht doppelt angelegt.
+Danach `etch/dist/*` nach `wp-content/golfplatz/` kopieren (Konstante `GOLFPLATZ_DATEN`). Das Handbuch liegt dort als `handbuch.php` mit Schutzzeile, damit es über die URL nicht abrufbar ist.
+
+**PHP als WPCodeBox-Snippets** (seit 2026-09-29, lokal umgestellt):
+
+- Alle Dateien aus `snippets/` laufen als PHP-Snippets in WPCodeBox, Ordner „Golfplatz“.
+  - Titel = „Plugin Name“ aus dem Dateikopf, Schlagwörter `golfplatz` und der Dateiname (daran erkennt der Abgleich das Snippet).
+  - Ausführung: „Always“, Einfügepunkt **Root**.
+  - Der Ordner `wp-content/mu-plugins/` ist leer.
+- Das Repository ist die Quelle. Ablauf nach einer Änderung:
+  1. `node wordpress/etch/build.mjs` (kopiert die Dateien nach `dist/snippets/`).
+  2. `dist` nach `wp-content/golfplatz/` kopieren.
+  3. MCP `golfplatz/snippets-sync` aufrufen. Er legt fehlende Snippets an und aktualisiert geänderten Code, alles über die WPCodeBox-Funktionen `wpcodebox/*`, also mit deren Freigaben und Protokoll.
+  - Mit `aktivieren: true` schaltet er deaktivierte Snippets ein, aber nur, wenn keine gleichnamige Datei in `wp-content/mu-plugins/` liegt (sonst doppelte Funktionen).
+  - `nur: ["golfplatz-turniere"]` beschränkt den Lauf auf einzelne Dateien.
+- WPCodeBox führt jedes Snippet per `eval()` in einem try-Block aus. Daraus folgen drei Regeln für den PHP-Code:
+  - **Kein `const` auf oberster Ebene**, sondern `define( 'NAME', … )`. `const` ist im Block ein Syntaxfehler, und WPCodeBox schaltet das Snippet dann ab.
+  - **Kein `__DIR__`**, sondern `GOLFPLATZ_DATEN` (`wp-content/golfplatz`).
+  - Funktionen gelten erst ab ihrer Definition. Beim Laden nichts aufrufen, was weiter unten definiert ist; Hooks sind unkritisch.
+- Ein Snippet mit Fehler schaltet WPCodeBox selbst ab. Prüfen mit `wpcodebox/list-errored-snippets` bzw. `enabled` in `wpcodebox/list-snippets`.
+  - Das Feld `error` bleibt nach einer Korrektur stehen, bis das Snippet einmal in der WPCodeBox-Oberfläche gespeichert wird. Maßgeblich ist `enabled`.
+- In den WPCodeBox-MCP-Einstellungen freigegeben: Create Folder, Create/Update/Enable/Disable Snippet.
+- **Live-Seite:** WPCodeBox installieren und die Werkzeuge freigeben. Dann einmal `golfplatz-mcp.php` als Snippet anlegen (im WPCodeBox-Editor einfügen, Einfügepunkt Root, einschalten). Danach die übrigen Snippets mit `golfplatz/snippets-sync` übernehmen und die alten mu-plugins entfernen, bevor sie eingeschaltet werden.
+
+Anschließend die MCP-Funktion `golfplatz/sync-from-files` aufrufen (`what`: `all`, `loops`, `components`, `templates`, `pages` oder `stylesheet`). Vorhandene Templates und Seiten werden per Slug bzw. Pfad aktualisiert, nicht doppelt angelegt.
 
 **Wichtig:** Änderungen, die jemand im Etch-Editor an Templates oder Seiten macht, überschreibt der nächste Sync. Entweder im Repo **oder** im Editor arbeiten, nicht beides für dieselbe Seite.
 
@@ -60,13 +83,14 @@ Danach `etch/dist/*` nach `wp-content/mu-plugins/golfplatz/` und `mu-plugins/gol
 | `list-content` | Seiten, Templates oder Komponenten auflisten |
 | `get-content` | Block-Markup einer Seite, eines Templates oder einer Komponente lesen |
 | `save-page`, `save-template`, `save-component`, `save-stylesheet` | einzeln speichern |
-| `sync-from-files` | alles aus `mu-plugins/golfplatz/` übernehmen: erst Komponenten (per Key), dann Templates und Seiten, in denen `"__REF_<Key>__"` durch die Komponenten-ID ersetzt wird, dann das Stylesheet |
-| `import-content` | Einträge aus `mu-plugins/golfplatz/daten/<typ>.json` anlegen oder aktualisieren (Schlüsselfeld aus der Datei, z. B. `bahn_nummer`). Erlaubt: `spielbahn`, `sperrung`, `person`, `preis`, `kurs`, `lochwettspiel`. Optional `content` (Beitragstext). Optional `terms` je Eintrag, z. B. `{ "personengruppe": ["Vorstand"] }` – fehlende Begriffe werden angelegt. Die Datei baut `etch/build.mjs` aus `prototype/src/data.mjs`. |
+| `sync-from-files` | alles aus `wp-content/golfplatz/` übernehmen: erst Komponenten (per Key), dann Templates und Seiten, in denen `"__REF_<Key>__"` durch die Komponenten-ID ersetzt wird, dann das Stylesheet |
+| `import-content` | Einträge aus `wp-content/golfplatz/daten/<typ>.json` anlegen oder aktualisieren (Schlüsselfeld aus der Datei, z. B. `bahn_nummer`). Erlaubt: `spielbahn`, `sperrung`, `person`, `preis`, `kurs`, `lochwettspiel`. Optional `content` (Beitragstext). Optional `terms` je Eintrag, z. B. `{ "personengruppe": ["Vorstand"] }` – fehlende Begriffe werden angelegt. Die Datei baut `etch/build.mjs` aus `prototype/src/data.mjs`. |
 | `import-settings` | Felder aus `daten/einstellungen-<seite>.json` in `clubdaten` oder `platzstatus` schreiben; `null` entfernt ein Feld. **Mit `felder: [...]` nur die genannten Felder übernehmen** – ohne schreibt der Import alle Felder der Datei und überschreibt, was im Admin gepflegt wurde. |
 | `save-settings-page` | Meta-Box-Einstellungsseite anlegen oder ändern (wie der Builder, bleibt im Builder bearbeitbar) |
 | `acss-colors` | Farbeinstellungen von Automatic.css schreiben (nur Farbschlüssel: `color-*`, `option-*-clr`, OKLCH je Abstufung inkl. `-alt`, Farbschema `auto-color-scheme`, `website-color-scheme`, `color-scheme-force-*`, Button-Textfarben `btn-primary-text`, `btn-secondary-text` samt Hover), ACSS erzeugt danach sein CSS neu. `aus_datei: true` liest `daten/acss-farben.json`. Hex-Farben laufen über `API::update_settings()`, alles andere direkt über `Database_Settings`, weil die API jeden Schlüssel mit „color-“ als Hex-Farbe prüft. |
 | `flush-permalinks` | wie „Einstellungen → Permalinks → Speichern“ |
 | `set-front-page` | statische Startseite setzen |
+| `snippets-sync` | PHP-Dateien aus `wp-content/golfplatz/snippets/` in WPCodeBox anlegen bzw. aktualisieren (Ordner „Golfplatz“, Einfügepunkt Root), optional `aktivieren` und `nur` |
 
 Die Funktionen erlauben nur die Beitragstypen `page`, `wp_template` und `wp_block`. Templates und Stylesheets laufen über die REST-Routen von Etch selbst. Eine allgemeine REST-Weiterleitung gibt es bewusst nicht, weil sie die Sicherheitsprüfung als zu breite Angriffsfläche abgelehnt hat.
 

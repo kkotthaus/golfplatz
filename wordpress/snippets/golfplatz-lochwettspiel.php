@@ -4,23 +4,23 @@
  * Description: Rechnet den Turnierbaum des jährlichen Lochwettspiels (Beitragstyp „lochwettspiel“, Teams aus zwei Spielern, K.-o.-System) und stellt ihn Etch als Daten bereit: {options.golfplatz.lochwettspiele}. Setzt die Teams ins Tableau (Freilose gestreut), lässt Sieger aus den eingetragenen Ergebnissen weiterrücken und bewertet jede Runde gegen ihren Spielzeitraum (läuft, Frist abgelaufen, abgeschlossen). Keine Shortcodes – das Markup baut die Etch-Komponente „Lochwettspiel“ (wordpress/etch/lochwettspiel.mjs).
  * Version: 1.0.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-lochwettspiel.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-lochwettspiel.php
  */
 
 defined( 'ABSPATH' ) || exit;
 
-const GOLFPLATZ_LW_SPIELFORMEN = array(
+define( 'GOLFPLATZ_LW_SPIELFORMEN', array(
 	'vierball' => 'Vierball-Bestball',
 	'vierer'   => 'Klassischer Vierer',
 	'chapman'  => 'Chapman-Vierer',
 	'greensome' => 'Greensome',
-);
+) );
 
 /**
  * Höchstens so viele Spiele stehen in der ersten Spalte des Turnierbaums (8 = ab Achtelfinale, 16 Teams).
  * Frühere Runden erscheinen als Rundenlisten über dem Baum – so bleibt die Grafik auch bei 64, 128 oder mehr Teams lesbar.
  */
-const GOLFPLATZ_LW_BAUM_MAX_SPIELE = 8;
+define( 'GOLFPLATZ_LW_BAUM_MAX_SPIELE', 8 );
 
 /**
  * Datum als JJJJ-MM-TT oder null. Meta Box speichert Datumsfelder in Gruppen im Anzeigeformat („31.05.2026“),

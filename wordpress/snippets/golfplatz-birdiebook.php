@@ -4,26 +4,30 @@
  * Description: Daten der 18 Spielbahnen für Etch: je Bahn {this|item.golfplatz.plan|status|fahne|entfernungen}, dazu Scorekarte und Rating unter {options.golfplatz.platz}. Außerdem Birdiebook-Skript (Abschlag-Wahl, Direktlink #bahn-7, zuletzt gesehene Bahn) und Web-App-Manifest. Keine Shortcodes: das Markup bauen die Etch-Komponenten (wordpress/etch/birdiebook.mjs).
  * Version: 1.0.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-birdiebook.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-birdiebook.php
  * Konzept: docs/konzept-birdiebook.md
  */
 
 defined( 'ABSPATH' ) || exit;
 
-const GOLFPLATZ_ABSCHLAEGE = array(
+// Build-Dateien (wordpress/etch/build.mjs → dist) liegen in wp-content/golfplatz/. Als WPCodeBox-Snippet läuft der Code per eval(),
+// __DIR__ zeigt deshalb nicht auf diesen Ordner.
+defined( 'GOLFPLATZ_DATEN' ) || define( 'GOLFPLATZ_DATEN', WP_CONTENT_DIR . '/golfplatz' );
+
+define( 'GOLFPLATZ_ABSCHLAEGE', array(
 	'gelb'   => array( 'Gelb', 'herren' ),
 	'blau'   => array( 'Blau', 'herren' ),
 	'rot'    => array( 'Rot', 'damen' ),
 	'orange' => array( 'Orange', 'damen' ),
-);
+) );
 
-const GOLFPLATZ_HINDERNIS_ARTEN = array(
+define( 'GOLFPLATZ_HINDERNIS_ARTEN', array(
 	'bunker' => 'Bunker',
 	'wasser' => 'Wasser',
 	'aus'    => 'Aus',
 	'baum'   => 'Bäume',
 	'marker' => 'Marker',
-);
+) );
 
 /** Alle Bahnen, sortiert nach Nummer. */
 function golfplatz_bahnen(): array {
@@ -609,9 +613,9 @@ add_action(
 add_action(
 	'wp_enqueue_scripts',
 	function () {
-		$datei = __DIR__ . '/golfplatz/zaehlkarte.js';
+		$datei = GOLFPLATZ_DATEN . '/zaehlkarte.js';
 		if ( is_readable( $datei ) ) {
-			wp_enqueue_script( 'golfplatz-zaehlkarte', WPMU_PLUGIN_URL . '/golfplatz/zaehlkarte.js', array(), (string) filemtime( $datei ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+			wp_enqueue_script( 'golfplatz-zaehlkarte', content_url( '/golfplatz/zaehlkarte.js' ), array(), (string) filemtime( $datei ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		}
 	}
 );

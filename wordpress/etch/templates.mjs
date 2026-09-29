@@ -98,11 +98,11 @@ export const pages = [
               t('a', 'btn btn--ghost btn--large', 'Mitglied werden', { attrs: { href: '/mitgliedschaft/' } }),
             ]),
           ]),
-          // Platzstatus-Kurzfassung: sofort sichtbar, ohne Scrollen. Logik: mu-plugins/golfplatz-platzstatus.php
+          // Platzstatus-Kurzfassung: sofort sichtbar, ohne Scrollen. Logik: snippets/golfplatz-platzstatus.php
           komponente('PlatzstatusKurz'),
         ]),
       ], { name: 'Hero' }),
-      // Platzstatus direkt unter dem Hero, überlappend. Logik: mu-plugins/golfplatz-platzstatus.php
+      // Platzstatus direkt unter dem Hero, überlappend. Logik: snippets/golfplatz-platzstatus.php
       el('div', 'container home-status', [komponente('Platzstatus')], { name: 'Platzstatus' }),
       el('section', 'section', [
         el('div', 'container', [
@@ -460,7 +460,7 @@ pages.push({
   ),
 });
 
-// Aktuelles: Beiträge (post) als Karten, Kategorien als Pillen (?kategorie=), Seitenzahlen (?seite=). Daten: mu-plugins/golfplatz-news.php.
+// Aktuelles: Beiträge (post) als Karten, Kategorien als Pillen (?kategorie=), Seitenzahlen (?seite=). Daten: snippets/golfplatz-news.php.
 pages.push({
   slug: 'news',
   title: 'Aktuelles',

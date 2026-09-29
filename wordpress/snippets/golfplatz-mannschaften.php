@@ -4,7 +4,7 @@
  * Description: Stellt Mannschaften, Kader, Ligaspiele und Spielberichte Etch als Daten bereit: {options.golfplatz.mannschaften} (Übersicht, nächstes Spiel, alle Ligaspiele einer Saison, Auswahl per ?saison=), je Mannschaft {this.golfplatz.team} (Spiele, Berichte, Spielführer, Kader) und je Spielbericht {this.golfplatz.bericht} (Mannschaft über das Ligaspiel). Spieler erscheinen nur mit Einwilligung. Keine Shortcodes – das Markup steht in den Etch-Templates (wordpress/etch/mannschaften.mjs).
  * Version: 1.0.0
  *
- * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/mu-plugins/golfplatz-mannschaften.php
+ * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-mannschaften.php
  */
 
 defined( 'ABSPATH' ) || exit;

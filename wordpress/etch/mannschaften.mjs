@@ -1,5 +1,5 @@
 // Mannschaften & Ligaspiele: Bausteine für die Templates archive-mannschaft, single-mannschaft und single-spielbericht.
-// Daten aus mu-plugins/golfplatz-mannschaften.php: {options.golfplatz.mannschaften} (Übersicht, alle Ligaspiele),
+// Daten aus snippets/golfplatz-mannschaften.php: {options.golfplatz.mannschaften} (Übersicht, alle Ligaspiele),
 // {this.golfplatz.team} (eine Mannschaft) und {this.golfplatz.bericht} (ein Spielbericht). Aufbau wie im Prototyp.
 //
 // Ligaspiel-Tabellen als CSS-Grid aus divs mit Tabellen-Rollen (Konvention, wie Preistabelle und Scorekarte).
