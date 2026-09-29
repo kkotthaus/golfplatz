@@ -37,7 +37,7 @@ table { border-collapse: collapse; width: 100%; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip-link { position: absolute; left: var(--space-s); top: -4rem; z-index: 100; background: var(--primary); color: var(--white); padding: var(--space-xs) var(--space-s); border-radius: var(--radius); }
 .skip-link:focus { top: var(--space-s); color: var(--white); }
-.icon { width: 1.1em; height: 1.1em; fill: currentColor; vertical-align: -0.18em; flex: none; }
+.icon { display: inline-block; width: 1.1em; height: 1.1em; fill: currentColor; vertical-align: -0.18em; flex: none; } /* inline-block: ACSS setzt SVG auf block, dann stünde das Symbol in einer eigenen Zeile */
 .small { font-size: var(--text-s); color: var(--base-semi-dark); }
 .lead { font-size: var(--text-l); color: var(--base-semi-dark); }
 .spacer-top { margin-top: var(--space-l); }
@@ -605,7 +605,6 @@ html.scheme--dark {
 .course-card__trainer { margin: var(--space-xs) 0 0; font-size: var(--text-s); color: var(--base-semi-dark); }
 .course-detail { display: grid; gap: var(--space-m); }
 .course-card--detail { padding: var(--space-m); }
-.note .icon, .course-card__trainer .icon { display: inline-block; } /* ACSS setzt SVG auf block */
 
 .person-card { display: flex; gap: var(--space-m); align-items: flex-start; background: var(--white); border: 1px solid var(--base-light); border-radius: var(--radius-l); padding: var(--space-m); }
 .person-card__avatar { width: 4rem; height: 4rem; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--primary-light); color: var(--primary-dark); font-family: var(--heading-font-family); font-size: 1.4rem; border: 2px solid var(--secondary-light); }
