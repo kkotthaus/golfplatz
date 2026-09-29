@@ -212,12 +212,16 @@ function golfplatz_tb_plan( int $pid, ?array $regeln = null ): array {
 	}
 	$uhr     = fn( int $ts ) => gmdate( 'H:i', $ts );
 	// Turnierstart und Tee-Sperre sind zwei Angaben: Das Tee ist ab „vorlauf“ vor dem Start gesperrt.
-	$start_text = ( 'kanonenstart' === $r['startform'] ? 'Kanonenstart ' : 'Erster Start ' ) . $uhr( $start ) . ' Uhr' . ( 'beide' === $r['tee'] ? ' an Tee 1 und 10' : '' );
+	// Kanonenstart: gespielte Bahnen – 9 Loch ab Tee 1 = 1–9, ab Tee 10 = 10–18, sonst 1–18
+	$form       = 'kanonenstart' === $r['startform']
+		? 'Kanonenstart Tee ' . ( 9 === $loecher && 'beide' !== $r['tee'] ? ( '10' === $tees[0] ? '10–18' : '1–9' ) : '1–18' )
+		: 'Erster Start' . ( 'beide' === $r['tee'] ? ' an Tee 1 und 10' : '' );
+	$start_text = $form . ' · ' . $uhr( $start ) . ' Uhr';
 	$grund      = str_replace( '{turnier}', $titel, (string) ( $r['grund'] ?: 'Turnier: {turnier}' ) );
 	$beginn     = $start - (int) $r['vorlauf'] * MINUTE_IN_SECONDS;
 	$ende       = $start + $dauer * MINUTE_IN_SECONDS;
 	$sperren    = array_map( fn( $tee ) => array( 'tee' => $tee, 'beginn' => $beginn, 'ende' => $ende, 'grund' => $grund, 'start' => $start, 'start_text' => $start_text ), $tees );
-	$text       = $woher . ': Turnierstart ' . $uhr( $start ) . ' Uhr (' . GOLFPLATZ_TB_STARTFORMEN[ $r['startform'] ] . ') · ' . GOLFPLATZ_TB_TEES[ 'beide' === $r['tee'] ? 'beide' : $tees[0] ] . ' gesperrt ' . $uhr( $beginn ) . '–' . $uhr( $ende ) . ' Uhr (' . (int) $r['vorlauf'] . ' Min. vor dem Start' . ( $info ? ', ' . $info : '' ) . ')';
+	$text       = $woher . ': Turnierstart ' . $uhr( $start ) . ' Uhr (' . ( 'kanonenstart' === $r['startform'] ? $form : GOLFPLATZ_TB_STARTFORMEN[ $r['startform'] ] ) . ') · ' . GOLFPLATZ_TB_TEES[ 'beide' === $r['tee'] ? 'beide' : $tees[0] ] . ' gesperrt ' . $uhr( $beginn ) . '–' . $uhr( $ende ) . ' Uhr (' . (int) $r['vorlauf'] . ' Min. vor dem Start' . ( $info ? ', ' . $info : '' ) . ')';
 	return array( 'sperren' => $sperren, 'text' => $text );
 }
 

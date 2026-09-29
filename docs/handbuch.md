@@ -139,7 +139,7 @@ Die Website unterscheidet dabei zwischen **Sperrung des Tees** und **Start des T
 
 - Abschlag 1 · **14:30–19:15 Uhr**: So lange ist das Tee gesperrt, mit Vorlauf und Puffer.
 - Turnier: 9-Loch Afterwork (A)
-- **Kanonenstart 16:30 Uhr** bzw. bei Tee-Times **Erster Start 10:00 Uhr**: So beginnt das Turnier.
+- **Kanonenstart Tee 1–9 · 16:30 Uhr** bzw. bei Tee-Times **Erster Start · 10:00 Uhr**: So beginnt das Turnier. Beim Kanonenstart stehen die gespielten Bahnen dabei: 9 Loch ab Tee 1 = „Tee 1–9“ (Afterwork A), 9 Loch ab Tee 10 = „Tee 10–18“ (Afterwork B), sonst „Tee 1–18“.
 
 Den Turnierstart übernimmt die Website aus PC CADDIE. Er gehört deshalb nicht in den Grund.
 
