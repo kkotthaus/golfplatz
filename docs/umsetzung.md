@@ -205,6 +205,33 @@ Stand 2026-09-28, Aufbau wie im Prototyp.
 - **Offen:** Das Antragsformular aus dem Prototyp fehlt, weil kein Formular-Plugin installiert ist. Sobald eines feststeht, das Formular mit den Modellen aus `preis` und Datenschutzhinweis ergänzen. Das PDF liegt noch auf dreibaeumen.de, besser in die Mediathek übernehmen.
 - **CSS:** `.price-card__button` setzt `--btn-width: 100%`, weil ACSS die Buttonbreite über diese Variable steuert und nach dem Golfplatz-Stylesheet lädt. Abstände in der Karte sind ausdrücklich gesetzt (ACSS setzt Überschriften- und Absatzabstände auf 0).
 
+### Tee-Belegung durch Turniere
+
+Stand 2026-09-29, `mu-plugins/golfplatz-tee-belegung.php`.
+
+- **Regeln** unter **Sperrungen → Turnier-Regeln**. Die Einstellungsseite `tee-belegung` ist in PHP registriert, Option `tee_belegung`, Recht `edit_sperrungen`.
+  - Klonbare, sortierbare Gruppe `regeln` mit `name`, `muster` (Teile des Turniernamens, Komma-getrennt; leer = alle), `loecher` (9/18), `startform` (`kanonenstart`, `tee_times`, `keine`), `tee` (`1`, `10`, `beide`), `vorlauf`, `dauer` (Minuten), `intervall`, `flight`, `grund` (`{turnier}`).
+  - Es gilt die erste passende Regel.
+  - Regeln laut Club (2026-09-29), zugleich Vorbelegung beim ersten Aufruf (`golfplatz_tb_standard()`), in dieser Reihenfolge:
+    1. Weihnachtsfeiern: keine Sperre.
+    2. 9-Loch Afterwork (B): Kanonenstart Tee 10, 120 Min. vorher.
+    3. Übrige Afterwork, also (A) und „Ladies Afterwork“: Kanonenstart Tee 1, 120 Min. vorher.
+    4. Monats-Cup: Tee-Times Tee 1, 60 Min. vorher.
+    5. Herrengolf, Damengolf, AK 50+: Tee-Times Tee 1, 60 Min. vorher.
+    6. Startabstand und Flightgröße sind in den Regeln leer; es gelten die Clubdaten.
+- **Ausnahme je Turnier:** Kasten „Tee-Belegung (nur dieses Turnier)“ am Beitragstyp `turnier` (`tb_startform`, `tb_tee`, `tb_vorlauf`, `tb_dauer`). Der Abgleich mit PC CADDIE überschreibt diese Felder nicht.
+- **Standardwerte in den Clubdaten** (Reiter Platz & Abschläge, Feldgruppe `clubdaten-startzeiten`, in PHP registriert): `startabstand` (8 Min., GC Dreibäumen), `flight_groesse` (3, GC Dreibäumen), `spielzeit_loch` (15 Min.), `turnier_puffer` (30 Min., 0 = aus). Regeln ohne eigenen Startabstand bzw. Flightgröße nutzen sie.
+- **Turnierpuffer:** `golfplatz_tb_soll()` sortiert alle Sperren je Tee. Beginnt das nächste Turnier am selben Tee vor Ende + Puffer, gelten beide als hintereinander: Die frühere Sperre reicht bis zum Beginn des nächsten (Lücke geschlossen, bei Überschneidung unverändert). Nur das letzte Turnier der Kette bekommt den Puffer. Vorschau und Turnier-Kasten nennen Puffer bzw. Folgeturnier.
+- **Dauer:** Ohne Angabe gilt beim Kanonenstart Spielzeit je Loch × Löcher. Bei Tee-Times gilt Flights × Startabstand; die Flights ergeben sich aus den Angemeldeten (maximal minus frei, sonst maximal), bei zwei Tees geteilt. Ohne Teilnehmerzahl gilt 2 Stunden.
+- **Sperrungen:** normale Einträge `sperrung` (`abschlag_1`/`abschlag_10`) mit `sperr_quelle` = `turnier:<ID>:<tee>` und Titelzusatz „(automatisch)“.
+  - Bei jedem Lauf werden sie angelegt oder angepasst.
+  - Nicht mehr benötigte kommende Sperrungen kommen in den Papierkorb, abgelaufene nach 14 Tagen.
+  - Nur Turniere des Heimatclubs mit Uhrzeit ab heute.
+  - Hinweis im Editor einer automatischen Sperrung, dass Änderungen an Regel oder Turnier gehören.
+- **Auslöser:** Hook `golfplatz_pcc_nach_abgleich` am Ende von `golfplatz_pcc_abgleich()` (stündlich und von Hand), Speichern der Regeln, der Clubdaten oder eines Turniers (`rwmb_after_save_post`).
+- **Geprüft** am 2026-09-29: 5 Sperrungen aus 29 kommenden Turnieren (4 × Afterwork, 1 × Monats-Cup mit 62 Angemeldeten = 16 Flights; damals noch mit 10 Min. Abstand); zweiter Lauf ohne Änderung. Ausnahme Tee 10 und „keine Sperre“ am Turnier geprüft, Anzeige im Platzstatus für morgen geprüft.
+- **Offen:** Vorlauf (60 Min.) und Startform für Herrengolf, Damengolf und AK 50+ sind angenommen – mit dem Club bestätigen. Harmony-Cup, Scrambles, Winter-Cup und Golf-Rallye haben keine Regel und sperren nichts.
+
 ### Club & Kontakt `/club/`
 
 Stand 2026-09-28, Aufbau wie im Prototyp. Daten aus `mu-plugins/golfplatz-club.php`, Markup aus `wordpress/etch/club.mjs`.

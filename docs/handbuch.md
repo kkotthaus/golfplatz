@@ -35,6 +35,7 @@ Das heißt für Sie:
 | Aufgabe | Menüpunkt im Backend | Erscheint auf der Website |
 | --- | --- | --- |
 | Platz, Range oder Proshop kurzfristig sperren, Wintergrüns, Fahnenpositionen | **Platzstatus** | Startseite, Kopfzeile, Birdiebook |
+| Tee-Sperren durch Turniere (Regeln je Turnierart) | **Sperrungen › Turnier-Regeln** | Startseite (heute und morgen) |
 | Geplante Sperrung (Turnier, Pflegearbeiten) | **Sperrungen** | Startseite (heute und morgen) |
 | Öffnungszeiten und Ausnahmen (Feiertage, Winter) | **Clubdaten › Öffnungszeiten** | Startseite, Greenfee, Club & Kontakt, Fußbereich |
 | Adresse, Telefon, E-Mail, Anfahrt | **Clubdaten › Kontakt & Anfahrt** | überall |
@@ -115,6 +116,39 @@ Beispiel: Am Samstag ist von 8 bis 14 Uhr Abschlag 1 wegen eines Turniers belegt
 6. **Veröffentlichen**.
 
 Die Startseite zeigt Sperrungen von heute und morgen an. Nach dem Ende verschwinden sie von selbst. Löschen müssen Sie sie nicht.
+
+### Turniere sperren Tee 1 und 10 automatisch
+
+Für Turniere aus PC CADDIE müssen Sie keine Sperrungen von Hand anlegen. Die Website erzeugt sie selbst, und zwar nach Regeln, die Sie festlegen. Beispiele:
+
+- **9-Loch Afterwork** mit Kanonenstart: Tee 1 ist ab 2 Stunden vor dem Start gesperrt, bis die Runde vorbei ist.
+- **Monats-Cup** mit Tee-Times: Tee 1 ist ab 1 Stunde vor dem ersten Start gesperrt, bis der letzte Flight gestartet ist.
+
+**Regeln pflegen:** Menü **Sperrungen › Turnier-Regeln**. Jede Regel hat:
+
+- **Bezeichnung**: nur für Sie, zum Beispiel „9-Loch Afterwork“.
+- **Turniername enthält**: ein Teil des Namens aus PC CADDIE, zum Beispiel „Afterwork“. Mehrere Begriffe mit Komma trennen. Leer lassen = gilt für alle übrigen Turniere.
+- **Nur bei**: alle Turniere, nur 9 Loch oder nur 18 Loch.
+- **Startform**: **Kanonenstart**, **Tee-Times (Einzelstart)** oder **Keine Sperre** (um bestimmte Turniere auszunehmen).
+- **Start-Tee**: Tee 1, Tee 10 oder beide. Bei Tee-Times an beiden Tees verteilen sich die Flights auf beide.
+- **Gesperrt ab … Minuten vor dem Start**, zum Beispiel 120 für 2 Stunden.
+- **Gesperrt bis … Minuten nach dem Start**: leer lassen, dann rechnet die Website selbst. Bei einem Kanonenstart ist das die Spielzeit je Loch aus den Clubdaten mal Löcher (15 Minuten × 9 Loch = 2:15 Stunden). Bei Tee-Times dauert die Sperre, bis der letzte Flight gestartet ist; dafür nimmt die Website die angemeldeten Spieler aus PC CADDIE, **Startabstand** und **Spieler je Flight**. Bleiben diese beiden Felder leer, gelten die Standardwerte des Clubs.
+- **Grund (öffentlich)**: der Text für Golfer; {turnier} wird durch den Turniernamen ersetzt.
+
+Für jedes Turnier gilt die **erste passende Regel**. Die Reihenfolge ändern Sie, indem Sie eine Regel am Kopf nach oben oder unten ziehen. Speichern Sie mit **Speichern und Sperrungen neu berechnen**. Unter den Regeln zeigt die Seite die Turniere der nächsten 4 Wochen und was sie sperren. So sehen Sie sofort, ob die Regeln greifen.
+
+**Standardwerte des Clubs:** **Clubdaten › Platz & Abschläge**, Abschnitt **Starts bei Turnieren**: Startabstand der Flights (8 Minuten), Spieler je Flight (3), Spielzeit je Loch beim Kanonenstart (15 Minuten) und **Turnierpuffer** (30 Minuten). Ändern Sie einen Wert dort, rechnen alle Regeln ohne eigenen Wert damit; die Sperrungen passen sich beim Speichern sofort an.
+
+**Turnierpuffer:** Nach dem letzten Turnier bleibt das Tee noch 30 Minuten länger gesperrt. Spielen mehrere Turniere am selben Tee direkt hintereinander (zum Beispiel AK 50+ und danach AK 50+ 9-Loch), bekommt nur das letzte den Puffer. Die Sperre des ersten reicht dann bis zum Beginn des nächsten, sodass keine kurze Lücke entsteht. Als „hintereinander“ gilt: Das nächste Turnier beginnt, bevor die Sperre plus Puffer abgelaufen ist. Den Wert ändern Sie in den Clubdaten; 0 schaltet den Puffer ab.
+
+**Ein einzelnes Turnier weicht ab** (zum Beispiel startet dieses Afterwork an Tee 10): **Turniere (PC CADDIE) › Alle Turniere**, das Turnier öffnen und im Kasten **Tee-Belegung (nur dieses Turnier)** Startform, Start-Tee, Vorlauf oder Dauer setzen. Leere Felder gelten laut Regel. **Aktualisieren**.
+
+Gut zu wissen:
+
+- Die automatischen Sperrungen stehen unter **Alle Sperrungen** mit dem Zusatz „(automatisch)“. Ändern Sie sie nicht dort, sondern an der Regel oder am Turnier; sonst überschreibt die nächste Berechnung Ihre Änderung.
+- Die Website rechnet nach jedem Abgleich mit PC CADDIE (stündlich) neu. Verschiebt sich ein Turnier oder wird es abgesagt, passt sich die Sperrung von selbst an.
+- Turniere ohne Uhrzeit in PC CADDIE sperren nichts. Tragen Sie dort die Startzeit ein.
+- Es sperren nur die Turniere des eigenen Clubs, nicht die der Partnerclubs.
 
 ## Öffnungszeiten
 
@@ -325,7 +359,7 @@ Menü **Clubdaten**. Hier stehen die Stammdaten des Clubs, verteilt auf Reiter:
 | **Öffnungszeiten** | siehe Kapitel „Öffnungszeiten“ |
 | **Gäste & Systeme** | Telefon und Hinweis für Gäste, Pflegetag, Greenfee-Hinweise, Twilight, Name in den Ligatabellen, PC-CADDIE-Kennung, Partnerclubs |
 | **Restaurant** | Name, Telefon, aktueller Hinweis, Speisekarte (PDF) |
-| **Platz & Abschläge** | Course Rating, Slope, Par je Abschlag |
+| **Platz & Abschläge** | Course Rating, Slope, Par je Abschlag; Starts bei Turnieren (Startabstand, Spieler je Flight, Spielzeit je Loch, Turnierpuffer) |
 | **Rechtliches** | Angaben für Impressum und Datenschutz |
 | **Social Media** | Links zu Instagram, Facebook, YouTube |
 
@@ -373,6 +407,7 @@ Nur für Administratoren. Menü **Benutzer**.
 | Was | Wann | Wo kontrollieren |
 | --- | --- | --- |
 | Turniere aus PC CADDIE lesen (eigener Club und Partnerclubs) | stündlich | Turniere (PC CADDIE) › PC-CADDIE-Abgleich |
+| Tee 1 und 10 für Turniere sperren (nach den Turnier-Regeln) | stündlich nach dem PC-CADDIE-Abgleich und beim Speichern | Sperrungen › Turnier-Regeln |
 | Ligaspiele vom Golfverband NRW lesen | täglich 5:30 Uhr | Mannschaften › Verband-Abgleich |
 | „Jetzt geöffnet / geschlossen“, nächste Öffnung | bei jedem Aufruf | – |
 | Ablauf von Sperrungen und Schnellsperren mit Enddatum | bei jedem Aufruf | – |

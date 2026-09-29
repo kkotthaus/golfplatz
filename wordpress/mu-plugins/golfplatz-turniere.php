@@ -263,6 +263,7 @@ function golfplatz_pcc_abgleich(): array {
 	if ( ! $log['clubs'] ) {
 		$log['fehler'][] = 'Keine Turniere gelesen – hat PC CADDIE den Aufbau der Seiten geändert?';
 	}
+	do_action( 'golfplatz_pcc_nach_abgleich', $log ); // z. B. Tee-Belegung (golfplatz-tee-belegung.php)
 	return golfplatz_pcc_log( $log );
 }
 
