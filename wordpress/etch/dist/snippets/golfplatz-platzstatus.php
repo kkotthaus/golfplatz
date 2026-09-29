@@ -765,7 +765,7 @@ add_filter(
 			),
 		);
 		foreach ( GOLFPLATZ_ZEITEN_BEREICHE as $key => $name ) {
-			$felder[] = array( 'id' => 'zeiten_' . $key . '_heading', 'type' => 'heading', 'name' => $name );
+			$felder[] = array( 'id' => 'zeiten_' . $key . '_heading', 'type' => 'heading', 'name' => $name, 'class' => 'golfplatz-zeiten-bereich' );
 			$felder[] = array(
 				'id'         => 'zeiten_' . $key . '_standard',
 				'name'       => 'Normale Öffnungszeiten',
@@ -786,6 +786,7 @@ add_filter(
 				'collapsible'  => true,
 				'default_state' => 'collapsed',
 				'group_title'  => '{titel}',
+				'clone_empty_start' => true, // kein leerer Eintrag, bis „+ Ausnahme“ geklickt wird
 				'add_button'   => '+ Ausnahme',
 				'fields'       => array(
 					array( 'id' => 'titel', 'name' => 'Bezeichnung', 'type' => 'text', 'placeholder' => 'z. B. Weihnachten, Winterzeit', 'columns' => 4 ),
@@ -803,7 +804,7 @@ add_filter(
 					),
 				),
 			);
-			$felder[] = array( 'id' => 'zeiten_' . $key . '_hinweis', 'name' => 'Hinweis (öffentlich)', 'type' => 'text', 'placeholder' => 'z. B. Letzter Einlass 30 Minuten vor Schluss' );
+			$felder[] = array( 'id' => 'zeiten_' . $key . '_hinweis', 'name' => 'Hinweis (öffentlich)', 'type' => 'text', 'placeholder' => 'z. B. Letzter Einlass 30 Minuten vor Schluss', 'class' => 'golfplatz-zeiten-ende' );
 		}
 		$boxen[] = array(
 			'id'             => 'clubdaten-zeiten',
@@ -813,5 +814,20 @@ add_filter(
 			'fields'         => $felder,
 		);
 		return $boxen;
+	}
+);
+
+// Bereiche im Reiter „Öffnungszeiten“ sichtbar abgrenzen (die Seite Clubdaten hat den Stil „ohne Kästen“). Farben aus dem Backend-Farbschema.
+add_action(
+	'admin_head',
+	function () {
+		if ( 'clubdaten' !== ( $_GET['page'] ?? '' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			return;
+		}
+		echo '<style>
+			.golfplatz-zeiten-bereich { margin: 2.5em 0 1em !important; padding: .7em 1em !important; border-left: 5px solid var(--wp-admin-theme-color, currentColor); background: color-mix(in srgb, var(--wp-admin-theme-color, currentColor) 10%, transparent); }
+			.golfplatz-zeiten-bereich h4 { margin: 0; font-size: 1.3em; text-transform: none; letter-spacing: 0; border: 0; padding: 0; }
+			.golfplatz-zeiten-ende { padding-bottom: 1.5em !important; border-bottom: 3px solid color-mix(in srgb, currentColor 25%, transparent); }
+		</style>';
 	}
 );

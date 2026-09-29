@@ -183,7 +183,7 @@ Gut zu wissen:
 
 ## Öffnungszeiten
 
-Menü **Clubdaten**, Reiter **Öffnungszeiten**. Der Reiter hat fünf Abschnitte mit fetter Überschrift: **Sekretariat**, **Driving Range**, **Kurzspielbereich & Putting-Grün**, **Proshop** und **Clubrestaurant**. Jeder Abschnitt hat dieselben drei Angaben.
+Menü **Clubdaten**, Reiter **Öffnungszeiten**. Der Reiter hat fünf Abschnitte, jeweils mit einem farbigen Titelbalken und einer Trennlinie am Ende: **Sekretariat**, **Driving Range**, **Kurzspielbereich & Putting-Grün**, **Proshop** und **Clubrestaurant**. Jeder Abschnitt hat dieselben drei Angaben.
 
 ### Normale Öffnungszeiten
 
