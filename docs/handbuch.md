@@ -20,6 +20,29 @@ Abmelden: oben rechts auf Ihren Namen zeigen und **Abmelden** wählen. Bitte mel
 
 Welche Menüpunkte Sie sehen, hängt von Ihrer Rolle ab. Wer nur den Platzstatus pflegt, sieht zum Beispiel nur „Platzstatus“, „Sperrungen“ und dieses Handbuch.
 
+### Platzstatus auf einen Blick (Dashboard)
+
+Rechts oben im **Dashboard** steht der Kasten **Platzstatus**. Er zeigt dasselbe wie die Startseite der Website:
+
+- **Ampel**: zum Beispiel „Platz geöffnet“ oder „Platz gesperrt“ mit Grund, dazu die Uhrzeit des Stands.
+- **Spielbedingungen**: Grüns, gespielte Abschläge, Trolleys, Buggies und die Fahnenpositionen (Standard und abweichende Bahnen). Gesperrtes ist mit einem Kreuz und „gesperrt“ markiert, darunter steht der Grund.
+- **Heute** und **Morgen**: alle Sperrungen mit Uhrzeit, bei Turnieren auch der Turnierstart, sonst „uneingeschränkt bespielbar“.
+- **Übungsanlagen & Proshop**: geöffnet, geschlossen oder gesperrt, mit Öffnungszeit.
+
+Darunter: **Platzstatus bearbeiten** (öffnet die Seite Platzstatus), **Neue Sperrung** und ein Link, der die Website in einem neuen Fenster zeigt. Die beiden Knöpfe sieht nur, wer den Platzstatus pflegen darf.
+
+### Termine der nächsten 14 Tage (Dashboard)
+
+Auf der Startseite des Backends (**Dashboard**) steht ganz oben links der Kasten **Termine der nächsten 14 Tage**, nach Tagen sortiert:
+
+- **Turniere** des eigenen Clubs mit Uhrzeit und Spielform. Darunter steht die Tee-Sperre, die das Turnier auslöst (zum Beispiel „Abschlag 1 gesperrt 14:30–19:15 Uhr“), oder „keine Tee-Sperre“, wenn keine Turnier-Regel passt. Abgesagte oder verschobene Turniere sind markiert.
+- **Sperrungen**, die von Hand angelegt wurden.
+- **Ligaspiele** der Mannschaften mit Spielort („Heimspiel“ steht davor).
+- **Fristen des Lochwettspiels**: der letzte Tag einer Runde.
+- Oben unter **Jetzt** stehen die gerade aktiven Schnellsperren aus dem Platzstatus.
+
+Ein Klick auf einen Eintrag öffnet ihn zum Bearbeiten: das Turnier, die Sperrung, das Ligaspiel oder das Lochwettspiel. Am Ende des Kastens führen Links zu allen Turnieren, allen Sperrungen und den Turnier-Regeln. Den Kasten sehen alle, die Inhalte bearbeiten oder den Platzstatus pflegen; Links erscheinen nur zu Einträgen, die man bearbeiten darf.
+
 ### Das Grundprinzip: jede Angabe steht an genau einer Stelle
 
 Die Website setzt ihre Seiten aus Daten zusammen. Telefonnummer, Öffnungszeiten, Preise, Turniere oder der Platzstatus werden **einmal** eingetragen und erscheinen dann automatisch überall, wo sie gebraucht werden: auf der Startseite, im Fußbereich, auf den Unterseiten und im Birdiebook.

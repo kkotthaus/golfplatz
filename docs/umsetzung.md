@@ -328,9 +328,31 @@ Jedes Grün hat **6 nummerierte Fahnenpositionen (1–6)**. Gesteckt wird eine P
 
 Der große Platzstatus-Block der Startseite ist jetzt die Etch-Komponente „Platzstatus“ (`wordpress/etch/platzstatus.mjs`). Die Berechnung bleibt in `golfplatz-platzstatus.php`, die Daten liegen unter `{options.golfplatz.platzstatus.*}` (Filter `etch/dynamic_data/option`). Einzelheiten stehen in `wordpress/README.md`.
 
+## Dashboard: Platzstatus und Termine der nächsten 14 Tage
+
+**Platzstatus** (Widget rechts oben, seit 2026-09-29): dieselben Daten wie auf der Startseite (`golfplatz_platzstatus_etch()`).
+- Ampel mit Stand, Spielbedingungen und Fahnen, Sperrungen heute/morgen mit Turnierstart, Übungsanlagen und Proshop.
+- Zustand immer als Text, Dashicon zusätzlich.
+- Knöpfe „Platzstatus bearbeiten“ und „Neue Sperrung“ nur mit `edit_sperrungen`.
+- Geprüft im Normalzustand und mit einer vorübergehenden Trolley-Sperre (danach zurückgesetzt).
+
+**Termine der nächsten 14 Tage:**
+
+Stand 2026-09-29, Snippet `golfplatz-dashboard.php` (WPCodeBox-ID 14).
+
+- Widget oben links im Dashboard für Benutzer mit `edit_posts` oder `edit_sperrungen`.
+- Inhalt, nach Tag gruppiert und nach Uhrzeit sortiert:
+  - Turniere des Heimatclubs mit gültigem Termin und Status aus `golfplatz_turnier_status()`. Darunter die zugehörigen Tee-Sperrungen (`sperr_quelle` = `turnier:<ID>:…`) oder „keine Tee-Sperre“.
+  - Übrige Sperrungen (auch über mehrere Tage laufende, am heutigen Tag).
+  - Ligaspiele (`ligaspiel_termin`).
+  - Lochwettspiel-Fristen (`lw_runden[].bis`).
+  - Oben die aktiven Schnellsperren aus `golfplatz_platzstatus_daten()`.
+- Links zum Bearbeiten nur, wenn `current_user_can( 'edit_post', … )`.
+- Geprüft am 2026-09-29: 10 Turniere mit ihren Tee-Sperrungen und eine Lochwettspiel-Frist, 17 Links, Darstellung mit den Backend-Styles.
+
 ## PHP als WPCodeBox-Snippets
 
-Stand 2026-09-29, lokal umgestellt. Alle 13 PHP-Dateien (`wordpress/snippets/`, früher `mu-plugins`) laufen als Snippets in WPCodeBox 2 (1.4.1), Ordner „Golfplatz“, IDs 1–13, Einfügepunkt Root. Abgleich per MCP `golfplatz/snippets-sync`. Einzelheiten und Regeln stehen in [wordpress/README.md](../wordpress/README.md).
+Stand 2026-09-29, lokal umgestellt. Alle PHP-Dateien (`wordpress/snippets/`, früher `mu-plugins`) laufen als Snippets in WPCodeBox 2 (1.4.1), Ordner „Golfplatz“, IDs 1–13, Einfügepunkt Root. Abgleich per MCP `golfplatz/snippets-sync`. Einzelheiten und Regeln stehen in [wordpress/README.md](../wordpress/README.md).
 
 - Build-Dateien liegen jetzt in `wp-content/golfplatz/` (vorher `wp-content/mu-plugins/golfplatz/`).
 - Das Handbuch ist dort als `handbuch.php` mit Schutzzeile gespeichert. Vorher war `handbuch.html` öffentlich abrufbar.

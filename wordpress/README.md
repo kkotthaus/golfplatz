@@ -26,6 +26,7 @@ Seiten, Etch-Templates und das CSS werden im Repo als Code beschrieben, gebaut u
 | `snippets/golfplatz-liga-sync.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Abgleich der Ligaspiele mit gvnrw.liga.golf (GraphQL): Mannschaften, Spieltage, Orte, Ergebnisse, Gastclubs; täglich per Cron, von Hand unter Mannschaften → Verband-Abgleich, per MCP `golfplatz/liga-sync` |
 | `snippets/golfplatz-turniere.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: liest Turnierkalender und Ergebnisliste aus PC CADDIE://online (Club-Kennung `pccaddie_code`) sowie die Kalender der GOLFHOCHZEHN-Partnerclubs (Clubdaten `partnerclubs`), Beitragstyp `turnier`, stündlich per Cron, von Hand unter Turniere → PC-CADDIE-Abgleich, per MCP `golfplatz/turniere-sync`; Daten `{options.golfplatz.turniere}` |
 | `snippets/golfplatz-tee-belegung.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: erzeugt aus den Turnieren des Heimatclubs Sperrungen von Abschlag 1/10 nach Regeln (Einstellungsseite `tee-belegung` unter Sperrungen, Option `tee_belegung`) und Ausnahmen am Turnier (`tb_startform`, `tb_tee`, `tb_vorlauf`, `tb_dauer`); nach jedem PC-CADDIE-Abgleich (Hook `golfplatz_pcc_nach_abgleich`) und beim Speichern. Erkennung der Sperrungen über `sperr_quelle` = `turnier:<ID>:<tee>` |
+| `snippets/golfplatz-dashboard.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Dashboard-Widget „Platzstatus“ (rechts oben, Daten aus `golfplatz_platzstatus_etch()`: Ampel, Spielbedingungen, Fahnen, heute/morgen, Übungsanlagen, Knöpfe Platzstatus/Neue Sperrung) und Widget „Termine der nächsten 14 Tage“ (oben links): Turniere des Heimatclubs mit Status und den Tee-Sperrungen aus `sperr_quelle`, übrige Sperrungen, Ligaspiele, Lochwettspiel-Fristen, aktive Schnellsperren; Links zum Bearbeiten, wenn erlaubt (`edit_posts` oder `edit_sperrungen`) |
 | `snippets/golfplatz-handbuch.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: Backend-Seite „Handbuch“ (und Dashboard-Hinweis) mit der Bedienungsanleitung aus `docs/handbuch.md`; nur für Benutzer mit `edit_posts` oder `edit_sperrungen`. Inhalt `wp-content/golfplatz/handbuch.php` (mit Schutzzeile) erzeugt `etch/build.mjs` über `etch/handbuch.mjs` |
 | `snippets/golfplatz-news.php` | WPCodeBox-Snippet, **gehört auf die Live-Seite**: News-Beiträge unter `/news/<slug>/`, Beitragsliste mit Kategorie-Filter und Seitenzahlen, Mitglieder-Sperre ohne Volltext; Daten `{options.golfplatz.news}` und `{this.golfplatz.news}` |
 | `etch/news.mjs` | Komponente Newskarten (Startseite und `/news/`), Bausteine für die Übersicht und das Template `single-post` |
@@ -79,7 +80,7 @@ Die Live-Seite entsteht als Kopie der lokalen Seite mit **Duplicator Pro** (Date
 **Vorher (lokal):**
 
 1. `node wordpress/etch/build.mjs`, `dist` nach `wp-content/golfplatz/` kopieren, `golfplatz/sync-from-files` (`all`) und `golfplatz/snippets-sync` ausführen.
-2. `wpcodebox/list-snippets` prüfen: alle 13 Golfplatz-Snippets `enabled`.
+2. `wpcodebox/list-snippets` prüfen: alle Golfplatz-Snippets `enabled`.
 3. Beispiel- und Testinhalte entfernen (siehe „Offen“ in `docs/umsetzung.md`: Beispiel-News, Beispiel-Lochwettspiele 2025/2026, Beispiel-Sperrungen).
 4. Paket in Duplicator Pro erstellen; `wp-content/golfplatz` und die Tabellen `wp_wpcb_*` nicht ausschließen.
 
