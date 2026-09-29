@@ -133,6 +133,7 @@ export const oeffnungszeiten = {
       { titel: 'Beispiel: Inventur', von: '2026-10-05', bis: '2026-10-05', geschlossen: true, zeiten: [], beispiel: true },
     ],
     hinweis: 'Betrieben von Golf und Günstig OHG.',
+    link: 'https://www.golfundguenstig.de/',
   },
   restaurant: {
     name: 'Clubrestaurant',

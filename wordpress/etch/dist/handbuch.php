@@ -70,7 +70,7 @@
 <p>Für Feiertage, Betriebsferien oder die Winterzeit: <strong>+ Ausnahme</strong> klicken.</p>
 <ol><li><strong>Bezeichnung</strong>, zum Beispiel „Weihnachten“ oder „Winterzeit“. Sie steht danach als Titel über der zugeklappten Ausnahme.</li><li><strong>vom</strong> und <strong>bis einschließlich</strong>.</li><li>Entweder <strong>Ganz geschlossen</strong> anhaken oder bei <strong>Abweichende Öffnungszeiten in diesem Zeitraum</strong> die Zeiten eintragen (wie bei den normalen Öffnungszeiten).</li></ol>
 <p>Eine Ausnahme ersetzt an ihren Tagen die normalen Öffnungszeiten. Die Website zeigt kommende Ausnahmen rechtzeitig an und rechnet „Jetzt geöffnet“ bzw. „Öffnet morgen um 9 Uhr“ selbst aus.</p>
-<p><strong>Hinweis (öffentlich)</strong> (optional) erscheint unter den Zeiten, zum Beispiel „Rangefee 5 €“ oder „Letzter Einlass 30 Minuten vor Schluss“.</p>
+<p><strong>Website (optional)</strong>, zum Beispiel die des Betreibers, erscheint als Link unter den Zeiten (beim Proshop: golfundguenstig.de). <strong>Hinweis (öffentlich)</strong> (optional) erscheint ebenfalls unter den Zeiten, zum Beispiel „Rangefee 5 €“ oder „Letzter Einlass 30 Minuten vor Schluss“.</p>
 <div class="notice notice-info inline golfplatz-handbuch__hinweis"><p>Ist ein Bereich per Schnellsperre im <strong>Platzstatus</strong> geschlossen, zeigt die Website ihn als geschlossen, auch wenn laut Öffnungszeiten geöffnet wäre.</p></div>
 <h2 id="aktuelles-nachrichten">Aktuelles (Nachrichten)</h2>
 <p>Nachrichten erscheinen unter <strong>Aktuelles</strong> (<code>/news/</code>) und die drei neuesten auf der Startseite.</p>

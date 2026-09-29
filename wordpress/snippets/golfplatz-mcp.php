@@ -857,7 +857,7 @@ function golfplatz_mcp_import_content( $input ) {
 	if ( ! in_array( $type, GOLFPLATZ_MCP_IMPORT_TYPES, true ) || ! post_type_exists( $type ) ) {
 		return new WP_Error( 'golfplatz_type', 'Beitragstyp nicht erlaubt oder nicht registriert.' );
 	}
-	$daten = json_decode( (string) @file_get_contents( __DIR__ . '/golfplatz/daten/' . $type . '.json' ), true );
+	$daten = json_decode( (string) @file_get_contents( GOLFPLATZ_DATEN . '/daten/' . $type . '.json' ), true );
 	if ( ! is_array( $daten ) || empty( $daten['key'] ) || ! isset( $daten['items'] ) ) {
 		return new WP_Error( 'golfplatz_daten', 'Datei fehlt oder hat nicht das erwartete Format.' );
 	}
@@ -946,7 +946,7 @@ function golfplatz_mcp_acss_colors( $input ) {
 	}
 	$werte = isset( $input['werte'] ) && is_array( $input['werte'] ) ? $input['werte'] : array();
 	if ( ! empty( $input['aus_datei'] ) ) {
-		$datei = json_decode( (string) @file_get_contents( __DIR__ . '/golfplatz/daten/acss-farben.json' ), true );
+		$datei = json_decode( (string) @file_get_contents( GOLFPLATZ_DATEN . '/daten/acss-farben.json' ), true );
 		if ( ! is_array( $datei ) ) {
 			return new WP_Error( 'golfplatz_daten', 'daten/acss-farben.json fehlt oder ist ungültig.' );
 		}
@@ -987,7 +987,7 @@ function golfplatz_mcp_import_settings( $input ) {
 	if ( ! in_array( $seite, array( 'clubdaten', 'platzstatus' ), true ) ) {
 		return new WP_Error( 'golfplatz_seite', 'Einstellungsseite nicht erlaubt.' );
 	}
-	$werte = json_decode( (string) @file_get_contents( __DIR__ . '/golfplatz/daten/einstellungen-' . $seite . '.json' ), true );
+	$werte = json_decode( (string) @file_get_contents( GOLFPLATZ_DATEN . '/daten/einstellungen-' . $seite . '.json' ), true );
 	if ( ! is_array( $werte ) ) {
 		return new WP_Error( 'golfplatz_daten', 'Datei fehlt oder ist ungültig.' );
 	}

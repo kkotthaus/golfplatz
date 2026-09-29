@@ -386,6 +386,7 @@ function golfplatz_zeiten_bereich( string $key ): array {
 		'standard'  => $standard,
 		'ausnahmen' => $ausnahmen,
 		'hinweis'   => (string) ( $opt[ "zeiten_{$key}_hinweis" ] ?? '' ),
+		'link'      => esc_url_raw( (string) ( $opt[ "zeiten_{$key}_link" ] ?? '' ) ),
 	);
 }
 
@@ -568,6 +569,9 @@ function golfplatz_zeiten_etch(): array {
 				$kommende
 			),
 			'hinweis'       => $b['hinweis'],
+			// Website (z. B. des Betreibers); angezeigt ohne https:// und www.
+			'link'          => $b['link'],
+			'link_text'     => $b['link'] ? rtrim( preg_replace( '#^https?://(www\.)?#', '', $b['link'] ), '/' ) : '',
 		);
 	}
 	return $liste;
@@ -804,6 +808,7 @@ add_filter(
 					),
 				),
 			);
+			$felder[] = array( 'id' => 'zeiten_' . $key . '_link', 'name' => 'Website (optional)', 'type' => 'url', 'placeholder' => 'https://…', 'desc' => 'Z. B. die Website des Betreibers. Erscheint als Link unter den Öffnungszeiten.' );
 			$felder[] = array( 'id' => 'zeiten_' . $key . '_hinweis', 'name' => 'Hinweis (öffentlich)', 'type' => 'text', 'placeholder' => 'z. B. Letzter Einlass 30 Minuten vor Schluss', 'class' => 'golfplatz-zeiten-ende' );
 		}
 		$boxen[] = array(

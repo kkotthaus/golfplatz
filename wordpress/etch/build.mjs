@@ -218,6 +218,7 @@ const zeitenFelder = Object.fromEntries(
     [`zeiten_${key}_standard`, b.standard],
     [`zeiten_${key}_ausnahmen`, b.ausnahmen.filter((a) => !a.beispiel).map(({ titel, von, bis, geschlossen, zeiten }) => ({ titel, von, bis, geschlossen: geschlossen ? 1 : 0, zeiten }))],
     [`zeiten_${key}_hinweis`, b.hinweis],
+    [`zeiten_${key}_link`, b.link || ''],
   ]),
 );
 const einstellungen = {

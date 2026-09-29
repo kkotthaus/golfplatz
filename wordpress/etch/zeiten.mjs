@@ -31,6 +31,7 @@ const bereich = ({ klasse, liste, titel }) =>
       ]),
     ]),
     wenn('z.hinweis', [t('p', 'opening-hours__note', '{z.hinweis}')]),
+    wenn('z.link', [el('p', 'opening-hours__note opening-hours__link', [t('a', '', '{z.link_text}', { attrs: { href: '{z.link}', rel: 'noopener' } })])]),
   ]);
 
 export const oeffnungszeitenKomponente = {

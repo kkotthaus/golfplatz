@@ -146,6 +146,7 @@
   ],
   "zeiten_sekretariat_ausnahmen": [],
   "zeiten_sekretariat_hinweis": "",
+  "zeiten_sekretariat_link": "",
   "zeiten_range_standard": [
     {
       "tage": [
@@ -163,9 +164,11 @@
   ],
   "zeiten_range_ausnahmen": [],
   "zeiten_range_hinweis": "Rangefee 5 €.",
+  "zeiten_range_link": "",
   "zeiten_kurzspiel_standard": [],
   "zeiten_kurzspiel_ausnahmen": [],
   "zeiten_kurzspiel_hinweis": "Öffnungszeiten folgen.",
+  "zeiten_kurzspiel_link": "",
   "zeiten_proshop_standard": [
     {
       "tage": [
@@ -183,9 +186,11 @@
   ],
   "zeiten_proshop_ausnahmen": [],
   "zeiten_proshop_hinweis": "Betrieben von Golf und Günstig OHG.",
+  "zeiten_proshop_link": "https://www.golfundguenstig.de/",
   "zeiten_restaurant_standard": [],
   "zeiten_restaurant_ausnahmen": [],
   "zeiten_restaurant_hinweis": "Öffnungszeiten folgen.",
+  "zeiten_restaurant_link": "",
   "club_oeffnungszeiten": null,
   "club_oeffnungszeiten_hinweis": null,
   "range_oeffnungszeiten": null,

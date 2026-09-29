@@ -203,7 +203,7 @@ Für Feiertage, Betriebsferien oder die Winterzeit: **+ Ausnahme** klicken.
 
 Eine Ausnahme ersetzt an ihren Tagen die normalen Öffnungszeiten. Die Website zeigt kommende Ausnahmen rechtzeitig an und rechnet „Jetzt geöffnet“ bzw. „Öffnet morgen um 9 Uhr“ selbst aus.
 
-**Hinweis (öffentlich)** (optional) erscheint unter den Zeiten, zum Beispiel „Rangefee 5 €“ oder „Letzter Einlass 30 Minuten vor Schluss“.
+**Website (optional)**, zum Beispiel die des Betreibers, erscheint als Link unter den Zeiten (beim Proshop: golfundguenstig.de). **Hinweis (öffentlich)** (optional) erscheint ebenfalls unter den Zeiten, zum Beispiel „Rangefee 5 €“ oder „Letzter Einlass 30 Minuten vor Schluss“.
 
 > Ist ein Bereich per Schnellsperre im **Platzstatus** geschlossen, zeigt die Website ihn als geschlossen, auch wenn laut Öffnungszeiten geöffnet wäre.
 
