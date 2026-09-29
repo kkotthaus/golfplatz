@@ -741,3 +741,77 @@ add_action(
 	},
 	99
 );
+
+/*
+ * Clubdaten › Öffnungszeiten: Feldgruppe im Code (ersetzt die frühere Builder-Gruppe „clubdaten-zeiten“, gleiche Feld-IDs).
+ * Je Bereich: Überschrift, normale Öffnungszeiten, Ausnahmen, Hinweis. Die alten Freitext-Felder (club_oeffnungszeiten usw.) entfallen.
+ */
+add_filter(
+	'rwmb_meta_boxes',
+	function ( $boxen ) {
+		$woche = array( 'mo' => 'Mo', 'di' => 'Di', 'mi' => 'Mi', 'do' => 'Do', 'fr' => 'Fr', 'sa' => 'Sa', 'so' => 'So' );
+		$zeit  = fn( string $id, string $name ) => array( 'id' => $id, 'name' => $name, 'type' => 'time', 'columns' => 3, 'js_options' => array( 'timeFormat' => 'HH:mm', 'stepMinute' => 15 ) );
+		$datum = fn( string $id, string $name ) => array( 'id' => $id, 'name' => $name, 'type' => 'date', 'columns' => 3, 'save_format' => 'Y-m-d', 'js_options' => array( 'dateFormat' => 'dd.mm.yy' ) );
+		$zeile = array(
+			array( 'id' => 'tage', 'name' => 'An diesen Tagen', 'type' => 'checkbox_list', 'inline' => true, 'options' => $woche, 'columns' => 6 ),
+			$zeit( 'von', 'geöffnet von' ),
+			$zeit( 'bis', 'bis' ),
+		);
+		$felder = array(
+			array(
+				'type' => 'heading',
+				'name' => 'So funktionieren die Öffnungszeiten',
+				'desc' => 'Für jeden Bereich gibt es drei Angaben: <strong>Normale Öffnungszeiten</strong> (die übliche Woche), <strong>Ausnahmen</strong> für einen bestimmten Zeitraum (Feiertage, Winterzeit, Betriebsferien) und einen <strong>Hinweis</strong>, der unter den Zeiten erscheint. Tage ohne Zeile gelten als geschlossen. Die Website zeigt daraus selbst „Jetzt geöffnet“ bzw. „Geschlossen · öffnet …“.',
+			),
+		);
+		foreach ( GOLFPLATZ_ZEITEN_BEREICHE as $key => $name ) {
+			$felder[] = array( 'id' => 'zeiten_' . $key . '_heading', 'type' => 'heading', 'name' => $name );
+			$felder[] = array(
+				'id'         => 'zeiten_' . $key . '_standard',
+				'name'       => 'Normale Öffnungszeiten',
+				'desc'       => 'Tage anhaken und Uhrzeit eintragen. Andere Zeiten an anderen Tagen (z. B. Wochenende): weitere Zeile.',
+				'type'       => 'group',
+				'clone'      => true,
+				'sort_clone' => true,
+				'add_button' => '+ weitere Tage mit anderen Zeiten',
+				'fields'     => $zeile,
+			);
+			$felder[] = array(
+				'id'           => 'zeiten_' . $key . '_ausnahmen',
+				'name'         => 'Ausnahmen',
+				'desc'         => 'Nur für einen Zeitraum, z. B. Weihnachten oder Winterzeit. An diesen Tagen gelten statt der normalen Zeiten die Zeiten der Ausnahme – oder „geschlossen“.',
+				'type'         => 'group',
+				'clone'        => true,
+				'sort_clone'   => true,
+				'collapsible'  => true,
+				'default_state' => 'collapsed',
+				'group_title'  => '{titel}',
+				'add_button'   => '+ Ausnahme',
+				'fields'       => array(
+					array( 'id' => 'titel', 'name' => 'Bezeichnung', 'type' => 'text', 'placeholder' => 'z. B. Weihnachten, Winterzeit', 'columns' => 4 ),
+					$datum( 'von', 'vom' ),
+					$datum( 'bis', 'bis einschließlich' ),
+					array( 'id' => 'geschlossen', 'name' => 'Ganz geschlossen', 'type' => 'checkbox', 'columns' => 2 ),
+					array(
+						'id'         => 'zeiten',
+						'name'       => 'Abweichende Öffnungszeiten in diesem Zeitraum',
+						'type'       => 'group',
+						'clone'      => true,
+						'add_button' => '+ weitere Tage',
+						'fields'     => $zeile,
+						'hidden'     => array( 'geschlossen', '=', 1 ),
+					),
+				),
+			);
+			$felder[] = array( 'id' => 'zeiten_' . $key . '_hinweis', 'name' => 'Hinweis (öffentlich)', 'type' => 'text', 'placeholder' => 'z. B. Letzter Einlass 30 Minuten vor Schluss' );
+		}
+		$boxen[] = array(
+			'id'             => 'clubdaten-zeiten',
+			'title'          => 'Clubdaten · Öffnungszeiten',
+			'settings_pages' => 'clubdaten',
+			'tab'            => 'zeiten',
+			'fields'         => $felder,
+		);
+		return $boxen;
+	}
+);

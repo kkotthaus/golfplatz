@@ -57,7 +57,7 @@ Alle Stammdaten des Clubs stehen an **einer** Stelle: WordPress-Menü **„Clubd
 | --- | --- | --- |
 | Club | Clubdaten · Club | `club_name`, `club_kurzname`, `club_claim`, `club_gegruendet`, `club_mitglieder`, `club_jugend`, `club_logo`, `club_logo_hell` |
 | Kontakt & Anfahrt | Clubdaten · Kontakt & Anfahrt | `club_strasse`, `club_plz`, `club_ort`, `club_telefon`, `club_fax`, `club_email`, `club_anfahrt_auto`, `club_anfahrt_oepnv`, `club_karte`, `club_routenlink` |
-| Öffnungszeiten | Clubdaten · Öffnungszeiten | Je Bereich (`sekretariat`, `range`, `kurzspiel`, `proshop`, `restaurant`): `zeiten_<bereich>_standard` (klonbar: `tage` = mo…so, `von`, `bis`), `zeiten_<bereich>_ausnahmen` (klonbar: `titel`, `von`, `bis` als JJJJ-MM-TT, `geschlossen`, `zeiten` wie Standard), `zeiten_<bereich>_hinweis`. Eine Ausnahme ersetzt an ihren Tagen die Standardzeiten. |
+| Öffnungszeiten | Clubdaten · Öffnungszeiten (seit 2026-09-29 im Code: `snippets/golfplatz-platzstatus.php`, Builder-Gruppe 116 im Papierkorb; alte Freitext-Felder `club_oeffnungszeiten`, `<bereich>_oeffnungszeiten`, `<bereich>_hinweis` und `restaurant_oeffnungszeiten` entfernt) | Je Bereich (`sekretariat`, `range`, `kurzspiel`, `proshop`, `restaurant`): `zeiten_<bereich>_standard` (klonbar: `tage` = mo…so, `von`, `bis`), `zeiten_<bereich>_ausnahmen` (klonbar: `titel`, `von`, `bis` als JJJJ-MM-TT, `geschlossen`, `zeiten` wie Standard), `zeiten_<bereich>_hinweis`. Eine Ausnahme ersetzt an ihren Tagen die Standardzeiten. |
 | Gäste & Systeme | Clubdaten · Gäste & Systeme | `anmeldung_telefon`, `anmeldung_hinweis`, `ruhetag_hinweis`, `pccaddie_code`. Keine Startzeitbuchung – der Club verzichtet bewusst auf feste Startzeiten. |
 | Restaurant | Clubdaten · Restaurant | `restaurant_name`, `restaurant_telefon`, `restaurant_hinweis`, `restaurant_speisekarte` |
 | Platz & Abschläge | Clubdaten · Platz & Abschläge | je `abschlag_gelb`/`_blau`/`_rot`/`_orange` eine Gruppe mit `geschlecht` (für wen bewertet), `cr`, `slope`, `par`. Längen werden aus den Bahnen summiert. |
@@ -244,6 +244,21 @@ Stand 2026-09-29, `snippets/golfplatz-tee-belegung.php`.
 - **Auslöser:** Hook `golfplatz_pcc_nach_abgleich` am Ende von `golfplatz_pcc_abgleich()` (stündlich und von Hand), Speichern der Regeln, der Clubdaten oder eines Turniers (`rwmb_after_save_post`).
 - **Geprüft** am 2026-09-29: 5 Sperrungen aus 29 kommenden Turnieren (4 × Afterwork, 1 × Monats-Cup mit 62 Angemeldeten = 16 Flights; damals noch mit 10 Min. Abstand); zweiter Lauf ohne Änderung. Ausnahme Tee 10 und „keine Sperre“ am Turnier geprüft, Anzeige im Platzstatus für morgen geprüft.
 - **Offen:** Vorlauf (60 Min.) und Startform für Herrengolf, Damengolf und AK 50+ sind angenommen – mit dem Club bestätigen. Harmony-Cup, Scrambles, Winter-Cup und Golf-Rallye haben keine Regel und sperren nichts.
+
+### Golfschule `/golfschule/`
+
+Stand 2026-09-29, Aufbau wie im Prototyp. Daten aus `snippets/golfplatz-golfschule.php` (WPCodeBox-ID 15), Markup aus `wordpress/etch/golfschule.mjs`.
+
+- **Seite:** Seitenkopf, Abschnitt `#kurse` mit Etch-Komponente „Kurskarten“ und Anmeldehinweis, `#team` mit Personenkarten (Liste `golfschule`), `#platzreife` mit Erklärtext.
+  - Anmeldung: Telefon und E-Mail aus den Clubdaten, Betreff „Kursanmeldung“.
+- **Kurskarte:** Kursart, Titel (verlinkt, ganze Karte klickbar), Text, Preis (leer = „auf Anfrage“, 0 = „kostenlos“), Dauer, max. Teilnehmer, künftige Termine, Golflehrer.
+  - Vergangene Termine fallen weg; Kurse, deren Termine alle vorbei sind, verschwinden. Kurse ohne Termine bleiben.
+  - Termin-Datumsfelder in der Gruppe werden in beiden Meta-Box-Formaten gelesen (`golfplatz_kurs_datum()`).
+- **Kursseite `/golfschule/kurs/<slug>/`:** Template `single-kurs` mit Eckdaten, Beschreibung, Anmeldung (`kurs_anmeldung` oder Clubdaten) und Rücklink. Damit ist der offene Punkt „Kurs (Single)“ erledigt.
+- **Geprüft** am 2026-09-29 auf golfplatz.local: drei Kurse, drei Pros, Kursseite Schnupperkurs.
+  - Mit Testwerten (vergangener und künftiger Termin, Golflehrer, Dauer, Teilnehmer) geprüft, danach zurückgesetzt.
+  - Ein Kurs mit nur vergangenen Terminen wird ausgeblendet.
+- **Offen:** echte Kurstermine und Beschreibungen vom Club.
 
 ### Club & Kontakt `/club/`
 

@@ -71,7 +71,7 @@ Das heißt für Sie:
 | Ligaspiele | automatisch vom Golfverband NRW (**Mannschaften › Verband-Abgleich**) | Mannschaften |
 | Bahnbeschreibungen, Längen, Entfernungen | **Spielbahnen** | Platz & Bahnen, Birdiebook |
 | Course Rating und Slope | **Clubdaten › Platz & Abschläge** | Spielvorgaben, Zählkarte |
-| Kurse der Golfschule | **Golfschule** | Golfschule (Seite im Aufbau) |
+| Kurse der Golfschule | **Golfschule** | Golfschule, Kursseiten |
 | Bilder und PDFs hochladen | **Medien** | dort, wo sie eingebunden werden |
 
 ### Speichern, Vorschau, Papierkorb
@@ -183,27 +183,27 @@ Gut zu wissen:
 
 ## Öffnungszeiten
 
-Menü **Clubdaten**, Reiter **Öffnungszeiten**. Es gibt je einen Abschnitt für Sekretariat, Driving Range, Kurzspielbereich, Proshop und Clubrestaurant.
+Menü **Clubdaten**, Reiter **Öffnungszeiten**. Der Reiter hat fünf Abschnitte mit fetter Überschrift: **Sekretariat**, **Driving Range**, **Kurzspielbereich & Putting-Grün**, **Proshop** und **Clubrestaurant**. Jeder Abschnitt hat dieselben drei Angaben.
 
-### Standardzeiten
+### Normale Öffnungszeiten
 
-Unter **Standard** stehen die üblichen Zeiten. Jede Zeile besteht aus Wochentagen und einer Uhrzeit:
+Die übliche Woche. Jede Zeile besteht aus Wochentagen und einer Uhrzeit:
 
-- Tage anhaken (Mo … So), dann **von** und **bis** eintragen.
-- Unterschiedliche Zeiten an verschiedenen Tagen: weitere Zeile mit **+ Eintrag hinzufügen**. Beispiel: Zeile 1 Mo–Fr 9–17 Uhr, Zeile 2 Sa–So 9–14 Uhr.
+- Bei **An diesen Tagen** die Tage anhaken (Mo … So), dann **geöffnet von** und **bis** eintragen.
+- Andere Zeiten an anderen Tagen: **+ weitere Tage mit anderen Zeiten**. Beispiel: Zeile 1 Mo–Fr 9:00–17:00, Zeile 2 Sa + So 9:00–14:00.
 - Tage ohne Zeile gelten als geschlossen.
 
 ### Ausnahmen
 
-Für Feiertage, Betriebsferien oder die Winterzeit legen Sie unter **Ausnahmen** einen Eintrag an:
+Für Feiertage, Betriebsferien oder die Winterzeit: **+ Ausnahme** klicken.
 
-1. **Titel**, zum Beispiel „Weihnachten“ oder „Winterzeit“.
+1. **Bezeichnung**, zum Beispiel „Weihnachten“ oder „Winterzeit“. Sie steht danach als Titel über der zugeklappten Ausnahme.
 2. **vom** und **bis einschließlich**.
-3. Entweder **Geschlossen** anhaken oder unter **Abweichende Zeiten** die Zeiten für diesen Zeitraum eintragen (wie beim Standard).
+3. Entweder **Ganz geschlossen** anhaken oder bei **Abweichende Öffnungszeiten in diesem Zeitraum** die Zeiten eintragen (wie bei den normalen Öffnungszeiten).
 
-Eine Ausnahme ersetzt an ihren Tagen die Standardzeiten. Die Website zeigt kommende Ausnahmen rechtzeitig an und rechnet „Jetzt geöffnet“ bzw. „Öffnet morgen um 9 Uhr“ selbst aus.
+Eine Ausnahme ersetzt an ihren Tagen die normalen Öffnungszeiten. Die Website zeigt kommende Ausnahmen rechtzeitig an und rechnet „Jetzt geöffnet“ bzw. „Öffnet morgen um 9 Uhr“ selbst aus.
 
-**Hinweis** (optional) erscheint unter den Zeiten, zum Beispiel „Außerhalb der Zeiten: Anmeldung im Proshop“.
+**Hinweis (öffentlich)** (optional) erscheint unter den Zeiten, zum Beispiel „Rangefee 5 €“ oder „Letzter Einlass 30 Minuten vor Schluss“.
 
 > Ist ein Bereich per Schnellsperre im **Platzstatus** geschlossen, zeigt die Website ihn als geschlossen, auch wenn laut Öffnungszeiten geöffnet wäre.
 
@@ -429,13 +429,30 @@ Nach Änderungen unten auf **Änderungen speichern** klicken.
 
 > **Anfahrt:** Die Website bettet bewusst keine Google-Karte ein, weil dafür eine Einwilligung der Besucher nötig wäre. Stattdessen gibt es den Knopf „Route planen“ und optional ein Kartenbild (Lageplan).
 
-> Einige Felder werden noch nicht angezeigt, weil die zugehörigen Seiten (Restaurant, Golfschule, Impressum, Datenschutz) noch im Aufbau sind. Füllen dürfen Sie sie schon.
+> Einige Felder werden noch nicht angezeigt, weil die zugehörigen Seiten (Restaurant, Impressum, Datenschutz) noch im Aufbau sind. Füllen dürfen Sie sie schon.
 
 ## Golfschule
 
-Menü **Golfschule › Neuen Kurs hinzufügen**: Titel, Beschreibung, **Kursart**, **Preis** (leer = „auf Anfrage“, 0 = kostenlos), **Max. Teilnehmer**, **Dauer**, **Golflehrer** (aus Team & Vorstand), **Termine** (je Termin eine Zeile) und **Anmeldung** (wie man sich anmeldet).
+Die Seite **Golfschule** (`/golfschule/`) zeigt die Kurse als Karten, darunter die Anmeldung (Telefon und E-Mail aus den Clubdaten), das Team der Golfschule und einen Text zur Platzreife. Jeder Kurs hat zusätzlich eine eigene Seite (`/golfschule/kurs/<name>/`), die sich per Klick auf die Karte öffnet.
 
-> Die Seite Golfschule ist noch im Aufbau. Die Kurse erscheinen dort, sobald sie fertig ist.
+### Einen Kurs anlegen oder ändern
+
+1. Menü **Golfschule › Neuen Kurs hinzufügen** (oder einen Kurs aus **Alle Kurse** öffnen).
+2. **Titel** und **Beschreibung** (Textfeld). Die Beschreibung steht auf der Karte und auf der Kursseite.
+3. **Kursart**: Schnupperkurs, Platzreife, Training, Kinder & Jugend oder Firmen & Gruppen. Sie steht klein über dem Titel.
+4. **Preis** in Euro: leer = „auf Anfrage“, 0 = „kostenlos“.
+5. Optional **Max. Teilnehmer** und **Dauer** (zum Beispiel „2 Stunden“ oder „4 Abende“).
+6. **Golflehrer**: eine Person aus Team & Vorstand. Sie erscheint als „mit …“.
+7. **Termine**: je Termin eine Zeile mit **Von**, optional **Bis** (mehrtägig) und **Uhrzeit** (zum Beispiel „10–12 Uhr“).
+8. **Anmeldung**: wie man sich anmeldet. Der Text steht auf der Kursseite. Leer = Telefon und E-Mail des Sekretariats.
+9. **Veröffentlichen**. Die Reihenfolge auf der Seite bestimmt **Reihenfolge** (rechts unter „Seiten-Attribute“).
+
+Gut zu wissen:
+
+- Vergangene Termine blendet die Website aus.
+- Hat ein Kurs Termine, die alle vorbei sind, verschwindet er von der Seite, bis Sie neue Termine eintragen.
+- Kurse ganz ohne Termine (zum Beispiel Einzelunterricht nach Absprache) bleiben immer sichtbar.
+- Die Golflehrer im Abschnitt „Das Team der Golfschule“ sind die Personen der Gruppe **Golfschule** unter Team & Vorstand.
 
 ## Seiten und Aussehen
 
