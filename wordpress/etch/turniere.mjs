@@ -22,7 +22,7 @@ const pillen = (target, label, feld) =>
 const kategorien = (x) => wenn(`${x}.hat_kategorien`, [el('p', 'tournament__tags', [loop({ target: `${x}.kategorien`, itemId: 'k' }, [t('span', 'badge badge--{k.key}', '{k.name}')])])]);
 
 const turnier = () =>
-  el('article', 'tournament', [
+  el('article', 'tournament tournament--{tu.status_mod}', [
     el('div', 'tournament__date', [
       t('span', 'tournament__weekday', '{tu.wochentag}'),
       t('span', 'tournament__day', '{tu.tag}'),
@@ -30,6 +30,8 @@ const turnier = () =>
     ], { attrs: { 'aria-hidden': 'true' } }),
     el('div', 'tournament__body', [
       el('h4', 'tournament__title', [t('span', 'visually-hidden', '{tu.datum_lang}: '), text('{tu.titel}')]),
+      // Absage/Verschiebung immer als Text (nicht nur über Durchstreichen oder Farbe)
+      wenn('tu.status_text', [t('p', 'tournament__status tournament__status--{tu.status_mod}', '{tu.status_text}')]),
       wenn('tu.untertitel', [t('p', 'tournament__subtitle', '{tu.untertitel}')]),
       wenn('tu.infos', [t('p', 'tournament__info', '{tu.infos}')]),
       kategorien('tu'),
@@ -53,7 +55,7 @@ export const turnierkalenderKomponente = {
     wenn(`${TU}.hat_heute`, [
       el('div', 'tournaments__today', [
         t('p', 'tournaments__today-label', 'Heute auf dem Platz'),
-        loop({ target: `${TU}.heute`, itemId: 'h' }, [el('p', 'tournaments__today-item', [t('strong', '', '{h.titel}'), wenn('h.infos', [text(' · {h.infos}')])])]),
+        loop({ target: `${TU}.heute`, itemId: 'h' }, [el('p', 'tournaments__today-item', [t('strong', '', '{h.titel}'), wenn('h.infos', [text(' · {h.infos}')]), wenn('h.status_text', [text(' · '), t('strong', '', '{h.status_text}')])])]),
       ], { attrs: { role: 'status' } }),
     ]),
     pillen(`${TU}.filter`, 'Turniere nach Kategorie filtern', 'name'),
@@ -77,12 +79,13 @@ const belegungZelle = () =>
   el('div', 'occupancy__cell occupancy__cell--{z.mod} occupancy__cell--{z.club_mod}', [
     t('span', 'visually-hidden', '{z.vorlesen}'),
     el('div', 'occupancy__content', [
-      wenn('z.belegt', [
+      wenn('z.hat_turniere', [
         loop({ target: 'z.turniere', itemId: 'e' }, [
-          el('p', 'occupancy__event', [
+          el('p', 'occupancy__event occupancy__event--{e.mod}', [
             wenn('e.zeit', [t('span', 'occupancy__time', '{e.zeit}')]),
             t('span', 'occupancy__name', '{e.titel}'),
-            wenn('e.loecher', [t('span', 'occupancy__holes', '{e.loecher}')]),
+            wenn('e.abgesagt', [t('span', 'occupancy__cancel', 'abgesagt')]),
+            wenn('e.abgesagt', [wenn('e.loecher', [t('span', 'occupancy__holes', '{e.loecher}')])], 'isFalsy'),
           ]),
         ]),
       ]),
@@ -134,6 +137,20 @@ export const platzbelegungKomponente = {
       ]),
     ], { name: 'Platzbelegung' }),
   ]),
+};
+
+/** Startseite: die nächsten Turniere des Heimatclubs (auch abgesagte bzw. verschobene, mit Hinweis). */
+export const naechsteTurniereKomponente = {
+  key: 'NaechsteTurniere',
+  name: 'Nächste Turniere',
+  description: 'Die vier nächsten Turniere des Heimatclubs aus PC CADDIE für die Startseite – wie im Turnierkalender, abgesagte durchgestrichen mit „Abgesagt“, verschobene mit „Verschoben vom …“. Daten: {options.golfplatz.turniere.naechste}.',
+  properties: [],
+  content: el('div', 'tournaments tournaments--kompakt', [
+    wenn(`${TU}.hat_naechste`, [
+      el('div', 'tournaments__list', [loop({ target: `${TU}.naechste`, itemId: 'tu' }, [turnier()])], { attrs: { role: 'list', 'aria-label': 'Nächste Turniere' } }),
+    ]),
+    wenn(`${TU}.hat_naechste`, [t('p', 'tournaments__empty', 'Zurzeit sind keine Turniere ausgeschrieben.')], 'isFalsy'),
+  ], { name: 'Nächste Turniere' }),
 };
 
 export const turnierergebnisseKomponente = {

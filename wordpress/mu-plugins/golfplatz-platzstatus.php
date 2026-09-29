@@ -619,10 +619,22 @@ function golfplatz_platzstatus_etch(): array {
 				'klasse'  => trim( ( 'platz' === $s['bereich'] ? 'status-entry--platz' : '' ) . ( $laeuft ? ' status-entry--active' : '' ) ),
 			);
 		}
+		$frei = ! $eintraege;
+		// Abgesagte oder verschobene Turniere des Tages (golfplatz-turniere.php): Hinweis, dass die Turniersperre entfällt
+		foreach ( function_exists( 'golfplatz_turniere_ausfall_am' ) ? golfplatz_turniere_ausfall_am( $tag ) : array() as $a ) {
+			$eintraege[] = array(
+				'bereich' => 'Turnier ' . $a['art'],
+				'zeit'    => $a['zeit'],
+				'grund'   => $a['text'],
+				'start'   => '',
+				'laeuft'  => false,
+				'klasse'  => 'status-entry--' . $a['art'],
+			);
+		}
 		$tage[] = array(
 			'label'     => $label,
 			'datum'     => date_i18n( 'l, j. F', $tag ),
-			'frei'      => ! $eintraege,
+			'frei'      => $frei,
 			'eintraege' => $eintraege,
 		);
 	}

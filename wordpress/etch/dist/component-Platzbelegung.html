@@ -52,9 +52,9 @@
 <!-- wp:etch/text {"content":"{z.vorlesen}"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"div","attributes":{"aria-hidden":"true","class":"occupancy__content"}} -->
-<!-- wp:etch/condition {"condition":{"leftHand":"z.belegt","operator":"isTruthy","rightHand":null},"conditionString":"z.belegt"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"z.hat_turniere","operator":"isTruthy","rightHand":null},"conditionString":"z.hat_turniere"} -->
 <!-- wp:etch/loop {"target":"z.turniere","itemId":"e"} -->
-<!-- wp:etch/element {"tag":"p","attributes":{"class":"occupancy__event"}} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"occupancy__event occupancy__event\u002d\u002d{e.mod}"}} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"e.zeit","operator":"isTruthy","rightHand":null},"conditionString":"e.zeit"} -->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"occupancy__time"}} -->
 <!-- wp:etch/text {"content":"{e.zeit}"} /-->
@@ -63,10 +63,17 @@
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"occupancy__name"}} -->
 <!-- wp:etch/text {"content":"{e.titel}"} /-->
 <!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"e.abgesagt","operator":"isTruthy","rightHand":null},"conditionString":"e.abgesagt"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"occupancy__cancel"}} -->
+<!-- wp:etch/text {"content":"abgesagt"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"e.abgesagt","operator":"isFalsy","rightHand":null},"conditionString":"!e.abgesagt"} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"e.loecher","operator":"isTruthy","rightHand":null},"conditionString":"e.loecher"} -->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"occupancy__holes"}} -->
 <!-- wp:etch/text {"content":"{e.loecher}"} /-->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
 <!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/loop -->

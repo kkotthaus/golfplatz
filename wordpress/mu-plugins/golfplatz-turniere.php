@@ -234,6 +234,19 @@ function golfplatz_pcc_abgleich(): array {
 			);
 			$pid = $vorhanden[ $c['code'] ][ (string) $id ] ?? 0;
 			if ( $pid ) {
+				// Wieder im Kalender: automatische Absage aufheben
+				if ( get_post_meta( $pid, 'turnier_pcc_fehlt', true ) ) {
+					delete_post_meta( $pid, 'turnier_pcc_fehlt' );
+				}
+				// Neues Datum für ein kommendes Turnier: als „verschoben vom …“ merken (zurück auf das alte Datum hebt es auf)
+				$alt_ts = (int) get_post_meta( $pid, 'turnier_beginn', true );
+				if ( $alt_ts && $alt_ts >= $heute && gmdate( 'Y-m-d', $alt_ts ) !== gmdate( 'Y-m-d', $t['beginn'] ) && ! get_post_meta( $pid, 'turnier_verschoben_von', true ) ) {
+					update_post_meta( $pid, 'turnier_verschoben_von', $alt_ts );
+				}
+				$von = (int) get_post_meta( $pid, 'turnier_verschoben_von', true );
+				if ( $von && gmdate( 'Y-m-d', $von ) === gmdate( 'Y-m-d', $t['beginn'] ) ) {
+					delete_post_meta( $pid, 'turnier_verschoben_von' );
+				}
 				$alt = array_map( fn( $k ) => (string) get_post_meta( $pid, $k, true ), array_keys( $meta ) );
 				if ( array_combine( array_keys( $meta ), $alt ) == array_map( 'strval', $meta ) && html_entity_decode( get_post_field( 'post_title', $pid ) ) === $t['titel'] /* Rohtitel: get_the_title() setzt typografische Striche */ && 'publish' === get_post_status( $pid ) ) {
 					++$log['unveraendert'];
@@ -249,11 +262,12 @@ function golfplatz_pcc_abgleich(): array {
 				update_post_meta( $pid, $k, $v );
 			}
 		}
-		// Kommende Turniere dieses Clubs, die nicht mehr im Kalender stehen, sind abgesagt (nur wenn der Kalender Turniere hatte)
+		// Kommende Turniere dieses Clubs, die nicht mehr im Kalender stehen, gelten als abgesagt (nur wenn der Kalender Turniere hatte).
+		// Sie bleiben sichtbar und werden als „abgesagt“ angezeigt; die Tee-Sperre entfällt.
 		if ( $kommend ) {
 			foreach ( $vorhanden[ $c['code'] ] ?? array() as $id => $pid ) {
-				if ( ! isset( $alle[ $id ] ) && (int) get_post_meta( $pid, 'turnier_beginn', true ) >= $heute && 'publish' === get_post_status( $pid ) ) {
-					wp_trash_post( $pid );
+				if ( ! isset( $alle[ $id ] ) && (int) get_post_meta( $pid, 'turnier_beginn', true ) >= $heute && 'publish' === get_post_status( $pid ) && ! get_post_meta( $pid, 'turnier_pcc_fehlt', true ) ) {
+					update_post_meta( $pid, 'turnier_pcc_fehlt', 1 );
 					++$log['abgesagt'];
 				}
 			}
@@ -275,7 +289,132 @@ function golfplatz_pcc_log( array $log ): array {
 }
 
 function golfplatz_pcc_log_text( array $l ): string {
-	return wp_date( 'd.m.Y H:i', $l['zeit'] ) . ': ' . ( isset( $l['clubs'] ) ? $l['clubs'] . ' Clubs, ' : '' ) . $l['neu'] . ' neu, ' . $l['aktualisiert'] . ' aktualisiert, ' . $l['unveraendert'] . ' unverändert' . ( $l['abgesagt'] ? ', ' . $l['abgesagt'] . ' abgesagt (Papierkorb)' : '' ) . ( $l['fehler'] ? '; Probleme: ' . implode( ' ', $l['fehler'] ) : '' );
+	return wp_date( 'd.m.Y H:i', $l['zeit'] ) . ': ' . ( isset( $l['clubs'] ) ? $l['clubs'] . ' Clubs, ' : '' ) . $l['neu'] . ' neu, ' . $l['aktualisiert'] . ' aktualisiert, ' . $l['unveraendert'] . ' unverändert' . ( $l['abgesagt'] ? ', ' . $l['abgesagt'] . ' nicht mehr im Kalender (als abgesagt angezeigt)' : '' ) . ( $l['fehler'] ? '; Probleme: ' . implode( ' ', $l['fehler'] ) : '' );
+}
+
+/* ---------- Absage und Verschiebung ---------- */
+
+/**
+ * Tatsächlicher Stand eines Turniers. Von Hand am Turnier (Kasten „Absage / Verschiebung“: turnier_status, turnier_status_hinweis,
+ * turnier_neuer_termin) oder automatisch aus PC CADDIE (turnier_pcc_fehlt = nicht mehr im Kalender, turnier_verschoben_von = altes Datum).
+ * Die Angabe von Hand geht vor. beginn = gültiger Termin (Ortszeit als Unix-Zeit), findet_statt = sperrt Tees und erlaubt Anmeldung.
+ */
+function golfplatz_turnier_status( int $id ): array {
+	$m       = fn( string $k ) => get_post_meta( $id, $k, true );
+	$tz      = new DateTimeZone( 'UTC' );
+	$beginn  = (int) $m( 'turnier_beginn' );
+	$uhrzeit = (bool) $m( 'turnier_hat_uhrzeit' );
+	$hand    = (string) $m( 'turnier_status' );
+	$hinweis = trim( (string) $m( 'turnier_status_hinweis' ) );
+	$status  = $hand;
+	$von     = 0;
+	$offen   = false;
+	if ( 'verschoben' === $hand ) {
+		$neu = (int) $m( 'turnier_neuer_termin' );
+		if ( $neu ) {
+			$von     = $beginn;
+			$beginn  = $neu;
+			$uhrzeit = true;
+		} else {
+			$offen = true; // neuer Termin steht noch nicht fest
+		}
+	} elseif ( '' === $hand ) {
+		if ( $m( 'turnier_pcc_fehlt' ) ) {
+			$status = 'abgesagt';
+		} elseif ( (int) $m( 'turnier_verschoben_von' ) ) {
+			$status = 'verschoben';
+			$von    = (int) $m( 'turnier_verschoben_von' );
+		}
+	}
+	$tag  = fn( int $ts ) => wp_date( 'D, j.n.', $ts, $tz );
+	$text = '';
+	if ( 'abgesagt' === $status ) {
+		$text = 'Abgesagt';
+	} elseif ( 'verschoben' === $status ) {
+		$text = $offen ? 'Verschoben – neuer Termin folgt' : 'Verschoben vom ' . $tag( $von );
+	}
+	return array(
+		'status'       => $status,
+		'beginn'       => $beginn,
+		'hat_uhrzeit'  => $uhrzeit,
+		'von'          => $von,
+		'termin_offen' => $offen,
+		'hinweis'      => $hinweis,
+		'text'         => $text ? $text . ( $hinweis ? ' – ' . $hinweis : '' ) : '',
+		'findet_statt' => 'abgesagt' !== $status && ! $offen,
+	);
+}
+
+/**
+ * Hinweise für den Platzstatus: Turniere des Heimatclubs, die an diesem Tag geplant waren und abgesagt oder verschoben sind.
+ * $tag = 0 Uhr des Tages (Ortszeit als Unix-Zeit).
+ */
+function golfplatz_turniere_ausfall_am( int $tag ): array {
+	$eigen  = golfplatz_pcc_club();
+	$liste  = array();
+	$ids    = get_posts(
+		array(
+			'post_type'      => 'turnier',
+			'post_status'    => 'publish',
+			'posts_per_page' => 50,
+			'fields'         => 'ids',
+			// altes Datum: turnier_beginn (von Hand verschoben/abgesagt) oder turnier_verschoben_von (Datum in PC CADDIE geändert)
+			'meta_query'     => array(
+				'relation' => 'OR',
+				array( 'key' => 'turnier_beginn', 'value' => array( $tag, $tag + DAY_IN_SECONDS - 1 ), 'compare' => 'BETWEEN', 'type' => 'NUMERIC' ),
+				array( 'key' => 'turnier_verschoben_von', 'value' => array( $tag, $tag + DAY_IN_SECONDS - 1 ), 'compare' => 'BETWEEN', 'type' => 'NUMERIC' ),
+			),
+		)
+	);
+	foreach ( $ids as $id ) {
+		if ( ( (string) get_post_meta( $id, 'turnier_club', true ) ?: $eigen ) !== $eigen ) {
+			continue;
+		}
+		$s = golfplatz_turnier_status( $id );
+		if ( $s['findet_statt'] && ( ! $s['von'] || gmdate( 'Y-m-d', $s['beginn'] ) === gmdate( 'Y-m-d', $tag ) ) ) {
+			continue; // findet an diesem Tag statt
+		}
+		$alt     = $s['von'] && gmdate( 'Y-m-d', $s['von'] ) === gmdate( 'Y-m-d', $tag ) ? $s['von'] : (int) get_post_meta( $id, 'turnier_beginn', true );
+		$was     = 'abgesagt' === $s['status'] ? 'abgesagt' : ( $s['termin_offen'] ? 'verschoben, neuer Termin folgt' : 'verschoben auf ' . wp_date( 'l, j. F', $s['beginn'], new DateTimeZone( 'UTC' ) ) );
+		$liste[] = array(
+			'titel'   => html_entity_decode( get_the_title( $id ) ),
+			'zeit'    => get_post_meta( $id, 'turnier_hat_uhrzeit', true ) ? gmdate( 'H:i', $alt ) . ' Uhr' : '',
+			'text'    => html_entity_decode( get_the_title( $id ) ) . ' ' . $was . ( $s['hinweis'] ? ' (' . $s['hinweis'] . ')' : '' ),
+			'art'     => 'abgesagt' === $s['status'] ? 'abgesagt' : 'verschoben',
+		);
+	}
+	return $liste;
+}
+
+// Kasten am Turnier: Absage oder Verschiebung von Hand (bleibt beim Abgleich mit PC CADDIE erhalten)
+add_filter(
+	'rwmb_meta_boxes',
+	function ( $boxen ) {
+		$boxen[] = array(
+			'id'         => 'turnier-absage',
+			'title'      => 'Absage / Verschiebung',
+			'post_types' => array( 'turnier' ),
+			'context'    => 'side',
+			'priority'   => 'high',
+			'fields'     => array(
+				array( 'type' => 'custom_html', 'callback' => 'golfplatz_turnier_status_html' ),
+				array( 'id' => 'turnier_status', 'name' => 'Status', 'type' => 'radio', 'inline' => false, 'options' => array( '' => 'Findet statt (laut PC CADDIE)', 'abgesagt' => 'Abgesagt', 'verschoben' => 'Verschoben' ), 'std' => '' ),
+				array( 'id' => 'turnier_neuer_termin', 'name' => 'Neuer Termin', 'type' => 'datetime', 'timestamp' => true, 'js_options' => array( 'stepMinute' => 5 ), 'desc' => 'Leer = „neuer Termin folgt“.', 'visible' => array( 'turnier_status', 'verschoben' ) ),
+				array( 'id' => 'turnier_status_hinweis', 'name' => 'Hinweis (öffentlich)', 'type' => 'text', 'placeholder' => 'z. B. wegen Unwetter', 'hidden' => array( 'turnier_status', '' ) ),
+			),
+		);
+		return $boxen;
+	}
+);
+
+function golfplatz_turnier_status_html(): string {
+	$id = (int) ( $_GET['post'] ?? 0 ); // phpcs:ignore WordPress.Security.NonceVerification
+	if ( ! $id ) {
+		return '';
+	}
+	$s    = golfplatz_turnier_status( $id );
+	$auto = '' === (string) get_post_meta( $id, 'turnier_status', true ) && $s['status'] ? ' (automatisch aus PC CADDIE)' : '';
+	return '<p><strong>Aktuell:</strong> ' . esc_html( $s['text'] ? $s['text'] . $auto : 'findet statt' ) . '</p><p class="description">Abgesagte Turniere bleiben im Kalender sichtbar (durchgestrichen); die Sperre von Tee 1/10 entfällt. Verschobene erscheinen am neuen Termin, die Sperre wandert mit.</p>';
 }
 
 /* ---------- Daten für Etch: {options.golfplatz.turniere} ---------- */
@@ -283,18 +422,19 @@ function golfplatz_pcc_log_text( array $l ): string {
 /** Ein Turnier für die Ausgabe. */
 function golfplatz_turnier_zeile( WP_Post $p, int $heute, array $clubs = array() ): array {
 	$m      = fn( string $k ) => get_post_meta( $p->ID, $k, true );
-	$ts     = (int) $m( 'turnier_beginn' );
+	$status = golfplatz_turnier_status( $p->ID );
+	$ts     = $status['beginn'];
 	$tz     = new DateTimeZone( 'UTC' ); // Ortszeit als Unix-Zeit
 	$kat    = array_filter( explode( ' ', (string) $m( 'turnier_kategorien' ) ) );
 	$max    = (int) $m( 'turnier_teilnehmer_max' );
 	$frei   = $m( 'turnier_plaetze_frei' );
 	$plaetze = '';
-	if ( '' !== (string) $frei && $max ) {
+	if ( '' !== (string) $frei && $max && $status['findet_statt'] ) {
 		$plaetze = 0 === (int) $frei ? 'ausgebucht' : (int) $frei . ' von ' . $max . ' Plätzen frei';
 	}
 	$infos = array_filter(
 		array(
-			$m( 'turnier_hat_uhrzeit' ) ? wp_date( 'H:i', $ts, $tz ) . ' Uhr' : '',
+			$status['hat_uhrzeit'] ? wp_date( 'H:i', $ts, $tz ) . ' Uhr' : '',
 			(string) $m( 'turnier_spielform' ),
 			(int) $m( 'turnier_loecher' ) ? (int) $m( 'turnier_loecher' ) . ' Löcher' : '',
 			$m( 'turnier_vorgabewirksam' ) ? 'handicaprelevant' : '',
@@ -312,7 +452,12 @@ function golfplatz_turnier_zeile( WP_Post $p, int $heute, array $clubs = array()
 		'eigen'             => $club['eigen'],
 		'club_mod'          => $club['eigen'] ? 'heim' : 'partner',
 		'titel'             => html_entity_decode( get_the_title( $p ) ),
-		'uhrzeit'           => $m( 'turnier_hat_uhrzeit' ) ? wp_date( 'H:i', $ts, $tz ) : '',
+		'uhrzeit'           => $status['hat_uhrzeit'] ? wp_date( 'H:i', $ts, $tz ) : '',
+		'ts'                => $ts,
+		'abgesagt'          => ! $status['findet_statt'],
+		'verschoben'        => 'verschoben' === $status['status'],
+		'status_mod'        => $status['findet_statt'] ? ( $status['status'] ?: 'geplant' ) : 'abgesagt',
+		'status_text'       => $status['text'],
 		'loecher'           => (int) $m( 'turnier_loecher' ),
 		'untertitel'        => (string) $m( 'turnier_untertitel' ),
 		'datum_iso'         => wp_date( 'Y-m-d', $ts, $tz ),
@@ -329,11 +474,11 @@ function golfplatz_turnier_zeile( WP_Post $p, int $heute, array $clubs = array()
 		'kategorien'        => array_map( fn( $k ) => array( 'name' => GOLFPLATZ_PCC_KATEGORIEN[ $k ] ?? $k, 'key' => strtolower( $k ) ), $kat ),
 		'kategorie_keys'    => $kat,
 		'hat_kategorien'    => (bool) $kat,
-		'anmeldeschluss'    => (string) $m( 'turnier_anmeldeschluss' ),
+		'anmeldeschluss'    => $status['findet_statt'] ? (string) $m( 'turnier_anmeldeschluss' ) : '',
 		'plaetze'           => $plaetze,
 		'ausgebucht'        => 'ausgebucht' === $plaetze,
 		'link_anmeldung'    => (string) $m( 'turnier_link_anmeldung' ),
-		'hat_anmeldung'     => '' !== (string) $m( 'turnier_link_anmeldung' ) && 'ausgebucht' !== $plaetze,
+		'hat_anmeldung'     => '' !== (string) $m( 'turnier_link_anmeldung' ) && 'ausgebucht' !== $plaetze && $status['findet_statt'],
 		'link_ausschreibung' => (string) $m( 'turnier_link_ausschreibung' ),
 		'hat_ausschreibung' => '' !== (string) $m( 'turnier_link_ausschreibung' ),
 		'link_details'      => (string) $m( 'turnier_link_details' ),
@@ -361,6 +506,7 @@ function golfplatz_turniere_etch(): array {
 	foreach ( get_posts( array( 'post_type' => 'turnier', 'post_status' => 'publish', 'posts_per_page' => -1, 'meta_key' => 'turnier_beginn', 'orderby' => 'meta_value_num', 'order' => 'ASC', 'no_found_rows' => true ) ) as $p ) {
 		$alle[] = golfplatz_turnier_zeile( $p, $heute, $clubs );
 	}
+	usort( $alle, fn( $a, $b ) => $a['ts'] <=> $b['ts'] ); // verschobene an ihrem neuen Termin
 	$eigene  = array_values( array_filter( $alle, fn( $t ) => $t['eigen'] ) );
 	$seite   = get_permalink( get_page_by_path( 'turniere' ) ) ?: home_url( '/turniere/' );
 	// phpcs:disable WordPress.Security.NonceVerification
@@ -383,7 +529,7 @@ function golfplatz_turniere_etch(): array {
 	}
 
 	// Ergebnisse des Heimatclubs
-	$gespielt = array_reverse( array_values( array_filter( $eigene, fn( $t ) => ! $t['kommend'] ) ) );
+	$gespielt = array_reverse( array_values( array_filter( $eigene, fn( $t ) => ! $t['kommend'] && ! $t['abgesagt'] ) ) ); // abgesagte haben keine Ergebnisse
 	$jahre    = array_values( array_unique( array_column( $gespielt, 'jahr' ) ) );
 	$jahr     = in_array( $jahr, $jahre, true ) ? $jahr : ( $jahre[0] ?? (int) wp_date( 'Y' ) );
 	$heutige  = array_values( array_filter( $eigene, fn( $t ) => $t['heute'] ) );
@@ -400,6 +546,7 @@ function golfplatz_turniere_etch(): array {
 		'heute'        => $heutige,
 		'hat_heute'    => (bool) $heutige,
 		'naechste'     => array_slice( array_values( array_filter( $eigene, fn( $t ) => $t['kommend'] ) ), 0, 4 ),
+		'hat_naechste' => (bool) array_filter( $eigene, fn( $t ) => $t['kommend'] ),
 		'pcc_kalender' => GOLFPLATZ_PCC_WEB . golfplatz_pcc_club() . '/app.php?cat=ts_calendar',
 		'belegung'     => golfplatz_platzbelegung( $alle, $clubs, $heute, $ab, $seite ),
 	);
@@ -432,7 +579,9 @@ function golfplatz_platzbelegung( array $turniere, array $clubs, int $heute, int
 				'titel'   => $t['titel'],
 				'loecher' => $t['loecher'] ? $t['loecher'] . ' Loch' : '',
 				'link'    => $t['link_details'] ?: $t['link_ausschreibung'],
-			);
+					'abgesagt' => $t['abgesagt'],
+					'mod'     => $t['abgesagt'] ? 'abgesagt' : 'aktiv',
+				);
 		}
 	}
 	$tage = array();
@@ -441,13 +590,15 @@ function golfplatz_platzbelegung( array $turniere, array $clubs, int $heute, int
 		$zellen = array();
 		foreach ( $spalten as $c ) {
 			$liste    = $je[ $iso ][ $c['code'] ] ?? array();
+			$belegt   = (bool) array_filter( $liste, fn( $e ) => ! $e['abgesagt'] );
 			$zellen[] = array(
-				'belegt'    => (bool) $liste,
-				'mod'       => $liste ? 'belegt' : 'frei',
+				'belegt'    => $belegt,
+				'hat_turniere' => (bool) $liste,
+				'mod'       => $belegt ? 'belegt' : 'frei',
 				'turniere'  => $liste,
 				'club'      => $c['kurz'],
 				'club_mod'  => $c['eigen'] ? 'heim' : 'partner',
-				'vorlesen'  => $c['kurz'] . ': ' . ( $liste ? implode( '; ', array_map( fn( $e ) => trim( $e['zeit'] . ' ' . $e['titel'] ), $liste ) ) : 'kein Turnier' ),
+				'vorlesen'  => $c['kurz'] . ': ' . ( $liste ? implode( '; ', array_map( fn( $e ) => trim( $e['zeit'] . ' ' . $e['titel'] ) . ( $e['abgesagt'] ? ' (abgesagt)' : '' ), $liste ) ) . ( $belegt ? '' : ', Platz frei' ) : 'kein Turnier' ),
 			);
 		}
 		$wt     = (int) gmdate( 'N', $ts );

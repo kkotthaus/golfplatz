@@ -236,6 +236,12 @@
       "properties": []
     },
     {
+      "key": "NaechsteTurniere",
+      "name": "Nächste Turniere",
+      "description": "Die vier nächsten Turniere des Heimatclubs aus PC CADDIE für die Startseite – wie im Turnierkalender, abgesagte durchgestrichen mit „Abgesagt“, verschobene mit „Verschoben vom …“. Daten: {options.golfplatz.turniere.naechste}.",
+      "properties": []
+    },
+    {
       "key": "Birdiebook",
       "name": "Birdiebook",
       "description": "Alle 18 Bahnen zum Durchwischen (EtchSliderPro) mit Abschlag-Wahl, Nummernleiste und Vor/Zurück. Daten: Spielbahnen (Loop gp-bahnen), Skript: mu-plugins/golfplatz-birdiebook.php.",

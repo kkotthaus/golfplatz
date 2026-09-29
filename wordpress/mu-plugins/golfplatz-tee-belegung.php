@@ -176,8 +176,12 @@ function golfplatz_tb_plan( int $pid, ?array $regeln = null ): array {
 	$m       = fn( string $k ) => get_post_meta( $pid, $k, true );
 	$titel   = html_entity_decode( get_post_field( 'post_title', $pid ) );
 	$loecher = (int) $m( 'turnier_loecher' );
-	$start   = (int) $m( 'turnier_beginn' );
-	if ( ! $m( 'turnier_hat_uhrzeit' ) ) {
+	$status  = golfplatz_turnier_status( $pid );
+	$start   = $status['beginn'];
+	if ( ! $status['findet_statt'] ) {
+		return array( 'sperren' => array(), 'text' => $status['text'] . ' – keine Sperre' );
+	}
+	if ( ! $status['hat_uhrzeit'] ) {
 		return array( 'sperren' => array(), 'text' => 'ohne Uhrzeit in PC CADDIE – keine Sperre' );
 	}
 	$regel = golfplatz_tb_regel( $titel, $loecher, $regeln );
@@ -269,19 +273,27 @@ function golfplatz_tb_soll( ?array $regeln = null ): array {
 function golfplatz_tb_turniere(): array {
 	$heute = strtotime( 'today', (int) current_time( 'timestamp' ) );
 	$eigen = function_exists( 'golfplatz_pcc_club' ) ? golfplatz_pcc_club() : '';
-	$ids   = get_posts(
+	// Auch Turniere mit altem Datum in der Vergangenheit, die auf einen kommenden Termin verschoben sind
+	$ids = get_posts(
 		array(
 			'post_type'      => 'turnier',
 			'post_status'    => 'publish',
 			'posts_per_page' => -1,
 			'fields'         => 'ids',
-			'meta_key'       => 'turnier_beginn',
-			'orderby'        => 'meta_value_num',
-			'order'          => 'ASC',
-			'meta_query'     => array( array( 'key' => 'turnier_beginn', 'value' => $heute, 'compare' => '>=', 'type' => 'NUMERIC' ) ),
+			'meta_query'     => array( array( 'key' => 'turnier_beginn', 'value' => $heute - 90 * DAY_IN_SECONDS, 'compare' => '>=', 'type' => 'NUMERIC' ) ),
 		)
 	);
-	return array_values( array_filter( $ids, fn( $id ) => ( (string) get_post_meta( $id, 'turnier_club', true ) ?: $eigen ) === $eigen ) );
+	$ts  = array();
+	foreach ( $ids as $id ) {
+		if ( ( (string) get_post_meta( $id, 'turnier_club', true ) ?: $eigen ) === $eigen ) {
+			$b = golfplatz_turnier_status( $id )['beginn'];
+			if ( $b >= $heute ) {
+				$ts[ $id ] = $b;
+			}
+		}
+	}
+	asort( $ts );
+	return array_keys( $ts );
 }
 
 /**
@@ -357,11 +369,12 @@ function golfplatz_tb_vorschau_html(): string {
 	$bis   = strtotime( 'today', (int) current_time( 'timestamp' ) ) + 29 * DAY_IN_SECONDS;
 	$zeilen = '';
 	foreach ( golfplatz_tb_soll()['texte'] as $tid => $text ) {
-		$ts = (int) get_post_meta( $tid, 'turnier_beginn', true );
+		$st = golfplatz_turnier_status( $tid );
+		$ts = $st['beginn'];
 		if ( $ts > $bis ) {
 			break;
 		}
-		$zeilen .= '<tr><td>' . esc_html( wp_date( 'D, d.m.', $ts, new DateTimeZone( 'UTC' ) ) . ( get_post_meta( $tid, 'turnier_hat_uhrzeit', true ) ? ' ' . gmdate( 'H:i', $ts ) : '' ) ) . '</td><td><a href="' . esc_url( get_edit_post_link( $tid ) ) . '">' . esc_html( html_entity_decode( get_the_title( $tid ) ) ) . '</a></td><td>' . esc_html( $text ) . '</td></tr>';
+		$zeilen .= '<tr><td>' . esc_html( wp_date( 'D, d.m.', $ts, new DateTimeZone( 'UTC' ) ) . ( $st['hat_uhrzeit'] ? ' ' . gmdate( 'H:i', $ts ) : '' ) ) . '</td><td><a href="' . esc_url( get_edit_post_link( $tid ) ) . '">' . esc_html( html_entity_decode( get_the_title( $tid ) ) ) . '</a></td><td>' . esc_html( $text ) . '</td></tr>';
 	}
 	$log  = (array) get_option( 'golfplatz_tb_log', array() );
 	$info = $log ? '<p>Zuletzt berechnet: ' . esc_html( wp_date( 'd.m.Y H:i', (int) $log['zeit'] ) ) . ' – ' . (int) $log['neu'] . ' neu, ' . (int) $log['geaendert'] . ' geändert, ' . (int) $log['entfernt'] . ' entfernt. Die Sperrungen stehen unter „Alle Sperrungen“ mit dem Zusatz „(automatisch)“.</p>' : '';

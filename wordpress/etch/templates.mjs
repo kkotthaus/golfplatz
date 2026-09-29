@@ -121,6 +121,13 @@ export const pages = [
       el('section', 'section section--tint', [el('div', 'container', [komponente('GastInfo', { anker: 'gast' })])], { name: 'Als Gast spielen' }),
       el('section', 'section', [
         el('div', 'container', [
+          el('header', 'section-head', [t('p', 'section-head__eyebrow', 'Turniere'), t('h2', 'section-head__title', 'Die nächsten Turniere')]),
+          komponente('NaechsteTurniere'),
+          el('p', 'more-link', [el('a', 'link-arrow', [text('Alle Turniere & Kalender '), icon('arrow')], { attrs: { href: '/turniere/' } })]),
+        ]),
+      ], { name: 'Nächste Turniere' }),
+      el('section', 'section section--tint', [
+        el('div', 'container', [
           el('header', 'section-head', [t('p', 'section-head__eyebrow', 'Aus dem Club'), t('h2', 'section-head__title', 'Aktuelles')]),
           komponente('Newskarten', { liste: 'neueste' }),
           el('p', 'more-link', [el('a', 'link-arrow', [text('Alle Nachrichten '), icon('arrow')], { attrs: { href: '/news/' } })]),

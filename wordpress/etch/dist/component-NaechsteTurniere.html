@@ -1,48 +1,7 @@
-<!-- wp:etch/element {"tag":"div","attributes":{"class":"tournaments"},"metadata":{"name":"Turnierkalender"}} -->
-<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.hat_heute","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.turniere.hat_heute"} -->
-<!-- wp:etch/element {"tag":"div","attributes":{"role":"status","class":"tournaments__today"}} -->
-<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournaments__today-label"}} -->
-<!-- wp:etch/text {"content":"Heute auf dem Platz"} /-->
-<!-- /wp:etch/element -->
-<!-- wp:etch/loop {"target":"options.golfplatz.turniere.heute","itemId":"h"} -->
-<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournaments__today-item"}} -->
-<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
-<!-- wp:etch/text {"content":"{h.titel}"} /-->
-<!-- /wp:etch/element -->
-<!-- wp:etch/condition {"condition":{"leftHand":"h.infos","operator":"isTruthy","rightHand":null},"conditionString":"h.infos"} -->
-<!-- wp:etch/text {"content":" · {h.infos}"} /-->
-<!-- /wp:etch/condition -->
-<!-- wp:etch/condition {"condition":{"leftHand":"h.status_text","operator":"isTruthy","rightHand":null},"conditionString":"h.status_text"} -->
-<!-- wp:etch/text {"content":" · "} /-->
-<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
-<!-- wp:etch/text {"content":"{h.status_text}"} /-->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/condition -->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/loop -->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/condition -->
-<!-- wp:etch/element {"tag":"nav","attributes":{"aria-label":"Turniere nach Kategorie filtern","class":"season-nav"}} -->
-<!-- wp:etch/loop {"target":"options.golfplatz.turniere.filter","itemId":"f"} -->
-<!-- wp:etch/condition {"condition":{"leftHand":"f.aktiv","operator":"isFalsy","rightHand":null},"conditionString":"!f.aktiv"} -->
-<!-- wp:etch/element {"tag":"a","attributes":{"href":"{f.link}","class":"season-nav__link"}} -->
-<!-- wp:etch/text {"content":"{f.name}"} /-->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/condition -->
-<!-- wp:etch/condition {"condition":{"leftHand":"f.aktiv","operator":"isTruthy","rightHand":null},"conditionString":"f.aktiv"} -->
-<!-- wp:etch/element {"tag":"span","attributes":{"aria-current":"page","class":"season-nav__link season-nav__link\u002d\u002daktiv"}} -->
-<!-- wp:etch/text {"content":"{f.name}"} /-->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/condition -->
-<!-- /wp:etch/loop -->
-<!-- /wp:etch/element -->
-<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.hat_kommende","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.turniere.hat_kommende"} -->
-<!-- wp:etch/loop {"target":"options.golfplatz.turniere.monate","itemId":"mo"} -->
-<!-- wp:etch/element {"tag":"h3","attributes":{"class":"tournaments__month"}} -->
-<!-- wp:etch/text {"content":"{mo.name}"} /-->
-<!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"div","attributes":{"role":"list","aria-label":"Turniere {mo.name}","class":"tournaments__list"}} -->
-<!-- wp:etch/loop {"target":"mo.turniere","itemId":"tu"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"tournaments tournaments\u002d\u002dkompakt"},"metadata":{"name":"Nächste Turniere"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.hat_naechste","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.turniere.hat_naechste"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"role":"list","aria-label":"Nächste Turniere","class":"tournaments__list"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.turniere.naechste","itemId":"tu"} -->
 <!-- wp:etch/element {"tag":"article","attributes":{"role":"listitem","class":"tournament tournament\u002d\u002d{tu.status_mod}"},"metadata":{"name":"Turnier"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"aria-hidden":"true","class":"tournament__date"}} -->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"tournament__weekday"}} -->
@@ -122,18 +81,10 @@
 <!-- /wp:etch/element -->
 <!-- /wp:etch/loop -->
 <!-- /wp:etch/element -->
-<!-- /wp:etch/loop -->
 <!-- /wp:etch/condition -->
-<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.hat_kommende","operator":"isFalsy","rightHand":null},"conditionString":"!options.golfplatz.turniere.hat_kommende"} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.turniere.hat_naechste","operator":"isFalsy","rightHand":null},"conditionString":"!options.golfplatz.turniere.hat_naechste"} -->
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"tournaments__empty"}} -->
 <!-- wp:etch/text {"content":"Zurzeit sind keine Turniere ausgeschrieben."} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/condition -->
-<!-- wp:etch/element {"tag":"p","attributes":{"class":"tournaments__source small"}} -->
-<!-- wp:etch/text {"content":"Die Turniere kommen aus PC CADDIE. Anmeldung, Start- und Ergebnislisten finden Sie dort, auch im "} /-->
-<!-- wp:etch/element {"tag":"a","attributes":{"href":"{options.golfplatz.turniere.pcc_kalender}","rel":"noopener"}} -->
-<!-- wp:etch/text {"content":"Turnierkalender bei PC CADDIE"} /-->
-<!-- /wp:etch/element -->
-<!-- wp:etch/text {"content":"."} /-->
-<!-- /wp:etch/element -->
 <!-- /wp:etch/element -->

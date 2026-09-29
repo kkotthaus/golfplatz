@@ -58,6 +58,7 @@ const paare = [
   ['success', KARTE, 4.5, 'Status geöffnet'], ['success', 'success-ultra-light', 4.5, 'Status-Chip'],
   ['warning', KARTE, 4.5, 'Status eingeschränkt'], ['warning', 'warning-ultra-light', 4.5, 'Status-Chip'],
   ['danger', KARTE, 4.5, 'Status gesperrt'], ['danger', 'danger-ultra-light', 4.5, 'Status-Chip'],
+  ['white', 'danger', 4.5, 'Schild „Abgesagt“, Datum abgesagter Turniere'], ['base', 'danger-ultra-light', 4.5, 'Text auf abgesagter Turnierkarte'], ['base-semi-dark', 'danger-ultra-light', 4.5, 'Nebentext auf abgesagter Turnierkarte'], ['primary-dark', 'danger-ultra-light', 4.5, 'Links auf abgesagter Turnierkarte'], ['base', 'warning-ultra-light', 4.5, 'Text im Hinweis „Turnier verschoben“'],
   ['info', 'info-ultra-light', 4.5, 'Wintergrüns'],
 ];
 // Bereiche, die immer hell gerechnet werden (Top-Bar, Footer)

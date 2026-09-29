@@ -217,8 +217,30 @@ Die Turniere kommen **automatisch** aus PC CADDIE. Einmal pro Stunde liest die W
 
 - **Nicht** unter „Turniere (PC CADDIE)“ von Hand ändern. Der nächste Abgleich würde es überschreiben.
 - Sofort abgleichen: **Turniere (PC CADDIE) › PC-CADDIE-Abgleich**, Knopf zum Abgleichen klicken. Darunter steht das Protokoll der letzten Läufe.
-- Wird ein kommendes Turnier in PC CADDIE gelöscht, nimmt die Website es beim nächsten Abgleich heraus.
+- Wird ein kommendes Turnier in PC CADDIE gelöscht, zeigt die Website es beim nächsten Abgleich als **abgesagt** an. Ändert sich in PC CADDIE das Datum, erscheint es als **„Verschoben vom …“**.
 - Namen aus Start- und Ergebnislisten übernimmt die Website aus Datenschutzgründen nicht. Sie verlinkt auf PC CADDIE.
+
+### Turnier absagen oder verschieben
+
+Fällt ein Turnier aus, etwa wegen Unwetter, oder wird es auf einen anderen Tag gelegt:
+
+1. **Turniere (PC CADDIE) › Alle Turniere**, das Turnier öffnen.
+2. Rechts im Kasten **Absage / Verschiebung** den **Status** wählen:
+   - **Abgesagt**: Das Turnier findet nicht statt.
+   - **Verschoben**: Bei **Neuer Termin** Datum und Uhrzeit eintragen. Steht der neue Termin noch nicht fest, das Feld leer lassen; dann steht „Verschoben – neuer Termin folgt“.
+3. Optional einen **Hinweis** eintragen, zum Beispiel „wegen Unwetter“. Er ist öffentlich.
+4. **Aktualisieren**.
+
+Das passiert dann auf der Website:
+
+- **Turnierkalender** und **Startseite (Die nächsten Turniere)**: Ein abgesagtes Turnier bleibt stehen und ist hervorgehoben: rot hinterlegte Karte, rotes Datum, durchgestrichener Name und ein rotes Schild „ABGESAGT – WEGEN UNWETTER“. Der Knopf „Anmelden“ und der Anmeldeschluss verschwinden. Ein verschobenes Turnier steht am neuen Termin mit „Verschoben vom Do., 1.10.“.
+- **Platzstatus** (heute und morgen): Am ursprünglichen Tag erscheint ein roter Eintrag **TURNIER ABGESAGT**, etwa „9-Loch Afterwork (A) abgesagt (wegen Unwetter)“, bei einer Verschiebung ein gelber Eintrag **Turnier verschoben** mit dem neuen Termin.
+- **Tee-Sperre**: Bei einer Absage wird die automatische Sperre von Tee 1/10 sofort aufgehoben. Bei einer Verschiebung wandert sie auf den neuen Termin.
+- **Platzbelegung**: Das abgesagte Turnier steht durchgestrichen mit rotem Schild „abgesagt“, der Tag gilt als frei.
+
+Rückgängig machen: Status wieder auf **Findet statt (laut PC CADDIE)** stellen und aktualisieren.
+
+> Am besten sagen Sie das Turnier auch in PC CADDIE ab bzw. verlegen es dort. Die Angabe auf der Website geht aber immer vor und bleibt beim stündlichen Abgleich erhalten.
 
 ### Platzbelegung der Partnerclubs
 
@@ -428,6 +450,9 @@ Nur für Administratoren. Menü **Benutzer**.
 
 **Ich habe etwas geändert, sehe es aber nicht auf der Website.**
 Haben Sie gespeichert (Aktualisieren / Änderungen speichern)? Dann die Seite im Browser neu laden (F5). Hilft das nicht, die Seite in einem privaten Fenster öffnen.
+
+**Ein Turnier fällt aus oder wird verschoben.**
+Am Turnier im Kasten **Absage / Verschiebung** den Status setzen (siehe „Turnier absagen oder verschieben“). Die Tee-Sperre passt sich sofort an.
 
 **Ein Turnier fehlt oder stimmt nicht.**
 Erst in PC CADDIE prüfen und dort korrigieren. Danach unter **Turniere (PC CADDIE) › PC-CADDIE-Abgleich** abgleichen.

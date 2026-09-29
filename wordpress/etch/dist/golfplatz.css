@@ -886,6 +886,19 @@ background: var(--warning-ultra-light); box-shadow: inset 0 0 0 1px var(--warnin
 .tournament__actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-s); }
 @media (min-width: 48em) { .tournament__actions { grid-column: auto; flex-direction: column; align-items: flex-end; } }
 .tournament__link { font-size: var(--text-s); font-weight: 600; color: var(--primary-dark); }
+.tournament__status { display: inline-block; margin: 0.3rem 0 0; padding: 0.15rem 0.6rem; border-radius: 99px; font-size: var(--text-xs); font-weight: 700; }
+.tournament__status--abgesagt { padding: 0.25rem 0.75rem; background: var(--danger); color: var(--white); font-size: var(--text-s); letter-spacing: 0.06em; text-transform: uppercase; }
+.tournament__status--verschoben { background: var(--warning-ultra-light); color: var(--warning); }
+.tournament--abgesagt { background: var(--danger-ultra-light); border-color: var(--danger); border-left-width: 6px; }
+.tournament--abgesagt .tournament__date { background: var(--danger); }
+.tournament--abgesagt .tournament__title { text-decoration: line-through; }
+.tournament--verschoben { border-color: var(--warning); border-left-width: 6px; }
+.occupancy__event--abgesagt .occupancy__name { text-decoration: line-through; }
+.occupancy__cancel { display: inline-block; margin-top: 0.15rem; padding: 0 0.4rem; border-radius: 99px; background: var(--danger); color: var(--white); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.status-entry--abgesagt { background: var(--danger-ultra-light); border-color: var(--danger); border-left-width: 6px; }
+.status-entry--abgesagt .status-entry__area { color: var(--danger); text-transform: uppercase; letter-spacing: 0.04em; }
+.status-entry--verschoben { background: var(--warning-ultra-light); border-color: var(--warning); }
+.status-entry--verschoben .status-entry__area { color: var(--warning); }
 .tournament__full { padding: 0.2rem 0.6rem; border-radius: 99px; font-size: var(--text-xs); font-weight: 700; background: var(--danger-ultra-light); color: var(--danger); }
 .results__list { display: grid; margin-top: var(--space-s); border-top: 1px solid var(--base-light); }
 .results__item { display: grid; grid-template-columns: 4.5rem 1fr auto; gap: var(--space-s); align-items: baseline; padding: var(--space-xs) 0; border-bottom: 1px solid var(--base-light); }
