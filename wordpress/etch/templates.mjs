@@ -646,8 +646,12 @@ export const templates = [
         }),
         el('section', 'section', [
           el('div', 'container hole-detail', [
+            // Bild aus bahn_grafik; ohne Bild bleibt der Platzhalter
             el('figure', 'hole-detail__map', [
-              t('figcaption', 'hole-detail__caption', 'Bahngrafik / Luftbild'),
+              wenn('this.golfplatz.plan.hat_bild_karte', [
+                el('img', 'hole-detail__bild', [], { attrs: { src: '{this.golfplatz.plan.bild_karte}', alt: 'Bahngrafik {this.title}', width: '768', height: '768' } }),
+              ]),
+              wenn('this.golfplatz.plan.hat_bild_karte', [t('figcaption', 'hole-detail__caption', 'Bahngrafik / Luftbild')], 'isFalsy'),
             ], { name: 'Bahngrafik' }),
             el('div', 'hole-detail__content', [
               el('dl', 'hole-facts', [

@@ -392,7 +392,8 @@ Menü **Spielbahnen**. Für jede der 18 Bahnen gibt es einen Eintrag „Bahn 1�
 - **Par Herren**, **Par Damen**, **Vorgabe (HCP-Reihenfolge)** (1 = schwerste Bahn).
 - **Längen in Metern je Abschlag** (Gelb, Blau, Rot, Orange). Die Gesamtlängen der Scorekarte rechnet die Website daraus.
 - **Beschreibung** und **Spieltipp** erscheinen auf der Seite der Bahn.
-- **Bahngrafik / Luftbild**, **Bilder**, **Video**.
+- **Bahngrafik / Luftbild** erscheint auf der Seite der Bahn neben den Eckdaten (am besten quadratisch, mindestens 800 × 800 Pixel). Ohne Bild steht dort ein Platzhalter.
+- **Bilder**, **Video**.
 
 ### Birdiebook (Entfernungen und Grün)
 

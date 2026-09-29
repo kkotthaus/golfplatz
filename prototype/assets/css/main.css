@@ -483,6 +483,7 @@ html.scheme--dark {
 @media (min-width: 56em) { .hole-detail { grid-template-columns: minmax(14rem, 22rem) 1fr; align-items: start; } .hole-detail__map { position: sticky; top: 8rem; } }
 .hole-detail__map { margin: 0; }
 .hole-detail__map .hole-map { border-radius: var(--radius-l); box-shadow: var(--shadow-m); }
+.hole-detail__bild { display: block; width: 100%; height: auto; border-radius: var(--radius-l); box-shadow: var(--shadow-m); }
 .hole-detail__caption { font-size: var(--text-xs); color: var(--base-semi-light); margin-top: var(--space-xs); text-align: center; }
 .hole-detail__content { display: grid; gap: var(--space-l); }
 .hole-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: var(--space-xs); margin: 0; }
