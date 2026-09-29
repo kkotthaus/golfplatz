@@ -337,7 +337,7 @@ Jedes Grün hat **6 nummerierte Fahnenpositionen (1–6)**. Gesteckt wird eine P
   - Ohne heutigen Plan gilt der von gestern.
   - Liegt nur ein Plan in der Zukunft, erscheint nichts.
 - **Grafik je Grün** (`pin_grafik`, Bild): Grün mit den Positionen 1–6, auf der Bahnseite unter der Bahngrafik (`{this.golfplatz.plan.pin_karte}`) und im Birdiebook unter den Entfernungen (`{item.golfplatz.plan.pin_karte}`).
-- **Eingetragen** am 2026-09-29 aus der „Pin Position Card 2024“ von dreibaeumen.de: Lage der 6 Positionen, Grüntiefe und je Grün eine freigestellte Grafik (18 PNGs aus der PDF).
+- **Offen:** Der Club trägt die Lage der 6 Positionen je Grün ein und lädt je Grün eine Grafik hoch, zum Beispiel aus seinem Pin-Plan.
 
 ### Platzstatus als Etch-Komponente
 
