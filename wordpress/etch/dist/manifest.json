@@ -152,6 +152,12 @@
       ]
     },
     {
+      "key": "Kurskarten",
+      "name": "Kurskarten",
+      "description": "Kurse der Golfschule als Karten (Kursart, Titel mit Link zur Kursseite, Text, Preis, Dauer, Teilnehmer, künftige Termine, Golflehrer). Kurse, deren Termine alle vorbei sind, erscheinen nicht. Daten: {options.golfplatz.kurse} aus golfplatz-golfschule.php; Reihenfolge über „Reihenfolge“ am Kurs.",
+      "properties": []
+    },
+    {
       "key": "PlatzstatusKurz",
       "name": "Platzstatus kurz",
       "description": "Kurzfassung im Hero der Startseite: Zustand jetzt, heutige Sperren von Platz und Abschlägen, Spielbedingungen als Chips (inkl. Fahnen), Link auf den ausführlichen Platzstatus. Daten: {options.golfplatz.platzstatus.kurz}.",
@@ -284,6 +290,10 @@
       "title": "Spielbericht"
     },
     {
+      "slug": "single-kurs",
+      "title": "Kurs"
+    },
+    {
       "slug": "single-post",
       "title": "Beitrag"
     },
@@ -340,11 +350,6 @@
       "order": 11
     },
     {
-      "slug": "golfschule",
-      "title": "Golfschule",
-      "order": 50
-    },
-    {
       "slug": "restaurant",
       "title": "Restaurant",
       "order": 50
@@ -372,6 +377,11 @@
     {
       "slug": "club",
       "title": "Club & Kontakt",
+      "order": 50
+    },
+    {
+      "slug": "golfschule",
+      "title": "Golfschule",
       "order": 50
     },
     {

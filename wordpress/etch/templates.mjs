@@ -6,6 +6,7 @@ import { header } from './header.mjs';
 import { birdiebookKomponente, bahnenRaster } from './birdiebook.mjs';
 import { anfahrt } from './club.mjs';
 import { kategorienNav, seitenNav, keineBeitraege, beitragInhalt } from './news.mjs';
+import { anmeldung, kursInhalt } from './golfschule.mjs';
 import { MS, BERICHT, teamKarten, alleLigaspiele, teamInhalt, teamKader, berichtMeta, berichtBilder, berichtRuecklink } from './mannschaften.mjs';
 
 // Hero-Illustration der Startseite (wie im Prototyp). Platzhalter, bis ein Foto des Platzes vorliegt.
@@ -345,7 +346,6 @@ const platzhalter = (slug, title, eyebrow, lead, parent) => ({
   ),
 });
 pages.push(
-  platzhalter('golfschule', 'Golfschule', 'Golf lernen', 'Vom ersten Schwung bis zur DGV-Platzreife mit unseren Professionals.'),
   platzhalter('restaurant', 'Restaurant', 'Gastronomie', 'Für Golfer und alle anderen Gäste.'),
   platzhalter('mitglieder', 'Mitgliederbereich', 'Intern', 'Melden Sie sich an, um die internen Inhalte zu sehen.'),
   platzhalter('impressum', 'Impressum', '', ''),
@@ -460,6 +460,26 @@ pages.push({
   ),
 });
 
+// Golfschule: Kurse (Komponente Kurskarten), Anmeldung aus den Clubdaten, Pros (Personenkarten, Gruppe Golfschule), Platzreife.
+pages.push({
+  slug: 'golfschule',
+  title: 'Golfschule',
+  order: 50,
+  content: markup(
+    seitenkopf({ krumen: [['Golfschule']], eyebrow: 'Golf lernen', titel: 'Golfschule', lead: 'Vom ersten Schwung bis zur DGV-Platzreife: Unsere Professionals begleiten Sie einzeln oder in kleinen Gruppen.' }),
+    el('section', 'section', [el('div', 'container', [abschnittKopf('Angebot', 'Kurse & Training'), komponente('Kurskarten'), anmeldung()])], { attrs: { id: 'kurse' }, name: 'Kurse & Training' }),
+    el('section', 'section section--tint', [
+      el('div', 'container', [abschnittKopf('Unsere Pros', 'Das Team der Golfschule'), komponente('Personenkarten', { liste: 'golfschule', spalten: '3' })]),
+    ], { attrs: { id: 'team' }, name: 'Team der Golfschule' }),
+    el('section', 'section', [
+      el('div', 'container prose prose--narrow', [
+        t('h2', '', 'Was ist die Platzreife?'),
+        t('p', '', 'Mit der DGV-Platzreife weisen Sie nach, dass Sie die Grundschläge, die Golfregeln und die Etikette beherrschen. Sie ist die Erlaubnis, eigenständig auf dem Platz zu spielen. Unsere Professionals bereiten Sie in Einzelstunden oder kleinen Gruppen darauf vor.'),
+      ]),
+    ], { attrs: { id: 'platzreife' }, name: 'Platzreife' }),
+  ),
+});
+
 // Aktuelles: Beiträge (post) als Karten, Kategorien als Pillen (?kategorie=), Seitenzahlen (?seite=). Daten: snippets/golfplatz-news.php.
 pages.push({
   slug: 'news',
@@ -555,6 +575,15 @@ export const templates = [
         titel: '{this.title}',
       }),
       el('section', 'section', [el('div', 'container prose prose--narrow', [berichtMeta(), postContent(), berichtBilder(), berichtRuecklink()])], { name: 'Bericht' }),
+    ),
+  },
+  {
+    // Ein Kurs der Golfschule: /golfschule/kurs/<slug>/
+    slug: 'single-kurs',
+    title: 'Kurs',
+    content: rahmen(
+      seitenkopf({ krumen: [['Golfschule', '/golfschule/'], ['{this.title}']], eyebrow: '{this.golfplatz.kurs.typ}', titel: '{this.title}' }),
+      el('section', 'section', [el('div', 'container prose--narrow course-detail', kursInhalt())], { name: 'Kurs' }),
     ),
   },
   {

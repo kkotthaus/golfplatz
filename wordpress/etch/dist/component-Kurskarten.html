@@ -1,0 +1,76 @@
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"course-list"},"metadata":{"name":"Kurskarten"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.kurse.hat_kurse","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.kurse.hat_kurse"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"grid grid\u002d\u002d2"},"metadata":{"name":"Kurse"}} -->
+<!-- wp:etch/loop {"target":"options.golfplatz.kurse.liste","itemId":"k"} -->
+<!-- wp:etch/element {"tag":"article","attributes":{"class":"course-card"},"metadata":{"name":"Kurskarte"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"k.typ","operator":"isTruthy","rightHand":null},"conditionString":"k.typ"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"course-card__type"}} -->
+<!-- wp:etch/text {"content":"{k.typ}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"h3","attributes":{"class":"course-card__title"}} -->
+<!-- wp:etch/element {"tag":"a","attributes":{"href":"{k.link}","class":"course-card__link"}} -->
+<!-- wp:etch/text {"content":"{k.titel}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"course-card__text"}} -->
+<!-- wp:etch/text {"content":"{k.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dl","attributes":{"class":"course-card__facts"}} -->
+<!-- wp:etch/element {"tag":"div","attributes":{}} -->
+<!-- wp:etch/element {"tag":"dt","attributes":{}} -->
+<!-- wp:etch/text {"content":"Preis"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dd","attributes":{}} -->
+<!-- wp:etch/text {"content":"{k.preis}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"k.hat_dauer","operator":"isTruthy","rightHand":null},"conditionString":"k.hat_dauer"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{}} -->
+<!-- wp:etch/element {"tag":"dt","attributes":{}} -->
+<!-- wp:etch/text {"content":"Dauer"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dd","attributes":{}} -->
+<!-- wp:etch/text {"content":"{k.dauer}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"k.hat_max","operator":"isTruthy","rightHand":null},"conditionString":"k.hat_max"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{}} -->
+<!-- wp:etch/element {"tag":"dt","attributes":{}} -->
+<!-- wp:etch/text {"content":"Teilnehmer"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"dd","attributes":{}} -->
+<!-- wp:etch/text {"content":"{k.max}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"k.hat_termine","operator":"isTruthy","rightHand":null},"conditionString":"k.hat_termine"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"course-card__dates"}} -->
+<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
+<!-- wp:etch/text {"content":"Termine: "} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":"{k.termine}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"k.hat_trainer","operator":"isTruthy","rightHand":null},"conditionString":"k.hat_trainer"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{"class":"course-card__trainer"}} -->
+<!-- wp:etch/element {"tag":"svg","attributes":{"viewBox":"0 0 24 24","aria-hidden":"true","focusable":"false","class":"icon icon\u002d\u002duser"}} -->
+<!-- wp:etch/element {"tag":"path","attributes":{"d":"M12 12a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0 1.8c4.4 0 8 2.3 8 5.2V21H4v-2c0-2.9 3.6-5.2 8-5.2z"}} -->
+
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":" mit {k.trainer}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/loop -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.kurse.hat_kurse","operator":"isFalsy","rightHand":null},"conditionString":"!options.golfplatz.kurse.hat_kurse"} -->
+<!-- wp:etch/element {"tag":"p","attributes":{}} -->
+<!-- wp:etch/text {"content":"Zurzeit sind keine Kurse ausgeschrieben. Sprechen Sie uns gern an."} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->

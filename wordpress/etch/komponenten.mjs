@@ -10,6 +10,7 @@ import { zaehlkarteKomponente } from './zaehlkarte.mjs';
 import { lochwettspielKomponente } from './lochwettspiel.mjs';
 import { personenkartenKomponente } from './club.mjs';
 import { newskartenKomponente } from './news.mjs';
+import { kurskartenKomponente } from './golfschule.mjs';
 import { turnierkalenderKomponente, platzbelegungKomponente, turnierergebnisseKomponente, naechsteTurniereKomponente } from './turniere.mjs';
 
 /** Öffnungszeiten eines Bereichs als Etch-Komponente (wordpress/etch/zeiten.mjs). */
@@ -51,6 +52,7 @@ export const components = [
   preiskartenKomponente,
   personenkartenKomponente,
   newskartenKomponente,
+  kurskartenKomponente,
   platzstatusKurzKomponente,
   platzstatusKomponente,
   scorekarteKomponente,

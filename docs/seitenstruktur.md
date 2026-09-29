@@ -211,7 +211,7 @@ Nicht öffentlich und ohne eigene Seite: `sperrung`, `spieler`, `ligaspiel`, `pr
 **Anforderungen**
 
 - Vergangene Kurstermine werden ausgeblendet. Kurse ohne künftigen Termin bleiben sichtbar, wenn sie auf Anfrage stattfinden (z. B. Einzeltraining).
-- Kurs ohne Preis zeigt „kostenlos“.
+- Kurs ohne Preis zeigt „auf Anfrage“, Preis 0 zeigt „kostenlos“ (wie im Feld „Preis“ beschrieben).
 
 ### Alle Ligaspiele `/mannschaften/ligaspiele/`
 
@@ -382,9 +382,17 @@ Gilt für alle 10 Einträge von `mannschaft`.
 
 - Ist `nur_mitglieder` an und niemand angemeldet, erscheinen nur Titel, Teaser und der Hinweis mit Anmelde-Button. Der Volltext darf dann auch nicht im HTML stehen.
 
-### Kurs (Single) `/golfschule/kurs/<slug>/` – offen
+### Kurs (Single) `/golfschule/kurs/<slug>/`
 
-Der Beitragstyp `kurs` ist öffentlich und hat eine eigene URL, im Prototyp gibt es aber keine Kursseite. Entweder ein Template bauen (Inhalt wie `course-card` plus Trainer aus `kurs_trainer` und Anmeldung aus `kurs_anmeldung`) oder `kurs` auf nicht öffentlich stellen. Siehe [Offene Punkte](#offene-punkte).
+Template `single-kurs` (seit 2026-09-29).
+
+| # | Abschnitt | Inhalt | Quelle |
+| --- | --- | --- | --- |
+| 1 | Seitenkopf | Brotkrumen Golfschule › Titel, Kursart | `kurs` |
+| 2 | Eckdaten | Preis, Dauer, Teilnehmer, künftige Termine, Golflehrer | `kurs`, `kurs_trainer` |
+| 3 | Beschreibung | Text | Editor |
+| 4 | Anmeldung | `kurs_anmeldung`, sonst Telefon/E-Mail des Sekretariats | `kurs`, Clubdaten |
+| 5 | Rücklink | „Alle Kurse der Golfschule“ | `/golfschule/` |
 
 ### 404
 
