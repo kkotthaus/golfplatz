@@ -999,6 +999,19 @@ width: 2.75rem;
 height: 2.75rem;
 flex: none;
 }
+.dwc-nest-menu__logo:has(.site-logo__text) .site-logo__bild {
+width: 2.75rem;
+height: 2.75rem;
+max-width: none;
+flex: none;
+}
+.site-logo__bild--hell,
+.scheme--dark .site-logo__bild--hell + .site-logo__bild {
+display: none;
+}
+.scheme--dark .site-logo__bild--hell {
+display: block;
+}
 .dwc-nest-header ~ .top-bar,
 .top-bar {
 width: 100%;

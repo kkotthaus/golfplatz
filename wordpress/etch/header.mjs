@@ -44,10 +44,16 @@ const dropdown = (text_, kinder) =>
     { Nested_Dropdown_Content: kinder.map(([t_, l]) => menuItem(t_, l)), Mega_Menu_Content: '' },
   );
 
-// Clublogo: Bild aus den Clubdaten (club_logo); ohne Bild Wortmarke mit Fahnen-Signet, „Name im Logo“ und Ort · Region
+// Clublogo: Bild aus den Clubdaten (club_logo, im dunklen Farbschema club_logo_hell); ohne Bild Fahnen-Signet.
+// Schriftzug („Name im Logo“, Ort · Region) ohne Logo immer, mit Logo nur bei „Schriftzug neben dem Logo“.
+// alt leer: der Link trägt den Clubnamen (aria-label).
+const logoBild = (quelle, zusatz = '') => el('img', 'site-logo__bild' + zusatz, [], { attrs: { src: `{options.golfplatz.club.${quelle}}`, alt: '' } });
 const logo = () =>
   el('a', 'dwc-nest-menu__logo site-logo', [
-    wenn('options.golfplatz.club.hat_logo', [el('img', 'site-logo__bild', [], { attrs: { src: '{options.golfplatz.club.logo}', alt: club('club_name') } })]),
+    wenn('options.golfplatz.club.hat_logo', [
+      wenn('options.golfplatz.club.hat_logo_hell', [logoBild('logo_hell', ' site-logo__bild--hell')]),
+      logoBild('logo'),
+    ]),
     wenn('options.golfplatz.club.hat_logo', [
       el('svg', 'site-logo__mark', [
         svgEl('circle', { cx: 24, cy: 24, r: 22.5, fill: 'none', stroke: 'currentColor', 'stroke-width': 1.5 }),
@@ -55,11 +61,13 @@ const logo = () =>
         svgEl('path', { d: 'M21 34V12l11 5-9 4', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.8, 'stroke-linejoin': 'round' }),
         svgEl('path', { d: 'M12 35c5-3 19-3 24 0', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.4 }),
       ], { attrs: { viewBox: '0 0 48 48', 'aria-hidden': 'true' } }),
+    ], 'isFalsy'),
+    wenn('options.golfplatz.club.zeige_schriftzug', [
       el('span', 'site-logo__text', [
         t('span', 'site-logo__name', '{options.golfplatz.club.logoname}'),
         t('span', 'site-logo__since', '{options.golfplatz.club.unterzeile}'),
       ]),
-    ], 'isFalsy'),
+    ]),
   ], { attrs: { href: '/', 'aria-label': club('club_name'), 'data-breakout': '' }, name: 'Logo', styles: ['pk20gtg'] });
 
 // Top-Bar: Platzstatus-Ampel, Telefon, Mitglieder-Login

@@ -50,6 +50,21 @@
   height: 2.75rem;
   flex: none;
 }
+/* Logo mit Schriftzug daneben: als Signet so groß wie das Fahnen-Signet */
+.dwc-nest-menu__logo:has(.site-logo__text) .site-logo__bild {
+  width: 2.75rem;
+  height: 2.75rem;
+  max-width: none;
+  flex: none;
+}
+/* Logo für dunkle Flächen: nur im dunklen Farbschema, dann ersetzt es das normale Logo */
+.site-logo__bild--hell,
+.scheme--dark .site-logo__bild--hell + .site-logo__bild {
+  display: none;
+}
+.scheme--dark .site-logo__bild--hell {
+  display: block;
+}
 
 /* Top-Bar im EMMP-Header über die volle Breite */
 .dwc-nest-header ~ .top-bar,

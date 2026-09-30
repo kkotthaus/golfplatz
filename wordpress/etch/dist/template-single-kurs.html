@@ -36,7 +36,12 @@
 <!-- wp:etch/element {"tag":"div","attributes":{"data-etch-element":"container","class":"dwc-nest-header__container"},"metadata":{"name":"Header Container"},"styles":["etch-container-style","duncscw"]} -->
 <!-- wp:etch/element {"tag":"a","attributes":{"href":"/","aria-label":"{options.metabox.clubdaten.club_name}","data-breakout":"","class":"dwc-nest-menu__logo site-logo"},"metadata":{"name":"Logo"},"styles":["pk20gtg"]} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.club.hat_logo","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.club.hat_logo"} -->
-<!-- wp:etch/element {"tag":"img","attributes":{"src":"{options.golfplatz.club.logo}","alt":"{options.metabox.clubdaten.club_name}","class":"site-logo__bild"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.club.hat_logo_hell","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.club.hat_logo_hell"} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{options.golfplatz.club.logo_hell}","alt":"","class":"site-logo__bild site-logo__bild\u002d\u002dhell"}} -->
+
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{options.golfplatz.club.logo}","alt":"","class":"site-logo__bild"}} -->
 
 <!-- /wp:etch/element -->
 <!-- /wp:etch/condition -->
@@ -55,6 +60,8 @@
 
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"options.golfplatz.club.zeige_schriftzug","operator":"isTruthy","rightHand":null},"conditionString":"options.golfplatz.club.zeige_schriftzug"} -->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"site-logo__text"}} -->
 <!-- wp:etch/element {"tag":"span","attributes":{"class":"site-logo__name"}} -->
 <!-- wp:etch/text {"content":"{options.golfplatz.club.logoname}"} /-->

@@ -99,11 +99,15 @@ function golfplatz_club_etch(): array {
 	$c      = (array) get_option( 'clubdaten', array() );
 	$s      = fn( string $k ) => trim( (string) ( $c[ $k ] ?? '' ) );
 	$logo   = golfplatz_club_bild( $c['club_logo'] ?? 0 );
-	$hell   = golfplatz_club_bild( $c['club_logo_hell'] ?? 0 ) ?: $logo;
+	$eigen  = golfplatz_club_bild( $c['club_logo_hell'] ?? 0 );
+	$hell   = $eigen ?: $logo;
 	$daten  = array(
 		'logo'      => $logo,
 		'hat_logo'  => '' !== $logo,
 		'logo_hell' => $hell,
+		// Header: eigenes Logo für dunkle Flächen nur im dunklen Farbschema; Schriftzug ohne Logo oder auf Wunsch daneben
+		'hat_logo_hell'  => '' !== $logo && '' !== $eigen && $eigen !== $logo,
+		'zeige_schriftzug' => '' === $logo || ! empty( $c['club_logo_schriftzug'] ),
 		'logoname'  => $s( 'club_logoname' ) ?: $s( 'club_name' ),
 		'region'    => $s( 'club_region' ),
 		'unterzeile' => implode( ' · ', array_filter( array( $s( 'club_ort' ), $s( 'club_region' ) ) ) ),
@@ -146,7 +150,8 @@ add_filter(
 			'settings_pages' => array( 'clubdaten' ),
 			'tab'            => 'club',
 			'fields'         => array(
-				array( 'type' => 'heading', 'name' => 'Auftritt', 'desc' => 'Name im Logo und Region erscheinen im Kopf und Fuß jeder Seite. Ist ein Logo hinterlegt (oben), ersetzt es die Wortmarke.' ),
+				array( 'type' => 'heading', 'name' => 'Auftritt', 'desc' => 'Name im Logo und Region erscheinen im Kopf und Fuß jeder Seite. Ist ein Logo hinterlegt (oben), ersetzt es die Wortmarke – außer „Schriftzug neben dem Logo“ ist eingeschaltet.' ),
+				array( 'id' => 'club_logo_schriftzug', 'name' => 'Schriftzug neben dem Logo', 'type' => 'switch', 'style' => 'rounded', 'on_label' => 'Ja', 'off_label' => 'Nein', 'columns' => 12, 'desc' => 'Für ein Signet ohne Namen (z. B. rundes Clubwappen): Im Kopf der Seite steht dann Name im Logo und Ort · Region neben dem Logo. Aus = das Logo steht allein (für ein Logo mit Schriftzug).' ),
 				array( 'id' => 'club_logoname', 'name' => 'Name im Logo', 'type' => 'text', 'columns' => 6, 'placeholder' => 'z. B. Golfclub Musterclub', 'desc' => 'Leer = Vereinsname.' ),
 				array( 'id' => 'club_region', 'name' => 'Region', 'type' => 'text', 'columns' => 6, 'placeholder' => 'z. B. Musterregion', 'desc' => 'Steht hinter dem Ort unter dem Logo.' ),
 				array( 'type' => 'heading', 'name' => 'Texte' ),

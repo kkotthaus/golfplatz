@@ -419,7 +419,7 @@ Menü **Clubdaten**. Hier stehen die Stammdaten des Clubs, verteilt auf Reiter:
 
 | Reiter | Inhalt |
 | --- | --- |
-| **Club** | Vereinsname, Kurzname (für Seitentitel), Claim, Logo und Logo für dunkle Flächen; darunter **Auftritt & Texte**: Name im Logo, Region, Platzbeschreibung, Einleitung Mitgliedschaft, Ansprechpartner Aufnahme, Link zum Aufnahmeantrag (PDF), Hinweis zum Betreiber |
+| **Club** | Vereinsname, Kurzname (für Seitentitel), Claim, Logo und Logo für dunkle Flächen; darunter **Auftritt & Texte**: Name im Logo, Schriftzug neben dem Logo, Region, Platzbeschreibung, Einleitung Mitgliedschaft, Ansprechpartner Aufnahme, Link zum Aufnahmeantrag (PDF), Hinweis zum Betreiber |
 | **Kontakt & Anfahrt** | Adresse, Telefon, E-Mail, Anfahrt mit Auto bzw. Bus und Bahn, Kartenbild, Link „Route planen“, Koordinaten |
 | **Öffnungszeiten** | siehe Kapitel „Öffnungszeiten“ |
 | **Gäste & Systeme** | Telefon und Hinweis für Gäste, Pflegetag, Greenfee-Hinweise, Twilight, Name in den Ligatabellen, PC-CADDIE-Kennung, Partnerclubs; darunter **Ligaportal** (Name des Verbands, Adresse Ligaportal und Schnittstelle) |
@@ -430,7 +430,7 @@ Menü **Clubdaten**. Hier stehen die Stammdaten des Clubs, verteilt auf Reiter:
 
 Nach Änderungen unten auf **Änderungen speichern** klicken.
 
-> **Logo:** Ist unter **Club › Logo** ein Bild hinterlegt, erscheint es im Kopf jeder Seite; im Fuß das **Logo für dunkle Flächen** (sonst dasselbe Logo). Ohne Bild zeigt die Website eine Wortmarke aus „Name im Logo“ sowie Ort und Region.
+> **Logo:** Ist unter **Club › Logo** ein Bild hinterlegt, erscheint es im Kopf jeder Seite; im Fuß das **Logo für dunkle Flächen** (sonst dasselbe Logo), im dunklen Farbschema auch im Kopf. Ohne Bild zeigt die Website eine Wortmarke aus „Name im Logo“ sowie Ort und Region. Ist das Logo ein Signet ohne Namen (z. B. ein rundes Wappen), schalten Sie unter **Auftritt & Texte** „Schriftzug neben dem Logo“ ein: Dann stehen Name sowie Ort und Region neben dem Logo.
 
 > **Anfahrt:** Die Website bettet bewusst keine Google-Karte ein, weil dafür eine Einwilligung der Besucher nötig wäre. Stattdessen gibt es den Knopf „Route planen“ und optional ein Kartenbild (Lageplan).
 
