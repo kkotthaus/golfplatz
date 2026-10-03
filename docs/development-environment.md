@@ -1,6 +1,6 @@
 # Entwicklungsumgebung – projektspezifisch
 
-Stack, allgemeine Konventionen, Farbregeln und Betrieb stehen in [etch-nodes](../etch-nodes/CLAUDE.md) (git subtree). Hier steht nur, was für dieses Projekt gilt. Projekt-Prefix (`<prefix>` in etch-nodes): `golfplatz`.
+Stack, allgemeine Konventionen und Betrieb stehen in [etch-nodes](../etch-nodes/CLAUDE.md) (git subtree). Hier steht nur, was für dieses Projekt gilt; Farben in [farben.md](farben.md). Projekt-Prefix (`<prefix>` in etch-nodes): `golfplatz`.
 
 ## etch-nodes aktualisieren
 
@@ -44,10 +44,4 @@ Stand 2026-09-24 aus `wp plugin list --status=active`. Automatische Updates sind
 - **Dynamische Daten:** global `{options.golfplatz.<bereich>.…}`, je Beitrag `{this.golfplatz.…}` bzw. `{item.golfplatz.…}`. Generator der Komponenten: `wordpress/etch/*.mjs`.
 - **WPCodeBox:** Datenordner `wp-content/golfplatz` über die Konstante `GOLFPLATZ_DATEN` (statt `__DIR__`). Snippet-Sync per MCP `golfplatz/snippets-sync`.
 - **Tabellarische Daten** als CSS-Grid mit Tabellen-Rollen, wie in Preistabelle, Scorekarte und Rating.
-- **Farben:** Clubfarben zentral in `wordpress/etch/acss-farben.mjs`, übernehmen per MCP `golfplatz/acss-colors`.
-  - Blueprint: Primary `#2E6B4E` (Golf-Grün), Secondary `#2C5A85` (Blau).
-  - Zuordnung im Design: `--secondary-ultra-light` Seitenhintergrund, `--base-ultra-light` Flächen, `--base-light` Rahmen, `--base-semi-light` gedämpfter Text und Rahmen von Eingabefeldern, `--base-semi-dark` Nebentext, `--info` Wintergrüns.
-  - `--primary` nur als Fläche mit weißer Schrift (`--white`) oder für große Schrift/Grafik; grüne Schrift und Links immer `--primary-dark`. `--secondary` nie als Schrift auf Grün oder dunklen Flächen – dort `--white` bzw. `--secondary-light`.
-  - Ausnahmen von „nur ACSS-Farben“: Abschlagfarben (`--tee-*`) und Illustrationen (Bahngrafik, Platzhalter-Verläufe).
-  - Immer hell gerechnete Bereiche in `immerHell` in `wordpress/etch/acss-farben.mjs` eintragen.
-  - Kontrastprüfung: `node wordpress/etch/kontrast.mjs` – muss ohne Fehler durchlaufen.
+- **Farben:** siehe [farben.md](farben.md).

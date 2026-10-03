@@ -172,8 +172,8 @@ Das Markup des großen Blocks ist dagegen die **Etch-Komponente „Platzstatus�
 
 ### Etch- und ACSS-Eigenheiten
 
-Allgemein: [etch-nodes/docs/konventionen.md](../etch-nodes/docs/konventionen.md#css) und [etch-nodes/docs/farben-barrierefreiheit.md](../etch-nodes/docs/farben-barrierefreiheit.md). Im Projekt:
+Allgemein: [etch-nodes/docs/konventionen.md](../etch-nodes/docs/konventionen.md#css) und [docs/farben.md](../docs/farben.md). Im Projekt:
 
-- Palette in `etch/acss-farben.mjs`, Farben und Zuordnung in [docs/development-environment.md](../docs/development-environment.md).
+- Palette in `etch/acss-farben.mjs`, Farben und Zuordnung in [docs/farben.md](../docs/farben.md).
 - `etch/css/tokens.css` neutralisiert den `<section>`-Standard von ACSS/Etch (`section:where([class])`).
 - Icons als Etch-Elemente über `icon()` in `lib.mjs`; die Bahngrafik ist HTML/CSS.
