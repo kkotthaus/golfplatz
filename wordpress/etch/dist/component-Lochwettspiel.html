@@ -41,12 +41,20 @@
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"lw-rounds__title"}} -->
 <!-- wp:etch/text {"content":"Frühere Runden"} /-->
 <!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"lw-round-list"}} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordion__","attributes":{"settings":"{{\u0022type\u0022:\u0022multiple\u0022}}"},"metadata":{"name":"Frühere Runden"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
 <!-- wp:etch/loop {"target":"t.runden","itemId":"r"} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"r.vorrunde","operator":"isTruthy","rightHand":null},"conditionString":"r.vorrunde"} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"r.aufklappen","operator":"isTruthy","rightHand":null},"conditionString":"r.aufklappen"} -->
-<!-- wp:etch/element {"tag":"details","attributes":{"open":"","class":"lw-round lw-round\u002d\u002d{r.mod}"},"metadata":{"name":"Runde (Liste)"}} -->
-<!-- wp:etch/element {"tag":"summary","attributes":{"class":"lw-round__summary"}} -->
-<!-- wp:etch/element {"tag":"h3","attributes":{"class":"lw-round__name"}} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionItem__","attributes":{"settings":"{{\u0022open\u0022:true}}"},"metadata":{"name":"Runde (Liste)"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionHeader__","attributes":{"structure":"{{\u0022level\u0022:\u00223\u0022}}"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionTrigger__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lw-round__summary"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lw-round__name"}} -->
 <!-- wp:etch/text {"content":"{r.name}"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/condition {"condition":{"leftHand":"r.zeitraum","operator":"isTruthy","rightHand":null},"conditionString":"r.zeitraum"} -->
@@ -61,6 +69,12 @@
 <!-- wp:etch/text {"content":"{r.zahlen}"} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionContent__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"list","aria-label":"Spiele {r.name}","class":"lw-round__matches"}} -->
 <!-- wp:etch/loop {"target":"r.liste","itemId":"m"} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"listitem","class":"lw-round__item"}} -->
@@ -113,12 +127,20 @@
 <!-- /wp:etch/element -->
 <!-- /wp:etch/loop -->
 <!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
 <!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"r.aufklappen","operator":"isFalsy","rightHand":null},"conditionString":"!r.aufklappen"} -->
-<!-- wp:etch/element {"tag":"details","attributes":{"class":"lw-round lw-round\u002d\u002d{r.mod}"},"metadata":{"name":"Runde (Liste)"}} -->
-<!-- wp:etch/element {"tag":"summary","attributes":{"class":"lw-round__summary"}} -->
-<!-- wp:etch/element {"tag":"h3","attributes":{"class":"lw-round__name"}} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionItem__","attributes":{"settings":"{{\u0022open\u0022:false}}"},"metadata":{"name":"Runde (Liste)"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionHeader__","attributes":{"structure":"{{\u0022level\u0022:\u00223\u0022}}"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionTrigger__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lw-round__summary"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"lw-round__name"}} -->
 <!-- wp:etch/text {"content":"{r.name}"} /-->
 <!-- /wp:etch/element -->
 <!-- wp:etch/condition {"condition":{"leftHand":"r.zeitraum","operator":"isTruthy","rightHand":null},"conditionString":"r.zeitraum"} -->
@@ -133,6 +155,12 @@
 <!-- wp:etch/text {"content":"{r.zahlen}"} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionContent__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"list","aria-label":"Spiele {r.name}","class":"lw-round__matches"}} -->
 <!-- wp:etch/loop {"target":"r.liste","itemId":"m"} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"listitem","class":"lw-round__item"}} -->
@@ -185,10 +213,16 @@
 <!-- /wp:etch/element -->
 <!-- /wp:etch/loop -->
 <!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
 <!-- /wp:etch/condition -->
 <!-- /wp:etch/condition -->
 <!-- /wp:etch/loop -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/element -->
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"lw-rounds__title"}} -->
 <!-- wp:etch/text {"content":"{t.baum_titel}"} /-->
 <!-- /wp:etch/element -->

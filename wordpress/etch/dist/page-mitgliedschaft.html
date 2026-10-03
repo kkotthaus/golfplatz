@@ -1,17 +1,8 @@
 <!-- wp:etch/element {"tag":"section","attributes":{"class":"page-hero"},"metadata":{"name":"Seitenkopf"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"page-hero__inner container"}} -->
-<!-- wp:etch/element {"tag":"nav","attributes":{"aria-label":"Brotkrumen","class":"breadcrumb"}} -->
-<!-- wp:etch/element {"tag":"ol","attributes":{"class":"breadcrumb__list"}} -->
-<!-- wp:etch/element {"tag":"li","attributes":{"class":"breadcrumb__item"}} -->
-<!-- wp:etch/element {"tag":"a","attributes":{"href":"/","class":"breadcrumb__link"}} -->
-<!-- wp:etch/text {"content":"Start"} /-->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"li","attributes":{"aria-current":"page","class":"breadcrumb__item"}} -->
-<!-- wp:etch/text {"content":"Mitgliedschaft"} /-->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
+<!-- wp:etch/component {"ref":"__REF_OmeBreadcrumbs__","attributes":{"content":"{{\u0022homeLabel\u0022:\u0022Start\u0022,\u0022separator\u0022:\u0022/\u0022,\u0022ariaLabel\u0022:\u0022Brotkrumen\u0022}}"},"metadata":{"name":"Brotkrumen"}} -->
+
+<!-- /wp:etch/component -->
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"page-hero__eyebrow"}} -->
 <!-- wp:etch/text {"content":"Mitglied werden"} /-->
 <!-- /wp:etch/element -->
@@ -117,38 +108,85 @@
 <!-- wp:etch/element {"tag":"h3","attributes":{}} -->
 <!-- wp:etch/text {"content":"Häufige Fragen"} /-->
 <!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"div","attributes":{"class":"accordion"}} -->
-<!-- wp:etch/element {"tag":"details","attributes":{"class":"accordion__item"}} -->
-<!-- wp:etch/element {"tag":"summary","attributes":{"class":"accordion__summary"}} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordion__","attributes":{"settings":"{{\u0022type\u0022:\u0022multiple\u0022}}"},"metadata":{"name":"Häufige Fragen"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionItem__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionHeader__","attributes":{"structure":"{{\u0022level\u0022:\u00224\u0022}}"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionTrigger__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"faq__question"}} -->
 <!-- wp:etch/text {"content":"Was brauche ich für die Aufnahme?"} /-->
 <!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"div","attributes":{"class":"accordion__content"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","class":"faq__icon"}} -->
+<!-- wp:etch/text {"content":"+"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionContent__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
 <!-- wp:etch/text {"content":"Für das Spiel auf dem Platz die DGV-Platzreife oder ein Handicap. Beides können Sie auch bei uns in der Golfschule erwerben."} /-->
 <!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"details","attributes":{"class":"accordion__item"}} -->
-<!-- wp:etch/element {"tag":"summary","attributes":{"class":"accordion__summary"}} -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionItem__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionHeader__","attributes":{"structure":"{{\u0022level\u0022:\u00224\u0022}}"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionTrigger__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"faq__question"}} -->
 <!-- wp:etch/text {"content":"Kann ich vorher auf dem Platz spielen?"} /-->
 <!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"div","attributes":{"class":"accordion__content"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","class":"faq__icon"}} -->
+<!-- wp:etch/text {"content":"+"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionContent__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
 <!-- wp:etch/text {"content":"Ja. Spielen Sie eine Runde als Gast – im persönlichen Gespräch rechnen wir Ihr Greenfee auf Wunsch an."} /-->
 <!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"details","attributes":{"class":"accordion__item"}} -->
-<!-- wp:etch/element {"tag":"summary","attributes":{"class":"accordion__summary"}} -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionItem__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionHeader__","attributes":{"structure":"{{\u0022level\u0022:\u00224\u0022}}"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionTrigger__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"faq__question"}} -->
 <!-- wp:etch/text {"content":"Gibt es Partnerclubs?"} /-->
 <!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"div","attributes":{"class":"accordion__content"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","class":"faq__icon"}} -->
+<!-- wp:etch/text {"content":"+"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionContent__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
 <!-- wp:etch/element {"tag":"p","attributes":{}} -->
 <!-- wp:etch/text {"content":"Ja. Auf den Plätzen unserer Partnerclubs spielen Mitglieder zu besonderen Konditionen – Details auf der Seite Greenfee \u0026 Preise."} /-->
 <!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->

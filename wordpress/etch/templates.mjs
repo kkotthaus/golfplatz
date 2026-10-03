@@ -1,7 +1,7 @@
 // Etch-Templates der Website. Aufbau und Klassen wie im Prototyp (prototype/src/build.mjs).
 // Erzeugen: node wordpress/etch/build.mjs  →  wordpress/etch/dist/<slug>.html
 
-import { el, t, text, raw, wenn, markup, komponente, club, telHref, icon, svgEl, postContent, loop, CLUB } from './lib.mjs';
+import { ome, el, t, text, raw, wenn, markup, komponente, club, telHref, icon, svgEl, postContent, loop, CLUB } from './lib.mjs';
 import { header } from './header.mjs';
 import { birdiebookKomponente, bahnenRaster, lightbox, lightboxBild } from './birdiebook.mjs';
 import { anfahrt } from './club.mjs';
@@ -62,19 +62,34 @@ const fakt = (label, wert, mod = '') =>
     t('dd', 'hole-facts__value', wert),
   ]);
 
-const seitenkopf = ({ krumen, eyebrow, titel, lead, aktionen }) =>
+/*
+ * Brotkrumen. Standard: OhMyEtch (Pfad aus Seitenhierarchie bzw. Beitragstyp, mit BreadcrumbList-Schema); krumen wird dann nicht gebraucht.
+ * krumenArt 'zwischen': OhMyEtch plus die Zwischenstufen aus krumen als „Manual Links“ – für Beitragstypen ohne Archivseite
+ *   (Kurs, Spielbahn, Lochwettspiel), bei denen OhMyEtch die Elternstufe nicht kennt.
+ * krumenArt 'eigen': eigene Liste aus krumen – wo OhMyEtch nicht passt: Beiträge (OhMyEtch setzt dort fest „Blog“ ein, weil
+ *   „Aktuelles“ eine Etch-Seite und keine WordPress-Beitragsseite ist) und Spielberichte (Mannschaft aus dynamischen Daten).
+ */
+const krumenOme = (zwischen = []) =>
+  ome('OmeBreadcrumbs', {
+    content: { homeLabel: 'Start', separator: '/', ariaLabel: 'Brotkrumen' },
+    ...(zwischen.length ? { manualLinks: { position: 'afterHome', links: zwischen.map(([label, url]) => ({ label, url })) }, settings: { excludeTaxonomy: true } } : {}),
+  }, {}, 'Brotkrumen');
+const krumenEigen = (krumen) =>
+  el('nav', 'breadcrumb', [
+    el('ol', 'breadcrumb__list', [
+      el('li', 'breadcrumb__item', [t('a', 'breadcrumb__link', 'Start', { attrs: { href: '/' } })]),
+      ...krumen.map(([label, href]) =>
+        href
+          ? el('li', 'breadcrumb__item', [t('a', 'breadcrumb__link', label, { attrs: { href } })])
+          : t('li', 'breadcrumb__item', label, { attrs: { 'aria-current': 'page' } }),
+      ),
+    ]),
+  ], { attrs: { 'aria-label': 'Brotkrumen' } });
+
+const seitenkopf = ({ krumen = [], krumenArt = 'ome', eyebrow, titel, lead, aktionen }) =>
   el('section', 'page-hero', [
     el('div', 'page-hero__inner container', [
-      el('nav', 'breadcrumb', [
-        el('ol', 'breadcrumb__list', [
-          el('li', 'breadcrumb__item', [t('a', 'breadcrumb__link', 'Start', { attrs: { href: '/' } })]),
-          ...krumen.map(([label, href]) =>
-            href
-              ? el('li', 'breadcrumb__item', [t('a', 'breadcrumb__link', label, { attrs: { href } })])
-              : t('li', 'breadcrumb__item', label, { attrs: { 'aria-current': 'page' } }),
-          ),
-        ]),
-      ], { attrs: { 'aria-label': 'Brotkrumen' } }),
+      krumenArt === 'eigen' ? krumenEigen(krumen) : krumenOme(krumenArt === 'zwischen' ? krumen.filter(([, href]) => href) : []),
       eyebrow && t('p', 'page-hero__eyebrow', eyebrow),
       t('h1', 'page-hero__title', titel),
       lead && t('p', 'page-hero__lead', lead),
@@ -357,8 +372,15 @@ pages.push(
 
 // Mitgliedschaft: Modelle (Preise der Kategorie „Mitgliedschaft“), drei Schritte, Aufnahmeantrag mit FAQ.
 // Ein Antragsformular folgt, sobald ein Formular-Plugin feststeht – bis dahin Telefon, E-Mail und PDF.
+// Häufige Fragen: Accordion von OhMyEtch (Tastatur, ARIA, Animation). Frage als Slot des Triggers,
+// weil die Eigenschaft content.label bei Etch nicht ankommt. H4 unter der Zwischenüberschrift „Häufige Fragen“ (H3).
 const faq = (frage, antwort) =>
-  el('details', 'accordion__item', [t('summary', 'accordion__summary', frage), el('div', 'accordion__content', [t('p', '', antwort)])]);
+  ome('OmeAccordionItem', {}, {
+    default: [
+      ome('OmeAccordionHeader', { structure: { level: '4' } }, { default: [ome('OmeAccordionTrigger', {}, { default: [t('span', 'faq__question', frage), t('span', 'faq__icon', '+', { attrs: { 'aria-hidden': 'true' } })] })] }),
+      ome('OmeAccordionContent', {}, { default: [t('p', '', antwort)] }),
+    ],
+  });
 const schritt = (titel, inhalt) => el('li', 'steps__item', [t('h3', 'steps__title', titel), el('p', 'steps__text', inhalt)]);
 pages.push({
   slug: 'mitgliedschaft',
@@ -398,11 +420,11 @@ pages.push({
         ], { name: 'Kontakt' }),
         el('div', '', [
           t('h3', '', 'Häufige Fragen'),
-          el('div', 'accordion', [
+          ome('OmeAccordion', { settings: { type: 'multiple' } }, { default: [
             faq('Was brauche ich für die Aufnahme?', 'Für das Spiel auf dem Platz die DGV-Platzreife oder ein Handicap. Beides können Sie auch bei uns in der Golfschule erwerben.'),
             faq('Kann ich vorher auf dem Platz spielen?', 'Ja. Spielen Sie eine Runde als Gast – im persönlichen Gespräch rechnen wir Ihr Greenfee auf Wunsch an.'),
             faq('Gibt es Partnerclubs?', 'Ja. Auf den Plätzen unserer Partnerclubs spielen Mitglieder zu besonderen Konditionen – Details auf der Seite Greenfee & Preise.'),
-          ]),
+          ] }, 'Häufige Fragen'),
         ], { name: 'Häufige Fragen' }),
       ]),
     ], { attrs: { id: 'antrag' }, name: 'Aufnahmeantrag' }),
@@ -575,6 +597,7 @@ export const templates = [
     content: rahmen(
       seitenkopf({
         krumen: [['Mannschaften', '/mannschaften/'], [`{${BERICHT}.mannschaft}`, `{${BERICHT}.mannschaft_link}`], ['Spielbericht']],
+        krumenArt: 'eigen',
         eyebrow: `{${BERICHT}.eyebrow}`,
         titel: '{this.title}',
       }),
@@ -586,7 +609,7 @@ export const templates = [
     slug: 'single-kurs',
     title: 'Kurs',
     content: rahmen(
-      seitenkopf({ krumen: [['Golfschule', '/golfschule/'], ['{this.title}']], eyebrow: '{this.golfplatz.kurs.typ}', titel: '{this.title}' }),
+      seitenkopf({ krumen: [['Golfschule', '/golfschule/'], ['{this.title}']], krumenArt: 'zwischen', eyebrow: '{this.golfplatz.kurs.typ}', titel: '{this.title}' }),
       el('section', 'section', [el('div', 'container prose--narrow course-detail', kursInhalt())], { name: 'Kurs' }),
     ),
   },
@@ -595,7 +618,7 @@ export const templates = [
     slug: 'single-post',
     title: 'Beitrag',
     content: rahmen(
-      seitenkopf({ krumen: [['Aktuelles', '/news/'], ['{this.title}']], eyebrow: '{this.golfplatz.news.kategorie} · {this.golfplatz.news.datum}', titel: '{this.title}' }),
+      seitenkopf({ krumen: [['Aktuelles', '/news/'], ['{this.title}']], krumenArt: 'eigen', eyebrow: '{this.golfplatz.news.kategorie} · {this.golfplatz.news.datum}', titel: '{this.title}' }),
       el('section', 'section', [el('div', 'container prose prose--narrow', beitragInhalt())], { name: 'Beitrag' }),
     ),
   },
@@ -625,6 +648,7 @@ export const templates = [
     content: rahmen(
       seitenkopf({
         krumen: [['Turniere & Kalender', '/turniere/'], ['Lochwettspiel {this.metabox.lw_jahr}']],
+        krumenArt: 'zwischen',
         eyebrow: 'Lochwettspiel · Zweier-Teams',
         titel: '{this.title}',
       }),
@@ -640,6 +664,7 @@ export const templates = [
     content: rahmen(
         seitenkopf({
           krumen: [['Platz & Bahnen', '/platz/'], ['Bahn {this.metabox.bahn_nummer}']],
+          krumenArt: 'zwischen',
           eyebrow: 'Hole by Hole · {this.metabox.bahn_nummer} von 18',
           titel: '{this.title}',
           lead: 'Par {this.metabox.bahn_par_herren} (Herren) · {this.metabox.bahn_par_damen} (Damen) · HCP {this.metabox.bahn_hcp}',

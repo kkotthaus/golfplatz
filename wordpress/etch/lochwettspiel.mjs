@@ -9,7 +9,7 @@
 // Keine Listen-Tags: Der Builder packt Loops in <div style="display: contents">, deshalb role="list/listitem".
 // Die Karten sind für Screenreader ausgeblendet, stattdessen liest jede Karte einen fertigen Satz vor ({m.aria}).
 
-import { el, t, loop, wenn } from './lib.mjs';
+import { el, t, loop, wenn, ome } from './lib.mjs';
 
 const LW = 'options.golfplatz.lochwettspiele';
 
@@ -41,26 +41,44 @@ const karte = () =>
 const spiel = () => el('div', 'bracket__slot', [karte()], { attrs: { role: 'listitem' } });
 
 // Frühere Runden großer Felder: je Runde ein aufklappbarer Block mit allen Spielen im Raster
+// OhMyEtch-Accordion-Eintrag (Karte über die Hülle .lw-round-list, Zeile .lw-round__summary im Trigger):
+// styling.class kommt bei Etch nicht an, und die Einträge müssen direkte Kinder des Accordions sein. Rundenname als H3.
 const vorrunde = (offen) =>
-  el('details', 'lw-round lw-round--{r.mod}', [
-    el('summary', 'lw-round__summary', [
-      t('h3', 'lw-round__name', '{r.name}'),
-      wenn('r.zeitraum', [t('span', 'lw-round__dates', '{r.zeitraum}')]),
-      t('span', 'bracket__status bracket__status--{r.mod}', '{r.status}'),
-      t('span', 'lw-round__count', '{r.zahlen}'),
-    ]),
-    el('div', 'lw-round__matches', [
-      loop({ target: 'r.liste', itemId: 'm' }, [el('div', 'lw-round__item', [karte()], { attrs: { role: 'listitem' } })]),
-    ], { attrs: { role: 'list', 'aria-label': 'Spiele {r.name}' } }),
-  ], { attrs: offen ? { open: '' } : {}, name: 'Runde (Liste)' });
+  ome('OmeAccordionItem', { settings: { open: offen } }, {
+    default: [
+      ome('OmeAccordionHeader', { structure: { level: '3' } }, {
+        default: [
+          ome('OmeAccordionTrigger', {}, {
+            default: [
+              el('span', 'lw-round__summary', [
+                t('span', 'lw-round__name', '{r.name}'),
+                wenn('r.zeitraum', [t('span', 'lw-round__dates', '{r.zeitraum}')]),
+                t('span', 'bracket__status bracket__status--{r.mod}', '{r.status}'),
+                t('span', 'lw-round__count', '{r.zahlen}'),
+              ]),
+            ],
+          }),
+        ],
+      }),
+      ome('OmeAccordionContent', {}, {
+        default: [
+          el('div', 'lw-round__matches', [
+            loop({ target: 'r.liste', itemId: 'm' }, [el('div', 'lw-round__item', [karte()], { attrs: { role: 'listitem' } })]),
+          ], { attrs: { role: 'list', 'aria-label': 'Spiele {r.name}' } }),
+        ],
+      }),
+    ],
+  }, 'Runde (Liste)');
 
 const vorrunden = () =>
   wenn('t.hat_vorrunden', [
     el('div', 'lw-rounds', [
       t('p', 'lw-rounds__title', 'Frühere Runden'),
-      loop({ target: 't.runden', itemId: 'r' }, [
-        wenn('r.vorrunde', [wenn('r.aufklappen', [vorrunde(true)]), wenn('r.aufklappen', [vorrunde(false)], 'isFalsy')]),
-      ]),
+      el('div', 'lw-round-list', [ome('OmeAccordion', { settings: { type: 'multiple' } }, { default: [
+        loop({ target: 't.runden', itemId: 'r' }, [
+          wenn('r.vorrunde', [wenn('r.aufklappen', [vorrunde(true)]), wenn('r.aufklappen', [vorrunde(false)], 'isFalsy')]),
+        ]),
+      ] }, 'Frühere Runden')]),
       t('p', 'lw-rounds__title', '{t.baum_titel}'),
     ], { name: 'Frühere Runden' }),
   ]);

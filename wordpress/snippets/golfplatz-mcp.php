@@ -702,7 +702,18 @@ function golfplatz_mcp_sync_from_files( $input ) {
 		foreach ( $refs as $key => $id ) {
 			$markup = str_replace( '"__REF_' . $key . '__"', (string) $id, $markup );
 		}
-		return $markup;
+		// Übrige Verweise: vorhandene Fremdkomponenten (z. B. OhMyEtch „OmeAccordion“) per Key auflösen – ohne feste IDs.
+		return preg_replace_callback(
+			'/"__REF_([A-Za-z0-9_-]+)__"/',
+			function ( $m ) use ( &$refs ) {
+				if ( ! isset( $refs[ $m[1] ] ) ) {
+					$ids             = get_posts( array( 'post_type' => 'wp_block', 'post_status' => 'publish', 'posts_per_page' => 1, 'meta_key' => 'etch_component_html_key', 'meta_value' => $m[1], 'fields' => 'ids' ) );
+					$refs[ $m[1] ] = $ids ? (int) $ids[0] : 0;
+				}
+				return $refs[ $m[1] ] ? (string) $refs[ $m[1] ] : $m[0];
+			},
+			$markup
+		);
 	};
 	foreach ( (array) ( $manifest['components'] ?? array() ) as $komp ) {
 		$key   = preg_replace( '/[^A-Za-z0-9_-]/', '', (string) $komp['key'] );

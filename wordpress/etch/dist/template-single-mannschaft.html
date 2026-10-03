@@ -162,23 +162,9 @@
 <!-- wp:etch/element {"tag":"main","attributes":{"id":"main","class":"site-main"},"metadata":{"name":"Main"}} -->
 <!-- wp:etch/element {"tag":"section","attributes":{"class":"page-hero"},"metadata":{"name":"Seitenkopf"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"page-hero__inner container"}} -->
-<!-- wp:etch/element {"tag":"nav","attributes":{"aria-label":"Brotkrumen","class":"breadcrumb"}} -->
-<!-- wp:etch/element {"tag":"ol","attributes":{"class":"breadcrumb__list"}} -->
-<!-- wp:etch/element {"tag":"li","attributes":{"class":"breadcrumb__item"}} -->
-<!-- wp:etch/element {"tag":"a","attributes":{"href":"/","class":"breadcrumb__link"}} -->
-<!-- wp:etch/text {"content":"Start"} /-->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"li","attributes":{"class":"breadcrumb__item"}} -->
-<!-- wp:etch/element {"tag":"a","attributes":{"href":"/mannschaften/","class":"breadcrumb__link"}} -->
-<!-- wp:etch/text {"content":"Mannschaften"} /-->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- wp:etch/element {"tag":"li","attributes":{"aria-current":"page","class":"breadcrumb__item"}} -->
-<!-- wp:etch/text {"content":"{this.title}"} /-->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
+<!-- wp:etch/component {"ref":"__REF_OmeBreadcrumbs__","attributes":{"content":"{{\u0022homeLabel\u0022:\u0022Start\u0022,\u0022separator\u0022:\u0022/\u0022,\u0022ariaLabel\u0022:\u0022Brotkrumen\u0022}}"},"metadata":{"name":"Brotkrumen"}} -->
+
+<!-- /wp:etch/component -->
 <!-- wp:etch/element {"tag":"p","attributes":{"class":"page-hero__eyebrow"}} -->
 <!-- wp:etch/text {"content":"{this.golfplatz.team.liga}"} /-->
 <!-- /wp:etch/element -->
@@ -199,14 +185,28 @@
 <!-- wp:etch/element {"tag":"h2","attributes":{"class":"h3"}} -->
 <!-- wp:etch/text {"content":"Ligaspiele"} /-->
 <!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"season-list"}} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordion__","attributes":{"settings":"{{\u0022type\u0022:\u0022multiple\u0022}}"},"metadata":{"name":"Saisons"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
 <!-- wp:etch/loop {"target":"this.golfplatz.team.saisons","itemId":"z"} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"z.offen","operator":"isTruthy","rightHand":null},"conditionString":"z.offen"} -->
-<!-- wp:etch/element {"tag":"details","attributes":{"open":"","class":"season"},"metadata":{"name":"Saison"}} -->
-<!-- wp:etch/element {"tag":"summary","attributes":{"class":"season__summary"}} -->
-<!-- wp:etch/element {"tag":"h3","attributes":{"class":"season__title"}} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionItem__","attributes":{"settings":"{{\u0022open\u0022:true}}"},"metadata":{"name":"Saison"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionHeader__","attributes":{"structure":"{{\u0022level\u0022:\u00223\u0022}}"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionTrigger__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"season__summary"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"season__title"}} -->
 <!-- wp:etch/text {"content":"{z.titel}"} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionContent__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"season__body"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"table-wrap"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Ligaspiele {this.title} {z.jahr}","class":"match-table match-table\u002d\u002dgrid match-table\u002d\u002dkompakt"},"metadata":{"name":"Ligaspiele"}} -->
@@ -290,15 +290,29 @@
 <!-- /wp:etch/element -->
 <!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
 <!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"z.offen","operator":"isFalsy","rightHand":null},"conditionString":"!z.offen"} -->
-<!-- wp:etch/element {"tag":"details","attributes":{"class":"season"},"metadata":{"name":"Saison"}} -->
-<!-- wp:etch/element {"tag":"summary","attributes":{"class":"season__summary"}} -->
-<!-- wp:etch/element {"tag":"h3","attributes":{"class":"season__title"}} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionItem__","attributes":{"settings":"{{\u0022open\u0022:false}}"},"metadata":{"name":"Saison"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionHeader__","attributes":{"structure":"{{\u0022level\u0022:\u00223\u0022}}"}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionTrigger__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"season__summary"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"season__title"}} -->
 <!-- wp:etch/text {"content":"{z.titel}"} /-->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- wp:etch/component {"ref":"__REF_OmeAccordionContent__","attributes":{}} -->
+<!-- wp:etch/slot-content {"name":"default"} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"season__body"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"table-wrap"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"role":"table","aria-label":"Ligaspiele {this.title} {z.jahr}","class":"match-table match-table\u002d\u002dgrid match-table\u002d\u002dkompakt"},"metadata":{"name":"Ligaspiele"}} -->
@@ -382,9 +396,15 @@
 <!-- /wp:etch/element -->
 <!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
-<!-- /wp:etch/element -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
 <!-- /wp:etch/condition -->
 <!-- /wp:etch/loop -->
+<!-- /wp:etch/slot-content -->
+<!-- /wp:etch/component -->
+<!-- /wp:etch/element -->
 <!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.hat_berichte","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.team.hat_berichte"} -->
 <!-- wp:etch/element {"tag":"h2","attributes":{"class":"h3 spacer-top"}} -->

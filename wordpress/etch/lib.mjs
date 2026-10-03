@@ -84,6 +84,23 @@ export const emmp = (ref, attributes = {}, slots = {}, name) => {
   return `<!-- wp:etch/component ${json(a)} -->\n${inhalt}\n<!-- /wp:etch/component -->`;
 };
 
+/**
+ * OhMyEtch-Komponente per Key einbinden (Accordion, Breadcrumbs …): Der Sync ersetzt "__REF_<Key>__" durch die ID
+ * der vorhandenen Komponente (etch_component_html_key) – keine festen IDs. Gruppen-Eigenschaften als Objekt.
+ * ome('OmeAccordion', { settings: { type: 'multiple' } }, { default: [...] })
+ */
+export const ome = (key, eigenschaften = {}, slots = {}, name) => {
+  const attributes = Object.fromEntries(
+    Object.entries(eigenschaften).map(([k, v]) => [k, v !== null && typeof v === 'object' && !Array.isArray(v) ? `{${JSON.stringify(v)}}` : v]),
+  );
+  const a = { ref: `__REF_${key}__`, attributes };
+  if (name) a.metadata = { name };
+  const inhalt = Object.entries(slots)
+    .map(([slot, kinder]) => `<!-- wp:etch/slot-content ${json({ name: slot })} -->\n${join([kinder]) || ''}\n<!-- /wp:etch/slot-content -->`)
+    .join('\n\n');
+  return `<!-- wp:etch/component ${json(a)} -->\n${inhalt}\n<!-- /wp:etch/component -->`;
+};
+
 /** Gruppen-Eigenschaft im EMMP-Format: gruppe({ mode: 'none' }) → '{{"mode":"none"}}' */
 export const gruppe = (obj) => `{${JSON.stringify(obj)}}`;
 
