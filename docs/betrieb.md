@@ -18,7 +18,7 @@
 - **Eng begrenzen:** nur Administratoren (`manage_options`), nur freigegebene Beitragstypen (z. B. `page`, `wp_template`, `wp_block` und ausdrücklich gelistete eigene Typen), feste Etch-REST-Routen intern aufrufen. **Keine allgemeine REST-Weiterleitung** – zu breite Angriffsfläche.
 - **Nur in der Entwicklung aktiv:** Funktionen nur registrieren, wenn `wp_get_environment_type()` `local` oder `development` meldet. Bewusste Nutzung live nur über eine Konstante in der `wp-config.php` (z. B. `<PREFIX>_MCP_LIVE`).
 - Lesende und schreibende Funktionen trennen (readonly-Kennzeichnung). Schreibende Imports wiederholbar machen (anlegen oder per Schlüsselfeld aktualisieren, nichts löschen).
-- Typischer Satz: Inhalte auflisten/lesen, Seite/Template/Komponente/Stylesheet speichern, Sync aus dem Build-Ordner (Reihenfolge: Loops → Komponenten → Templates und Seiten mit `__REF_<Key>__`-Ersetzung → Stylesheet), Import von Inhalten und Einstellungen aus JSON, ACSS-Farben, Permalinks, Startseite, Snippet-Sync.
+- Typischer Satz: Inhalte auflisten/lesen, Seite/Template/Komponente/Stylesheet speichern, Sync aus dem Build-Ordner (Reihenfolge: Loops → Komponenten → Templates und Seiten mit `__REF_<Key>__`-Ersetzung → Stylesheet), Import von Inhalten und Einstellungen aus JSON, ACSS-Einstellungen, Permalinks, Startseite, Snippet-Sync.
 
 ## Ablauf Build → WordPress
 

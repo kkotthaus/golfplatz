@@ -1,13 +1,12 @@
 # etch-nodes
 
-Gemeinsame Standards für WordPress-Projekte mit Etch, Automatic.css v4, Meta Box und WPCodeBox: Stack, Konventionen, Farben/Barrierefreiheit und Betrieb. Die Inhalte sind generisch und enthalten keine Projektdaten.
+Gemeinsame Standards für WordPress-Projekte mit Etch, Automatic.css v4, Meta Box und WPCodeBox: Stack, Konventionen und Betrieb. Die Inhalte sind generisch und enthalten keine Projektdaten. Farben und Farbregeln legt jedes Projekt lokal ab.
 
 | Datei | Inhalt |
 | --- | --- |
 | [CLAUDE.md](CLAUDE.md) | Einstieg für Claude Code, importiert die Doku |
 | [docs/development-environment.md](docs/development-environment.md) | Stack und Plugins |
 | [docs/konventionen.md](docs/konventionen.md) | Komponenten, Block-Markup, dynamische Daten, CSS, Meta Box |
-| [docs/farben-barrierefreiheit.md](docs/farben-barrierefreiheit.md) | ACSS-Farbsystem, Hell/Dunkel, WCAG 2.1 AA |
 | [docs/betrieb.md](docs/betrieb.md) | WPCodeBox-Snippets, MCP-Funktionen, Build/Sync, Duplicator, Caching |
 
 ## In ein Projekt einbinden (git subtree)
@@ -27,7 +26,7 @@ Danach in der `CLAUDE.md` des Projekts importieren:
 @etch-nodes/CLAUDE.md
 ```
 
-Die Imports in `etch-nodes/CLAUDE.md` sind relativ zum Ordner `etch-nodes/` und funktionieren deshalb ohne Anpassung. Projektspezifisches (Prefix, Farben, Versionen, Komponenten-IDs) gehört in die Projekt-Doku, nicht hierher.
+Die Imports in `etch-nodes/CLAUDE.md` sind relativ zum Ordner `etch-nodes/` und funktionieren deshalb ohne Anpassung. Projektspezifisches (Prefix, Versionen, Komponenten-IDs) und alle Farben und Farbregeln gehören in die Projekt-Doku, nicht hierher.
 
 ## Aktualisieren
 
@@ -53,5 +52,6 @@ Dann in etch-nodes einen Pull Request von `<branch>` nach `main` stellen. Commit
 ## Regeln für dieses Repo
 
 - Nur Standards, die für alle Etch-Projekte gelten.
+- Keine Farben und Farbregeln.
 - Generisch formulieren: keine Projektnamen, Domains, Prefixe, Pfade, IDs oder Versionsstände. Platzhalter `<prefix>` / `<PREFIX>` für das Projektkürzel.
 - Verweise immer relativ innerhalb von `etch-nodes/`.
