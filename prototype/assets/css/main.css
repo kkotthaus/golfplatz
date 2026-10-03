@@ -20,6 +20,8 @@ body {
 body > * { flex-shrink: 0; }
 img, svg { max-width: 100%; }
 a { color: var(--primary-dark); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+/* Links im Fließtext unterstrichen – nicht nur über die Farbe erkennbar (WCAG 1.4.1) */
+:is(p, li, dd) a:not([class]) { text-decoration: underline; }
 a:hover { color: var(--secondary-dark); }
 :focus-visible { outline: 2px solid var(--secondary); outline-offset: 2px; }
 h1, h2, h3, h4 { font-family: var(--heading-font-family); font-weight: 500; line-height: 1.15; color: var(--primary-dark); margin: 0 0 0.5em; letter-spacing: -0.005em; }
@@ -186,6 +188,8 @@ html.scheme--dark {
 .site-footer .site-logo__since { color: var(--secondary-light); }
 .site-footer__address { margin-bottom: var(--space-s); }
 .site-footer__line { display: block; }
+/* Telefon und E-Mail im Footer: Zielgröße mindestens 24 px (WCAG 2.5.8) */
+.site-footer__contact .site-footer__link { padding-block: 0.25rem; }
 .site-footer__link { text-decoration: none; }
 .site-footer__title { font-family: var(--text-font-family); font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--secondary-light); margin-bottom: var(--space-s); }
 .site-footer__bottom { border-top: 1px solid rgb(255 255 255 / 0.1); }
@@ -637,7 +641,7 @@ html.scheme--dark {
 
 .match-table__row--home { background: var(--secondary-light); }
 .match-table__date { white-space: nowrap; }
-.match-table__time { display: block; font-size: var(--text-xs); color: var(--base-semi-light); }
+.match-table__time { display: block; font-size: var(--text-xs); color: var(--base-semi-dark); } /* semi-light hat auf der Heimspiel-Zeile nur 4,2:1 */
 .match-table__team { font-weight: 600; }
 .match-table__report { font-size: var(--text-xs); font-weight: 600; }
 

@@ -108,6 +108,8 @@ function golfplatz_club_etch(): array {
 		// Header: eigenes Logo für dunkle Flächen nur im dunklen Farbschema; Schriftzug ohne Logo oder auf Wunsch daneben
 		'hat_logo_hell'  => '' !== $logo && '' !== $eigen && $eigen !== $logo,
 		'zeige_schriftzug' => '' === $logo || ! empty( $c['club_logo_schriftzug'] ),
+		// Alternativtext des Logos: leer, wenn der Schriftzug daneben steht (sonst doppelt vorgelesen), sonst der Clubname
+		'logo_alt'  => ( '' === $logo || ! empty( $c['club_logo_schriftzug'] ) ) ? '' : $s( 'club_name' ),
 		'logoname'  => $s( 'club_logoname' ) ?: $s( 'club_name' ),
 		'region'    => $s( 'club_region' ),
 		'unterzeile' => implode( ' · ', array_filter( array( $s( 'club_ort' ), $s( 'club_region' ) ) ) ),

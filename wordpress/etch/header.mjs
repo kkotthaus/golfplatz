@@ -46,8 +46,9 @@ const dropdown = (text_, kinder) =>
 
 // Clublogo: Bild aus den Clubdaten (club_logo, im dunklen Farbschema club_logo_hell); ohne Bild Fahnen-Signet.
 // Schriftzug („Name im Logo“, Ort · Region) ohne Logo immer, mit Logo nur bei „Schriftzug neben dem Logo“.
-// alt leer: der Link trägt den Clubnamen (aria-label).
-const logoBild = (quelle, zusatz = '') => el('img', 'site-logo__bild' + zusatz, [], { attrs: { src: `{options.golfplatz.club.${quelle}}`, alt: '' } });
+// Kein aria-label am Link (Name muss den sichtbaren Text enthalten, WCAG 2.5.3): Mit Schriftzug ist das Bild leer beschriftet,
+// ohne Schriftzug trägt das Bild den Clubnamen (logo_alt aus golfplatz-club.php).
+const logoBild = (quelle, zusatz = '') => el('img', 'site-logo__bild' + zusatz, [], { attrs: { src: `{options.golfplatz.club.${quelle}}`, alt: '{options.golfplatz.club.logo_alt}' } });
 const logo = () =>
   el('a', 'dwc-nest-menu__logo site-logo', [
     wenn('options.golfplatz.club.hat_logo', [
@@ -68,7 +69,7 @@ const logo = () =>
         t('span', 'site-logo__since', '{options.golfplatz.club.unterzeile}'),
       ]),
     ]),
-  ], { attrs: { href: '/', 'aria-label': club('club_name'), 'data-breakout': '' }, name: 'Logo', styles: ['pk20gtg'] });
+  ], { attrs: { href: '/', 'data-breakout': '' }, name: 'Logo', styles: ['pk20gtg'] });
 
 // Top-Bar: Platzstatus-Ampel, Telefon, Mitglieder-Login
 const topBar = () =>

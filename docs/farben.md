@@ -43,3 +43,7 @@ Clubfarben zentral in `wordpress/etch/acss-farben.mjs`, übernehmen per MCP `gol
 - Danger-Farbe von der Markenfarbe unterscheidbar halten, wenn die Marke selbst rot ist.
 - Alle verwendeten Kombinationen (Vordergrund, Hintergrund, Mindestwert, Verwendung) in einem **Prüfskript** im Projekt pflegen, das die OKLCH-Werte so rechnet wie ACSS (inkl. Tausch im dunklen Schema) und bei Fehlern mit Exit-Code 1 endet. Nach jeder Farbänderung ausführen; zusätzlich Browser-Audit bei 375, 768, 1280 und 1920 px.
 - Ausgeblendete Elemente (z. B. inaktive Slides) dürfen per Tab nicht erreichbar sein.
+- Links im Fließtext (`p`, `li`, `dd` ohne Klasse) sind unterstrichen, nicht nur farbig (WCAG 1.4.1).
+- Klickflächen mindestens 24 px (WCAG 2.5.8), z. B. Telefon/E-Mail im Footer mit Innenabstand.
+- Kein `aria-label`, das vom sichtbaren Text abweicht (WCAG 2.5.3) – auch nicht am Logo-Link.
+- Nebentext auf getönten Zeilen (z. B. Heimspiel in der Ligatabelle) mit `--base-semi-dark`, nicht `--base-semi-light`.
