@@ -39,6 +39,7 @@ Regeln für Komponenten, Block-Markup, Daten und CSS. Platzhalter: `<prefix>` st
 
 ## CSS
 
+- **Automatic.css zuerst.** Vorhandene ACSS-Klassen (z. B. `btn--primary`, `btn--outline`, `btn--s`) und ACSS-Variablen (Farben, `--space-*`, `--section-space-*`, `--text-*`, `--h1`…`--h6`, `--radius*`, `--content-width`, `--gutter`, `--grid-gap`, `--transition`, `--btn-*`) haben Vorrang. Was sich über die ACSS-Einstellungen regeln lässt (z. B. Rundung, Schriftstärke und Innenabstand der Buttons), wird dort eingestellt – per Datei im Repo und MCP-Funktion übertragen, nicht im eigenen CSS nachgebaut. Eigene Klassen und Variablen nur, wenn ACSS dafür nichts bietet oder es nicht funktioniert; den Grund dann kurz im CSS kommentieren. Keine eigenen Klassen, die ACSS-Klassen nachbilden (etwa eigene Button-Klassen).
 - **Klassennamen nach BEM** (`block__element--modifier`), z. B. `main-nav__item--active`. Styles hängen an den BEM-Klassen im globalen Stylesheet, nicht an Etch-Style-IDs.
 - **`body` nie mit `overflow: hidden`.** Im Etch-Builder ist `body` ein Flex-Container (`flex-direction: column`), EMMP macht `html` zu Flex mit 100 % Höhe, und der Builder gibt jedem Block `min-height: 1px`. Mit `overflow-x: hidden` schrumpft `body` auf Fensterhöhe und die Abschnitte überlappen im Builder (im Frontend fällt es nicht auf). Stattdessen:
   ```css
@@ -53,7 +54,7 @@ Regeln für Komponenten, Block-Markup, Daten und CSS. Platzhalter: `<prefix>` st
   `section:where([class])` hat Spezifität 0,0,1: schlägt `:where()`, verliert gegen jede BEM-Klasse.
 - ACSS setzt Überschriften- und Absatzabstände auf 0 – Abstände in Komponenten ausdrücklich setzen.
 - ACSS steuert die Buttonbreite über `--btn-width` und lädt nach dem eigenen Stylesheet: `--btn-width: 100%` statt `width: 100%`.
-- Eigene Tokens nur für das, was ACSS nicht kennt (z. B. Schriften, Schatten). Farben regelt das Projekt. Abstände, Schriftgrößen, Radius und Container kommen aus ACSS.
+- Eigene Tokens nur für das, was ACSS nicht kennt (z. B. Schriften, Schatten) – vorher in den ACSS-Variablen nachsehen. Farben regelt das Projekt. Abstände, Schriftgrößen, Radius und Container kommen aus ACSS.
 - **EMMP anpassen** über seine Variablen (`--menu-item-clr`, `--menu-cta-bg`, `--dropdown-content-bg` …), gesetzt mit doppelter Klasse (`.dwc-top-level-items-vars.dwc-top-level-items-vars`), damit sie unabhängig von der Ladereihenfolge gewinnen. Farbwerte nach den Farbregeln des Projekts.
 - EMMP markiert den aktiven Menüpunkt selbst mit `aria-current="page"`, aber nur bei exakt gleicher URL (Elternbereiche auf Unterseiten nicht).
 - **Tabellarische Daten** in Komponenten als CSS-Grid aus `div`s mit Tabellen-Rollen (`role="table|row|columnheader|rowheader|cell"`, Name per `aria-label`). Breite Tabellen seitlich scrollbar, erste Spalte bei Bedarf fixiert.
