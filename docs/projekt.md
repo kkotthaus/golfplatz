@@ -1,6 +1,6 @@
 # Projekt Golfplatz – Projektbeschreibung
 
-Fachlicher Rahmen der Website. Den technischen Stack beschreibt [development-environment.md](development-environment.md).
+Fachlicher Rahmen der Website. Den technischen Stack beschreiben [etch-nodes](../etch-nodes/docs/development-environment.md) und projektspezifisch [development-environment.md](development-environment.md).
 
 Dieses Repository ist ein **neutraler Blueprint für Golfclub-Websites**. Alle Inhalte sind Platzhalter („Golfclub Musterclub“). Wie ein neuer Club eingerichtet wird, steht in [neuer-club.md](neuer-club.md).
 

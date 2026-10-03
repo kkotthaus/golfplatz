@@ -1,44 +1,53 @@
-# Etch-Nodes – Entwicklungsumgebung
+# Entwicklungsumgebung – projektspezifisch
 
-Referenz für den technischen Stack und die Konventionen, auf denen die Nodes in diesem Repository aufbauen. Wird als Kontext für die Weiterentwicklung mit Claude genutzt.
+Stack, allgemeine Konventionen, Farbregeln und Betrieb stehen in [etch-nodes](../etch-nodes/CLAUDE.md) (git subtree). Hier steht nur, was für dieses Projekt gilt. Projekt-Prefix (`<prefix>` in etch-nodes): `golfplatz`.
 
-## Stack
+## etch-nodes aktualisieren
 
-Die Versionen stammen aus `wp plugin list --status=active`, Stand 2026-09-24. EtchMegaMenuPro ist kein eigenes Plugin, sondern als Komponenten in Etch hinterlegt. EtchSliderPro besteht aus Etch-Komponenten **und** dem Plugin `dwc-slider-pro-etch` (lädt Splide, das CSS und `window.SplideComponent`); ohne das Plugin bleiben die Slider stehen.
+`etch-nodes/` ist als git subtree (mit `--squash`) eingebunden. Neuen Stand holen, im Projekt-Root bei sauberem Arbeitsverzeichnis:
 
-| Baustein | Plugin-Slug | Version | Status | Zweck | Doku |
-| --- | --- | --- | --- | --- | --- |
-| WordPress | – | – | aktiv | CMS-Basis | – |
-| **Etch** | `etch` | 1.6.7 | aktiv | Visueller "Unified Visual Development Environment" für WordPress. Erzeugt echtes, semantisches HTML/CSS/PHP/JS statt proprietärem Builder-Markup und erstellt automatisch passende Gutenberg-Blöcke. | [docs.etchwp.com](https://docs.etchwp.com/) |
-| **Automatic.css v4 (ACSS)** | `automatic-css` | 4.0.1 | aktiv | CSS-Framework/Design-System mit Utility-Klassen, Design-Tokens, automatischen Farbrelationen und fluid-responsivem Spacing. Bindet sich direkt in Etch ein ("True Builder Integration"), keine Zusatz-Plugins nötig. | [docs.automaticcss.com](https://docs.automaticcss.com/) (Version 4) |
-| **OhMyEtch** | `oh-my-etch` | 1.6.0 | aktiv | Komponentenbibliothek mit atomaren, "headless-style" Bausteinen (Accordion, Dialog, Tabs u. a.) – zugängliches Verhalten/Interaktionslogik, aber bewusst wenig visuelle Vorgaben. Dazu Facet-Komponenten für Filter/Suche und WooCommerce-Atome (Warenkorb, Checkout). | [docs.ohmyetch.com](https://docs.ohmyetch.com/) |
-| **Media Bridge for Etch** | `media-bridge-for-etch` | 2.2.3 | aktiv | Medien-Erweiterung für Etch. _Genauer Einsatzzweck im Projekt noch zu dokumentieren._ | – |
-| **EtchSliderPro** | `dwc-slider-pro-etch` + Etch-Komponenten (IDs 240–246) | 1.2.3 | aktiv | Komponentenbasiertes Slider-/Carousel-System für Etch, auf Basis von Splide. Slider werden aus wiederverwendbaren Teilen (Wrapper, Track, Navigation, Fortschrittsanzeige) zusammengesetzt, ohne Code zu schreiben. | [design-with-cracka.gitbook.io/etchsliderpro](https://design-with-cracka.gitbook.io/etchsliderpro/) |
-| **EtchMegaMenuPro** | – (Etch-Komponente) | – | in Etch hinterlegt | Premium-Navigationssystem für Etch – von einfachen responsiven Menüs bis zu Mega-Menüs mit Animationen, Mobile-Optimierung und flexibler Logo-Positionierung. | [design-with-cracka.gitbook.io/etchmegamenupro](https://design-with-cracka.gitbook.io/etchmegamenupro/) |
-| **Meta Box AIO** | `meta-box-aio` | 3.12.0 | aktiv | Framework zum Erstellen eigener Felder/Meta-Boxen für Beiträge, Benutzerprofile, Einstellungsseiten usw., inkl. API zur Datenverwaltung. Das AIO-Paket enthält alle Erweiterungen, u. a. **MB Relationships** (Beziehungen zwischen Beitragstypen) und MB Custom Post Types. | [docs.metabox.io](https://docs.metabox.io/) |
-| **User Role Editor Pro** | `user-role-editor-pro` | 4.66.2 | aktiv | Verwaltung von Benutzerrollen und Rechten (Capabilities), z. B. eigene Rollen mit eingeschränktem Zugriff auf einzelne Beitragstypen und Einstellungsseiten. | [role-editor.com/documentation](https://www.role-editor.com/documentation/) |
-| **WPCodeBox 2** | `wpcodebox2` | 1.4.1 | aktiv | Verwaltet die eigenen PHP-Erweiterungen der Website als Snippets (Ordner „Golfplatz“, je Datei aus `wordpress/snippets/` ein Snippet). Ausführung per `eval()` zu `plugins_loaded`, Snippets mit Fehlern werden automatisch deaktiviert. Eigene MCP-Funktionen `wpcodebox/…`; schreibende nur nach Freigabe in den WPCodeBox-MCP-Einstellungen. | [docs.wpcodebox.com](https://docs.wpcodebox.com/) |
+```bash
+git fetch etch-nodes
+git subtree pull --prefix=etch-nodes etch-nodes main --squash
+```
 
-### Betrieb & Werkzeuge
+Das Remote `etch-nodes` existiert nur im lokalen Klon. In einem frischen Klon zuerst anlegen:
 
-| Baustein | Plugin-Slug | Version | Status | Zweck | Doku |
-| --- | --- | --- | --- | --- | --- |
-| **Duplicator Pro** | `duplicator-pro` | 5.0.4 | aktiv | Backup und Migration der Website, z. B. von Staging nach Live. | [duplicator.com/knowledge-base](https://duplicator.com/knowledge-base/) |
-| **MCP Adapter** | `mcp-adapter` | 0.6.1 | aktiv | Stellt WordPress-Funktionen über das Model Context Protocol für KI-Werkzeuge bereit. Nur dort aktiv lassen, wo er gebraucht wird, und nur für berechtigte Benutzer freigeben. | – |
-| **Uplink Editorial Title** | `uplink-editorial-title` | 1.1.2 | aktiv | _Zweck noch zu dokumentieren._ | – |
-| **Uplink Unified Ops Center** | `uplink-unified-ops-center` | 1.5.0 | aktiv | _Zweck noch zu dokumentieren._ | – |
+```bash
+git remote add etch-nodes https://github.com/kkotthaus/etch-nodes.git
+```
 
-Automatische Updates sind für alle Plugins deaktiviert. Updates werden von Hand eingespielt.
+Änderungen an `etch-nodes/` möglichst direkt im Repo etch-nodes machen und dann hier pullen. Zurückgeben: `git subtree push --prefix=etch-nodes etch-nodes <branch>`, danach Pull Request in etch-nodes. Projekte, die von diesem Blueprint abgeleitet sind, auf denselben Stand von etch-nodes pullen, damit Blueprint-Updates ohne Konflikt durchgehen.
 
-## Konventionen
+## Plugin-Versionen
 
-- **Navigationselemente:** Klassennamen nach **BEM** (`block__element--modifier`), z. B. `main-nav__item--active`.
+Stand 2026-09-24 aus `wp plugin list --status=active`. Automatische Updates sind aus.
 
-<!-- Weitere Konventionen (Node-Namensschema, Ordnerstruktur, Naming für ACSS-Variablen usw.) hier ergänzen. -->
-- **Etch-Komponenten statt Shortcodes.** Alles, was als Etch-Komponente gebaut werden kann, wird als Etch-Komponente gebaut – keine Shortcodes. Rechnet PHP etwas (Status relativ zu „jetzt“, Summen, Öffnungszeiten), stellt es nur die fertigen Werte als dynamische Daten bereit: global über den Filter `etch/dynamic_data/option` (`{options.golfplatz.<bereich>.…}`), je Beitrag über `etch/dynamic_data/post` (`{this.golfplatz.…}` bzw. `{item.golfplatz.…}` im Loop). Markup, Texte und Klassen stehen in der Komponente (Generator `wordpress/etch/*.mjs`) und bleiben im Builder bearbeitbar. Listen über Loops mit `target`, Varianten über Bedingungen, Klassen-Modifier als Datenfeld (`condition--{b.mod}`). PHP-Hooks ohne Markup im Inhalt (Skripte im Footer, Manifest) sind erlaubt.
-- **PHP läuft als WPCodeBox-Snippet** (`wordpress/snippets/`, übernommen mit MCP `golfplatz/snippets-sync`). WPCodeBox führt den Code per `eval()` in einem try-Block aus. Deshalb auf oberster Ebene `define( 'NAME', … )` statt `const`, kein `__DIR__` (stattdessen `GOLFPLATZ_DATEN` = `wp-content/golfplatz`), und jede Datei beginnt mit `defined( 'ABSPATH' ) || exit;`, weil sie auch als Build-Kopie im öffentlichen Ordner liegt.
-- **`body` nie mit `overflow: hidden`.** Im Etch-Builder ist `body` ein Flex-Container (`flex-direction: column`), EtchMegaMenuPro macht `html` zu Flex mit 100 % Höhe, und der Builder gibt jedem Block `min-height: 1px`. Mit `overflow-x: hidden` schrumpft `body` auf Fensterhöhe und staucht alle Abschnitte – im Builder überlappen sie dann (im Frontend fällt es nicht auf). Deshalb `overflow-x: clip` und `body > * { flex-shrink: 0 }`.
-- **Tabellarische Daten in Etch-Komponenten** als CSS-Grid aus `div`s mit Tabellen-Rollen (`role="table|row|columnheader|rowheader|cell"`, Name per `aria-label`), wie in Preistabelle, Scorekarte und Rating.
-- **Farben: immer das Farbsystem von Automatic.css.** Im CSS nur ACSS-Farbvariablen verwenden (`--primary*`, `--secondary*`, `--base*`, `--success*`, `--warning*`, `--danger*`, `--info*`, `--white`, `--black`) – keine eigenen Farbvariablen und keine Hex-Werte für Oberflächenfarben. Die Werte werden ausschließlich in ACSS gepflegt: Palette in `wordpress/etch/acss-farben.mjs` ändern und per MCP-Funktion `golfplatz/acss-colors` übernehmen. Zuordnung im Design: `--secondary-ultra-light` Seitenhintergrund, `--base-ultra-light` Flächen, `--base-light` Rahmen, `--base-semi-light` gedämpfter Text, `--base-semi-dark` Nebentext, `--info` Wintergrüns. Ausnahmen: Abschlagfarben (`--tee-*`) und Illustrationen (Bahngrafik, Platzhalter-Verläufe).
-- **Barrierefreiheit (WCAG 2.1 AA) der Farben.** Clubfarben stehen zentral in `wordpress/etch/acss-farben.mjs` (Blueprint: Primary `#2E6B4E` Golf-Grün, Secondary `#2C5A85` Blau). `--primary` nur als Fläche mit weißer Schrift (`--white`) oder für große Schrift/Grafik; grüne Schrift und Links immer `--primary-dark`. `--secondary` nie als Schrift auf Grün oder dunklen Flächen – dort `--white` bzw. `--secondary-light`. Gedämpfter Text `--base-semi-light` erfüllt 4,5:1; Rahmen von Eingabefeldern ebenfalls `--base-semi-light` (3:1). Status nie nur über Farbe, immer mit Text. Nach jeder Farbänderung `node wordpress/etch/kontrast.mjs` ausführen – das Skript muss ohne Fehler durchlaufen.
-- **Farbschema Hell/Dunkel über ACSS.** Hell ist Standard; der Umschalter setzt die ACSS-Klasse `scheme--dark` am `<html>`. ACSS rechnet jede Farbvariable mit `light-dark()` und tauscht im dunklen Schema die Abstufungen (`-ultra-light` ↔ `-ultra-dark`, `-light` ↔ `-dark`, `-semi-light` ↔ `-semi-dark`); `--white` wird dunkel, `--black` hell. CSS deshalb nach Rolle schreiben (z. B. Karte `--white`, Text auf `--primary` in `--white`) und nie davon ausgehen, dass `--white` weiß ist. Bereiche, die immer hell gerechnet werden sollen (dunkelgrüne Flächen, feste Illustrationen), in `immerHell` in `wordpress/etch/acss-farben.mjs` eintragen – nicht mit eigenen Farben lösen. Feste Werte ohne Umschaltung liefern die ACSS-Tokens `--<farbe>[-<stufe>]-ref`.
+| Baustein | Plugin-Slug | Version | Status | Anmerkung |
+| --- | --- | --- | --- | --- |
+| **Etch** | `etch` | 1.6.7 | aktiv | |
+| **Automatic.css** | `automatic-css` | 4.0.1 | aktiv | |
+| **OhMyEtch** | `oh-my-etch` | 1.6.0 | aktiv | |
+| **Media Bridge for Etch** | `media-bridge-for-etch` | 2.2.3 | aktiv | Medien-Erweiterung für Etch. _Genauer Einsatzzweck im Projekt noch zu dokumentieren._ |
+| **EtchSliderPro** | `dwc-slider-pro-etch` + Etch-Komponenten (IDs 240–246) | 1.2.3 | aktiv | |
+| **EtchMegaMenuPro** | – (Etch-Komponenten) | – | in Etch hinterlegt | |
+| **Meta Box AIO** | `meta-box-aio` | 3.12.0 | aktiv | |
+| **User Role Editor Pro** | `user-role-editor-pro` | 4.66.2 | aktiv | |
+| **WPCodeBox 2** | `wpcodebox2` | 1.4.1 | aktiv | Ordner „Golfplatz“, je Datei aus `wordpress/snippets/` ein Snippet |
+| **Duplicator Pro** | `duplicator-pro` | 5.0.4 | aktiv | |
+| **MCP Adapter** | `mcp-adapter` | 0.6.1 | aktiv | |
+| **Uplink Editorial Title** | `uplink-editorial-title` | 1.1.2 | aktiv | _Zweck noch zu dokumentieren._ |
+| **Uplink Unified Ops Center** | `uplink-unified-ops-center` | 1.5.0 | aktiv | _Zweck noch zu dokumentieren._ |
+
+## Projektspezifische Konventionen
+
+- **Dynamische Daten:** global `{options.golfplatz.<bereich>.…}`, je Beitrag `{this.golfplatz.…}` bzw. `{item.golfplatz.…}`. Generator der Komponenten: `wordpress/etch/*.mjs`.
+- **WPCodeBox:** Datenordner `wp-content/golfplatz` über die Konstante `GOLFPLATZ_DATEN` (statt `__DIR__`). Snippet-Sync per MCP `golfplatz/snippets-sync`.
+- **Tabellarische Daten** als CSS-Grid mit Tabellen-Rollen, wie in Preistabelle, Scorekarte und Rating.
+- **Farben:** Clubfarben zentral in `wordpress/etch/acss-farben.mjs`, übernehmen per MCP `golfplatz/acss-colors`.
+  - Blueprint: Primary `#2E6B4E` (Golf-Grün), Secondary `#2C5A85` (Blau).
+  - Zuordnung im Design: `--secondary-ultra-light` Seitenhintergrund, `--base-ultra-light` Flächen, `--base-light` Rahmen, `--base-semi-light` gedämpfter Text und Rahmen von Eingabefeldern, `--base-semi-dark` Nebentext, `--info` Wintergrüns.
+  - `--primary` nur als Fläche mit weißer Schrift (`--white`) oder für große Schrift/Grafik; grüne Schrift und Links immer `--primary-dark`. `--secondary` nie als Schrift auf Grün oder dunklen Flächen – dort `--white` bzw. `--secondary-light`.
+  - Ausnahmen von „nur ACSS-Farben“: Abschlagfarben (`--tee-*`) und Illustrationen (Bahngrafik, Platzhalter-Verläufe).
+  - Immer hell gerechnete Bereiche in `immerHell` in `wordpress/etch/acss-farben.mjs` eintragen.
+  - Kontrastprüfung: `node wordpress/etch/kontrast.mjs` – muss ohne Fehler durchlaufen.

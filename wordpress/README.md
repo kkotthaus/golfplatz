@@ -66,12 +66,7 @@ Danach `etch/dist/*` nach `wp-content/golfplatz/` kopieren (Konstante `GOLFPLATZ
   3. MCP `golfplatz/snippets-sync` aufrufen. Er legt fehlende Snippets an und aktualisiert geänderten Code, alles über die WPCodeBox-Funktionen `wpcodebox/*`, also mit deren Freigaben und Protokoll.
   - Mit `aktivieren: true` schaltet er deaktivierte Snippets ein, aber nur, wenn keine gleichnamige Datei in `wp-content/mu-plugins/` liegt (sonst doppelte Funktionen).
   - `nur: ["golfplatz-turniere"]` beschränkt den Lauf auf einzelne Dateien.
-- WPCodeBox führt jedes Snippet per `eval()` in einem try-Block aus. Daraus folgen drei Regeln für den PHP-Code:
-  - **Kein `const` auf oberster Ebene**, sondern `define( 'NAME', … )`. `const` ist im Block ein Syntaxfehler, und WPCodeBox schaltet das Snippet dann ab.
-  - **Kein `__DIR__`**, sondern `GOLFPLATZ_DATEN` (`wp-content/golfplatz`).
-  - Funktionen gelten erst ab ihrer Definition. Beim Laden nichts aufrufen, was weiter unten definiert ist; Hooks sind unkritisch.
-- Ein Snippet mit Fehler schaltet WPCodeBox selbst ab. Prüfen mit `wpcodebox/list-errored-snippets` bzw. `enabled` in `wpcodebox/list-snippets`.
-  - Das Feld `error` bleibt nach einer Korrektur stehen, bis das Snippet einmal in der WPCodeBox-Oberfläche gespeichert wird. Maßgeblich ist `enabled`.
+- Regeln für den PHP-Code (`eval()`, `define()` statt `const`, kein `__DIR__`, Fehlerstatus `enabled`): [etch-nodes/docs/betrieb.md](../etch-nodes/docs/betrieb.md#php-als-wpcodebox-snippets). Statt `__DIR__` hier `GOLFPLATZ_DATEN` (`wp-content/golfplatz`).
 - In den WPCodeBox-MCP-Einstellungen freigegeben: Create Folder, Create/Update/Enable/Disable Snippet.
 - **`golfplatz-mcp` nur in der Entwicklung:** Das Snippet registriert seine Funktionen nur, wenn `wp_get_environment_type()` „local“ oder „development“ meldet (Local: „local“; live ohne Angabe „production“). Bewusst live nutzen: `define( 'GOLFPLATZ_MCP_LIVE', true );` in der `wp-config.php`.
 
@@ -124,16 +119,13 @@ Für `spielbahn` sind zusätzlich die Meta-Box-eigenen Funktionen eingeschaltet 
 
 ## Regeln für das Block-Markup
 
-- **Backslashes in Attributen:** Die Template-Route von Etch speichert ohne `wp_slash()`. Das Plugin maskiert deshalb alle Inhalte vorab, und `lib.mjs` serialisiert Attribute wie WordPress selbst (JSON-Escapes für Anführungszeichen, `--`, `<`, `>`, `&`). So bleiben auch die Gruppen-Eigenschaften der EMMP-Komponenten intakt.
-- **Dynamische Daten:** `{this.title}`, Meta-Box-Felder als `{this.metabox.<feld_id>}`, WYSIWYG-Felder über `raw()` (`etch/raw-html`).
-- **Keine Shortcodes.** Rechnet PHP etwas, stellt es die Werte als Etch-Daten bereit (`etch/dynamic_data/option` → `{options.golfplatz.…}`, `etch/dynamic_data/post` → `{this|item.golfplatz.…}`); das Markup steht in der Komponente. Listen: `loop({ target: 'options.golfplatz.…', itemId: 'x' }, …)`, verschachtelt `loop({ target: 'x.liste', … })`. Varianten: `wenn('x.flag', …)`, sonst-Zweig `wenn('x.flag', …, 'isFalsy')`, Vergleich zweier Werte `wenn('z.key', …, '===', 'props.bereich')`. Modifier als Datenfeld in der Klasse (`condition--{b.mod}`).
-- **Komponenten in Komponenten:** `komponente('<Key>', { … })` funktioniert auch innerhalb einer Komponente. Der Sync ersetzt `__REF_<key>__` der Reihe nach, deshalb stehen eingebundene Komponenten in `components` vorne.
+Allgemeine Regeln (Serialisierung der Attribute, `__REF_<Key>__`, keine Inhalte direkt per MCP, Template-Dateinamen, BEM, Loops und Bedingungen): [etch-nodes/docs/konventionen.md](../etch-nodes/docs/konventionen.md). Projektspezifisch, mit den Helfern aus `etch/lib.mjs`:
+
+- **Daten:** `{options.golfplatz.…}`, `{this|item.golfplatz.…}`; WYSIWYG-Felder über `raw()`.
+- **Listen und Varianten:** `loop({ target: 'options.golfplatz.…', itemId: 'x' }, …)`, verschachtelt `loop({ target: 'x.liste', … })`; `wenn('x.flag', …)`, sonst-Zweig `wenn('x.flag', …, 'isFalsy')`, Vergleich `wenn('z.key', …, '===', 'props.bereich')`.
+- **Komponenten einbinden:** `komponente('<Key>', { … })`; eingebundene Komponenten stehen in `components` (`etch/komponenten.mjs`) vorne.
 - **Clubdaten** nie als Text ins Markup schreiben, sondern immer `club('<feld>')` bzw. `telHref('<feld>')` verwenden.
-- **Bedingungen:** `wenn('this.metabox.feld', [...])` blendet einen Abschnitt aus, wenn das Feld leer ist.
-- **Loops:** `loop({ loopId: 'gp-bahnen' }, [...])`, Preset in `etch/loops.mjs`. Im Loop `{item.metabox.<feld>}`, `{item.permalink.relative}` und die berechneten Bahndaten `{item.golfplatz.…}`.
-- **Inhalte nicht direkt per MCP-Aufruf übergeben:** Beim direkten Übergeben an `save-page` gehen die Backslashes aus `\u0022` verloren. Immer über Generator, Datei und `sync-from-files` arbeiten.
-- **Template-Dateien** heißen `template-<slug>.html`, damit ein Template wie `page-birdiebook` nicht mit der Seiten-Datei `page-birdiebook.html` kollidiert.
-- Styles hängen an den BEM-Klassen im globalen Stylesheet, nicht an Etch-Style-IDs.
+- **Loops:** `loop({ loopId: 'gp-bahnen' }, [...])`, Preset in `etch/loops.mjs`. Im Loop zusätzlich die berechneten Bahndaten `{item.golfplatz.…}`.
 
 ## Stand 2026-09-25
 
@@ -180,7 +172,8 @@ Das Markup des großen Blocks ist dagegen die **Etch-Komponente „Platzstatus�
 
 ### Etch- und ACSS-Eigenheiten
 
-- **Farben nur aus ACSS.** Das CSS nutzt ausschließlich ACSS-Farbvariablen (Konvention in `docs/development-environment.md`). ACSS v4 rechnet mit OKLCH-Schlüsseln je Abstufung (`<farbe>[-<stufe>]-l|c|h-oklch`); `color-<farbe>` allein ändert nichts. `option-palette-unify-*-lightness` muss aus sein, sonst überschreibt ACSS die Helligkeiten.
+Allgemein: [etch-nodes/docs/konventionen.md](../etch-nodes/docs/konventionen.md#css) und [etch-nodes/docs/farben-barrierefreiheit.md](../etch-nodes/docs/farben-barrierefreiheit.md). Im Projekt:
 
-- ACSS/Etch geben jedem `<section>` per `:where()` `display:flex`, `gap` und seitliches Padding. `etch/css/tokens.css` neutralisiert das für Abschnitte mit Klasse (`section:where([class])`).
-- Etch filtert SVG aus Raw-HTML. Icons deshalb als Etch-Elemente (`icon()` in `lib.mjs`) oder per CSS-Maske; die Bahngrafik ist HTML/CSS.
+- Palette in `etch/acss-farben.mjs`, Farben und Zuordnung in [docs/development-environment.md](../docs/development-environment.md).
+- `etch/css/tokens.css` neutralisiert den `<section>`-Standard von ACSS/Etch (`section:where([class])`).
+- Icons als Etch-Elemente über `icon()` in `lib.mjs`; die Bahngrafik ist HTML/CSS.

@@ -497,7 +497,7 @@ flowchart LR
 - **Formulare:** Formular-Plugin, Hinweis mit Link auf `/datenschutz/`.
 - **Keine externen Dienste** ohne Einwilligung (Schriften, Karten, Videos). Ausnahme nach Klärung: PC CADDIE.
 - **Barrierefreiheit:** Skip-Link, `aria-current` in Navigation und Bahn-Navigation, Tabellen mit `scope`, Tabs und Akkordeons per Tastatur bedienbar.
-- **BEM:** Klassennamen wie im Prototyp, siehe [development-environment.md](development-environment.md#konventionen).
+- **BEM:** Klassennamen wie im Prototyp, siehe [etch-nodes/docs/konventionen.md](../etch-nodes/docs/konventionen.md#css).
 
 ## Offene Punkte
 
