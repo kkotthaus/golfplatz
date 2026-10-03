@@ -544,7 +544,7 @@ html.scheme--dark {
 .person-card__name { font-size: var(--h4); margin-bottom: 0.1em; }
 .person-card__role { color: var(--secondary-dark); font-size: var(--text-s); font-weight: 600; margin-bottom: var(--space-xs); }
 .person-card__text { font-size: var(--text-s); color: var(--base-semi-dark); }
-.person-card__link { display: block; font-size: var(--text-s); overflow-wrap: anywhere; }
+.person-card__link { display: flex; align-items: center; min-height: 24px; font-size: var(--text-s); overflow-wrap: anywhere; }
 .team-card { background: var(--white); border: 1px solid var(--base-light); border-top: 3px solid var(--primary); border-radius: var(--radius-l); padding: var(--space-m); position: relative; transition: box-shadow var(--transition), transform var(--transition); }
 .team-card:hover { box-shadow: var(--shadow-m); transform: translateY(-2px); }
 .team-card__league { font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary-dark); font-weight: 700; margin-bottom: var(--space-xs); }

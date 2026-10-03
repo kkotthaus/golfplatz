@@ -514,7 +514,8 @@ pages.push({
   content: markup(
     seitenkopf({ krumen: [['Aktuelles']], eyebrow: 'News', titel: 'Aktuelles aus dem Club' }),
     el('section', 'section', [
-      el('div', 'container', [kategorienNav(), komponente('Newskarten', { liste: 'alle' }), keineBeitraege(), seitenNav()]),
+      // Unsichtbare h2, damit die Kartentitel (h3) nicht direkt auf die h1 folgen
+      el('div', 'container', [t('h2', 'visually-hidden', 'Alle Nachrichten'), kategorienNav(), komponente('Newskarten', { liste: 'alle' }), keineBeitraege(), seitenNav()]),
     ], { name: 'Beiträge' }),
   ),
 });

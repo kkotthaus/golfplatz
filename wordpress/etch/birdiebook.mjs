@@ -108,7 +108,7 @@ const entfernungen = () =>
 const bahnSlide = () =>
   el('div', 'splide__slide hole-sheet', [
     el('header', 'hole-sheet__head', [
-      el('h3', 'hole-sheet__title', [t('span', 'hole-sheet__label', 'Bahn'), text(' '), t('span', 'hole-sheet__number', NR)]),
+      el('h2', 'hole-sheet__title', [t('span', 'hole-sheet__label', 'Bahn'), text(' '), t('span', 'hole-sheet__number', NR)]),
       el('div', 'hole-sheet__status', [t('span', `hole-status hole-status--${G('status.mod')}`, G('status.text'))]),
       el('p', 'hole-sheet__length', [
         ...ABSCHLAEGE.map(([id]) => t('span', `hole-sheet__len hole-sheet__len--${id}`, B(`laenge_${id}`))),
