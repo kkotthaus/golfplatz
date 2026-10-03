@@ -97,7 +97,7 @@ export const preiskartenKomponente = {
             wenn('c.hat_leistungen', [
               el('ul', 'price-card__list', [loop({ target: 'c.leistungen', itemId: 'l' }, [t('li', 'price-card__item', '{l.text}')])]),
             ]),
-            t('a', 'btn btn--{c.button_mod} price-card__button', '{c.button}', { attrs: { href: '{props.ziel}' } }),
+            t('a', '{c.button_klasse} btn--s price-card__button', '{c.button}', { attrs: { href: '{props.ziel}' } }),
           ], { name: 'Preiskarte' }),
         ]),
       ], { name: 'Preiskarten' }),

@@ -228,13 +228,13 @@ add_action(
 		golfplatz_mcp_ability(
 			'acss-colors',
 			array(
-				'label'            => 'Automatic.css: Farben lesen oder setzen',
+				'label'            => 'Automatic.css: Farben und Buttons lesen oder setzen',
 				'description'      => 'Ohne „werte“: liefert alle Farb-Einstellungen von Automatic.css (Schlüssel color-*, option-*-clr, OKLCH je Stufe und Farbschema: auto-color-scheme, website-color-scheme, color-scheme-force-*). Mit „werte“: setzt diese über die offizielle ACSS-API (API::update_settings) und erzeugt das CSS neu. Andere Einstellungen sind nicht erlaubt.',
 				'input_schema'     => array(
 					'type'       => 'object',
 					'properties' => array(
 						'werte' => array( 'type' => 'object', 'additionalProperties' => true, 'description' => 'z. B. {"color-primary":"#1e3a2b","option-secondary-clr":"on"}' ),
-						'aus_datei' => array( 'type' => 'boolean', 'description' => 'true: Werte aus wp-content/golfplatz/daten/acss-farben.json (erzeugt von etch/build.mjs) übernehmen' ),
+						'aus_datei' => array( 'type' => 'boolean', 'description' => 'true: Werte aus wp-content/golfplatz/daten/acss-farben.json und acss-buttons.json (erzeugt von etch/build.mjs) übernehmen' ),
 					),
 				),
 				'execute_callback' => 'golfplatz_mcp_acss_colors',
@@ -935,9 +935,9 @@ function golfplatz_mcp_import_content( $input ) {
 	return $log;
 }
 
-/** Nur Farb-Einstellungen von Automatic.css (Palette und Schalter je Farbe). */
+/** Nur Farb-Einstellungen von Automatic.css (Palette und Schalter je Farbe) und das Aussehen der Buttons. */
 function golfplatz_mcp_acss_farbschluessel( string $key ): bool {
-	return (bool) preg_match( '/^(color-[a-z0-9-]+|option-[a-z]+-clr|option-palette-unify-[a-z-]+|unified-lightness-value|auto-color-scheme|website-color-scheme|option-ref-color-tokens|btn-(primary|secondary)-(hover-)?text|link-color(-hover)?|(primary|secondary|tertiary|accent|base|neutral|success|warning|danger|info)(-(ultra-light|light|semi-light|semi-dark|dark|ultra-dark|hover))?-[lch](-alt)?-oklch)$/', $key );
+	return (bool) preg_match( '/^(color-[a-z0-9-]+|option-[a-z]+-clr|option-palette-unify-[a-z-]+|unified-lightness-value|auto-color-scheme|website-color-scheme|option-ref-color-tokens|btn-(primary|secondary)-(hover-)?text|link-color(-hover)?|btn-(border-radius|border-width|font-weight|letter-spacing|line-height|padding-block|padding-inline)|(primary|secondary|tertiary|accent|base|neutral|success|warning|danger|info)(-(ultra-light|light|semi-light|semi-dark|dark|ultra-dark|hover))?-[lch](-alt)?-oklch)$/', $key );
 }
 
 function golfplatz_mcp_acss_colors( $input ) {
@@ -950,7 +950,9 @@ function golfplatz_mcp_acss_colors( $input ) {
 		if ( ! is_array( $datei ) ) {
 			return new WP_Error( 'golfplatz_daten', 'daten/acss-farben.json fehlt oder ist ungültig.' );
 		}
-		$werte = array_merge( $datei, $werte );
+		// Button-Aussehen (etch/acss-buttons.mjs)
+		$buttons = json_decode( (string) @file_get_contents( GOLFPLATZ_DATEN . '/daten/acss-buttons.json' ), true );
+		$werte   = array_merge( $datei, is_array( $buttons ) ? $buttons : array(), $werte );
 	}
 	if ( $werte ) {
 		$abgelehnt = array_values( array_filter( array_keys( $werte ), fn( $k ) => ! golfplatz_mcp_acss_farbschluessel( (string) $k ) ) );

@@ -39,7 +39,7 @@ const turnier = () =>
       wenn('tu.plaetze', [t('p', 'tournament__places', '{tu.plaetze}')]),
     ]),
     el('div', 'tournament__actions', [
-      wenn('tu.hat_anmeldung', [t('a', 'btn btn--primary tournament__button', 'Anmelden', { attrs: { href: '{tu.link_anmeldung}', rel: 'noopener' } })]),
+      wenn('tu.hat_anmeldung', [t('a', 'btn--primary btn--s tournament__button', 'Anmelden', { attrs: { href: '{tu.link_anmeldung}', rel: 'noopener' } })]),
       wenn('tu.ausgebucht', [t('span', 'tournament__full', 'ausgebucht')]),
       wenn('tu.hat_ausschreibung', [t('a', 'tournament__link', 'Ausschreibung (PDF)', { attrs: { href: '{tu.link_ausschreibung}', rel: 'noopener' } })]),
       wenn('tu.hat_details', [t('a', 'tournament__link', 'Details', { attrs: { href: '{tu.link_details}', rel: 'noopener' } })]),

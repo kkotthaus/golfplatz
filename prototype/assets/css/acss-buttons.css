@@ -1,0 +1,73 @@
+/* Generiert aus wordpress/etch/acss-buttons.mjs – nicht von Hand bearbeiten.
+   Im Prototyp ersetzt diese Datei die Buttons von Automatic.css (gleiche Klassen, Variablen und Werte). */
+:root {
+  --btn-padding-block: .5em;
+  --btn-padding-inline: 1.25em;
+  --btn-min-width: 8.75rem;
+  --btn-width: max-content;
+  --btn-font-weight: 400;
+  --btn-line-height: 1;
+  --btn-letter-spacing: 0;
+  --btn-border-width: 1.5px;
+  --btn-border-style: solid;
+  --btn-border-radius: var(--radius);
+  --btn-font-weight: 600;
+  --btn-letter-spacing: .03em;
+  --btn-line-height: 1.2;
+  --btn-padding-block: .75em;
+  --btn-padding-inline: 1.4em;
+}
+[class*="btn--"] {
+  display: inline-flex; justify-content: center; align-items: center; text-align: center;
+  background: var(--btn-background); color: var(--btn-text-color);
+  padding-block: var(--btn-padding-block); padding-inline: var(--btn-padding-inline);
+  inline-size: var(--btn-width, auto); min-inline-size: var(--btn-min-width);
+  line-height: var(--btn-line-height); font-family: inherit; font-size: var(--btn-font-size, var(--text-m));
+  font-weight: var(--btn-font-weight); letter-spacing: var(--btn-letter-spacing); text-decoration: none;
+  border-width: var(--btn-border-width); border-style: var(--btn-border-style); border-radius: var(--btn-border-radius); border-color: var(--btn-border-color);
+  transition: var(--transition); cursor: pointer;
+}
+[class*="btn--"]:hover { background: var(--btn-background-hover); color: var(--btn-text-color-hover); border-color: var(--btn-border-color-hover); }
+.btn--s { --btn-font-size: var(--text-s); }
+.btn--primary {
+  --btn-background: var(--primary);
+  --btn-background-hover: var(--primary-hover);
+  --btn-text-color: var(--white);
+  --btn-text-color-hover: var(--white);
+  --btn-border-color: var(--btn-background);
+  --btn-border-color-hover: var(--btn-background-hover);
+}
+.btn--secondary {
+  --btn-background: var(--secondary);
+  --btn-background-hover: var(--secondary-hover);
+  --btn-text-color: var(--white);
+  --btn-text-color-hover: var(--white);
+  --btn-border-color: var(--btn-background);
+  --btn-border-color-hover: var(--btn-background-hover);
+}
+.btn--primary-light {
+  --btn-background: var(--primary-ultra-light);
+  --btn-background-hover: var(--primary-light);
+  --btn-text-color: var(--primary);
+  --btn-text-color-hover: var(--primary-ultra-dark);
+  --btn-border-color: var(--btn-background);
+  --btn-border-color-hover: var(--btn-background-hover);
+}
+.btn--primary.btn--outline {
+  --btn-background: transparent;
+  --btn-background-hover: var(--primary-hover);
+  --btn-text-color: var(--primary);
+  --btn-text-color-hover: var(--primary-ultra-light);
+  --btn-border-width: 1.5px;
+  --btn-border-color: var(--primary);
+  --btn-border-color-hover: var(--btn-background-hover);
+}
+.btn--primary-light.btn--outline {
+  --btn-background: transparent;
+  --btn-background-hover: var(--primary-light);
+  --btn-text-color: var(--primary-light);
+  --btn-text-color-hover: var(--primary-dark);
+  --btn-border-width: 1.5px;
+  --btn-border-color: var(--primary-light);
+  --btn-border-color-hover: var(--btn-background-hover);
+}

@@ -13,6 +13,7 @@ import {
   pageHero, sectionHead, hoursList, guestInfo, statusBoard, facilityHours, openingHours, personCard, newsCard, priceTable, priceMatrix, preisText, prototypeForm, holeSvg,
 } from './components.mjs';
 import { farbenCss } from '../../wordpress/etch/acss-farben.mjs';
+import { buttonsCss } from '../../wordpress/etch/acss-buttons.mjs';
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const HEUTE = new Date().toISOString().slice(0, 10);
@@ -68,7 +69,7 @@ const mainNav = (r, aktiv) => `
       .join('')}
   </ul>
   <div class="main-nav__actions">
-    <a class="btn btn--secondary main-nav__cta" href="${r}greenfee/#spielen">Als Gast spielen</a>
+    <a class="btn--secondary btn--s main-nav__cta" href="${r}greenfee/#spielen">Als Gast spielen</a>
   </div>
 </nav>`;
 
@@ -157,6 +158,7 @@ function page({ path, title, description = club.claim, aktiv = '', body, bodyCla
 <meta name="description" content="${esc(description)}">
 <script>try{if(localStorage.getItem('golfplatz-farbschema')==='dunkel'){document.documentElement.classList.add('scheme--dark')}}catch(e){}</script>
 <link rel="stylesheet" href="${r}assets/css/farben.css">
+<link rel="stylesheet" href="${r}assets/css/acss-buttons.css">
 <link rel="stylesheet" href="${r}assets/css/tokens.css">
 <link rel="stylesheet" href="${r}assets/css/main.css">
 <script src="${r}assets/js/data.js" defer></script>
@@ -256,8 +258,8 @@ page({
       <h1 class="home-hero__title"><span class="home-hero__line">Golf mit Tradition,</span><span class="home-hero__line">Natur mit Weitblick.</span></h1>
       <p class="home-hero__lead">${esc(club.claim)} Mitglieder, Gäste und Einsteiger sind herzlich willkommen.</p>
       <div class="home-hero__actions">
-        <a class="btn btn--primary btn--large" href="${r}greenfee/#spielen">Als Gast spielen</a>
-        <a class="btn btn--ghost btn--large" href="${r}mitgliedschaft/">Mitglied werden</a>
+        <a class="btn--primary" href="${r}greenfee/#spielen">Als Gast spielen</a>
+        <a class="btn--primary-light" href="${r}mitgliedschaft/">Mitglied werden</a>
       </div>
     </div>
     <aside class="status-summary" aria-labelledby="status-summary-title" data-status-summary>
@@ -316,8 +318,8 @@ page({
         <div class="stats__item"><dt class="stats__label">CR / Slope Gelb</dt><dd class="stats__value">${zahl(abschlaege[0].cr, 1)} / ${abschlaege[0].slope}</dd></div>
       </dl>
       <div class="button-row">
-        <a class="btn btn--primary" href="${r}platz/">Platz & Bahnen</a>
-        <a class="btn btn--outline" href="${r}platz/spielvorgaben/">Spielvorgaben-Rechner</a>
+        <a class="btn--primary btn--s" href="${r}platz/">Platz & Bahnen</a>
+        <a class="btn--primary btn--outline btn--s" href="${r}platz/spielvorgaben/">Spielvorgaben-Rechner</a>
       </div>
     </div>
     <div class="split__media hole-strip">
@@ -352,8 +354,8 @@ page({
       ${sectionHead({ eyebrow: 'Restaurant & Veranstaltungen', title: 'Das 19. Loch – für Golfer und Genießer', lead: restaurant.hinweis })}
       ${openingHours('restaurant', { mod: 'light' })}
       <div class="button-row">
-        <a class="btn btn--secondary" href="${r}restaurant/">Speisekarte & Öffnungszeiten</a>
-        <a class="btn btn--ghost" href="${r}restaurant/#feiern">Feiern & Firmenevents</a>
+        <a class="btn--secondary btn--s" href="${r}restaurant/">Speisekarte & Öffnungszeiten</a>
+        <a class="btn--primary-light btn--outline btn--s" href="${r}restaurant/#feiern">Feiern & Firmenevents</a>
       </div>
     </div>
     <div class="split__media feature-band__quote">
@@ -513,7 +515,7 @@ const zaehlkarte = () => {
     <div class="score-calc__field"><label class="score-calc__label" for="sc-tee">Abschlag</label><select class="score-calc__select" id="sc-tee" data-sc-tee>${abschlaege.map((a) => `<option value="${a.id}" data-cr="${a.cr}" data-slope="${a.slope}" data-par="${a.par}" data-geschlecht="${a.geschlecht}">${a.name} · ${geschlechtText(a)}</option>`).join('')}</select></div>
     <div class="score-calc__field score-calc__field--sv"><span class="score-calc__label" id="sc-sv-label">Ihre Spielvorgabe</span><output class="score-calc__sv" data-sc-sv aria-labelledby="sc-sv-label" aria-live="polite">–</output></div>
   </div>
-  <div class="score-calc__shared" data-sc-geteilt hidden><p class="score-calc__shared-text">Sie sehen eine geteilte Runde. Sobald Sie etwas ändern, wird sie als Ihre Runde gespeichert.</p><button class="btn btn--outline score-calc__own" type="button" data-sc-eigene>Meine eigene Runde anzeigen</button></div>
+  <div class="score-calc__shared" data-sc-geteilt hidden><p class="score-calc__shared-text">Sie sehen eine geteilte Runde. Sobald Sie etwas ändern, wird sie als Ihre Runde gespeichert.</p><button class="btn--primary btn--outline btn--s score-calc__own" type="button" data-sc-eigene>Meine eigene Runde anzeigen</button></div>
   <p class="calculator__error" data-sc-error hidden role="alert">Bitte einen Handicap-Index zwischen +5,0 und 54,0 eingeben.</p>
   <div class="table-wrap">
   <div role="table" class="score-calc__table" aria-label="Zählkarte: Vorgabe, Schläge und Punkte je Loch">
@@ -523,7 +525,7 @@ const zaehlkarte = () => {
   </div>
   <div class="score-calc__footer">
     <dl class="score-calc__summary" aria-live="polite">${stat('gespielt', 'Gespielte Löcher')}${stat('brutto', 'Brutto')}${stat('netto', 'Netto')}${stat('pb', 'Stableford brutto')}${stat('pn', 'Stableford netto')}</dl>
-    <div class="score-calc__actions"><button class="btn btn--primary score-calc__share" type="button" data-sc-teilen>Ergebnis teilen</button><button class="btn btn--outline score-calc__download" type="button" data-sc-html>Als HTML speichern</button><button class="btn btn--outline score-calc__reset" type="button" data-sc-reset>Schläge löschen</button></div>
+    <div class="score-calc__actions"><button class="btn--primary btn--s score-calc__share" type="button" data-sc-teilen>Ergebnis teilen</button><button class="btn--primary btn--outline btn--s score-calc__download" type="button" data-sc-html>Als HTML speichern</button><button class="btn--primary btn--outline btn--s score-calc__reset" type="button" data-sc-reset>Schläge löschen</button></div>
   </div>
   <p class="score-calc__status" data-sc-status role="status" hidden></p>
   <p class="score-calc__note">Vorgabeschläge nach Loch-HCP verteilt. Netto = Schläge − Vorgabe. Stableford: Par = 2 Punkte, je Schlag besser +1, ab zwei über Par (netto: über Par plus Vorgabe) 0 Punkte. Ihre Eingaben bleiben nur in diesem Browser gespeichert.</p>
@@ -676,7 +678,7 @@ ${pageHero({ r, crumbs: [['Mitgliedschaft']], eyebrow: 'Mitglied werden', title:
         <p class="price-card__price"><span class="price-card__amount">${preisText(m.betrag)}</span>${m.betrag !== null ? ` <span class="price-card__unit">${esc(einheitText[m.einheit])}</span>` : ''}</p>
         ${m.zusatz ? `<p class="price-card__note">${esc(m.zusatz)}</p>` : ''}
         <ul class="price-card__list">${m.leistungen.map((l) => `<li class="price-card__item">${esc(l)}</li>`).join('')}</ul>
-        <a class="btn ${m.hervorheben ? 'btn--primary' : 'btn--outline'} price-card__button" href="#antrag">${m.betrag === null ? 'Gespräch vereinbaren' : 'Anfragen'}</a>
+        <a class="${m.hervorheben ? 'btn--primary' : 'btn--primary btn--outline'} btn--s price-card__button" href="#antrag">${m.betrag === null ? 'Gespräch vereinbaren' : 'Anfragen'}</a>
       </article>`).join('')}
     </div>
   </div>
@@ -743,7 +745,7 @@ ${pageHero({ r, crumbs: [['Turniere & Kalender']], eyebrow: 'Spielbetrieb', titl
     <div class="prose">
       <h2>Ligaspiele der Mannschaften</h2>
       <p>Die Ligaspiele unserer zehn Mannschaften pflegen wir direkt auf der Website. Termine, Ergebnisse und Spielberichte finden Sie bei den Mannschaften.</p>
-      <p><a class="btn btn--outline" href="${r}mannschaften/ligaspiele/">Alle Ligaspiele</a></p>
+      <p><a class="btn--primary btn--outline btn--s" href="${r}mannschaften/ligaspiele/">Alle Ligaspiele</a></p>
     </div>
     <div class="prose">
       <h2>Abschlagsperren</h2>
@@ -813,7 +815,7 @@ ${pageHero({ r, crumbs: [['Mannschaften']], eyebrow: 'Ligabetrieb', title: 'Unse
       </article>`;
       }).join('')}
     </div>
-    <p class="more-link"><a class="btn btn--outline" href="ligaspiele/">Alle Ligaspiele im Überblick</a></p>
+    <p class="more-link"><a class="btn--primary btn--outline btn--s" href="ligaspiele/">Alle Ligaspiele im Überblick</a></p>
   </div>
 </section>`,
 });
@@ -894,7 +896,7 @@ ${pageHero({ r, crumbs: [['Restaurant']], eyebrow: 'Gastronomie', title: esc(res
     <div>
       ${restaurant.hinweis ? `<p class="notice">${esc(restaurant.hinweis)}</p>` : ''}
       <h2 class="h3">Öffnungszeiten</h2>${openingHours('restaurant')}
-      ${restaurant.telefon ? `<p class="spacer-top"><a class="btn btn--primary" href="${telHref(restaurant.telefon)}">${icon('phone')} Tisch reservieren</a></p>` : ''}
+      ${restaurant.telefon ? `<p class="spacer-top"><a class="btn--primary btn--s" href="${telHref(restaurant.telefon)}">${icon('phone')} Tisch reservieren</a></p>` : ''}
     </div>
     <div class="menu-card">
       <h2 class="menu-card__title">Aus der Speisekarte</h2>
@@ -954,7 +956,7 @@ ${pageHero({ r, crumbs: [['Aktuelles', 'news/'], [n.titel]], eyebrow: `${n.kateg
   <div class="container prose prose--narrow">
     <p class="lead">${esc(n.teaser)}</p>
     ${n.mitglieder
-      ? `<div class="members-lock">${icon('lock')}<div><p><strong>Dieser Beitrag ist nur für Mitglieder.</strong></p><p><a class="btn btn--primary" href="${r}mitglieder/">Anmelden</a></p></div></div>`
+      ? `<div class="members-lock">${icon('lock')}<div><p><strong>Dieser Beitrag ist nur für Mitglieder.</strong></p><p><a class="btn--primary btn--s" href="${r}mitglieder/">Anmelden</a></p></div></div>`
       : `<p>Hier steht der vollständige Beitragstext. Er wird im WordPress-Editor gepflegt und kann Bilder, Zwischenüberschriften und Links enthalten.</p><p>Das Sekretariat legt News als normale Beiträge an. Über den Schalter „Nur für Mitglieder“ lässt sich ein Beitrag auf angemeldete Mitglieder beschränken.</p>`}
     <p><a class="link-arrow" href="${r}news/">Alle Nachrichten ${icon('arrow')}</a></p>
   </div>
@@ -1000,7 +1002,7 @@ ${pageHero({ r, crumbs: [['Club & Kontakt']], eyebrow: 'Über uns', title: 'Club
     <div class="prose">
       <h2>Jugend</h2>
       <p>Ansprechpartnerin für die Jugend ist unser Vorstand Jugend. Angebote für Kinder und Jugendliche folgen.</p>
-      <p><a class="btn btn--outline" href="${r}golfschule/">Golfschule</a></p>
+      <p><a class="btn--primary btn--outline btn--s" href="${r}golfschule/">Golfschule</a></p>
     </div>
     ${personCard(personen.find((p) => p.funktion.includes('Jugend')))}
   </div>
@@ -1071,6 +1073,7 @@ ${pageHero({ r, crumbs: [[titel]], title: titel })}
 // ---------- Farben (wie ACSS, hell/dunkel) ----------
 mkdirSync(join(OUT, 'assets/css'), { recursive: true });
 writeFileSync(join(OUT, 'assets/css/farben.css'), farbenCss());
+writeFileSync(join(OUT, 'assets/css/acss-buttons.css'), buttonsCss());
 
 // ---------- Daten für das Frontend-JS ----------
 mkdirSync(join(OUT, 'assets/js'), { recursive: true });

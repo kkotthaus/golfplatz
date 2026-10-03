@@ -57,7 +57,7 @@ export const zaehlkarteKomponente = {
     ]),
     el('div', 'score-calc__shared', [
       t('p', 'score-calc__shared-text', 'Sie sehen eine geteilte Runde. Sobald Sie etwas ändern, wird sie als Ihre Runde gespeichert.'),
-      t('button', 'btn btn--outline score-calc__own', 'Meine eigene Runde anzeigen', { attrs: { type: 'button', 'data-sc-eigene': '' } }),
+      t('button', 'btn--primary btn--outline btn--s score-calc__own', 'Meine eigene Runde anzeigen', { attrs: { type: 'button', 'data-sc-eigene': '' } }),
     ], { attrs: { 'data-sc-geteilt': '', hidden: '' } }),
     t('p', 'calculator__error', 'Bitte einen Handicap-Index zwischen +5,0 und 54,0 eingeben.', { attrs: { 'data-sc-error': '', hidden: '', role: 'alert' } }),
     el('div', 'table-wrap', [
@@ -104,9 +104,9 @@ export const zaehlkarteKomponente = {
         ergebnis('pn', 'Stableford netto'),
       ], { attrs: { 'aria-live': 'polite' } }),
       el('div', 'score-calc__actions', [
-        t('button', 'btn btn--primary score-calc__share', 'Ergebnis teilen', { attrs: { type: 'button', 'data-sc-teilen': '' } }),
-        t('button', 'btn btn--outline score-calc__download', 'Als HTML speichern', { attrs: { type: 'button', 'data-sc-html': '' } }),
-        t('button', 'btn btn--outline score-calc__reset', 'Schläge löschen', { attrs: { type: 'button', 'data-sc-reset': '' } }),
+        t('button', 'btn--primary btn--s score-calc__share', 'Ergebnis teilen', { attrs: { type: 'button', 'data-sc-teilen': '' } }),
+        t('button', 'btn--primary btn--outline btn--s score-calc__download', 'Als HTML speichern', { attrs: { type: 'button', 'data-sc-html': '' } }),
+        t('button', 'btn--primary btn--outline btn--s score-calc__reset', 'Schläge löschen', { attrs: { type: 'button', 'data-sc-reset': '' } }),
       ]),
     ]),
     t('p', 'score-calc__status', '', { attrs: { 'data-sc-status': '', role: 'status', hidden: '' } }),

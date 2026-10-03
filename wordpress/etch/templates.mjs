@@ -98,8 +98,8 @@ export const pages = [
             el('h1', 'home-hero__title', [t('span', 'home-hero__line', 'Golf mit Tradition,'), t('span', 'home-hero__line', 'Natur mit Weitblick.')]),
             t('p', 'home-hero__lead', club('club_claim') + ' Mitglieder, Gäste und Einsteiger sind herzlich willkommen.'),
             el('div', 'home-hero__actions', [
-              t('a', 'btn btn--primary btn--large', 'Als Gast spielen', { attrs: { href: '/greenfee/#spielen' } }),
-              t('a', 'btn btn--ghost btn--large', 'Mitglied werden', { attrs: { href: '/mitgliedschaft/' } }),
+              t('a', 'btn--primary', 'Als Gast spielen', { attrs: { href: '/greenfee/#spielen' } }),
+              t('a', 'btn--primary-light', 'Mitglied werden', { attrs: { href: '/mitgliedschaft/' } }),
             ]),
           ]),
           // Platzstatus-Kurzfassung: sofort sichtbar, ohne Scrollen. Logik: snippets/golfplatz-platzstatus.php
@@ -150,8 +150,8 @@ export const pages = [
         titel: 'Platz & Bahnen',
         lead: '18 Loch, Par 71 (Herren) / 69 (Damen), 5.880 Meter von Gelb. Vier Abschläge – zwei für Herren, zwei für Damen.',
         aktionen: [
-          t('a', 'btn btn--secondary', 'Birdiebook öffnen', { attrs: { href: '/platz/birdiebook/' } }),
-          t('a', 'btn btn--ghost', 'Zur Scorekarte', { attrs: { href: '#scorekarte' } }),
+          t('a', 'btn--secondary btn--s', 'Birdiebook öffnen', { attrs: { href: '/platz/birdiebook/' } }),
+          t('a', 'btn--primary-light btn--outline btn--s', 'Zur Scorekarte', { attrs: { href: '#scorekarte' } }),
         ],
       }),
       el('section', 'section birdiebook-section', [
@@ -394,7 +394,7 @@ pages.push({
             el('br', '', []),
             el('a', 'contact-line', [icon('mail'), text(' ' + club('club_email'))], { attrs: { href: 'mailto:' + club('club_email') } }),
           ]),
-          wenn(`${CL}.hat_aufnahmeantrag_url`, [el('p', '', [t('a', 'btn btn--primary', 'Aufnahmeantrag als PDF', { attrs: { href: `{${CL}.aufnahmeantrag_url}` } })])]),
+          wenn(`${CL}.hat_aufnahmeantrag_url`, [el('p', '', [t('a', 'btn--primary btn--s', 'Aufnahmeantrag als PDF', { attrs: { href: `{${CL}.aufnahmeantrag_url}` } })])]),
         ], { name: 'Kontakt' }),
         el('div', '', [
           t('h3', '', 'Häufige Fragen'),
@@ -441,7 +441,7 @@ pages.push({
         el('div', 'prose', [
           t('h2', '', 'Jugend'),
           t('p', '', 'Golf für Kinder und Jugendliche: Training mit unseren Professionals, eigene Jugendturniere und zwei Jugendmannschaften in der Liga.'),
-          el('p', '', [t('a', 'btn btn--outline', 'Golfschule', { attrs: { href: '/golfschule/' } }), text(' '), t('a', 'btn btn--outline', 'Jugendmannschaften', { attrs: { href: '/mannschaften/' } })]),
+          el('p', '', [t('a', 'btn--primary btn--outline btn--s', 'Golfschule', { attrs: { href: '/golfschule/' } }), text(' '), t('a', 'btn--primary btn--outline btn--s', 'Jugendmannschaften', { attrs: { href: '/mannschaften/' } })]),
         ]),
         komponente('Personenkarten', { liste: 'jugend', spalten: '1' }),
       ]),
@@ -510,10 +510,10 @@ pages.push({
       titel: 'Turniere & Kalender',
       lead: 'Alle Clubturniere mit Anmeldeschluss und freien Plätzen – angemeldet wird direkt in PC CADDIE. Dazu die Platzbelegung bei uns und unseren Partnerclubs und unser Lochwettspiel.',
       aktionen: [
-        t('a', 'btn btn--secondary', 'Turnierkalender', { attrs: { href: '#turnierkalender' } }),
-        t('a', 'btn btn--ghost', 'Platzbelegung', { attrs: { href: '#platzbelegung' } }),
-        t('a', 'btn btn--ghost', 'Lochwettspiel', { attrs: { href: '#lochwettspiel' } }),
-        t('a', 'btn btn--ghost', 'Ergebnisse', { attrs: { href: '#turnierergebnisse' } }),
+        t('a', 'btn--secondary btn--s', 'Turnierkalender', { attrs: { href: '#turnierkalender' } }),
+        t('a', 'btn--primary-light btn--outline btn--s', 'Platzbelegung', { attrs: { href: '#platzbelegung' } }),
+        t('a', 'btn--primary-light btn--outline btn--s', 'Lochwettspiel', { attrs: { href: '#lochwettspiel' } }),
+        t('a', 'btn--primary-light btn--outline btn--s', 'Ergebnisse', { attrs: { href: '#turnierergebnisse' } }),
       ],
     }),
     el('section', 'section', [el('div', 'container', [t('h2', '', 'Turnierkalender'), komponente('Turnierkalender')])], { attrs: { id: 'turnierkalender' }, name: 'Turnierkalender' }),
@@ -553,7 +553,7 @@ export const templates = [
       el('section', 'section', [
         el('div', 'container', [
           teamKarten(),
-          el('p', 'more-link', [t('a', 'btn btn--outline', 'Alle Ligaspiele im Überblick', { attrs: { href: '#ligaspiele' } })]),
+          el('p', 'more-link', [t('a', 'btn--primary btn--outline btn--s', 'Alle Ligaspiele im Überblick', { attrs: { href: '#ligaspiele' } })]),
         ]),
       ], { name: 'Mannschaften' }),
       el('section', 'section section--tint', [el('div', 'container', alleLigaspiele())], { attrs: { id: 'ligaspiele' }, name: 'Alle Ligaspiele' }),

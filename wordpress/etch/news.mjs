@@ -67,7 +67,7 @@ export const beitragInhalt = () => [
       icon('lock'),
       el('div', '', [
         el('p', '', [t('strong', '', 'Dieser Beitrag ist nur für Mitglieder.')]),
-        el('p', '', [t('a', 'btn btn--primary', 'Anmelden', { attrs: { href: '/mitglieder/' } })]),
+        el('p', '', [t('a', 'btn--primary btn--s', 'Anmelden', { attrs: { href: '/mitglieder/' } })]),
       ]),
     ], { name: 'Mitglieder-Sperre' }),
   ]),

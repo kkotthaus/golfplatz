@@ -308,7 +308,7 @@ export const prototypeForm = ({ felder, button, hinweis = '' }) => `
       .join('')}
   </div>
   ${hinweis ? `<p class="form__hint">${hinweis}</p>` : ''}
-  <button class="btn btn--primary form__submit" type="submit">${esc(button)}</button>
+  <button class="btn--primary btn--s form__submit" type="submit">${esc(button)}</button>
   <p class="form__message" data-form-message hidden role="status"></p>
 </form>`;
 

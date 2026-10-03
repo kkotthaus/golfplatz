@@ -7,6 +7,7 @@
 <meta name="description" content="Golf in schöner Landschaft – für Mitglieder und Gäste.">
 <script>try{if(localStorage.getItem('golfplatz-farbschema')==='dunkel'){document.documentElement.classList.add('scheme--dark')}}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/farben.css">
+<link rel="stylesheet" href="../../assets/css/acss-buttons.css">
 <link rel="stylesheet" href="../../assets/css/tokens.css">
 <link rel="stylesheet" href="../../assets/css/main.css">
 <script src="../../assets/js/data.js" defer></script>
@@ -60,7 +61,7 @@
       </li><li class="main-nav__item"><a class="main-nav__link" href="../../mitgliedschaft/">Mitgliedschaft</a></li><li class="main-nav__item"><a class="main-nav__link" href="../../mannschaften/">Mannschaften</a></li><li class="main-nav__item"><a class="main-nav__link" href="../../restaurant/">Restaurant</a></li><li class="main-nav__item"><a class="main-nav__link" href="../../news/">Aktuelles</a></li><li class="main-nav__item"><a class="main-nav__link" href="../../club/">Club & Kontakt</a></li>
   </ul>
   <div class="main-nav__actions">
-    <a class="btn btn--secondary main-nav__cta" href="../../greenfee/#spielen">Als Gast spielen</a>
+    <a class="btn--secondary btn--s main-nav__cta" href="../../greenfee/#spielen">Als Gast spielen</a>
   </div>
 </nav>
   </div>
@@ -91,7 +92,7 @@
     <div class="score-calc__field"><label class="score-calc__label" for="sc-tee">Abschlag</label><select class="score-calc__select" id="sc-tee" data-sc-tee><option value="gelb" data-cr="71" data-slope="130" data-par="72" data-geschlecht="herren">Gelb · Herren</option><option value="blau" data-cr="69.2" data-slope="125" data-par="72" data-geschlecht="herren">Blau · Herren</option><option value="rot" data-cr="72.6" data-slope="128" data-par="72" data-geschlecht="damen">Rot · Damen</option><option value="orange" data-cr="70.6" data-slope="122" data-par="72" data-geschlecht="damen">Orange · Damen</option></select></div>
     <div class="score-calc__field score-calc__field--sv"><span class="score-calc__label" id="sc-sv-label">Ihre Spielvorgabe</span><output class="score-calc__sv" data-sc-sv aria-labelledby="sc-sv-label" aria-live="polite">–</output></div>
   </div>
-  <div class="score-calc__shared" data-sc-geteilt hidden><p class="score-calc__shared-text">Sie sehen eine geteilte Runde. Sobald Sie etwas ändern, wird sie als Ihre Runde gespeichert.</p><button class="btn btn--outline score-calc__own" type="button" data-sc-eigene>Meine eigene Runde anzeigen</button></div>
+  <div class="score-calc__shared" data-sc-geteilt hidden><p class="score-calc__shared-text">Sie sehen eine geteilte Runde. Sobald Sie etwas ändern, wird sie als Ihre Runde gespeichert.</p><button class="btn--primary btn--outline btn--s score-calc__own" type="button" data-sc-eigene>Meine eigene Runde anzeigen</button></div>
   <p class="calculator__error" data-sc-error hidden role="alert">Bitte einen Handicap-Index zwischen +5,0 und 54,0 eingeben.</p>
   <div class="table-wrap">
   <div role="table" class="score-calc__table" aria-label="Zählkarte: Vorgabe, Schläge und Punkte je Loch">
@@ -137,7 +138,7 @@
   </div>
   <div class="score-calc__footer">
     <dl class="score-calc__summary" aria-live="polite"><div class="score-calc__stat score-calc__stat--gespielt"><dt class="score-calc__stat-label">Gespielte Löcher</dt><dd class="score-calc__stat-value" data-sc-ergebnis="gespielt">–</dd></div><div class="score-calc__stat score-calc__stat--brutto"><dt class="score-calc__stat-label">Brutto</dt><dd class="score-calc__stat-value" data-sc-ergebnis="brutto">–</dd></div><div class="score-calc__stat score-calc__stat--netto"><dt class="score-calc__stat-label">Netto</dt><dd class="score-calc__stat-value" data-sc-ergebnis="netto">–</dd></div><div class="score-calc__stat score-calc__stat--pb"><dt class="score-calc__stat-label">Stableford brutto</dt><dd class="score-calc__stat-value" data-sc-ergebnis="pb">–</dd></div><div class="score-calc__stat score-calc__stat--pn"><dt class="score-calc__stat-label">Stableford netto</dt><dd class="score-calc__stat-value" data-sc-ergebnis="pn">–</dd></div></dl>
-    <div class="score-calc__actions"><button class="btn btn--primary score-calc__share" type="button" data-sc-teilen>Ergebnis teilen</button><button class="btn btn--outline score-calc__download" type="button" data-sc-html>Als HTML speichern</button><button class="btn btn--outline score-calc__reset" type="button" data-sc-reset>Schläge löschen</button></div>
+    <div class="score-calc__actions"><button class="btn--primary btn--s score-calc__share" type="button" data-sc-teilen>Ergebnis teilen</button><button class="btn--primary btn--outline btn--s score-calc__download" type="button" data-sc-html>Als HTML speichern</button><button class="btn--primary btn--outline btn--s score-calc__reset" type="button" data-sc-reset>Schläge löschen</button></div>
   </div>
   <p class="score-calc__status" data-sc-status role="status" hidden></p>
   <p class="score-calc__note">Vorgabeschläge nach Loch-HCP verteilt. Netto = Schläge − Vorgabe. Stableford: Par = 2 Punkte, je Schlag besser +1, ab zwei über Par (netto: über Par plus Vorgabe) 0 Punkte. Ihre Eingaben bleiben nur in diesem Browser gespeichert.</p>

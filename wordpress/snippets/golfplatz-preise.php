@@ -191,7 +191,7 @@ function golfplatz_preise_karten( array $roh ): array {
 			'hervorheben'    => $z['hervorheben'],
 			'mod'            => $z['hervorheben'] ? 'featured' : 'normal',
 			'button'         => $z['anfrage'] ? 'Gespräch vereinbaren' : 'Anfragen',
-			'button_mod'     => $z['hervorheben'] ? 'primary' : 'outline',
+			'button_klasse'  => $z['hervorheben'] ? 'btn--primary' : 'btn--primary btn--outline', // ACSS-Klassen
 		),
 		$roh
 	);

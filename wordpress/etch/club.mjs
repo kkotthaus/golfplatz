@@ -42,7 +42,7 @@ export const anfahrt = (club) => [
     el('address', '', [text(club('club_name')), el('br', '', []), text(club('club_strasse')), el('br', '', []), text(club('club_plz') + ' ' + club('club_ort'))]),
     wenn(`${AN}.hat_auto`, [t('h3', 'h4', 'Mit dem Auto'), raw(`{${AN}.auto}`)]),
     wenn(`${AN}.hat_oepnv`, [t('h3', 'h4', 'Mit Bus und Bahn'), raw(`{${AN}.oepnv}`)]),
-    el('p', '', [el('a', 'btn btn--primary', [icon('arrow'), text(' Route planen')], { attrs: { href: `{${AN}.route}`, rel: 'noopener' } })]),
+    el('p', '', [el('a', 'btn--primary btn--s', [icon('arrow'), text(' Route planen')], { attrs: { href: `{${AN}.route}`, rel: 'noopener' } })]),
   ], { name: 'Anfahrt' }),
   wenn(`${AN}.hat_karte`, [el('img', 'club-map', [], { attrs: { src: `{${AN}.karte}`, alt: 'Lageplan des Golfplatzes', loading: 'lazy' } })]),
   wenn(`${AN}.hat_karte`, [

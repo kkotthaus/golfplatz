@@ -44,4 +44,5 @@ Stand 2026-09-24 aus `wp plugin list --status=active`. Automatische Updates sind
 - **Dynamische Daten:** global `{options.golfplatz.<bereich>.…}`, je Beitrag `{this.golfplatz.…}` bzw. `{item.golfplatz.…}`. Generator der Komponenten: `wordpress/etch/*.mjs`.
 - **WPCodeBox:** Datenordner `wp-content/golfplatz` über die Konstante `GOLFPLATZ_DATEN` (statt `__DIR__`). Snippet-Sync per MCP `golfplatz/snippets-sync`.
 - **Tabellarische Daten** als CSS-Grid mit Tabellen-Rollen, wie in Preistabelle, Scorekarte und Rating.
+- **Buttons:** nur ACSS-Klassen (`btn--primary`, `btn--secondary`, `btn--primary btn--outline`, `btn--primary-light` und `btn--primary-light btn--outline` auf grünen Flächen, Größe `btn--s`). Aussehen (Schriftstärke, Laufweite, Innenabstand) in `wordpress/etch/acss-buttons.mjs`, übertragen mit `golfplatz/acss-colors` (`aus_datei: true`). Der Prototyp bildet die ACSS-Buttons in `prototype/assets/css/acss-buttons.css` nach (generiert).
 - **Farben:** siehe [farben.md](farben.md).
