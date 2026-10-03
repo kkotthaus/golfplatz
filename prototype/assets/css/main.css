@@ -998,7 +998,7 @@ html.scheme--dark {
 /* Lochwettspiel, große Felder: frühere Runden als aufklappbare Listen, Karten im Raster */
 .lw-rounds { display: grid; gap: var(--space-xs); }
 .lw-rounds__title { margin: var(--space-s) 0 0; font-weight: 700; color: var(--base-semi-dark); }
-.lw-round, .lw-round-list .ome-accordion-item { border: 1px solid var(--base-light); border-radius: var(--radius); background: var(--white); }
+.lw-round, .lw-round-list > .ome-accordion > .ome-accordion-item { border: 1px solid var(--base-light); border-radius: var(--radius); background: var(--white); }
 .lw-round__summary { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem var(--space-s); padding: var(--space-xs) var(--space-s); cursor: pointer; list-style: none; }
 .lw-round__summary::-webkit-details-marker { display: none; }
 .lw-round__summary::before { content: ""; width: 0.55rem; height: 0.55rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.15s; flex: none; }
@@ -1029,7 +1029,7 @@ span.lw-round__name, span.season__title { font-family: var(--heading-font-family
 .season-nav__label { color: var(--base-semi-dark); }
 .season-nav__link { padding: 0.15rem 0.6rem; border: 1px solid var(--base-light); border-radius: 99px; color: var(--primary-dark); text-decoration: none; }
 .season-nav__link--aktiv { background: var(--primary); border-color: var(--primary); color: var(--white); font-weight: 700; }
-.season, .season-list .ome-accordion-item { margin-top: var(--space-s); border: 1px solid var(--base-light); border-radius: var(--radius); background: var(--white); }
+.season, .season-list > .ome-accordion > .ome-accordion-item { margin-top: var(--space-s); border: 1px solid var(--base-light); border-radius: var(--radius); background: var(--white); }
 .season__summary { display: flex; align-items: center; gap: var(--space-s); padding: var(--space-xs) var(--space-s); cursor: pointer; list-style: none; }
 .season__summary::-webkit-details-marker { display: none; }
 .season__summary::before { content: ""; flex: none; width: 0.55rem; height: 0.55rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.15s; }
