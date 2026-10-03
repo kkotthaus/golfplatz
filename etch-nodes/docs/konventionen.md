@@ -53,8 +53,8 @@ Regeln für Komponenten, Block-Markup, Daten und CSS. Platzhalter: `<prefix>` st
   `section:where([class])` hat Spezifität 0,0,1: schlägt `:where()`, verliert gegen jede BEM-Klasse.
 - ACSS setzt Überschriften- und Absatzabstände auf 0 – Abstände in Komponenten ausdrücklich setzen.
 - ACSS steuert die Buttonbreite über `--btn-width` und lädt nach dem eigenen Stylesheet: `--btn-width: 100%` statt `width: 100%`.
-- Eigene Tokens nur für das, was ACSS nicht kennt (Schriften, Schatten, Sonderfarben mit fester Bedeutung). Abstände, Schriftgrößen, Radius und Container kommen aus ACSS.
-- **EMMP anpassen** über seine Variablen (`--menu-item-clr`, `--menu-cta-bg`, `--dropdown-content-bg` …), gesetzt mit doppelter Klasse (`.dwc-top-level-items-vars.dwc-top-level-items-vars`), damit sie unabhängig von der Ladereihenfolge gewinnen. Werte immer ACSS-Farbvariablen.
+- Eigene Tokens nur für das, was ACSS nicht kennt (z. B. Schriften, Schatten). Farben regelt das Projekt. Abstände, Schriftgrößen, Radius und Container kommen aus ACSS.
+- **EMMP anpassen** über seine Variablen (`--menu-item-clr`, `--menu-cta-bg`, `--dropdown-content-bg` …), gesetzt mit doppelter Klasse (`.dwc-top-level-items-vars.dwc-top-level-items-vars`), damit sie unabhängig von der Ladereihenfolge gewinnen. Farbwerte nach den Farbregeln des Projekts.
 - EMMP markiert den aktiven Menüpunkt selbst mit `aria-current="page"`, aber nur bei exakt gleicher URL (Elternbereiche auf Unterseiten nicht).
 - **Tabellarische Daten** in Komponenten als CSS-Grid aus `div`s mit Tabellen-Rollen (`role="table|row|columnheader|rowheader|cell"`, Name per `aria-label`). Breite Tabellen seitlich scrollbar, erste Spalte bei Bedarf fixiert.
 
@@ -65,3 +65,10 @@ Regeln für Komponenten, Block-Markup, Daten und CSS. Platzhalter: `<prefix>` st
 - **Einstellungsseiten** so anlegen, wie es der Meta-Box-Builder tut, damit sie im Builder bearbeitbar bleiben.
 - Ein Teil des Datenmodells steht nur in der Datenbank (Builder). Beitragstypen, Taxonomien, Feldgruppen und Einstellungsseiten deshalb per Export-Skript (WP-CLI `wp eval-file`, nur lesend, im Backend-Kontext) als JSON ins Repo holen und nach jeder Änderung neu exportieren.
 - Import-Dateien beim Import nur gezielt übernehmen (Feldliste), sonst überschreibt ein Import, was im Backend gepflegt wurde.
+
+## Barrierefreiheit
+
+- Ziel ist WCAG 2.1 AA. Farbkontraste regelt das Projekt.
+- Ausgeblendete Elemente (z. B. inaktive Slides, geschlossene Menüs) dürfen per Tab nicht erreichbar sein.
+- Der zugängliche Name von Schaltflächen entspricht dem sichtbaren Text (WCAG 2.5.3); kein abweichendes `aria-label`.
+- Tabellarische Daten mit Tabellen-Rollen (siehe [CSS](#css)), Screenreader-Ansagen bei dynamischen Wechseln (z. B. „Element 3 von 18“).

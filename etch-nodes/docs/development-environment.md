@@ -1,6 +1,6 @@
 # Etch-Nodes – Entwicklungsumgebung
 
-Referenz für den technischen Stack, auf dem die Nodes in diesem Repository aufbauen. Wird als Kontext für die Weiterentwicklung mit Claude genutzt. Regeln für Komponenten, Markup und CSS: [konventionen.md](konventionen.md). Farben und Barrierefreiheit: [farben-barrierefreiheit.md](farben-barrierefreiheit.md). PHP, MCP und Veröffentlichen: [betrieb.md](betrieb.md).
+Referenz für den technischen Stack, auf dem die Nodes in diesem Repository aufbauen. Wird als Kontext für die Weiterentwicklung mit Claude genutzt. Regeln für Komponenten, Markup und CSS: [konventionen.md](konventionen.md). Farben und Farbregeln stehen im jeweiligen Projekt. PHP, MCP und Veröffentlichen: [betrieb.md](betrieb.md).
 
 Versionen stehen hier bewusst nicht. Welche Version ein Projekt einsetzt, hält das Projekt selbst fest (z. B. aus `wp plugin list --status=active`).
 
