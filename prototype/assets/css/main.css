@@ -1032,6 +1032,36 @@ span.lw-round__name, span.season__title { font-family: var(--heading-font-family
 .team-photo--bild { display: block; width: 100%; height: auto; object-fit: cover; margin-bottom: var(--space-l); }
 .report-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: var(--space-s); margin-block: var(--space-m); }
 .report-gallery__image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
+.report-gallery__item { position: relative; display: block; }
+/* Mannschaftsfoto: Rahmen eng ums Bild als Bezug für das KI-Symbol */
+.team-photo-figure__bild { position: relative; margin-bottom: var(--space-l); }
+.team-photo-figure__bild .team-photo--bild { margin-bottom: 0; }
+
+/* KI-Kennzeichnung (golfplatz-ki.php): Symbol „AI“ (Übergangs-Symbol nach dem EU-Verhaltenskodex zu Art. 50 KI-VO), beim Darüberfahren mit Kennung und Text.
+   Modifier aus Medien › KI-Kennzeichnung: Position (oben-rechts …, unter), Stil (dunkel, hell, club, rahmen), Größe (normal, klein). */
+.ki-bild__rahmen { position: relative; display: inline-block; max-width: 100%; vertical-align: top; }
+.ki-bild__rahmen > img, .ki-bild__rahmen > a > img { display: block; }
+.team-photo-figure__bild { position: relative; }
+.ki-plakette { position: absolute; z-index: 2; display: inline-flex; align-items: center; max-width: calc(100% - 2 * var(--ki-abstand, 0.5rem)); overflow: hidden; border-radius: var(--radius); font-size: 0.8rem; line-height: 1; cursor: help; background: var(--base-ultra-dark); color: var(--white); }
+.ki-plakette__icon { display: inline-grid; place-items: center; flex: none; min-width: 2em; height: 2em; padding-inline: 0.35em; font-weight: 800; letter-spacing: 0.04em; }
+.ki-plakette__logo { display: block; height: 1.6em; width: auto; max-width: 4em; }
+.ki-plakette--logo .ki-plakette__icon { padding-inline: 0.25em; }
+.ki-plakette__text { max-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; opacity: 0; transition: max-width 0.3s ease, opacity 0.2s ease, padding 0.3s ease; }
+.ki-plakette__text strong { font-weight: 700; letter-spacing: 0.03em; }
+.ki-plakette:hover .ki-plakette__text, .ki-plakette:active .ki-plakette__text { max-width: 32em; opacity: 1; padding-inline: 0 0.7em; }
+/* Abstand zur Kante: halber Eckenradius der Bilder plus Luft, damit das Symbol nicht in der Rundung sitzt */
+.ki-plakette { --ki-abstand: calc(var(--radius-l, 0.75rem) / 2 + 0.45rem); }
+.ki-plakette--oben-rechts { top: var(--ki-abstand); right: var(--ki-abstand); }
+.ki-plakette--unten-rechts { bottom: var(--ki-abstand); right: var(--ki-abstand); }
+.ki-plakette--oben-links { top: var(--ki-abstand); left: var(--ki-abstand); }
+.ki-plakette--unten-links { bottom: var(--ki-abstand); left: var(--ki-abstand); }
+.ki-plakette--unter { position: relative; margin-top: 0.4rem; }
+.news-card__media .ki-plakette--unter { position: absolute; bottom: var(--ki-abstand); left: var(--ki-abstand); margin: 0; }
+.ki-plakette--klein { font-size: 0.68rem; }
+.ki-plakette--hell { background: var(--white); color: var(--base-ultra-dark); box-shadow: inset 0 0 0 1px var(--base-light); }
+.ki-plakette--club { background: var(--primary); color: var(--white); }
+.ki-plakette--rahmen { background: var(--white); color: var(--primary-dark); box-shadow: inset 0 0 0 2px var(--primary-dark); }
+@media (prefers-reduced-motion: reduce) { .ki-plakette__text { transition: none; } }
 
 
 /* Ligaspiele: Saison-Auswahl (Übersicht) und Saisons auf der Mannschaftsseite */

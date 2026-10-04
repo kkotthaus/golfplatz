@@ -313,6 +313,35 @@ Die Anzahl der Teams ist beliebig. Bei mehr als 16 Teams zeigt die Website die e
 
 Der Sieger rückt automatisch in die nächste Runde. Spiele der nächsten Runde erscheinen in der Auswahl, sobald beide Gegner feststehen. Freilose brauchen keinen Eintrag. Passt ein gespeichertes Ergebnis nicht mehr (weil ein früheres Ergebnis korrigiert wurde), steht es mit „⚠ passt zu keinem Spiel mehr“ im Kasten „Stand“ und sollte gelöscht werden.
 
+## KI-generierte Bilder und Videos
+
+Seit dem 2. August 2026 verlangt die EU-KI-Verordnung (Art. 50): Bilder und Videos, die mit KI erzeugt oder so verändert wurden, dass sie echt wirken, müssen als künstlich erzeugt erkennbar sein. Dazu kommt das Wettbewerbsrecht: Bilder dürfen Gäste nicht über die Anlage täuschen.
+
+**So kennzeichnen Sie ein Bild:** in der **Mediathek** das Bild öffnen (auch direkt beim Hochladen im Medien-Fenster) und im Kasten **KI-Kennzeichnung** bei **KI-Nutzung** wählen:
+
+| Auswahl | Bedeutung |
+| --- | --- |
+| **AI** | KI wurde verwendet (zum Beispiel für einzelne Details) |
+| **AI GENERATED** | Inhalt vollständig von KI erzeugt |
+| **AI MODIFIED** | Inhalt durch KI verändert (zum Beispiel ausgetauschter Himmel, entfernte oder hinzugefügte Personen) |
+
+Optional tragen Sie das **Werkzeug** ein (z. B. „Midjourney“). Auf der Website erscheint am Bild ein kleines Symbol **„AI“**. Das ist das Kürzel, das der Verhaltenskodex der EU-Kommission bis zum endgültigen EU-Symbol vorsieht. Fährt man mit der Maus darüber, klappt es auf, etwa zu „AI GENERATED Inhalt vollständig von KI erzeugt (Midjourney)“. Für Screenreader steht der Hinweis im Alternativtext. Das gilt für Bilder und Galerien im Text, Beitragsbilder, News-Karten, Mannschaftsfotos und Bilder in Spielberichten.
+
+**Eigenes KI-Symbol:** Unter **Clubdaten › Club** können Sie bei **KI-Symbol** ein Bild hinterlegen, zum Beispiel das offizielle EU-Symbol, sobald es veröffentlicht ist. Es erscheint dann an allen KI-Bildern statt des Schriftzugs „AI“, aufgeklappt mit der vollen Kennung („AI GENERATED …“). Ohne Bild bleibt „AI“.
+
+**Aussehen einstellen:** Menü **Medien › KI-Kennzeichnung**. Dort wählen Sie **Position** (oben rechts, oben links, unten rechts, unten links oder unter dem Bild), **Stil** (dunkel, hell, Clubgrün, nur Rahmen), **Größe** und ob das Werkzeug genannt wird. Die Einstellung gilt sofort für alle Bilder. Verdeckt das Symbol bei einem Bild etwas Wichtiges, wählen Sie am Bild selbst unter **Position des Symbols** eine andere Ecke. Diese Wahl gilt nur für dieses Bild.
+
+**Club-Regel:**
+
+| Erlaubt, mit Kennzeichnung | Nicht verwenden |
+| --- | --- |
+| Symbolische Illustrationen (Golfball, Schläger, Stimmungsbilder) | Bilder, die als Foto der eigenen Anlage, Bahnen, Clubhaus oder Gastronomie erscheinen |
+| Grafiken für Flyer, News-Aufmacher und Platzhalter | Erfundene Personen als „unsere Mitglieder“, „unser Team“ oder Stimmen von Gästen |
+| Echte Fotos, per KI bearbeitet (Haken setzen) | Fotos echter Personen, die per KI verändert wurden, ohne deren Zustimmung |
+| | KI-Bilder auf den Seiten Platz, Bahnen, Birdiebook, Greenfee und Restaurant |
+
+> **Wichtig:** Fotos von Mitgliedern, Gästen oder Kindern nicht ohne Einwilligung in KI-Dienste hochladen, auch nicht zum Bearbeiten. Das ist eine Datenverarbeitung bei einem fremden Anbieter. Prüfen Sie außerdem, ob die Nutzungsbedingungen des Werkzeugs die Veröffentlichung erlauben.
+
 ## Mannschaften und Ligaspiele
 
 ### Was automatisch passiert
@@ -419,7 +448,7 @@ Menü **Clubdaten**. Hier stehen die Stammdaten des Clubs, verteilt auf Reiter:
 
 | Reiter | Inhalt |
 | --- | --- |
-| **Club** | Vereinsname, Kurzname (für Seitentitel), Claim, Logo und Logo für dunkle Flächen; darunter **Auftritt & Texte**: Name im Logo, Schriftzug neben dem Logo, Region, Platzbeschreibung, Einleitung Mitgliedschaft, Ansprechpartner Aufnahme, Link zum Aufnahmeantrag (PDF), Hinweis zum Betreiber |
+| **Club** | Vereinsname, Kurzname (für Seitentitel), Claim, Logo und Logo für dunkle Flächen, **KI-Symbol** (Bild für die KI-Kennzeichnung, siehe „KI-generierte Bilder und Videos“); darunter **Auftritt & Texte**: Name im Logo, Schriftzug neben dem Logo, Region, Platzbeschreibung, Einleitung Mitgliedschaft, Ansprechpartner Aufnahme, Link zum Aufnahmeantrag (PDF), Hinweis zum Betreiber |
 | **Kontakt & Anfahrt** | Adresse, Telefon, E-Mail, Anfahrt mit Auto bzw. Bus und Bahn, Kartenbild, Link „Route planen“, Koordinaten |
 | **Öffnungszeiten** | siehe Kapitel „Öffnungszeiten“ |
 | **Gäste & Systeme** | Telefon und Hinweis für Gäste, Pflegetag, Greenfee-Hinweise, Twilight, Name in den Ligatabellen, PC-CADDIE-Kennung, Partnerclubs; darunter **Ligaportal** (Name des Verbands, Adresse Ligaportal und Schnittstelle) |

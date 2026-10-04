@@ -177,8 +177,33 @@
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"container split split\u002d\u002dwide-left"}} -->
 <!-- wp:etch/element {"tag":"div","attributes":{},"metadata":{"name":"Spiele \u0026 Berichte"}} -->
 <!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.hat_foto","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.team.hat_foto"} -->
+<!-- wp:etch/element {"tag":"div","attributes":{"class":"team-photo-figure__bild"}} -->
 <!-- wp:etch/element {"tag":"img","attributes":{"src":"{this.golfplatz.team.foto}","alt":"{this.golfplatz.team.foto_alt}","class":"team-photo team-photo\u002d\u002dbild"}} -->
 
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.foto_ki.hat","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.team.foto_ki.hat"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","title":"{this.golfplatz.team.foto_ki.alt}","class":"ki-plakette {this.golfplatz.team.foto_ki.mod}"},"metadata":{"name":"KI-Kennzeichnung"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"ki-plakette__icon"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.foto_ki.hat_logo","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.team.foto_ki.hat_logo"} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{this.golfplatz.team.foto_ki.logo}","alt":"","class":"ki-plakette__logo"}} -->
+
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.foto_ki.hat_logo","operator":"isFalsy","rightHand":null},"conditionString":"!this.golfplatz.team.foto_ki.hat_logo"} -->
+<!-- wp:etch/text {"content":"{this.golfplatz.team.foto_ki.kurz}"} /-->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"ki-plakette__text"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.foto_ki.zusatz","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.team.foto_ki.zusatz"} -->
+<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
+<!-- wp:etch/text {"content":"{this.golfplatz.team.foto_ki.zusatz}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":" "} /-->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/text {"content":"{this.golfplatz.team.foto_ki.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/condition -->
 <!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.team.hat_spiele","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.team.hat_spiele"} -->

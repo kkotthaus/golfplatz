@@ -89,6 +89,8 @@ function golfplatz_news_etch( WP_Post $p ): array {
 		'frei'           => ! ( $mitglieder && ! is_user_logged_in() ),
 		'bild'           => $bild ?: '',
 		'hat_bild'       => (bool) $bild,
+		// KI-Kennzeichnung des Beitragsbilds (golfplatz-ki.php)
+		'bild_ki'        => $bild ? ( function_exists( 'golfplatz_ki_daten' ) ? golfplatz_ki_daten( (int) get_post_thumbnail_id( $p ) ) : array( 'hat' => false ) ) : array( 'hat' => false ),
 	);
 }
 

@@ -203,8 +203,33 @@
 <!-- wp:etch/condition {"condition":{"leftHand":"this.golfplatz.bericht.hat_bilder","operator":"isTruthy","rightHand":null},"conditionString":"this.golfplatz.bericht.hat_bilder"} -->
 <!-- wp:etch/element {"tag":"div","attributes":{"class":"report-gallery"},"metadata":{"name":"Bilder"}} -->
 <!-- wp:etch/loop {"target":"this.golfplatz.bericht.bilder","itemId":"i"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"report-gallery__item"}} -->
 <!-- wp:etch/element {"tag":"img","attributes":{"src":"{i.url}","alt":"{i.alt}","loading":"lazy","class":"report-gallery__image"}} -->
 
+<!-- /wp:etch/element -->
+<!-- wp:etch/condition {"condition":{"leftHand":"i.ki.hat","operator":"isTruthy","rightHand":null},"conditionString":"i.ki.hat"} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"aria-hidden":"true","title":"{i.ki.alt}","class":"ki-plakette {i.ki.mod}"},"metadata":{"name":"KI-Kennzeichnung"}} -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"ki-plakette__icon"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"i.ki.hat_logo","operator":"isTruthy","rightHand":null},"conditionString":"i.ki.hat_logo"} -->
+<!-- wp:etch/element {"tag":"img","attributes":{"src":"{i.ki.logo}","alt":"","class":"ki-plakette__logo"}} -->
+
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/condition {"condition":{"leftHand":"i.ki.hat_logo","operator":"isFalsy","rightHand":null},"conditionString":"!i.ki.hat_logo"} -->
+<!-- wp:etch/text {"content":"{i.ki.kurz}"} /-->
+<!-- /wp:etch/condition -->
+<!-- /wp:etch/element -->
+<!-- wp:etch/element {"tag":"span","attributes":{"class":"ki-plakette__text"}} -->
+<!-- wp:etch/condition {"condition":{"leftHand":"i.ki.zusatz","operator":"isTruthy","rightHand":null},"conditionString":"i.ki.zusatz"} -->
+<!-- wp:etch/element {"tag":"strong","attributes":{}} -->
+<!-- wp:etch/text {"content":"{i.ki.zusatz}"} /-->
+<!-- /wp:etch/element -->
+<!-- wp:etch/text {"content":" "} /-->
+<!-- /wp:etch/condition -->
+<!-- wp:etch/text {"content":"{i.ki.text}"} /-->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/element -->
+<!-- /wp:etch/condition -->
 <!-- /wp:etch/element -->
 <!-- /wp:etch/loop -->
 <!-- /wp:etch/element -->

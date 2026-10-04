@@ -225,12 +225,15 @@ function golfplatz_team_etch( int $id ): array {
 			}
 		}
 	}
-	$foto = get_the_post_thumbnail_url( $id, 'large' );
+	$foto    = get_the_post_thumbnail_url( $id, 'large' );
+	// KI-Kennzeichnung des Mannschaftsfotos (golfplatz-ki.php)
+	$foto_ki = $foto && function_exists( 'golfplatz_ki_daten' ) ? golfplatz_ki_daten( (int) get_post_thumbnail_id( $id ) ) : array( 'hat' => false );
 	return array(
 		'liga'             => (string) get_post_meta( $id, 'mannschaft_liga', true ),
 		'foto'             => $foto ?: '',
 		'hat_foto'         => (bool) $foto,
-		'foto_alt'         => 'Mannschaftsfoto ' . get_the_title( $id ),
+		'foto_alt'         => 'Mannschaftsfoto ' . get_the_title( $id ) . ( ! empty( $foto_ki['hat'] ) ? ' – ' . $foto_ki['alt'] : '' ),
+		'foto_ki'          => $foto_ki,
 		'saisons'          => $bloecke,
 		'hat_spiele'       => (bool) $spiele,
 		'berichte'         => array_reverse( $berichte ),
@@ -253,7 +256,10 @@ function golfplatz_bericht_etch( int $id ): array {
 	foreach ( (array) get_post_meta( $id, 'bericht_bilder', false ) as $bild ) {
 		$url = wp_get_attachment_image_url( (int) $bild, 'large' );
 		if ( $url ) {
-			$bilder[] = array( 'url' => $url, 'alt' => (string) get_post_meta( (int) $bild, '_wp_attachment_image_alt', true ) );
+			$alt      = (string) get_post_meta( (int) $bild, '_wp_attachment_image_alt', true );
+			// KI-Kennzeichnung (golfplatz-ki.php): Hinweis auch im Alternativtext
+			$ki       = function_exists( 'golfplatz_ki_daten' ) ? golfplatz_ki_daten( (int) $bild ) : array( 'hat' => false );
+			$bilder[] = array( 'url' => $url, 'alt' => trim( $alt . ( $ki['hat'] ? ( $alt ? ' – ' : '' ) . $ki['alt'] : '' ) ), 'ki' => $ki );
 		}
 	}
 	return array(

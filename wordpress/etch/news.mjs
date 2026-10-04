@@ -1,7 +1,7 @@
 // Aktuelles: Etch-Komponente „Newskarten“ und Bausteine für die Seite /news/ und das Template single-post (Aufbau wie im Prototyp).
 // Daten: {options.golfplatz.news} und {this.golfplatz.news} aus snippets/golfplatz-news.php. Filter per URL: ?kategorie=<slug>, ?seite=<n>.
 
-import { el, t, text, loop, wenn, icon, postContent } from './lib.mjs';
+import { el, t, text, loop, wenn, icon, postContent, kiPlakette } from './lib.mjs';
 
 export const NW = 'options.golfplatz.news';
 const B = 'this.golfplatz.news';
@@ -11,6 +11,8 @@ const newskarte = () =>
   el('article', 'news-card', [
     el('div', 'news-card__media', [
       wenn('n.hat_bild', [el('img', 'news-card__image', [], { attrs: { src: '{n.bild}', alt: '', loading: 'lazy' } })]),
+      // KI-Kennzeichnung des Beitragsbilds (golfplatz-ki.php)
+      kiPlakette('n.bild_ki'),
       wenn('n.kategorie', [t('span', 'news-card__category', '{n.kategorie}')]),
     ], { attrs: { 'aria-hidden': 'true' } }),
     el('div', 'news-card__body', [

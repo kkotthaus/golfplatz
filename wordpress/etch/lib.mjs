@@ -128,3 +128,21 @@ export const icon = (name) =>
 export const postContent = () => '<!-- wp:post-content {"align":"full","layout":{"type":"default"}} /-->';
 
 export const markup = (...kinder) => join(kinder);
+
+/**
+ * KI-Kennzeichnung am Bild (golfplatz-ki.php, Daten aus golfplatz_ki_daten): sichtbar „AI“, beim Darüberfahren Kennung und Text.
+ * Position, Stil und Größe kommen als Klassen-Modifier ({…mod}) aus Medien › KI-Kennzeichnung. Für Screenreader steht der Hinweis im Alternativtext.
+ * Gleicher Aufbau wie golfplatz_ki_plakette() für Bilder aus dem Editor.
+ */
+export const kiPlakette = (pfad) =>
+  wenn(`${pfad}.hat`, [
+    el('span', `ki-plakette {${pfad}.mod}`, [
+      // KI-Symbol aus Clubdaten › Club, sonst der Schriftzug „AI“
+      el('span', 'ki-plakette__icon', [
+        wenn(`${pfad}.hat_logo`, [el('img', 'ki-plakette__logo', [], { attrs: { src: `{${pfad}.logo}`, alt: '' } })]),
+        wenn(`${pfad}.hat_logo`, [text(`{${pfad}.kurz}`)], 'isFalsy'),
+      ]),
+      // aufgeklappt: Kennung ohne „AI“ (das steht im Symbol davor), z. B. „GENERATED Inhalt vollständig von KI erzeugt“
+      el('span', 'ki-plakette__text', [wenn(`${pfad}.zusatz`, [t('strong', '', `{${pfad}.zusatz}`), text(' ')]), text(`{${pfad}.text}`)]),
+    ], { attrs: { 'aria-hidden': 'true', title: `{${pfad}.alt}` }, name: 'KI-Kennzeichnung' }),
+  ]);

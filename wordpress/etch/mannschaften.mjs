@@ -4,7 +4,7 @@
 //
 // Ligaspiel-Tabellen als CSS-Grid aus divs mit Tabellen-Rollen (Konvention, wie Preistabelle und Scorekarte).
 
-import { el, t, text, loop, wenn, icon, ome } from './lib.mjs';
+import { el, t, text, loop, wenn, icon, ome, kiPlakette } from './lib.mjs';
 
 export const MS = 'options.golfplatz.mannschaften';
 const TEAM = 'this.golfplatz.team';
@@ -101,7 +101,12 @@ const saison = (offen) =>
 /** Mannschaftsseite, linke Spalte: Foto, Ligaspiele, Spielberichte. */
 export const teamInhalt = () =>
   el('div', '', [
-    wenn(`${TEAM}.hat_foto`, [el('img', 'team-photo team-photo--bild', [], { attrs: { src: `{${TEAM}.foto}`, alt: `{${TEAM}.foto_alt}` } })]),
+    // Rahmen eng ums Bild: Bezug für die Position des KI-Symbols
+    wenn(`${TEAM}.hat_foto`, [el('div', 'team-photo-figure__bild', [
+      el('img', 'team-photo team-photo--bild', [], { attrs: { src: `{${TEAM}.foto}`, alt: `{${TEAM}.foto_alt}` } }),
+      // KI-Kennzeichnung (golfplatz-ki.php); für Screenreader im Alternativtext
+      kiPlakette(`${TEAM}.foto_ki`),
+    ])]),
     // Ligaspiele je Saison, die neueste aufgeklappt
     wenn(`${TEAM}.hat_spiele`, [
       t('h2', 'h3', 'Ligaspiele'),
@@ -137,7 +142,13 @@ export const berichtMeta = () => wenn(`${BERICHT}.meta`, [t('p', 'article-meta',
 export const berichtBilder = () =>
   wenn(`${BERICHT}.hat_bilder`, [
     el('div', 'report-gallery', [
-      loop({ target: `${BERICHT}.bilder`, itemId: 'i' }, [el('img', 'report-gallery__image', [], { attrs: { src: '{i.url}', alt: '{i.alt}', loading: 'lazy' } })]),
+      loop({ target: `${BERICHT}.bilder`, itemId: 'i' }, [
+        el('span', 'report-gallery__item', [
+          el('img', 'report-gallery__image', [], { attrs: { src: '{i.url}', alt: '{i.alt}', loading: 'lazy' } }),
+          // KI-Kennzeichnung (golfplatz-ki.php); für Screenreader steht der Hinweis im Alternativtext
+          kiPlakette('i.ki'),
+        ]),
+      ]),
     ], { name: 'Bilder' }),
   ]);
 export const berichtRuecklink = () =>
