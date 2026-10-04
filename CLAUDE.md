@@ -2,7 +2,7 @@
 
 Diese Datei wird aus einem Projekt importiert (`@etch-nodes/CLAUDE.md`). Alle Verweise sind relativ zu diesem Ordner.
 
-Projektspezifisches (Namen, Domains, Prefix, Plugin-Versionen, Komponenten-IDs) steht in der CLAUDE.md des Projekts und hat dort Vorrang. **Design** (Farben und Farbregeln, Farben im hellen und dunklen Schema, Kontrastwerte, Schriften, Schatten, Rundungen, Abstands- und Größenwerte, ACSS-Einstellungen, Logo, Bildsprache, Gestaltung der Komponenten) steht nie hier, sondern immer lokal im Projekt – jede Website hat ihr eigenes Design. `<prefix>` bzw. `<PREFIX>` in diesen Dokumenten steht für das Kürzel des Projekts.
+**Die Standards in etch-nodes sind führend** für alle Projekte: Stack, Konventionen, Technik, Barrierefreiheit und Betrieb gelten so, wie sie hier stehen. Ein Projekt weicht nur bei Projektspezifischem ab (Namen, Domains, Prefix, Plugin-Versionen, Komponenten-IDs, Inhalte) – das steht in der CLAUDE.md des Projekts und hat dort Vorrang. Widerspricht eine Projekt-Doku einem Standard, gilt der Standard; die Projekt-Doku wird angepasst. **Design** (Farben und Farbregeln, Farben im hellen und dunklen Schema, Kontrastwerte, Schriften, Schatten, Rundungen, Abstands- und Größenwerte, ACSS-Einstellungen, Logo, Bildsprache, Gestaltung der Komponenten) steht nie hier, sondern immer lokal im Projekt – jede Website hat ihr eigenes Design. `<prefix>` bzw. `<PREFIX>` in diesen Dokumenten steht für das Kürzel des Projekts.
 
 ## Stack und Regeln
 
@@ -19,5 +19,6 @@ Projektspezifisches (Namen, Domains, Prefix, Plugin-Versionen, Komponenten-IDs) 
 - Für interaktive Bausteine (Accordion, Tabs, Dialog, Drawer, Lightbox, Carousel, Breadcrumbs, Inhaltsverzeichnis, Facets) OhMyEtch-Komponenten nutzen, nicht selbst bauen – **außer Navigation/Menüs** (keine OhMyEtch-Navigation). Siehe [docs/konventionen.md](docs/konventionen.md#komponenten).
 - Gestaltung (Farben, Schriften, Look) nach der Design-Doku des Projekts.
 - Jede Website unterstützt Hell und Dunkel (ACSS `light dark`, folgt dem Gerät); ein Umschalter ist optional. Siehe [docs/konventionen.md](docs/konventionen.md#helldunkel).
+- Jede Website kennzeichnet KI-erzeugte oder -veränderte Bilder und Videos (Mediathek-Feld `ki_art`, Symbol am Bild, Hinweis im Alternativtext). Symbol, Farben und Texte legt das Projekt fest. Siehe [docs/konventionen.md](docs/konventionen.md#ki-kennzeichnung).
 - PHP-Snippets WPCodeBox-tauglich schreiben (`define()` statt `const`, kein `__DIR__`).
 - Dieser Ordner ist ein git subtree (siehe [README.md](README.md)). Änderungen hier nur, wenn sie für alle Projekte gelten, und generisch formuliert – ohne Projektnamen, URLs, Prefixe oder Pfade eines Projekts.
