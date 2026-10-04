@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Golfplatz – KI-Kennzeichnung
- * Description: In der Mediathek je Bild oder Video die Art der KI-Nutzung (AI · KI wurde verwendet, AI GENERATED · vollständig von KI erzeugt, AI MODIFIED · durch KI verändert), optional mit Werkzeug. Auf der Website erscheint ein „AI“-Symbol am Bild (Übergangs-Symbol nach dem Verhaltenskodex der EU-Kommission zu Art. 50 KI-Verordnung), das beim Darüberfahren aufklappt und den Text zeigt; der Hinweis steht zusätzlich im Alternativtext. Position, Stil und Größe unter Medien › KI-Kennzeichnung. Daten für Etch: golfplatz_ki_daten() → { hat, kurz, label, text, mod }.
+ * Description: In der Mediathek je Bild oder Video die Art der KI-Nutzung (AI · KI wurde verwendet, AI GENERATED · vollständig von KI erzeugt, AI MODIFIED · durch KI verändert), optional mit Werkzeug. Auf der Website erscheint ein „AI“-Symbol am Bild (Übergangs-Symbol nach dem Verhaltenskodex der EU-Kommission zu Art. 50 KI-Verordnung), das beim Darüberfahren aufklappt und den Text zeigt; der Hinweis steht zusätzlich im Alternativtext. Position, Stil und Größe unter Medien › KI-Kennzeichnung. Daten für Etch: golfplatz_ki_daten() → { hat, kurz, label, text, mod }. In der Mediathek: Spalte „KI“ und Filter in der Listenansicht, Plakette auf den Kacheln im Raster und im Medien-Fenster.
  * Version: 2.0.0
  *
  * Gehört auf die Live-Seite. Quelle: Repository golfplatz, wordpress/snippets/golfplatz-ki.php
@@ -245,4 +245,163 @@ add_filter(
 	},
 	10,
 	2
+);
+
+// ---------- Mediathek: Kennzeichnung schon im Backend sichtbar ----------
+// Listenansicht: Spalte „KI“ und Filter; Raster und Medien-Fenster: Plakette auf der Kachel (aktualisiert sich nach dem Speichern).
+// Im Backend in allen Projekten gleich (neutral), nur die Kennung kommt aus GOLFPLATZ_KI_ARTEN.
+
+/** Kennung und Werkzeug eines Anhangs für das Backend (leer = keine KI). */
+function golfplatz_ki_backend( int $id ): array {
+	$art = golfplatz_ki_art( $id );
+	return '' === $art
+		? array( 'art' => '', 'label' => '', 'werkzeug' => '' )
+		: array( 'art' => $art, 'label' => GOLFPLATZ_KI_ARTEN[ $art ]['label'], 'werkzeug' => trim( (string) get_post_meta( $id, 'ki_werkzeug', true ) ) );
+}
+
+add_filter(
+	'manage_media_columns',
+	function ( $spalten ) {
+		$neu = array();
+		foreach ( $spalten as $schluessel => $name ) {
+			$neu[ $schluessel ] = $name;
+			if ( 'title' === $schluessel ) {
+				$neu['ki'] = 'KI';
+			}
+		}
+		return isset( $neu['ki'] ) ? $neu : $neu + array( 'ki' => 'KI' );
+	}
+);
+add_action(
+	'manage_media_custom_column',
+	function ( $spalte, $id ) {
+		if ( 'ki' !== $spalte ) {
+			return;
+		}
+		$k = golfplatz_ki_backend( (int) $id );
+		if ( '' === $k['art'] ) {
+			echo '<span aria-hidden="true">–</span><span class="screen-reader-text">keine KI</span>';
+			return;
+		}
+		echo '<span class="ki-admin-plakette">' . esc_html( $k['label'] ) . '</span>';
+		if ( '' !== $k['werkzeug'] ) {
+			echo '<br><small>' . esc_html( $k['werkzeug'] ) . '</small>';
+		}
+	},
+	10,
+	2
+);
+
+// Filter über der Liste: alle, nur KI, ohne KI, je Art
+add_action(
+	'restrict_manage_posts',
+	function ( $typ ) {
+		if ( 'attachment' !== $typ ) {
+			return;
+		}
+		$wahl     = sanitize_key( wp_unslash( $_GET['ki_filter'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification
+		$optionen = array( '' => 'KI: alle Medien', 'ja' => 'nur mit KI', 'nein' => 'ohne KI' ) + array_map( fn( $a ) => '– ' . $a['label'], GOLFPLATZ_KI_ARTEN );
+		echo '<label for="ki-filter" class="screen-reader-text">Nach KI-Kennzeichnung filtern</label><select name="ki_filter" id="ki-filter">';
+		foreach ( $optionen as $wert => $text ) {
+			echo '<option value="' . esc_attr( $wert ) . '"' . selected( $wahl, $wert, false ) . '>' . esc_html( $text ) . '</option>';
+		}
+		echo '</select>';
+	}
+);
+add_action(
+	'pre_get_posts',
+	function ( $q ) {
+		if ( ! is_admin() || ! $q->is_main_query() || 'attachment' !== $q->get( 'post_type' ) ) {
+			return;
+		}
+		$wahl = sanitize_key( wp_unslash( $_GET['ki_filter'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification
+		if ( '' === $wahl ) {
+			return;
+		}
+		$arten = array_keys( GOLFPLATZ_KI_ARTEN );
+		if ( 'ja' === $wahl ) {
+			$bedingung = array( 'key' => 'ki_art', 'value' => $arten, 'compare' => 'IN' );
+		} elseif ( 'nein' === $wahl ) {
+			$bedingung = array( 'relation' => 'OR', array( 'key' => 'ki_art', 'compare' => 'NOT EXISTS' ), array( 'key' => 'ki_art', 'value' => $arten, 'compare' => 'NOT IN' ) );
+		} elseif ( in_array( $wahl, $arten, true ) ) {
+			$bedingung = array( 'key' => 'ki_art', 'value' => $wahl );
+		} else {
+			return;
+		}
+		$meta   = (array) $q->get( 'meta_query' );
+		$meta[] = $bedingung;
+		$q->set( 'meta_query', $meta );
+	}
+);
+
+// Raster und Medien-Fenster: Kennung in den Bilddaten mitgeben …
+add_filter(
+	'wp_prepare_attachment_for_js',
+	function ( $daten, $anhang ) {
+		$k                = golfplatz_ki_backend( (int) $anhang->ID );
+		$daten['kiArt']   = $k['art'];
+		$daten['kiLabel'] = $k['label'];
+		return $daten;
+	},
+	10,
+	2
+);
+
+/** Stile der Plakette im Backend (Liste, Raster, Medien-Fenster – auch im Etch-Builder). */
+function golfplatz_ki_backend_css(): string {
+	return '<style id="golfplatz-ki-backend">'
+		. '.ki-admin-plakette{display:inline-block;padding:2px 8px;border-radius:999px;background:#1d2327;color:#fff;font-size:11px;font-weight:600;line-height:1.6;white-space:nowrap;letter-spacing:.02em}'
+		. '.ki-admin-plakette--kachel{position:absolute;top:6px;right:6px;z-index:2;max-width:calc(100% - 12px);overflow:hidden;text-overflow:ellipsis;pointer-events:none;box-shadow:0 0 0 1px rgba(255,255,255,.55)}'
+		. '.fixed .column-ki{width:9em}'
+		. '</style>';
+}
+add_action(
+	'admin_head-upload.php',
+	function () {
+		echo golfplatz_ki_backend_css(); // phpcs:ignore WordPress.Security.EscapeOutput
+	}
+);
+
+// … und auf jede Kachel eine Plakette setzen. print_media_templates läuft überall, wo das Medien-Fenster geladen wird.
+add_action(
+	'print_media_templates',
+	function () {
+		echo golfplatz_ki_backend_css(); // phpcs:ignore WordPress.Security.EscapeOutput
+		?>
+<script>
+(function () {
+	function einrichten() {
+		if (!window.wp || !wp.media || !wp.media.view || !wp.media.view.Attachment || wp.media.view.Attachment.prototype.golfplatzKi) return;
+		var A = wp.media.view.Attachment.prototype, init = A.initialize, render = A.render;
+		A.golfplatzKi = true;
+		A.initialize = function () {
+			init.apply(this, arguments);
+			// Nach dem Speichern der Felder liefert WordPress neue Bilddaten; dann neu zeichnen
+			this.listenTo(this.model, 'change:kiLabel', this.render);
+		};
+		A.render = function () {
+			render.apply(this, arguments);
+			var vorschau = this.el.querySelector('.attachment-preview');
+			if (!vorschau) return this;
+			var label = this.model.get('kiLabel'), plakette = vorschau.querySelector('.ki-admin-plakette');
+			if (label) {
+				if (!plakette) {
+					plakette = document.createElement('span');
+					plakette.className = 'ki-admin-plakette ki-admin-plakette--kachel';
+					plakette.setAttribute('aria-hidden', 'true');
+					vorschau.appendChild(plakette);
+				}
+				plakette.textContent = label;
+			} else if (plakette) {
+				plakette.parentNode.removeChild(plakette);
+			}
+			return this;
+		};
+	}
+	einrichten();
+	document.addEventListener('DOMContentLoaded', einrichten);
+})();
+</script>
+		<?php
+	}
 );

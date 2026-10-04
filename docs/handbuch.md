@@ -327,6 +327,8 @@ Seit dem 2. August 2026 verlangt die EU-KI-Verordnung (Art. 50): Bilder und Vide
 
 Optional tragen Sie das **Werkzeug** ein (z. B. „Midjourney“). Auf der Website erscheint am Bild ein kleines Symbol **„AI“**. Das ist das Kürzel, das der Verhaltenskodex der EU-Kommission bis zum endgültigen EU-Symbol vorsieht. Fährt man mit der Maus darüber, klappt es auf, etwa zu „AI GENERATED Inhalt vollständig von KI erzeugt (Midjourney)“. Für Screenreader steht der Hinweis im Alternativtext. Das gilt für Bilder und Galerien im Text, Beitragsbilder, News-Karten, Mannschaftsfotos und Bilder in Spielberichten.
 
+**In der Mediathek** sehen Sie gekennzeichnete Bilder sofort: In der Rasteransicht und im Medien-Fenster (beim Einfügen eines Bildes) trägt das Vorschaubild oben rechts eine dunkle Plakette mit der Kennung. In der Listenansicht zeigt die Spalte **KI** Kennung und Werkzeug; über die Auswahl **KI: alle Medien** oben in der Liste filtern Sie nach Bildern mit oder ohne KI bzw. nach der Art.
+
 **Eigenes KI-Symbol:** Unter **Clubdaten › Club** können Sie bei **KI-Symbol** ein Bild hinterlegen, zum Beispiel das offizielle EU-Symbol, sobald es veröffentlicht ist. Es erscheint dann an allen KI-Bildern statt des Schriftzugs „AI“, aufgeklappt mit der vollen Kennung („AI GENERATED …“). Ohne Bild bleibt „AI“.
 
 **Aussehen einstellen:** Menü **Medien › KI-Kennzeichnung**. Dort wählen Sie **Position** (oben rechts, oben links, unten rechts, unten links oder unter dem Bild), **Stil** (dunkel, hell, Clubgrün, nur Rahmen), **Größe** und ob das Werkzeug genannt wird. Die Einstellung gilt sofort für alle Bilder. Verdeckt das Symbol bei einem Bild etwas Wichtiges, wählen Sie am Bild selbst unter **Position des Symbols** eine andere Ecke. Diese Wahl gilt nur für dieses Bild.
