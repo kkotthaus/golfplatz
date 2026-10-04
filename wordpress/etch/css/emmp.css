@@ -8,6 +8,11 @@
   --primary-clr: var(--primary);
 }
 
+/* Abstand beim Springen zu #ziel: EMMP setzt ihn bei mitlaufendem Header selbst ([id] { scroll-margin-top: var(--dwc-scroll-margin) },
+   passend zur Header-Höhe). Den festen Abstand aus dem Prototyp (html { scroll-padding-top: 6rem }) hier aufheben, sonst addieren sich beide.
+   Diese Datei kommt im Stylesheet nach dem Prototyp-CSS, gleiche Spezifität → diese Regel gilt. */
+html { scroll-padding-top: 0; }
+
 /* Hauptmenü und Button „Als Gast spielen“ (letzter Menüpunkt) */
 .dwc-top-level-items-vars.dwc-top-level-items-vars {
   --menu-item-clr: var(--base);

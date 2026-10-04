@@ -993,6 +993,7 @@ span.lw-round__name, span.season__title { font-family: var(--heading-font-family
 .dwce-nav-nested.dwce-nav-nested {
 --primary-clr: var(--primary);
 }
+html { scroll-padding-top: 0; }
 .dwc-top-level-items-vars.dwc-top-level-items-vars {
 --menu-item-clr: var(--base);
 --menu-item-font-size: 0.8125rem;
