@@ -2,7 +2,7 @@
  "option-palette-unify-brand-lightness": "off",
  "option-palette-unify-status-lightness": "off",
  "auto-color-scheme": "on",
- "website-color-scheme": "light only",
+ "website-color-scheme": "light dark",
  "option-ref-color-tokens": "on",
  "color-scheme-force-light-selectors": ".top-bar, .app-bar, .site-footer, .page-hero, .section--dark, .home-hero, .hole-map, .hole-video__player, .news-card__media, .team-photo, .map-placeholder",
  "btn-primary-text": "var(--white)",

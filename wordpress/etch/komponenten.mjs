@@ -24,8 +24,10 @@ const farbschemaKomponente = {
   properties: [],
   content: el('button', 'scheme-toggle', [
     el('span', 'scheme-toggle__icon', [], { attrs: { 'aria-hidden': 'true' } }),
+    // Zugänglicher Name „Farbschema Dunkel“ enthält den sichtbaren Text (WCAG 2.5.3), deshalb kein aria-label
+    t('span', 'visually-hidden', 'Farbschema '),
     t('span', 'scheme-toggle__text', 'Dunkel'),
-  ], { attrs: { type: 'button', 'data-scheme-toggle': '', 'aria-pressed': 'false' }, name: 'Farbschema-Umschalter' }),
+  ], { attrs: { type: 'button', 'data-scheme-toggle': '', title: 'Dunkles Farbschema einschalten' }, name: 'Farbschema-Umschalter' }),
 };
 
 const logo = () =>

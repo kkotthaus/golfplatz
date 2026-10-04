@@ -29,7 +29,7 @@ export const palette = {
   info: { main: '#2e5873', 'ultra-light': '#e6eef4', 'ultra-dark': '#16232d', dunkel: { main: '#8fb6d3', hover: '#a9c7de' } },
 };
 
-// Farbschema: Hell ist Standard, Dunkel per Umschalter (Klasse scheme--dark am <html>).
+// Farbschema: folgt dem Gerät (ACSS „light dark“); der Umschalter setzt scheme--light bzw. scheme--dark am <html> (etch-nodes: Hell/Dunkel).
 // Diese Bereiche bleiben auch im dunklen Schema hell gerechnet (dunkelgrüne Flächen mit heller Schrift).
 // Dazu Flächen mit fester Illustration (Hero-Landschaft, Bahngrafik, Platzhalterbilder).
 export const immerHell = ['.top-bar', '.app-bar', '.site-footer', '.page-hero', '.section--dark', '.home-hero', '.hole-map', '.hole-video__player', '.news-card__media', '.team-photo', '.map-placeholder'];
@@ -56,7 +56,7 @@ export function acssEinstellungen() {
     'option-palette-unify-brand-lightness': 'off',
     'option-palette-unify-status-lightness': 'off',
     'auto-color-scheme': 'on',
-    'website-color-scheme': 'light only',
+    'website-color-scheme': 'light dark',
     'option-ref-color-tokens': 'on',
     'color-scheme-force-light-selectors': immerHell.join(', '),
     // Buttons: ACSS setzt die Schrift standardmäßig auf -ultra-light; auf einem mittleren Primary reicht das oft nicht. Weiß ist sicher.

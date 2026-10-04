@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Club &amp; Kontakt – GC Musterclub</title>
 <meta name="description" content="Golf in schöner Landschaft – für Mitglieder und Gäste.">
-<script>try{if(localStorage.getItem('golfplatz-farbschema')==='dunkel'){document.documentElement.classList.add('scheme--dark')}}catch(e){}</script>
+<script>try{var s=localStorage.getItem('golfplatz-farbschema');if(s==='dunkel')document.documentElement.classList.add('scheme--dark');else if(s==='hell')document.documentElement.classList.add('scheme--light')}catch(e){}</script>
 <link rel="stylesheet" href="../assets/css/farben.css">
 <link rel="stylesheet" href="../assets/css/acss-buttons.css">
 <link rel="stylesheet" href="../assets/css/tokens.css">
@@ -297,7 +297,7 @@
     
 <form class="form" data-prototype-form novalidate>
   <div class="form__grid">
-    <div class="form__field"><label class="form__label" for="f-name-ym9oo">Name</label><input class="form__input" id="f-name-ym9oo" name="name" type="text"></div><div class="form__field"><label class="form__label" for="f-email-6ub3z">E-Mail</label><input class="form__input" id="f-email-6ub3z" name="email" type="email"></div><div class="form__field form__field--wide"><label class="form__label" for="f-betreff-jwmfk">Betreff</label><input class="form__input" id="f-betreff-jwmfk" name="betreff" type="text"></div><div class="form__field form__field--wide"><label class="form__label" for="f-nachricht-vdltu">Nachricht</label><textarea class="form__input form__input--textarea" id="f-nachricht-vdltu" name="nachricht" rows="5"></textarea></div>
+    <div class="form__field"><label class="form__label" for="f-name-0kgj7">Name</label><input class="form__input" id="f-name-0kgj7" name="name" type="text"></div><div class="form__field"><label class="form__label" for="f-email-cyrd8">E-Mail</label><input class="form__input" id="f-email-cyrd8" name="email" type="email"></div><div class="form__field form__field--wide"><label class="form__label" for="f-betreff-dkhag">Betreff</label><input class="form__input" id="f-betreff-dkhag" name="betreff" type="text"></div><div class="form__field form__field--wide"><label class="form__label" for="f-nachricht-3izu9">Nachricht</label><textarea class="form__input form__input--textarea" id="f-nachricht-3izu9" name="nachricht" rows="5"></textarea></div>
   </div>
   
   <button class="btn--primary btn--s form__submit" type="submit">Nachricht senden</button>

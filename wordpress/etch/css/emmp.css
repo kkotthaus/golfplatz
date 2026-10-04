@@ -57,13 +57,19 @@
   max-width: none;
   flex: none;
 }
-/* Logo für dunkle Flächen: nur im dunklen Farbschema, dann ersetzt es das normale Logo */
-.site-logo__bild--hell,
-.scheme--dark .site-logo__bild--hell + .site-logo__bild {
+/* Logo für dunkle Flächen: nur im dunklen Farbschema (Gerät dunkel ohne scheme--light, oder scheme--dark), dann ersetzt es das normale Logo */
+html .site-logo__bild--hell {
   display: none;
 }
-.scheme--dark .site-logo__bild--hell {
+@media (prefers-color-scheme: dark) {
+  html:not(.scheme--light) .site-logo__bild--hell { display: block; }
+  html:not(.scheme--light) .site-logo__bild--hell + .site-logo__bild { display: none; }
+}
+html.scheme--dark .site-logo__bild--hell {
   display: block;
+}
+html.scheme--dark .site-logo__bild--hell + .site-logo__bild {
+  display: none;
 }
 
 /* Top-Bar im EMMP-Header über die volle Breite */

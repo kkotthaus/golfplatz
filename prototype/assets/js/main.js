@@ -9,29 +9,44 @@
   var datum = function (d) { return pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + '.'; };
   var tagesbeginn = function (versatz) { var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + versatz); return d; };
 
-  /* ---------- Farbschema (Hell ist Standard; in WordPress: mu-plugins/golfplatz-farbschema.php) ---------- */
+  /* ---------- Farbschema (folgt dem Gerät, Umschalter überschreibt; in WordPress: mu-plugins/golfplatz-farbschema.php) ---------- */
   (function () {
     var root = document.documentElement;
     var buttons = document.querySelectorAll('[data-scheme-toggle]');
+    var KEY = 'golfplatz-farbschema', mq = window.matchMedia('(prefers-color-scheme: dark)');
+    // Ohne gespeicherte Wahl folgt die Seite dem Gerät; Klassen scheme--light/scheme--dark überschreiben es (ACSS).
+    function geraet() { return mq.matches ? 'dunkel' : 'hell'; }
+    function aktuell() {
+      if (root.classList.contains('scheme--dark')) return 'dunkel';
+      if (root.classList.contains('scheme--light')) return 'hell';
+      return geraet();
+    }
     function anzeigen() {
-      var dunkel = root.classList.contains('scheme--dark');
+      var dunkel = aktuell() === 'dunkel';
       buttons.forEach(function (b) {
-        b.setAttribute('aria-pressed', dunkel ? 'true' : 'false');
-        b.setAttribute('aria-label', dunkel ? 'Helles Farbschema einschalten' : 'Dunkles Farbschema einschalten');
+        // Name aus dem sichtbaren Text („Farbschema Dunkel“/„Farbschema Hell“, WCAG 2.5.3): kein aria-label, kein aria-pressed
+        b.removeAttribute('aria-label');
+        b.removeAttribute('aria-pressed');
+        b.setAttribute('data-farbschema', dunkel ? 'dunkel' : 'hell');
+        b.title = dunkel ? 'Helles Farbschema einschalten' : 'Dunkles Farbschema einschalten';
         var text = b.querySelector('.scheme-toggle__text');
         if (text) text.textContent = dunkel ? 'Hell' : 'Dunkel';
       });
     }
     buttons.forEach(function (b) {
       b.addEventListener('click', function () {
-        var dunkel = root.classList.toggle('scheme--dark');
+        var neu = aktuell() === 'dunkel' ? 'hell' : 'dunkel';
+        root.classList.remove('scheme--light', 'scheme--dark');
+        if (neu !== geraet()) root.classList.add(neu === 'dunkel' ? 'scheme--dark' : 'scheme--light');
         try {
-          if (dunkel) localStorage.setItem('golfplatz-farbschema', 'dunkel');
-          else localStorage.removeItem('golfplatz-farbschema');
+          // Entspricht die Wahl dem Gerät, wird nichts gespeichert: die Seite folgt dann wieder dem Gerät.
+          if (neu === geraet()) localStorage.removeItem(KEY);
+          else localStorage.setItem(KEY, neu);
         } catch (e) {}
         anzeigen();
       });
     });
+    if (mq.addEventListener) mq.addEventListener('change', anzeigen);
     anzeigen();
   })();
 

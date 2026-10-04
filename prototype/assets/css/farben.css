@@ -1,7 +1,7 @@
 /* Generiert aus wordpress/etch/acss-farben.mjs – nicht von Hand bearbeiten.
    Im Prototyp ersetzt diese Datei das Farbsystem von Automatic.css (gleiche Variablen, gleiche Werte). */
 :root {
-  color-scheme: light only;
+  color-scheme: light dark;
   --white: light-dark(#fff, #000);
   --black: light-dark(#000, #fff);
   --primary: light-dark(oklch(0.479 0.08 160.5), oklch(0.751 0.104 160.5));

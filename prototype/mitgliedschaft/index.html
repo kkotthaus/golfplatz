@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mitgliedschaft – GC Musterclub</title>
 <meta name="description" content="Golf in schöner Landschaft – für Mitglieder und Gäste.">
-<script>try{if(localStorage.getItem('golfplatz-farbschema')==='dunkel'){document.documentElement.classList.add('scheme--dark')}}catch(e){}</script>
+<script>try{var s=localStorage.getItem('golfplatz-farbschema');if(s==='dunkel')document.documentElement.classList.add('scheme--dark');else if(s==='hell')document.documentElement.classList.add('scheme--light')}catch(e){}</script>
 <link rel="stylesheet" href="../assets/css/farben.css">
 <link rel="stylesheet" href="../assets/css/acss-buttons.css">
 <link rel="stylesheet" href="../assets/css/tokens.css">
@@ -134,7 +134,7 @@
     
 <form class="form" data-prototype-form novalidate>
   <div class="form__grid">
-    <div class="form__field"><label class="form__label" for="f-vorname-avxjb">Vorname</label><input class="form__input" id="f-vorname-avxjb" name="vorname" type="text"></div><div class="form__field"><label class="form__label" for="f-nachname-mqx3e">Nachname</label><input class="form__input" id="f-nachname-mqx3e" name="nachname" type="text"></div><div class="form__field"><label class="form__label" for="f-email-8bhy5">E-Mail</label><input class="form__input" id="f-email-8bhy5" name="email" type="email"></div><div class="form__field"><label class="form__label" for="f-telefon-j7f2o">Telefon</label><input class="form__input" id="f-telefon-j7f2o" name="telefon" type="tel"></div><div class="form__field form__field--wide"><label class="form__label" for="f-modell-0hj7y">Mitgliedschaft</label><select class="form__input form__input--select" id="f-modell-0hj7y" name="modell"><option>Ordentliche Mitgliedschaft</option><option>Partnermitgliedschaft</option></select></div><div class="form__field form__field--wide"><label class="form__label" for="f-nachricht-dssbr">Nachricht</label><textarea class="form__input form__input--textarea" id="f-nachricht-dssbr" name="nachricht" rows="5"></textarea></div>
+    <div class="form__field"><label class="form__label" for="f-vorname-k00jn">Vorname</label><input class="form__input" id="f-vorname-k00jn" name="vorname" type="text"></div><div class="form__field"><label class="form__label" for="f-nachname-wp7et">Nachname</label><input class="form__input" id="f-nachname-wp7et" name="nachname" type="text"></div><div class="form__field"><label class="form__label" for="f-email-jirz1">E-Mail</label><input class="form__input" id="f-email-jirz1" name="email" type="email"></div><div class="form__field"><label class="form__label" for="f-telefon-1edli">Telefon</label><input class="form__input" id="f-telefon-1edli" name="telefon" type="tel"></div><div class="form__field form__field--wide"><label class="form__label" for="f-modell-2q6jm">Mitgliedschaft</label><select class="form__input form__input--select" id="f-modell-2q6jm" name="modell"><option>Ordentliche Mitgliedschaft</option><option>Partnermitgliedschaft</option></select></div><div class="form__field form__field--wide"><label class="form__label" for="f-nachricht-bhrh2">Nachricht</label><textarea class="form__input form__input--textarea" id="f-nachricht-bhrh2" name="nachricht" rows="5"></textarea></div>
   </div>
   <p class="form__hint">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Daten gemäß <a href="../datenschutz/">Datenschutzerklärung</a> zu.</p>
   <button class="btn--primary btn--s form__submit" type="submit">Antrag senden</button>

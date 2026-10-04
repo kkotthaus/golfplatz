@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mitgliederbereich – GC Musterclub</title>
 <meta name="description" content="Golf in schöner Landschaft – für Mitglieder und Gäste.">
-<script>try{if(localStorage.getItem('golfplatz-farbschema')==='dunkel'){document.documentElement.classList.add('scheme--dark')}}catch(e){}</script>
+<script>try{var s=localStorage.getItem('golfplatz-farbschema');if(s==='dunkel')document.documentElement.classList.add('scheme--dark');else if(s==='hell')document.documentElement.classList.add('scheme--light')}catch(e){}</script>
 <link rel="stylesheet" href="../assets/css/farben.css">
 <link rel="stylesheet" href="../assets/css/acss-buttons.css">
 <link rel="stylesheet" href="../assets/css/tokens.css">
@@ -90,7 +90,7 @@
       
 <form class="form" data-prototype-form novalidate>
   <div class="form__grid">
-    <div class="form__field form__field--wide"><label class="form__label" for="f-user-y236j">Benutzername oder E-Mail</label><input class="form__input" id="f-user-y236j" name="user" type="text"></div><div class="form__field form__field--wide"><label class="form__label" for="f-pass-gzvm9">Passwort</label><input class="form__input" id="f-pass-gzvm9" name="pass" type="password"></div>
+    <div class="form__field form__field--wide"><label class="form__label" for="f-user-295t4">Benutzername oder E-Mail</label><input class="form__input" id="f-user-295t4" name="user" type="text"></div><div class="form__field form__field--wide"><label class="form__label" for="f-pass-74vab">Passwort</label><input class="form__input" id="f-pass-74vab" name="pass" type="password"></div>
   </div>
   <p class="form__hint"><a href="#">Passwort vergessen?</a> · Zugang erhalten Sie im Sekretariat.</p>
   <button class="btn--primary btn--s form__submit" type="submit">Anmelden</button>

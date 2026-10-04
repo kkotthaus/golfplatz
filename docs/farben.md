@@ -27,10 +27,10 @@ Clubfarben zentral in `wordpress/etch/acss-farben.mjs`, übernehmen per MCP `gol
 
 ## Hell/Dunkel über ACSS
 
-- Hell ist Standard. Dunkel = ACSS-Klasse `scheme--dark` am `<html>`. ACSS rechnet jede Farbvariable mit `light-dark()` und tauscht im dunklen Schema die Abstufungen (`-ultra-light` ↔ `-ultra-dark`, `-light` ↔ `-dark`, `-semi-light` ↔ `-semi-dark`); `--white` wird dunkel, `--black` hell.
+- Ohne Wahl folgt die Seite dem Gerät (ACSS-Website-Schema „light dark“, Standard aus etch-nodes). Der Umschalter setzt die ACSS-Klasse `scheme--light` bzw. `scheme--dark` am `<html>`. ACSS rechnet jede Farbvariable mit `light-dark()` und tauscht im dunklen Schema die Abstufungen (`-ultra-light` ↔ `-ultra-dark`, `-light` ↔ `-dark`, `-semi-light` ↔ `-semi-dark`); `--white` wird dunkel, `--black` hell.
 - Deshalb **nie davon ausgehen, dass `--white` weiß ist.** Beispiel: Karte `--white`, Text auf `--primary` in `--white` – beides tauscht korrekt.
 - Bereiche, die immer hell gerechnet werden sollen (dunkle Markenflächen, feste Illustrationen, Footer), über ACSS „Force light selectors“ eintragen – nicht mit eigenen Farben lösen. Feste Werte ohne Umschaltung liefern die Referenz-Tokens `--<farbe>[-<stufe>]-ref`.
-- Umschalter: Knopf als Etch-Komponente (z. B. `[data-scheme-toggle]`), Skripte per PHP-Hook. Die gespeicherte Wahl (localStorage) **schon im `<head>`** setzen, damit die Seite nicht hell aufblitzt. Zugänglicher Name aus dem sichtbaren Text (WCAG 2.5.3), nicht abweichend per `aria-label`.
+- Umschalter: Knopf als Etch-Komponente (z. B. `[data-scheme-toggle]`), Skripte per PHP-Hook. Die gespeicherte Wahl (localStorage `golfplatz-farbschema`: `hell`/`dunkel`) **schon im `<head>`** setzen, damit nicht kurz das andere Schema aufblitzt. Entspricht die Wahl dem Gerät, wird sie gelöscht. Logo und Grautöne für dunkle Flächen schalten per Media-Query **und** Klasse um (`html:not(.scheme--light)` bzw. `html.scheme--dark`), nicht nur über `.scheme--dark`. Zugänglicher Name aus dem sichtbaren Text (WCAG 2.5.3), nicht abweichend per `aria-label`.
 
 ## Kontrast (WCAG 2.1 AA)
 

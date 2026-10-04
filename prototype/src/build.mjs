@@ -156,7 +156,7 @@ function page({ path, title, description = club.claim, aktiv = '', body, bodyCla
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title ? `${title} – ${club.kurzname}` : club.name)}</title>
 <meta name="description" content="${esc(description)}">
-<script>try{if(localStorage.getItem('golfplatz-farbschema')==='dunkel'){document.documentElement.classList.add('scheme--dark')}}catch(e){}</script>
+<script>try{var s=localStorage.getItem('golfplatz-farbschema');if(s==='dunkel')document.documentElement.classList.add('scheme--dark');else if(s==='hell')document.documentElement.classList.add('scheme--light')}catch(e){}</script>
 <link rel="stylesheet" href="${r}assets/css/farben.css">
 <link rel="stylesheet" href="${r}assets/css/acss-buttons.css">
 <link rel="stylesheet" href="${r}assets/css/tokens.css">
