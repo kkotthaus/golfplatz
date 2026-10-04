@@ -1,13 +1,10 @@
 section:where([class]) { display: block; gap: normal; padding-block: 0; padding-inline: 0; }
 section:where([class]) > :where(div, ul, ol) { gap: normal; }
-body :is(h1, h2, h3, h4) { font-weight: 500; }
 :root {
 --tee-gelb: #d9ad1f;
 --tee-blau: #2e5f9e;
 --tee-rot: #b53a2e;
 --tee-orange: #e07a2b;
---heading-font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
---text-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 --radius-l: 0.75rem;
 --shadow-s: 0 1px 2px rgb(20 30 20 / 0.06), 0 2px 8px rgb(20 30 20 / 0.05);
 --shadow-m: 0 4px 12px rgb(20 30 20 / 0.08), 0 16px 40px rgb(20 30 20 / 0.08);

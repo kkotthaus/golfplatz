@@ -8,6 +8,7 @@ import { templates, pages } from './templates.mjs';
 import { components } from './komponenten.mjs';
 import { acssEinstellungen } from './acss-farben.mjs';
 import { acssButtons } from './acss-buttons.mjs';
+import { acssSchrift } from './acss-schrift.mjs';
 import { loops } from './loops.mjs';
 import { handbuchHtml } from './handbuch.mjs';
 import { bahnen, sperrungen, club, restaurant, abschlaege, oeffnungszeiten, platzstatus, personen, personengruppen, news, preise, kurse, kurseAnmeldung, lochwettspiele, mannschaften, ligaspiele } from '../../prototype/src/data.mjs';
@@ -387,6 +388,8 @@ writeFileSync(join(dist, 'daten/acss-farben.json'), JSON.stringify(acss, null, 1
 console.log(`daten/acss-farben.json  (${Object.keys(acss).length} Einstellungen)`);
 writeFileSync(join(dist, 'daten/acss-buttons.json'), JSON.stringify(acssButtons, null, 1) + '\n');
 console.log(`daten/acss-buttons.json  (${Object.keys(acssButtons).length} Einstellungen)`);
+writeFileSync(join(dist, 'daten/acss-schrift.json'), JSON.stringify(acssSchrift, null, 1) + '\n');
+console.log(`daten/acss-schrift.json  (${Object.keys(acssSchrift).length} Einstellungen)`);
 
 // Skript der Zählkarte (gemeinsam mit dem Prototyp), eingebunden von snippets/golfplatz-birdiebook.php
 copyFileSync(new URL('../../prototype/assets/js/zaehlkarte.js', import.meta.url), join(dist, 'zaehlkarte.js'));
