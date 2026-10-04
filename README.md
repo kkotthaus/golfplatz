@@ -1,6 +1,6 @@
 # etch-nodes
 
-Gemeinsame Standards für WordPress-Projekte mit Etch, Automatic.css v4, Meta Box und WPCodeBox: Stack, Konventionen und Betrieb. Die Inhalte sind generisch und enthalten keine Projektdaten. Farben und Farbregeln legt jedes Projekt lokal ab.
+Gemeinsame Standards für WordPress-Projekte mit Etch, Automatic.css v4, Meta Box und WPCodeBox: Stack, Konventionen und Betrieb. Die Inhalte sind generisch und enthalten keine Projektdaten und kein Design. Das Design (Farben, Schriften, Look) legt jede Website lokal ab.
 
 | Datei | Inhalt |
 | --- | --- |
@@ -26,7 +26,7 @@ Danach in der `CLAUDE.md` des Projekts importieren:
 @etch-nodes/CLAUDE.md
 ```
 
-Die Imports in `etch-nodes/CLAUDE.md` sind relativ zum Ordner `etch-nodes/` und funktionieren deshalb ohne Anpassung. Projektspezifisches (Prefix, Versionen, Komponenten-IDs) und alle Farben und Farbregeln gehören in die Projekt-Doku, nicht hierher.
+Die Imports in `etch-nodes/CLAUDE.md` sind relativ zum Ordner `etch-nodes/` und funktionieren deshalb ohne Anpassung. Projektspezifisches (Prefix, Versionen, Komponenten-IDs) und das gesamte Design gehören in die Projekt-Doku, nicht hierher.
 
 ## Aktualisieren
 
@@ -52,6 +52,6 @@ Dann in etch-nodes einen Pull Request von `<branch>` nach `main` stellen. Commit
 ## Regeln für dieses Repo
 
 - Nur Standards, die für alle Etch-Projekte gelten.
-- Keine Farben und Farbregeln.
+- Kein Design: keine Farben, Farbregeln, Schriften, Schatten, konkreten Abstands- oder Größenwerte, ACSS-Einstellungswerte, Logos oder Gestaltungsvorgaben. Hier stehen nur Technik und Arbeitsweise (wie man ACSS, Etch und Komponenten nutzt), nicht wie eine Website aussieht.
 - Generisch formulieren: keine Projektnamen, Domains, Prefixe, Pfade, IDs oder Versionsstände. Platzhalter `<prefix>` / `<PREFIX>` für das Projektkürzel.
 - Verweise immer relativ innerhalb von `etch-nodes/`.
