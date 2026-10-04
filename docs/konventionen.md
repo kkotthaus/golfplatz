@@ -56,10 +56,22 @@ Regeln für Komponenten, Block-Markup, Daten, CSS, Hell/Dunkel und KI-Kennzeichn
   `section:where([class])` hat Spezifität 0,0,1: schlägt `:where()`, verliert gegen jede BEM-Klasse.
 - ACSS setzt Überschriften- und Absatzabstände auf 0 – Abstände in Komponenten ausdrücklich setzen.
 - ACSS steuert die Buttonbreite über `--btn-width` und lädt nach dem eigenen Stylesheet: `--btn-width: 100%` statt `width: 100%`.
-- Eigene Tokens nur für das, was ACSS nicht kennt (z. B. Schriften, Schatten) – vorher in den ACSS-Variablen nachsehen. Abstände, Schriftgrößen, Radius und Container kommen aus ACSS. Welche Werte gelten (Farben, Schriften, Schatten, ACSS-Einstellungen), legt das Design des Projekts fest.
+- Eigene Tokens nur für das, was ACSS nicht kennt (z. B. Schatten) – vorher in den ACSS-Variablen nachsehen. Schriften kommen aus dem Font Manager (siehe [Schriften](#schriften)). Abstände, Schriftgrößen, Radius und Container kommen aus ACSS. Welche Werte gelten (Farben, Schriften, Schatten, ACSS-Einstellungen), legt das Design des Projekts fest.
 - **EMMP anpassen** über seine Variablen (`--menu-item-clr`, `--menu-cta-bg`, `--dropdown-content-bg` …), gesetzt mit doppelter Klasse (`.dwc-top-level-items-vars.dwc-top-level-items-vars`), damit sie unabhängig von der Ladereihenfolge gewinnen. Werte nach dem Design des Projekts.
 - EMMP markiert den aktiven Menüpunkt selbst mit `aria-current="page"`, aber nur bei exakt gleicher URL (Elternbereiche auf Unterseiten nicht).
 - **Tabellarische Daten** in Komponenten als CSS-Grid aus `div`s mit Tabellen-Rollen (`role="table|row|columnheader|rowheader|cell"`, Name per `aria-label`). Breite Tabellen seitlich scrollbar, erste Spalte bei Bedarf fixiert.
+
+## Schriften
+
+**Standard für jede Website:** Schriften werden über den **Etch Font Manager** verwaltet. Welche Schriften ein Projekt nutzt, legt sein Design fest.
+
+- **Einbinden nur über den Font Manager**: Google Fonts über dessen Google-Fonts-Suche installieren (die Dateien werden heruntergeladen und selbst gehostet), eigene Schriften als WOFF2 hochladen. Kein eigenes `@font-face` im Projekt-CSS, keine Schriftdateien im Projekt-Medienordner, keine externen Schriftdienste (Google Fonts, Adobe Fonts, Bunny Fonts) – Besucher laden nichts von fremden Servern (Datenschutz).
+- Möglichst **variable** Schriften und nur die nötigen **Subsets** (für Deutsch reicht `latin`: Umlaute und ß sind enthalten); so bleibt es meist bei einer Datei je Familie.
+- **Preload** für die Schrift des größten sichtbaren Elements beim ersten Anzeigen (meist der Hero-Titel); `font-display: swap`; **Fallback** auf Systemschriften (z. B. `ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif`).
+- **Zuordnung (Text, Überschriften) nur in den ACSS-Einstellungen** (`text-font-family`, `heading-font-family`, dazu Stärke und Laufweite), per Datei im Repo und MCP-Funktion übertragen. Im Font Manager **keine Rolle** (Heading/Body) setzen – sonst setzen Font Manager und ACSS dieselben Variablen und überschreiben sich je nach Ladereihenfolge.
+- **Lizenz** jeder Schrift als Datei im Repo ablegen (z. B. `lizenzen/<schrift>-OFL.txt`); nur Schriften mit freier Lizenz für gewerbliche Nutzung (z. B. SIL Open Font License) oder gekaufte Lizenzen.
+- **Einrichtung je Umgebung** (lokal, Staging, live) gleich: Familie installieren, Preload und Fallback setzen – in der Oberfläche oder per WP-CLI über die REST-Routen des Font Managers (`/etch-font-manager/v1/google/install`, `/etch-font-manager/v1/families`). Die Schritte stehen in der Projekt-Doku. Danach ACSS-Einstellungen übertragen und den Seitencache leeren.
+- Schriftwechsel im Frontend prüfen: Stärken und Laufweiten der großen Titel an die neue Schrift anpassen, Kontraste unverändert.
 
 ## Hell/Dunkel
 

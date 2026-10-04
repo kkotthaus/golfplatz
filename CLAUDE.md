@@ -18,6 +18,7 @@ Diese Datei wird aus einem Projekt importiert (`@etch-nodes/CLAUDE.md`). Alle Ve
 - Primär mit den Klassen, Variablen und Einstellungen von Automatic.css arbeiten; eigene Klassen und Variablen nur, wenn ACSS es nicht abdeckt (siehe [docs/konventionen.md](docs/konventionen.md#css)).
 - Für interaktive Bausteine (Accordion, Tabs, Dialog, Drawer, Lightbox, Carousel, Breadcrumbs, Inhaltsverzeichnis, Facets) OhMyEtch-Komponenten nutzen, nicht selbst bauen – **außer Navigation/Menüs** (keine OhMyEtch-Navigation). Siehe [docs/konventionen.md](docs/konventionen.md#komponenten).
 - Gestaltung (Farben, Schriften, Look) nach der Design-Doku des Projekts.
+- Schriften immer über den **Etch Font Manager** einbinden (selbst gehostet, auch Google Fonts), nie per eigenem `@font-face` oder externem Schriftdienst; Zuordnung zu Text/Überschriften nur in den ACSS-Einstellungen. Siehe [docs/konventionen.md](docs/konventionen.md#schriften).
 - Jede Website unterstützt Hell und Dunkel (ACSS `light dark`, folgt dem Gerät); ein Umschalter ist optional. Siehe [docs/konventionen.md](docs/konventionen.md#helldunkel).
 - Jede Website kennzeichnet KI-erzeugte oder -veränderte Bilder und Videos (Mediathek-Feld `ki_art`, Symbol am Bild, Hinweis im Alternativtext). Symbol, Farben und Texte legt das Projekt fest. Siehe [docs/konventionen.md](docs/konventionen.md#ki-kennzeichnung).
 - PHP-Snippets WPCodeBox-tauglich schreiben (`define()` statt `const`, kein `__DIR__`). Snippets immer in WPCodeBox anlegen, nie als mu-plugin oder Lader.
