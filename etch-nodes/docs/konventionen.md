@@ -1,6 +1,6 @@
 # Konventionen für Etch-Projekte
 
-Regeln für Komponenten, Block-Markup, Daten, CSS und Hell/Dunkel. Platzhalter: `<prefix>` steht für das Kürzel des jeweiligen Projekts (Datenschlüssel, Funktionsnamen, Ordner), `<PREFIX>` für dessen Konstanten.
+Regeln für Komponenten, Block-Markup, Daten, CSS, Hell/Dunkel und KI-Kennzeichnung. Platzhalter: `<prefix>` steht für das Kürzel des jeweiligen Projekts (Datenschlüssel, Funktionsnamen, Ordner), `<PREFIX>` für dessen Konstanten.
 
 ## Architektur
 
@@ -91,6 +91,34 @@ Regeln für Komponenten, Block-Markup, Daten, CSS und Hell/Dunkel. Platzhalter: 
   - In beiden Varianten den Zustand aus dem tatsächlich wirksamen Schema ableiten (Klasse am `<html>`, sonst Geräteeinstellung) und bei einem Wechsel der Geräteeinstellung (`matchMedia(…).addEventListener('change', …)`) neu anzeigen. Ohne JavaScript ausblenden (Klasse `js` am `<html>`) oder mit einer Beschriftung ausliefern, die ohne Skript nicht irreführt.
 - `localStorage`-Zugriffe in `try`/`catch` (gesperrter Speicher, private Fenster); die Umschaltung funktioniert dann für die aktuelle Seite trotzdem.
 - In der Datenschutzerklärung erwähnen: Die Wahl wird nur lokal im Browser gespeichert, nicht übertragen; unbedingt erforderlich für die gewünschte Funktion (§ 25 Abs. 2 Nr. 2 TDDDG).
+
+## KI-Kennzeichnung
+
+**Standard für jede Website:** Bilder und Videos, die mit KI erzeugt oder verändert wurden, sind auf der Website als solche gekennzeichnet (EU-KI-Verordnung Art. 50, seit 2. August 2026; dazu Wettbewerbsrecht, wenn Bilder sonst über Tatsachen täuschen könnten). **Form und Farbe des Symbols sowie alle Texte** (Kennung, Erklärung, Beschriftungen im Backend, Handbuch) legt das Projekt fest. Hier stehen nur Datenmodell, Technik und Barrierefreiheit.
+
+**Datenmodell** (Meta Box, im Code registriert, Snippet `<prefix>-ki.php`, gehört auf die Live-Seite):
+
+- Felder am Anhang (`attachment`, auch im Medien-Dialog: `media_modal`):
+  - `ki_art` – Auswahl der KI-Nutzung mit festen Schlüsseln `ai` (KI wurde verwendet), `generated` (vollständig von KI erzeugt), `modified` (durch KI verändert); **leer = keine KI**. Maßgeblich ist nur dieses Feld.
+  - `ki_werkzeug` – optional, Name des Werkzeugs.
+  - `ki_position` – optional, Position des Symbols an diesem Bild (überschreibt die Einstellung, z. B. wenn das Symbol etwas Wichtiges verdeckt).
+- Einstellungsseite unter **Medien › KI-Kennzeichnung** (Recht `edit_pages`): Position, Stil, Größe, Werkzeug nennen ja/nein. Welche Stile und Größen es gibt, bestimmt das Projekt.
+- Optional ein eigenes Symbol als Bild in den Stammdaten des Projekts (z. B. das offizielle EU-Symbol, sobald es veröffentlicht ist); ohne Bild erscheint das Text-Kürzel des Projekts.
+
+**Technik:**
+
+- Eine PHP-Funktion `<prefix>_ki_daten( $attachment_id )` liefert alles, was die Darstellung braucht: `hat`, `kurz`, `logo`, `hat_logo`, `label`, `zusatz`, `text`, `mod` (Klassen-Modifier für Position, Stil, Größe), `alt` (Hinweis für den Alternativtext). Ungültige oder leere Werte → `hat: false`.
+- **Etch-Komponenten:** Die Daten je Bild als dynamische Daten mitgeben (z. B. `{item.<prefix>.bild_ki.…}` aus dem `etch/dynamic_data/post`-Filter) und das Symbol über einen Generator-Baustein einsetzen (z. B. `kiPlakette('<pfad>')`), in einer Bedingung auf `….hat`.
+- **Bilder aus dem Editor** (Bild, Beitragsbild, Cover) per `render_block`-Filter mit `WP_HTML_Tag_Processor`: Klasse `ki-bild` am äußeren Element, Bild (samt Link) in `span.ki-bild__rahmen` als Bezug für die Position, Symbol direkt danach. Gleiches Markup wie in den Komponenten.
+- **Markup (BEM):** `.ki-plakette` mit Modifiern für Position/Stil/Größe (`ki-plakette--<wert>`, `ki-plakette--logo` bei Bild-Symbol), darin `.ki-plakette__icon` (Kürzel oder `.ki-plakette__logo`) und `.ki-plakette__text` (Kennung und Erklärung). Das Symbol ist immer sichtbar; Kennung und Erklärung klappen beim Darüberfahren bzw. Antippen auf (`:hover`, `:active`), Animation bei `prefers-reduced-motion` aus. Abstand zur Bildecke an deren Rundung ausrichten.
+- Farben der Stile nur aus ACSS-Variablen; Lesbarkeit auf beliebigen Bildern sicherstellen (deckender Hintergrund statt Transparenz) und in beiden Farbschemata prüfen.
+
+**Barrierefreiheit:**
+
+- Das sichtbare Symbol ist `aria-hidden="true"` (mit `title` für Maus-Nutzer). Für Screenreader wird der Hinweis an den **Alternativtext** des Bildes angehängt (`<alt> – <Kennung>: <Erklärung>`), auch bei Bildern aus dem Editor.
+- Bei Bildern ohne eigenen Alternativtext (dekorativ) trotzdem den Hinweis als Alternativtext setzen – die Kennzeichnung ist eine Information.
+
+**Redaktion:** Im Handbuch des Projekts erklären, wann welche Stufe gilt, und darauf hinweisen, dass Fotos echter Personen nicht ohne deren Einwilligung in KI-Dienste hochgeladen oder per KI verändert werden.
 
 ## Meta Box
 

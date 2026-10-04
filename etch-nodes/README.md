@@ -51,6 +51,7 @@ Dann in etch-nodes einen Pull Request von `<branch>` nach `main` stellen. Commit
 
 ## Regeln für dieses Repo
 
+- Die Standards hier sind **führend**. Neue allgemeine Regeln entstehen hier und werden per `subtree pull` in alle Projekte übernommen; Projekte, die einen Standard noch nicht erfüllen, werden angepasst.
 - Nur Standards, die für alle Etch-Projekte gelten.
 - Kein Design: keine Farben, Farbregeln, Schriften, Schatten, konkreten Abstands- oder Größenwerte, ACSS-Einstellungswerte, Logos oder Gestaltungsvorgaben. Hier stehen nur Technik und Arbeitsweise (wie man ACSS, Etch und Komponenten nutzt), nicht wie eine Website aussieht.
 - Generisch formulieren: keine Projektnamen, Domains, Prefixe, Pfade, IDs oder Versionsstände. Platzhalter `<prefix>` / `<PREFIX>` für das Projektkürzel.
