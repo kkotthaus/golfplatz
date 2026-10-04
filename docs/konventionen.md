@@ -85,7 +85,10 @@ Regeln für Komponenten, Block-Markup, Daten, CSS und Hell/Dunkel. Platzhalter: 
 
 - Schaltet die ACSS-Klassen `scheme--light` bzw. `scheme--dark` am `<html>`. Damit rechnen alle ACSS-Farben im gewählten Schema.
 - Die Wahl im `localStorage` speichern (Schlüssel z. B. `<prefix>-farbschema`) und per Inline-Skript im `<head>` setzen, bevor die Seite gezeichnet wird – sonst blitzt kurz das andere Schema auf. Entspricht die neue Wahl der Geräteeinstellung, die gespeicherte Wahl löschen; die Seite folgt dann wieder dem Gerät.
-- `<button type="button" aria-pressed="true|false">` mit sichtbar verborgenem, gleichbleibendem Namen (z. B. „Dunkles Design“); den Zustand meldet `aria-pressed`. Symbol je Zustand per CSS über `[aria-pressed]`. Ohne JavaScript ausblenden (Klasse `js` am `<html>`).
+- Schaltfläche `<button type="button">` in einer von zwei Varianten – je Projekt eine wählen, nicht mischen:
+  - **Schalter mit festem Namen:** `aria-pressed="true|false"` und ein gleichbleibender, sichtbar verborgener Name (z. B. „Dunkles Design“); den Zustand meldet `aria-pressed`. Passt zu einem reinen Symbol-Knopf. Symbol je Zustand per CSS über `[aria-pressed]`.
+  - **Aktion mit sichtbarer Beschriftung:** Die sichtbare Beschriftung nennt das Ziel und wechselt mit dem Zustand („Dunkel“ ↔ „Hell“), ein sichtbar verborgenes Präfix ergänzt den Namen (z. B. „Farbschema “). Der zugängliche Name entsteht aus dem Text – **kein** `aria-pressed` (sonst widersprechen sich Name und Zustand) und kein `aria-label`. Den Zustand für das CSS als Datenattribut setzen (z. B. `data-farbschema="hell|dunkel"`), das Symbol hängt daran. Optional ein `title` mit der Aktion.
+  - In beiden Varianten den Zustand aus dem tatsächlich wirksamen Schema ableiten (Klasse am `<html>`, sonst Geräteeinstellung) und bei einem Wechsel der Geräteeinstellung (`matchMedia(…).addEventListener('change', …)`) neu anzeigen. Ohne JavaScript ausblenden (Klasse `js` am `<html>`) oder mit einer Beschriftung ausliefern, die ohne Skript nicht irreführt.
 - `localStorage`-Zugriffe in `try`/`catch` (gesperrter Speicher, private Fenster); die Umschaltung funktioniert dann für die aktuelle Seite trotzdem.
 - In der Datenschutzerklärung erwähnen: Die Wahl wird nur lokal im Browser gespeichert, nicht übertragen; unbedingt erforderlich für die gewünschte Funktion (§ 25 Abs. 2 Nr. 2 TDDDG).
 
