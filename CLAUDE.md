@@ -20,5 +20,6 @@ Diese Datei wird aus einem Projekt importiert (`@etch-nodes/CLAUDE.md`). Alle Ve
 - Gestaltung (Farben, Schriften, Look) nach der Design-Doku des Projekts.
 - Jede Website unterstützt Hell und Dunkel (ACSS `light dark`, folgt dem Gerät); ein Umschalter ist optional. Siehe [docs/konventionen.md](docs/konventionen.md#helldunkel).
 - Jede Website kennzeichnet KI-erzeugte oder -veränderte Bilder und Videos (Mediathek-Feld `ki_art`, Symbol am Bild, Hinweis im Alternativtext). Symbol, Farben und Texte legt das Projekt fest. Siehe [docs/konventionen.md](docs/konventionen.md#ki-kennzeichnung).
-- PHP-Snippets WPCodeBox-tauglich schreiben (`define()` statt `const`, kein `__DIR__`).
+- PHP-Snippets WPCodeBox-tauglich schreiben (`define()` statt `const`, kein `__DIR__`). Snippets immer in WPCodeBox anlegen, nie als mu-plugin oder Lader.
+- **Bei einem neuen Projekt** (bzw. in der ersten Sitzung) zuerst die WPCodeBox-Einstellungen prüfen und Abweichungen melden: MCP an, genau die vorgesehenen Werkzeuge frei, Delete/Run Snippet nicht frei, kein Lader. Prüfliste: [docs/betrieb.md](docs/betrieb.md#wpcodebox-einstellungen-prüfen-bei-jedem-neuen-projekt). Freigaben setzt der Nutzer selbst in der Oberfläche.
 - Dieser Ordner ist ein git subtree (siehe [README.md](README.md)). Änderungen hier nur, wenn sie für alle Projekte gelten, und generisch formuliert – ohne Projektnamen, URLs, Prefixe oder Pfade eines Projekts.
