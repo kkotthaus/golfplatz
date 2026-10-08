@@ -14,4 +14,5 @@ Stand der Umsetzung (angelegte Beitragstypen/Felder, offene Handgriffe): [docs/u
 
 ## Arbeitsweise
 - Neue oder geänderte Funktionen im Handbuch für die Redaktion nachtragen: [docs/handbuch.md](docs/handbuch.md) (erscheint im Backend unter „Handbuch“).
+- Technik-Doku für Administratoren (Backend „Handbuch › Technik“, Snippet `golfplatz-technik.php`): [docs/technik.md](docs/technik.md). Bei Änderungen an Plugins, Snippets, externen Abgleichen, CSS oder Skripten mitpflegen; abgeleitete Clubs ergänzen dort ihre eigenen Teile.
 - `etch-nodes/` ist ein git subtree. Dort nur allgemeine, generische Standards ändern (siehe [etch-nodes/README.md](etch-nodes/README.md)); Projektspezifisches gehört in `docs/`.

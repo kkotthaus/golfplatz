@@ -6,8 +6,8 @@
       "slug": "beispiel-1",
       "meta": {
         "sperr_bereich": "abschlag_10",
-        "sperr_beginn": 1791100800,
-        "sperr_ende": 1791118800,
+        "sperr_beginn": 1791446400,
+        "sperr_ende": 1791464400,
         "sperr_grund": "Ligaspiel AK50/1 Männlich"
       }
     },
@@ -16,8 +16,8 @@
       "slug": "beispiel-2",
       "meta": {
         "sperr_bereich": "abschlag_1",
-        "sperr_beginn": 1791133200,
-        "sperr_ende": 1791147600,
+        "sperr_beginn": 1791478800,
+        "sperr_ende": 1791493200,
         "sperr_grund": "Afterwork-Turnier"
       }
     },
@@ -26,8 +26,8 @@
       "slug": "beispiel-3",
       "meta": {
         "sperr_bereich": "abschlag_1",
-        "sperr_beginn": 1791189000,
-        "sperr_ende": 1791196200,
+        "sperr_beginn": 1791534600,
+        "sperr_ende": 1791541800,
         "sperr_grund": "Turnier: Herbstpreis des Präsidenten"
       }
     },
@@ -36,8 +36,8 @@
       "slug": "beispiel-4",
       "meta": {
         "sperr_bereich": "abschlag_10",
-        "sperr_beginn": 1791189000,
-        "sperr_ende": 1791196200,
+        "sperr_beginn": 1791534600,
+        "sperr_ende": 1791541800,
         "sperr_grund": "Turnier: Herbstpreis des Präsidenten"
       }
     },
@@ -46,8 +46,8 @@
       "slug": "beispiel-5",
       "meta": {
         "sperr_bereich": "platz",
-        "sperr_beginn": 1791180000,
-        "sperr_ende": 1791189000,
+        "sperr_beginn": 1791525600,
+        "sperr_ende": 1791534600,
         "sperr_grund": "Platzpflege: Grüns werden besandet"
       }
     },
@@ -56,8 +56,8 @@
       "slug": "beispiel-6",
       "meta": {
         "sperr_bereich": "range",
-        "sperr_beginn": 1791183600,
-        "sperr_ende": 1791190800,
+        "sperr_beginn": 1791529200,
+        "sperr_ende": 1791536400,
         "sperr_grund": "Mäharbeiten"
       }
     }

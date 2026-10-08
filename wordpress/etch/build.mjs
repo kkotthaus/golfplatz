@@ -49,6 +49,10 @@ writeFileSync(
 writeFileSync(join(dist, 'handbuch.php'), "<?php defined( 'ABSPATH' ) || exit; ?>\n" + handbuchHtml(readFileSync(join(hier, '../../docs/handbuch.md'), 'utf8')));
 console.log('handbuch.php');
 
+// Technik-Doku für Administratoren (Unterseite „Technik“, snippets/golfplatz-technik.php), Quelle docs/technik.md.
+writeFileSync(join(dist, 'technik.php'), "<?php defined( 'ABSPATH' ) || exit; ?>\n" + handbuchHtml(readFileSync(join(hier, '../../docs/technik.md'), 'utf8')).replace('aus docs/handbuch.md', 'aus docs/technik.md'));
+console.log('technik.php');
+
 // Inhalte für golfplatz/import-content, Quelle sind die Prototyp-Daten.
 mkdirSync(join(dist, 'daten'), { recursive: true });
 writeFileSync(
