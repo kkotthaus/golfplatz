@@ -8,6 +8,51 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// Der Umschalter Hell/Dunkel lässt sich im Backend ein- und ausschalten: Clubdaten › Club › „Umschalter Hell/Dunkel“
+// (Standard aus etch-nodes). Ausgeschaltet verschwindet die Schaltfläche, und eine gespeicherte Wahl wird nicht mehr
+// angewendet – die Seite folgt dann immer dem Gerät.
+add_filter(
+	'rwmb_meta_boxes',
+	function ( $boxen ) {
+		$feld = array(
+			'id'        => 'farbschema_umschalter',
+			'name'      => 'Umschalter Hell/Dunkel',
+			'type'      => 'switch',
+			'style'     => 'rounded',
+			'on_label'  => 'Ja',
+			'off_label' => 'Nein',
+			'std'       => 1,
+			'desc'      => 'Zeigt Besuchern die Schaltfläche für das helle und dunkle Design. Ausgeschaltet verschwindet sie, und die Website folgt immer der Einstellung des Geräts.',
+		);
+		foreach ( $boxen as $i => $b ) {
+			if ( 'clubdaten-club' === ( $b['id'] ?? '' ) ) {
+				$boxen[ $i ]['fields'][] = $feld;
+				break;
+			}
+		}
+		return $boxen;
+	},
+	20
+);
+
+/** Ist der Umschalter eingeschaltet? Ohne gespeicherten Wert: ja. */
+function golfplatz_farbschema_an(): bool {
+	$daten = (array) get_option( 'clubdaten', array() );
+	return ! array_key_exists( 'farbschema_umschalter', $daten ) || ! empty( $daten['farbschema_umschalter'] );
+}
+
+// Solange noch nie ein Wert gespeichert wurde, den Schalter im Backend als eingeschaltet zeigen – so, wie er wirkt.
+// Sonst stünde er auf „Nein“, und das nächste Speichern der Seite würde den Umschalter unbemerkt abschalten.
+add_filter(
+	'rwmb_farbschema_umschalter_field_meta',
+	function ( $wert ) {
+		return array_key_exists( 'farbschema_umschalter', (array) get_option( 'clubdaten', array() ) ) ? $wert : 1;
+	}
+);
+
+// Nach dem Speichern der Einstellungsseite den Seitencache leeren, damit der Schalter sofort wirkt.
+add_action( 'update_option_clubdaten', fn() => do_action( 'litespeed_purge_all' ) );
+
 define( 'GOLFPLATZ_FARBSCHEMA_SPEICHER', 'golfplatz-farbschema' );
 
 /**
@@ -17,6 +62,11 @@ define( 'GOLFPLATZ_FARBSCHEMA_SPEICHER', 'golfplatz-farbschema' );
 add_action(
 	'wp_head',
 	function () {
+		if ( ! golfplatz_farbschema_an() ) {
+			// Umschalter ausgeschaltet: keine Schema-Klasse, Schaltfläche ausblenden.
+			echo "<style>[data-scheme-toggle]{display:none!important}</style>\n";
+			return;
+		}
 		$key = wp_json_encode( GOLFPLATZ_FARBSCHEMA_SPEICHER );
 		echo "<script>try{var s=localStorage.getItem({$key});if(s==='dunkel')document.documentElement.classList.add('scheme--dark');else if(s==='hell')document.documentElement.classList.add('scheme--light')}catch(e){}</script>\n";
 	},
@@ -28,6 +78,9 @@ add_action(
 add_action(
 	'wp_footer',
 	function () {
+		if ( ! golfplatz_farbschema_an() ) {
+			return;
+		}
 		$key = wp_json_encode( GOLFPLATZ_FARBSCHEMA_SPEICHER );
 		?>
 <script>

@@ -467,6 +467,8 @@ Nach Änderungen unten auf **Änderungen speichern** klicken.
 
 > Einige Felder werden noch nicht angezeigt, weil die zugehörigen Seiten (Restaurant, Impressum, Datenschutz) noch im Aufbau sind. Füllen dürfen Sie sie schon.
 
+**Umschalter Hell/Dunkel** (Reiter **Club**, ganz unten): zeigt Besuchern die Schaltfläche für das helle und dunkle Design. Steht der Schalter auf „Nein“, verschwindet sie, und die Website folgt immer der Einstellung des Geräts – auch bei Besuchern, die vorher von Hand umgeschaltet hatten. Das dunkle Design selbst bleibt.
+
 ## Golfschule
 
 Die Seite **Golfschule** (`/golfschule/`) zeigt die Kurse als Karten, darunter die Anmeldung (Telefon und E-Mail aus den Clubdaten), das Team der Golfschule und einen Text zur Platzreife. Jeder Kurs hat zusätzlich eine eigene Seite (`/golfschule/kurs/<name>/`), die sich per Klick auf die Karte öffnet.

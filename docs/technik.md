@@ -80,7 +80,7 @@
 
 | Snippet | Aufgabe |
 | --- | --- |
-| **golfplatz-farbschema** | Umschalter Hell/Dunkel (ACSS-Klassen `scheme--light`/`scheme--dark`, Wahl im Browser) |
+| **golfplatz-farbschema** | Umschalter Hell/Dunkel (ACSS-Klassen `scheme--light`/`scheme--dark`, Wahl im Browser). Der Umschalter lässt sich im Backend ein- und ausschalten: Clubdaten › Club › „Umschalter Hell/Dunkel“ (Feld `farbschema_umschalter`, ohne gespeicherten Wert eingeschaltet). Ausgeschaltet blendet das Snippet die Schaltfläche aus und wendet eine gespeicherte Wahl nicht mehr an – die Seite folgt dem Gerät. |
 | **golfplatz-scrollen** | Sprunglinks gleiten in 600 ms zum Ziel, mit Abstand zum Header |
 | **golfplatz-ki** | KI-Kennzeichnung von Bildern und Videos (Mediathek-Feld, Symbol am Bild, Hinweis im Alternativtext) |
 | **golfplatz-backend** | blendet den Block „Individuelle Felder“ aus (klassischer und Block-Editor) |
