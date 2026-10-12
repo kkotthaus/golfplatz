@@ -25,7 +25,8 @@ Regeln für Komponenten, Block-Markup, Daten, CSS, Hell/Dunkel und KI-Kennzeichn
   - Einbinden per Key wie OhMyEtch (`"__REF_DwcSlider__"` usw., der Sync löst über `etch_component_html_key` auf).
   - Responsive Werte als Kurzform `"BASIS lg:X md:Y sm:Z"` (max-width), z. B. `layout.slidesPerPage: "4 lg:3 md:2 sm:1"`; die Grenzen je Slider über `breakpoints.laptopLg / tabletMd / phoneSm` (px), sonst 1120/1024/640.
   - Barrierefreiheit: `ariaLabel` setzen; Autoplay nur, wenn das Design es verlangt, dann mit Pause-Knopf (`autoplay.playPauseButton`).
-- **Weitere Fremdkomponenten** (EMMP) werden per WordPress-ID eingebunden, mit Slots über `etch/slot-content`. Nie löschen und neu anlegen, sonst stimmt die ID nicht mehr. Nach einer Migration die IDs prüfen (Duplicator erhält sie). Die verwendeten IDs im Projekt dokumentieren.
+- **Weitere Fremdkomponenten** (EMMP) werden per WordPress-ID eingebunden, mit Slots über `etch/slot-content`. Nie löschen und neu anlegen, sonst stimmt die ID nicht mehr. Nach einer Migration und nach jedem EMMP-Update die IDs prüfen (Duplicator erhält sie). Die verwendeten IDs im Projekt dokumentieren. EMMP nach dem festen Ablauf aktualisieren (siehe [Updates](development-environment.md#updates)); dabei bleiben die IDs erhalten.
+- **Tabs im Mega-Menü: DWC Tabbed Nav** (EMMP), nicht OhMyEtch Tabs. Aufbau: `DWC Dropdown` mit eingeschaltetem Mega-Menü → Slot `Mega_Menu_Content` → `DWC Tabbed Nav` → Slot `Tabs` → je `DWC Tab` (Slot `Tab_Content`); die Tabs können aus einem `etch/loop` kommen (z. B. Kategorien). Funktioniert nur im EMMP-Header bzw. als Tabbed Hero (Slot `Hero`). Tabs im Seiteninhalt bleiben OhMyEtch Tabs.
 
 ## Block-Markup
 
@@ -94,7 +95,8 @@ Regeln für Komponenten, Block-Markup, Daten, CSS, Hell/Dunkel und KI-Kennzeichn
 - ACSS setzt Überschriften- und Absatzabstände auf 0 – Abstände in Komponenten ausdrücklich setzen.
 - ACSS steuert die Buttonbreite über `--btn-width` und lädt nach dem eigenen Stylesheet: `--btn-width: 100%` statt `width: 100%`.
 - Eigene Tokens nur für das, was ACSS nicht kennt (z. B. Schatten) – vorher in den ACSS-Variablen nachsehen. Schriften kommen aus dem Font Manager (siehe [Schriften](#schriften)). Abstände, Schriftgrößen, Radius und Container kommen aus ACSS. Welche Werte gelten (Farben, Schriften, Schatten, ACSS-Einstellungen), legt das Design des Projekts fest.
-- **EMMP anpassen** über seine Variablen (`--menu-item-clr`, `--menu-cta-bg`, `--dropdown-content-bg` …), gesetzt mit doppelter Klasse (`.dwc-top-level-items-vars.dwc-top-level-items-vars`), damit sie unabhängig von der Ladereihenfolge gewinnen. Werte nach dem Design des Projekts.
+- **EMMP anpassen** über seine Variablen (`--menu-item-clr`, `--menu-cta-bg`, `--dropdown-content-bg` …), gesetzt mit doppelter Klasse (`.dwc-top-level-items-vars.dwc-top-level-items-vars`), damit sie unabhängig von der Ladereihenfolge gewinnen. Werte nach dem Design des Projekts. Die Variablen hängen an den Klassen `.dwc-header-vars`, `.dwc-nav-vars`, `.dwc-top-level-items-vars`, `.dwc-dropdown-items-vars`, `.dwc-toggle-vars` und `.dwc-tabbed-nav-vars`. Das Etch-Stylesheet `DWC Mega Menu` nie bearbeiten – ein Update ersetzt es; Anpassungen stehen im globalen Stylesheet des Projekts.
+- **EMMP aus eigenem Skript steuern** über dessen JavaScript-API statt über eigene Klick-Simulation oder Klassen: `window.dwcMegaMenu` (nach `DOMContentLoaded`), z. B. `closeAllDropdowns()`, `closeMobileMenu()`, `isMobileMenuOpen()`, `recalculatePositions()`. Für Öffnen/Schließen gibt es keine Events; den Zustand zeigen Klassen (`open` am Menüpunkt, `show-nav` am `<body>`).
 - EMMP markiert den aktiven Menüpunkt selbst mit `aria-current="page"`, aber nur bei exakt gleicher URL (Elternbereiche auf Unterseiten nicht).
 - **Tabellarische Daten** in Komponenten als CSS-Grid aus `div`s mit Tabellen-Rollen (`role="table|row|columnheader|rowheader|cell"`, Name per `aria-label`). Breite Tabellen seitlich scrollbar, erste Spalte bei Bedarf fixiert.
 
@@ -309,6 +311,17 @@ add_action( 'wp_ajax_<prefix>_rest_nonce', function () {
 
 Die Texte im Dialog (`aria-label`, `title`) legt das Projekt fest. Hängt an Etch-Interna (`?etch=magic`, `window.etchGlobal.nonce`) – nach einem Etch-Update einmal prüfen: im Builder in einem zweiten Tab abmelden, dann speichern.
 
+**Text im Editor bearbeiten: Etch Text Editor** (Plugin `etch-text-editor`). Im Etch-Editor einen Textblock auswählen und „Edit“ klicken; ein Popup bearbeitet den Text samt Formatierung. Es arbeitet auch mit Gutenberg-Textblöcken, die Etch sonst nur durchreicht – sie bleiben Gutenberg-Blöcke.
+
+- **Nur für Seiten, die im Editor gepflegt werden.** Texte auf Seiten, Templates und Komponenten aus dem Repo überschreibt der nächste Sync (siehe [Architektur](#architektur)); dort den Text im Repo ändern.
+- **Schließen speichert die ganze Seite** (Klick neben das Popup, „Close“, das X): nicht nur den Text, sondern alles, was im Editor gerade offen ist. Vorher andere Änderungen fertig machen oder verwerfen. Verwerfen nur über „Discard“ oder Esc.
+- **Farbe nur über „var“** (Farbvariablen von ACSS), nie über den freien Farbwähler – der schreibt einen festen Farbwert in den Text und bricht das dunkle Schema (siehe [Hell/Dunkel](#helldunkel)). Welche Farben im Text erlaubt sind, legt das Design des Projekts fest.
+- Formatierung im Text sparsam: Farbe und Schriftstärke landen als `<span style="…">` im Inhalt. Was für alle Stellen gleich gelten soll, gehört als Klasse ins Stylesheet, nicht in jeden Text einzeln.
+- Fett und kursiv sind Betonung (`strong`, `em`), kein Ersatz für Überschriften. Links brauchen einen Linktext, der das Ziel nennt.
+- Das Skript wird für angemeldete Benutzer mit dem Recht `edit_posts` geladen und wirkt nur im Etch-Editor. Es ruft nur die eigene REST-API auf (Suche nach Seiten, Beiträgen und Medien für Links).
+- Hängt an der experimentellen Schnittstelle `window.etch` (dieselbe wie beim Etch AI Connector, aber ohne ihn: der Connector bleibt aus) – nach jedem Etch-Update prüfen (siehe [Updates](development-environment.md#updates)).
+- Im Handbuch des Projekts erklären: wo „Edit“ erscheint, dass Schließen speichert, und die Farbregel.
+
 Das globale Stylesheet des Projekts kommt per Sync in Etch und braucht keinen dieser Hooks. Pfade über `content_url()` bzw. die Projekt-Konstante, nie über `get_stylesheet_directory_uri()` oder `__DIR__` (siehe [Betrieb](betrieb.md#php-als-wpcodebox-snippets)).
 
 ## Barrierefreiheit
@@ -317,7 +330,7 @@ Das globale Stylesheet des Projekts kommt per Sync in Etch und braucht keinen di
 - **Link „Zum Inhalt springen“ (Skip-Link) auf jeder Seite** (WCAG 2.4.1):
   - erstes fokussierbares Element der Seite, vor der Navigation; Text legt das Projekt fest
   - Ziel ist das Hauptelement `<main id="main">` – genau ein `<main>` je Seite, im Seitenrahmen der Templates
-  - **mit EMMP** dessen eingebauten Skip-Link nutzen (Header-Komponente, Gruppe `accessibilty`: `skipLink: 'true'`, `customSkipLinkParameter: 'main | <Text>'`, Format `Ziel | Text`); **ohne EMMP** eigener Link `<a class="skip-link" href="#main">…</a>` am Anfang des Headers
+  - **mit EMMP** dessen eingebauten Skip-Link nutzen (Header-Komponente, Gruppe `accessibilty`: `skipLink: 'true'`, `customSkipLinkParameter: 'main | <Text>'`, Format `Ziel | Text`, Ziel als `#id` oder als Tag- bzw. Klassenname ohne `#`; Aussehen über die EMMP-Variablen `--skip-link-*` an `.dwc-header-vars`, Werte aus ACSS-Variablen); **ohne EMMP** eigener Link `<a class="skip-link" href="#main">…</a>` am Anfang des Headers
   - visuell verborgen, aber **sichtbar, sobald er den Fokus hat** (nicht mit `display: none` oder `visibility: hidden`, sonst ist er per Tastatur nicht erreichbar), mit sichtbarem Fokusrahmen. **ACSS 4 bringt die Klasse `.skip-link` mit** (Button-Stil, per `transform` verborgen, sichtbar bei `:focus-visible`) – nur die Klasse setzen, kein eigenes CSS dafür
   - es gibt nur einen Skip-Link: nicht zusätzlich zu dem von EMMP oder einem Plugin
   - Test: Seite laden, einmal Tab → Link erscheint; Enter → der nächste Tab landet im Inhalt, nicht in der Navigation
