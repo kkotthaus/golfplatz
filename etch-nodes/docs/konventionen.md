@@ -181,6 +181,20 @@ Regeln für Komponenten, Block-Markup, Daten, CSS, Hell/Dunkel und KI-Kennzeichn
 
 **Redaktion:** Im Handbuch des Projekts erklären, wann welche Stufe gilt, und darauf hinweisen, dass Fotos echter Personen nicht ohne deren Einwilligung in KI-Dienste hochgeladen oder per KI verändert werden.
 
+## Formulare
+
+**Standard für jede Website:** Formulare werden mit **WS Form** gebaut (Plugin `ws-form`), vorerst in der freien Version. Kein zweites Formular-Plugin und keine eigenen Formulare mit eigenem PHP für den Versand.
+
+- Auskommen mit dem, was die freie Version kann. Braucht ein Projekt mehr (z. B. Datei-Upload, mehrstufige Formulare, bedingte Logik, Anbindung an fremde Dienste), vor dem Bauen klären, ob dafür die Pro-Version gekauft wird – nicht mit einem anderen Plugin oder eigenem Code umgehen.
+- Jedes Formular speichert die Anfragen (Aktion „Save to Submissions“) **und** verschickt eine E-Mail (Aktion „Send Email“). Geht eine E-Mail verloren, bleibt die Anfrage im Backend.
+- E-Mail-Versand über SMTP (siehe [Betrieb](betrieb.md#veröffentlichen-mit-duplicator-pro)); Absender ist eine Adresse der eigenen Domain, die Adresse des Besuchers steht im Antwort-Feld (Reply-To). Außerhalb von live werden E-Mails abgefangen – dort über die gespeicherten Anfragen prüfen.
+- Empfänger, Betreff und Texte legt das Projekt fest; Empfänger-Adressen kommen aus den Stammdaten bzw. den Einstellungen des Formulars, nicht aus dem Code.
+- Gestaltung über die ACSS-Variablen und das Stylesheet des Projekts, in beiden Farbschemata geprüft (siehe [Hell/Dunkel](#helldunkel)).
+- Barrierefreiheit: jedes Feld mit sichtbarer Beschriftung (kein Platzhalter als Ersatz), Pflichtfelder gekennzeichnet, Fehlermeldungen als Text am Feld, Bedienung per Tastatur, Meldung nach dem Absenden für Screenreader hörbar.
+- Datenschutz: nur Felder abfragen, die gebraucht werden; Hinweis auf die Datenschutzerklärung am Formular; gespeicherte Anfragen nach der Frist des Projekts löschen. Spamschutz ohne fremde Dienste (z. B. Honeypot), kein Dienst, der Daten der Besucher an Dritte überträgt, ohne dass es das Projekt entschieden hat.
+- Formulare leben in der Datenbank, nicht im Repo. Ein Formular nach Änderungen veröffentlichen, als JSON exportieren und im Projekt ablegen; IDs der eingebundenen Formulare im Projekt dokumentieren.
+- Nach einem Update von WS Form und nach jedem Umzug: Formular absenden – Pflichtfelder, Fehlermeldungen, Eingang unter „Übermittlungen“, E-Mail.
+
 ## Meta Box
 
 - **Beziehungen** zwischen Beitragstypen als Feld vom Typ **Post** statt MB Relationships, wenn Strukturen per MCP angelegt werden – Relationships lassen sich darüber nicht anlegen.
