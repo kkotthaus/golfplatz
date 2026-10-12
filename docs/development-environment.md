@@ -18,6 +18,7 @@ Versionen stehen hier bewusst nicht. Welche Version ein Projekt einsetzt, hält 
 | **User Role Editor Pro** | `user-role-editor-pro` | Benutzerrollen und Capabilities, z. B. eigene Rollen mit Zugriff nur auf einzelne Beitragstypen oder Einstellungsseiten. | [role-editor.com/documentation](https://www.role-editor.com/documentation/) |
 | **Etch Font Manager** | `etch-font-manager` | Schriftverwaltung: lädt Schriften (auch aus Google Fonts) herunter und hostet sie selbst unter `wp-content/fonts/`, erzeugt `@font-face` mit `unicode-range`, Preload, Fallback-Stack und eine CSS-Variable je Familie. Regeln: [konventionen.md](konventionen.md#schriften). | [codexea.gitbook.io/etch-font-manager](https://codexea.gitbook.io/etch-font-manager/) |
 | **Etch Text Editor** | `etch-text-editor` | Popup im Etch-Editor zum Bearbeiten von Text: Etch-Textelemente und Gutenberg-Textblöcke, die Etch sonst nur durchreicht, mit Formatierung im Text (fett, kursiv, Link mit interner Suche, Farbe, weiches Trennzeichen, geschütztes Leerzeichen). Für Seiten, die im Editor gepflegt werden. Freies Plugin von GitHub (ein Skript, keine eigenen Daten), baut auf der experimentellen Schnittstelle `window.etch` auf. Regeln: [konventionen.md](konventionen.md#etch-editor-canvas). | [github.com/electricarts/etch-text-editor](https://github.com/electricarts/etch-text-editor) |
+| **WS Form** | `ws-form` | **Standard für alle Formulare.** Formulare mit Prüfung der Eingaben, Speicherung der Anfragen und E-Mail-Versand. Vorerst in der freien Version (WS Form LITE von wordpress.org). Regeln: [konventionen.md](konventionen.md#formulare). | [wsform.com/knowledgebase](https://wsform.com/knowledgebase/) |
 | **WPCodeBox 2** | `wpcodebox2` | Verwaltet die eigenen PHP-Erweiterungen der Website als Snippets. Eigene MCP-Funktionen `wpcodebox/…`. Regeln: [betrieb.md](betrieb.md#php-als-wpcodebox-snippets). | [docs.wpcodebox.com](https://docs.wpcodebox.com/) |
 
 ### Betrieb & Werkzeuge
@@ -28,6 +29,16 @@ Versionen stehen hier bewusst nicht. Welche Version ein Projekt einsetzt, hält 
 | **SEOPress Pro** | `wp-seopress` + `wp-seopress-pro` | Titel und Beschreibungen, XML-Sitemap, Indexierung je Beitragstyp, strukturierte Daten, 301-Weiterleitungen und 404-Protokoll. Eigene MCP-Funktionen `seopress/…` (Regeln: [betrieb.md](betrieb.md#seopress-funktionen-mcp)). | [seopress.org/support](https://www.seopress.org/support/) |
 | **MCP Adapter** | `mcp-adapter` | Stellt WordPress-Funktionen (Abilities API) über das Model Context Protocol für KI-Werkzeuge bereit. Nur dort aktiv lassen, wo er gebraucht wird, und nur für berechtigte Benutzer freigeben. | – |
 | **Etch AI Connector** | – (Etch-Einstellung + npm-Paket `@digital-gravy/etch-connector`) | Lokaler Dienst, über den ein KI-Agent den geöffneten Etch-Editor liest und ändert (Schnittstelle `etch.*`). Experimentell, nur in der Entwicklung und nur bei Bedarf eingeschaltet. Regeln: [betrieb.md](betrieb.md#etch-ai-connector). | [docs.etchwp.com/public-api](https://docs.etchwp.com/public-api) |
+
+## Plugin-Liste
+
+Jedes Plugin, das neu in die Arbeit aufgenommen wird, steht an drei Stellen – sonst gilt es nicht als aufgenommen:
+
+1. hier in der Tabelle unter [Stack](#stack) bzw. [Betrieb & Werkzeuge](#betrieb--werkzeuge), mit Zweck und Doku; Regeln für den Einsatz in [konventionen.md](konventionen.md) bzw. [betrieb.md](betrieb.md)
+2. in der Plugin-Liste des Server-Werkzeugs (`blueprint/plugins.conf`) mit der getesteten Version, das ZIP dazu in der Plugin-Ablage – auch bei freien Plugins
+3. in der zentralen Übersicht der Projekte (Abschnitt „WordPress-Plugins“) mit einem Satz zum Zweck
+
+Ein Plugin nur für eine einzelne Website steht nicht hier, sondern bei dieser Website (Projekt-Doku und Einstellungen der Seite im Server-Werkzeug).
 
 ## Updates
 
@@ -45,7 +56,7 @@ Versionen stehen hier bewusst nicht. Welche Version ein Projekt einsetzt, hält 
   gh api repos/electricarts/etch-text-editor/releases/latest --jq .tag_name
   wp plugin get etch-text-editor --field=version
   ```
-  Zusätzlich auf GitHub im Repo „Watch › Custom › Releases“ einschalten, dann kommt bei jeder neuen Version eine Nachricht. Claude vergleicht die Versionen, wenn in einem Projekt mit diesem Plugin Updates anstehen, und meldet eine neue Version.
+  Die zentrale Übersicht der Projekte sucht für Plugins von GitHub und von wordpress.org selbst nach Updates (grünes Kettenglied in der Plugin-Liste) und zeigt eine neuere Version unter der vereinbarten an; der Vergleich von Hand ist dann nur die Gegenprobe. Zusätzlich auf GitHub im Repo „Watch › Custom › Releases“ einschalten, dann kommt bei jeder neuen Version eine Nachricht. Claude vergleicht die Versionen, wenn in einem Projekt mit diesem Plugin Updates anstehen, und meldet eine neue Version.
 - **Etch Text Editor aktualisieren** (kein Update über WordPress): im [Changelog](https://github.com/electricarts/etch-text-editor/blob/main/CHANGELOG.md) nachsehen, das ZIP des Release von GitHub laden und als Plugin hochladen (ersetzt die vorhandene Version), zuerst lokal. Danach im Etch-Editor prüfen wie unten.
 - Nach einem Update von Etch, EMMP, EtchSliderPro oder OhMyEtch im Frontend prüfen: Header (auch mobil), Slider, Lightbox und die übrigen Fremdkomponenten. Nach einem Etch-Update zusätzlich im Block-Editor: Seitenleiste und Felder der Komponenten (siehe [konventionen.md](konventionen.md#backend)).
 - Nach einem Update von Etch oder vom Etch Text Editor im Etch-Editor prüfen: Textblock auswählen, „Edit“ öffnen, Text mit Link und Formatierung ändern, schließen, im Frontend ansehen. Das Plugin hängt an der experimentellen Schnittstelle von Etch; funktioniert es nach einem Etch-Update nicht mehr, deaktivieren, bis eine passende Version da ist – die Inhalte bleiben unverändert.
