@@ -7,7 +7,7 @@ Gemeinsame Standards für WordPress-Projekte mit Etch, Automatic.css v4, Meta Bo
 | [CLAUDE.md](CLAUDE.md) | Einstieg für Claude Code, importiert die Doku |
 | [docs/development-environment.md](docs/development-environment.md) | Stack und Plugins |
 | [docs/konventionen.md](docs/konventionen.md) | Komponenten, Block-Markup, dynamische Daten, CSS, Meta Box |
-| [docs/betrieb.md](docs/betrieb.md) | WPCodeBox-Snippets, MCP-Funktionen, Build/Sync, Duplicator, Caching |
+| [docs/betrieb.md](docs/betrieb.md) | WPCodeBox-Snippets, MCP-Funktionen, Etch AI Connector, Build/Sync, Duplicator, Caching |
 
 ## In ein Projekt einbinden (git subtree)
 
