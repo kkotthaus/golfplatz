@@ -42,6 +42,7 @@
 | **Etch Font Manager** | Schriften selbst hosten (Blueprint: Fraunces und Lora) | Zuordnung in den ACSS-Einstellungen |
 | **Meta Box AIO** | Beitragstypen, Felder, Einstellungsseiten | |
 | **User Role Editor Pro** | Rollen, z. B. nur Platzstatus pflegen (`edit_sperrungen`) | |
+| **Bausteine Backend** | eigenes Plugin: blendet „Individuelle Felder“ aus, öffnet bei Etch-Komponenten die Seitenleiste, räumt deren Felder im Block-Editor auf, fängt eine abgelaufene Anmeldung im Etch-Editor ab | aktualisiert sich selbst vom eigenen Update-Server; ersetzt das frühere Snippet „Backend“ |
 | **WPCodeBox 2** | führt die Snippets aus (Ordner „Golfplatz“) | Snippets mit Fehler schaltet WPCodeBox selbst ab |
 | **Duplicator Pro** | Sicherung, Umzug | nach dem Livegang nie mehr ein lokales Paket live einspielen |
 | **MCP Adapter** | Zugang für KI-Werkzeuge | **nicht auf 0.7.x aktualisieren** |
@@ -83,7 +84,6 @@
 | **golfplatz-farbschema** | Umschalter Hell/Dunkel (ACSS-Klassen `scheme--light`/`scheme--dark`, Wahl im Browser). Der Umschalter lässt sich im Backend ein- und ausschalten: Clubdaten › Club › „Umschalter Hell/Dunkel“ (Feld `farbschema_umschalter`, ohne gespeicherten Wert eingeschaltet). Ausgeschaltet blendet das Snippet die Schaltfläche aus und wendet eine gespeicherte Wahl nicht mehr an – die Seite folgt dem Gerät. |
 | **golfplatz-scrollen** | Sprunglinks gleiten in 600 ms zum Ziel, mit Abstand zum Header |
 | **golfplatz-ki** | KI-Kennzeichnung von Bildern und Videos (Mediathek-Feld, Symbol am Bild, Hinweis im Alternativtext) |
-| **golfplatz-backend** | blendet den Block „Individuelle Felder“ aus (klassischer und Block-Editor) |
 | **golfplatz-handbuch** | Menü „Handbuch“ für die Redaktion |
 | **golfplatz-technik** | diese Seite (Unterpunkt „Technik“ im Handbuch) |
 | **golfplatz-mcp** | Funktionen zum Übertragen aus dem Repository – nur in der Entwicklung aktiv |
