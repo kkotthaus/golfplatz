@@ -19,6 +19,7 @@ Versionen stehen hier bewusst nicht. Welche Version ein Projekt einsetzt, hält 
 | **Etch Font Manager** | `etch-font-manager` | Schriftverwaltung: lädt Schriften (auch aus Google Fonts) herunter und hostet sie selbst unter `wp-content/fonts/`, erzeugt `@font-face` mit `unicode-range`, Preload, Fallback-Stack und eine CSS-Variable je Familie. Regeln: [konventionen.md](konventionen.md#schriften). | [codexea.gitbook.io/etch-font-manager](https://codexea.gitbook.io/etch-font-manager/) |
 | **Etch Text Editor** | `etch-text-editor` | Popup im Etch-Editor zum Bearbeiten von Text: Etch-Textelemente und Gutenberg-Textblöcke, die Etch sonst nur durchreicht, mit Formatierung im Text (fett, kursiv, Link mit interner Suche, Farbe, weiches Trennzeichen, geschütztes Leerzeichen). Für Seiten, die im Editor gepflegt werden. Freies Plugin von GitHub (ein Skript, keine eigenen Daten), baut auf der experimentellen Schnittstelle `window.etch` auf. Regeln: [konventionen.md](konventionen.md#etch-editor-canvas). | [github.com/electricarts/etch-text-editor](https://github.com/electricarts/etch-text-editor) |
 | **WS Form** | `ws-form` | **Standard für alle Formulare.** Formulare mit Prüfung der Eingaben, Speicherung der Anfragen und E-Mail-Versand. Vorerst in der freien Version (WS Form LITE von wordpress.org). Regeln: [konventionen.md](konventionen.md#formulare). | [wsform.com/knowledgebase](https://wsform.com/knowledgebase/) |
+| **Bausteine Backend** | `bausteine-backend` | Eigenes Plugin: räumt das Backend auf – blendet „Individuelle Felder“ aus, öffnet bei Etch-Komponenten die Seitenleiste, vereinfacht deren Felder im Block-Editor und fängt eine abgelaufene Anmeldung im Etch-Editor ab. Aktualisiert sich selbst vom eigenen Update-Server. Regeln: [konventionen.md](konventionen.md#backend). | Doku im Repo der eigenen Plugins |
 | **WPCodeBox 2** | `wpcodebox2` | Verwaltet die eigenen PHP-Erweiterungen der Website als Snippets. Eigene MCP-Funktionen `wpcodebox/…`. Regeln: [betrieb.md](betrieb.md#php-als-wpcodebox-snippets). | [docs.wpcodebox.com](https://docs.wpcodebox.com/) |
 
 ### Betrieb & Werkzeuge
@@ -42,7 +43,8 @@ Ein Plugin nur für eine einzelne Website steht nicht hier, sondern bei dieser W
 
 ## Updates
 
-- Automatische Updates sind für alle Plugins aus. Updates werden von Hand eingespielt.
+- Automatische Updates sind aus: für WordPress, Themes, Übersetzungen und alle fremden Plugins. Diese Updates werden von Hand eingespielt.
+- **Ausnahme: die eigenen Plugins** (z. B. `bausteine-backend`). Sie tragen im Kopf eine `Update URI` auf den eigenen Update-Server und aktualisieren sich selbst. Lokale und Staging-Seiten (`WP_ENVIRONMENT_TYPE` = `local`, `development`, `staging`) bekommen jede gebaute Version, Live-Seiten (`production`) nur ausdrücklich freigegebene – eine neue Version läuft also zuerst lokal und auf Staging. Das Umgebungs-mu-plugin des Server-Werkzeugs lässt genau diese Updates zu und sperrt alle anderen. Je Website abschalten: `define( 'BAUSTEINE_AUTO', false );` in der `wp-config.php`. Nach einem Update eines eigenen Plugins gilt dieselbe Prüfung wie unten für das, was es berührt.
 - **EMMP aktualisieren** (kein Plugin, deshalb von Hand im Etch-Editor, zuerst lokal):
   1. Im [Changelog](https://design-with-cracka.gitbook.io/megamenupro/changelog) nachsehen, was die Version ändert und ob sie nur das CSS oder CSS und Komponenten betrifft.
   2. Vorher sichern (Datenbank bzw. Duplicator-Paket) und die im Projekt dokumentierten Komponenten-IDs bereithalten.

@@ -205,44 +205,17 @@ Regeln für Komponenten, Block-Markup, Daten, CSS, Hell/Dunkel und KI-Kennzeichn
 
 ## Backend
 
-- **Block „Individuelle Felder“ immer ausblenden** – in allen Beitragstypen, im Block-Editor und im klassischen Editor. Er zeigt die rohen Metadaten (auch die von Meta Box und internen Funktionen, z. B. Serialisiertes) und lässt sie ohne Prüfung ändern oder löschen. Eigene Felder kommen immer über Meta Box.
-- Technik im Snippet `<prefix>-backend.php`: den Kasten `postcustom` mit `remove_meta_box()` im Hook `add_meta_boxes` (späte Priorität) für alle Beitragstypen entfernen und im Filter `block_editor_settings_all` den Schlüssel `enableCustomFields` entfernen – dann verschwindet auch der Schalter „Individuelle Felder“ in den Voreinstellungen des Block-Editors.
+- **Plugin Bausteine Backend auf jeder Website** (`bausteine-backend`, eigenes Plugin). Es setzt die folgenden vier Punkte um; ein Snippet `<prefix>-backend.php` gibt es dafür nicht mehr. Einzelne Funktionen lassen sich je Website über den Filter `bausteine_backend_funktion` abschalten (Namen `felder`, `seitenleiste`, `etch-felder`, `sitzung`), z. B. in einem Snippet des Projekts:
+  ```php
+  add_filter( 'bausteine_backend_funktion', function ( $an, $name ) {
+  	return 'seitenleiste' === $name ? false : $an;
+  }, 10, 2 );
+  ```
+  Vorhandene Snippets `<prefix>-backend.php` entfallen, sobald das Plugin auf der Website aktiv ist: im Repo entfernen und in WPCodeBox ausschalten (löschen nur nach Rückfrage).
+- **Block „Individuelle Felder“ immer ausblenden** (`felder`) – in allen Beitragstypen, im Block-Editor und im klassischen Editor. Er zeigt die rohen Metadaten (auch die von Meta Box und internen Funktionen, z. B. Serialisiertes) und lässt sie ohne Prüfung ändern oder löschen. Eigene Felder kommen immer über Meta Box. Das Plugin entfernt den Kasten `postcustom` und den Schalter in den Voreinstellungen des Block-Editors.
 - **Nicht** `remove_post_type_support( …, 'custom-fields' )` verwenden: Ohne diese Unterstützung liefert die REST-API registrierte Metadaten (`register_post_meta` mit `show_in_rest`) nicht mehr aus.
-- **Seitenleiste bei Etch-Komponenten öffnen.** Etch-Komponenten lassen sich im Block-Editor nicht direkt im Inhalt bearbeiten, nur über die Seitenleiste. Ist sie zu, finden Redakteure die Felder nicht. Im selben Snippet `<prefix>-backend.php` öffnet ein kleines Skript die Block-Seitenleiste, sobald ein Block `etch/component` ausgewählt wird:
-  ```php
-  add_action( 'enqueue_block_editor_assets', function () {
-  	wp_add_inline_script( 'wp-edit-post', "( function () {
-  		var zuletzt = null;
-  		wp.data.subscribe( function () {
-  			var block = wp.data.select( 'core/block-editor' ).getSelectedBlock();
-  			var id = block ? block.clientId : null;
-  			if ( id === zuletzt ) { return; }
-  			zuletzt = id;
-  			var editor = wp.data.dispatch( 'core/edit-post' );
-  			if ( block && 'etch/component' === block.name && editor && editor.openGeneralSidebar ) {
-  				editor.openGeneralSidebar( 'edit-post/block' );
-  			}
-  		} );
-  	} )();" );
-  } );
-  ```
-  `wp-edit-post` gibt es nur im Beitrags-Editor, der Website-Editor bleibt unberührt.
-- **Etch-Felder im Block-Editor aufräumen** (ebenfalls in `<prefix>-backend.php`): unter den Eigenschaften der Komponenten den technischen Schlüssel ausblenden, bei Gruppen den zusätzlichen Innenabstand entfernen, bei Bild-Eigenschaften das ID-Feld ausblenden (die Schaltfläche für die Mediathek bleibt), und die Etch-Blöcke in der Block-Auswahl ausblenden. Die Blöcke nicht abmelden, sonst lassen sich vorhandene Etch-Inhalte nicht mehr duplizieren. Hilfetexte nur in Etch-Feldern ausblenden, die von Meta Box und WordPress bleiben:
-  ```php
-  add_action( 'enqueue_block_editor_assets', function () {
-  	wp_register_style( '<prefix>-block-editor', false );
-  	wp_enqueue_style( '<prefix>-block-editor' );
-  	wp_add_inline_style( '<prefix>-block-editor', '
-  		[data-etch-property-type] .components-base-control__help { display: none; }
-  		[data-etch-property-type="object:group"] .components-panel__body { padding-inline: 0; }
-  		[data-etch-property-type="string:wpMediaId"] .components-text-control__input,
-  		[data-etch-property-type="string:image"] .components-text-control__input { display: none; }
-  		.block-editor-inserter__panel-header:has(+ .block-editor-inserter__panel-content [class*="editor-block-list-item-etch-"]),
-  		.block-editor-inserter__panel-header:has(+ .block-editor-inserter__panel-content [class*="editor-block-list-item-etch-"]) + .block-editor-inserter__panel-content { display: none !important; }
-  	' );
-  } );
-  ```
-  Die Selektoren hängen an Etch-Interna (`data-etch-property-type`). Nach jedem Etch-Update im Block-Editor prüfen.
+- **Seitenleiste bei Etch-Komponenten öffnen** (`seitenleiste`). Etch-Komponenten lassen sich im Block-Editor nicht direkt im Inhalt bearbeiten, nur über die Seitenleiste. Ist sie zu, finden Redakteure die Felder nicht. Das Plugin öffnet die Block-Seitenleiste, sobald ein Block `etch/component` ausgewählt wird – nur im Beitrags-Editor, der Website-Editor bleibt unberührt.
+- **Etch-Felder im Block-Editor aufräumen** (`etch-felder`): unter den Eigenschaften der Komponenten den technischen Schlüssel ausblenden, bei Gruppen den zusätzlichen Innenabstand entfernen, bei Bild-Eigenschaften das ID-Feld ausblenden (die Schaltfläche für die Mediathek bleibt), und die Etch-Blöcke in der Block-Auswahl ausblenden. Die Blöcke bleiben angemeldet, sonst ließen sich vorhandene Etch-Inhalte nicht mehr duplizieren. Hilfetexte verschwinden nur in Etch-Feldern, die von Meta Box und WordPress bleiben. Die Selektoren hängen an Etch-Interna (`data-etch-property-type`). Nach jedem Etch-Update im Block-Editor prüfen; passt etwas nicht mehr, kommt die Korrektur als neue Version des Plugins.
 - **Technik-Doku im Backend für Administratoren** – auf jeder Website. Sie erklärt, wie die Website aufgebaut ist und wie Plugins, Snippets, CSS und Skripte zusammenarbeiten, und schützt so vor Änderungen an der falschen Stelle.
   - Quelle `docs/technik.md` im Projekt; der Build erzeugt daraus `<prefix>/technik.php` (HTML, mit Schutzzeile `<?php defined( 'ABSPATH' ) || exit; ?>`, damit die Datei direkt aufgerufen nichts ausliefert). Ein kleiner Markdown-Umwandler im Generator genügt: Überschriften, Absätze, Listen, Tabellen, Hinweise, **fett**, `Code`, Links – keine Code-Blöcke.
   - Snippet `<prefix>-technik.php`: Menüpunkt „Technik“ (bzw. Unterpunkt eines vorhandenen Handbuch-Menüs) und Hinweis im Dashboard, nur mit `manage_options`; Ausgabe über `wp_kses_post()`, Gestaltung mit den Farben des WordPress-Backends.
@@ -262,68 +235,9 @@ add_action( 'etch/canvas/enqueue_assets', function () {
 } );
 ```
 
-**Abgelaufene Anmeldung im Etch-Editor:** Läuft die Anmeldung ab (oder wird die Nonce ungültig, etwa nach einer neuen Anmeldung in einem anderen Tab), antwortet die REST-API beim Speichern mit `403 rest_cookie_invalid_nonce`, und Etch speichert nicht. Ein kleines Skript im Snippet `<prefix>-backend.php` zeigt dann das Anmeldefenster von WordPress (`interim-login`) über dem Editor, holt danach eine neue Nonce und setzt sie in `window.etchGlobal.nonce`, von wo Etch sie liest. Die Arbeit bleibt im Editor; danach noch einmal speichern. Zusätzlich übernimmt es die Nonce, die WordPress bei jeder erfolgreichen REST-Antwort im Header `X-WP-Nonce` mitschickt. Greift nur im Builder (`?etch=magic`) für Administratoren, deshalb in allen Umgebungen unschädlich:
+**Abgelaufene Anmeldung im Etch-Editor:** Läuft die Anmeldung ab (oder wird die Nonce ungültig, etwa nach einer neuen Anmeldung in einem anderen Tab), antwortet die REST-API beim Speichern mit `403 rest_cookie_invalid_nonce`, und Etch speichert nicht. Das Plugin Bausteine Backend (Funktion `sitzung`, siehe [Backend](#backend)) zeigt dann das Anmeldefenster von WordPress (`interim-login`) über dem Editor, holt danach eine neue Nonce und setzt sie in `window.etchGlobal.nonce`, von wo Etch sie liest. Die Arbeit bleibt im Editor; danach noch einmal speichern. Zusätzlich übernimmt es die Nonce, die WordPress bei jeder erfolgreichen REST-Antwort im Header `X-WP-Nonce` mitschickt. Greift nur im Builder (`?etch=magic`) für Administratoren, deshalb in allen Umgebungen unschädlich.
 
-```php
-add_action( 'wp_enqueue_scripts', function () {
-	if ( ! isset( $_GET['etch'] ) || 'magic' !== $_GET['etch'] || ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
-	$daten = array(
-		'login' => add_query_arg( 'interim-login', '1', wp_login_url() ),
-		'nonce' => add_query_arg( 'action', '<prefix>_rest_nonce', admin_url( 'admin-ajax.php' ) ),
-	);
-	wp_register_script( '<prefix>-etch-sitzung', false, array(), null, false );
-	wp_enqueue_script( '<prefix>-etch-sitzung' );
-	wp_add_inline_script( '<prefix>-etch-sitzung', 'window.<prefix>EtchSitzung = ' . wp_json_encode( $daten ) . ";\n" . <<<'JS'
-( function () {
-	var c = window.<prefix>EtchSitzung, offen = null, original = window.fetch;
-	function nonceSetzen( n ) {
-		if ( ! n ) { return; }
-		if ( window.etchGlobal ) { window.etchGlobal.nonce = n; }
-		if ( window.wpApiSettings ) { window.wpApiSettings.nonce = n; }
-	}
-	function anmelden() {
-		if ( offen ) { return; }
-		offen = document.createElement( 'dialog' );
-		offen.setAttribute( 'aria-label', 'Anmeldung abgelaufen' );
-		offen.style.cssText = 'padding:0;border:0;inline-size:min(420px,95vw);block-size:min(600px,90vh)';
-		var rahmen = document.createElement( 'iframe' );
-		rahmen.title = 'Anmelden';
-		rahmen.src = c.login;
-		rahmen.style.cssText = 'inline-size:100%;block-size:100%;border:0';
-		rahmen.addEventListener( 'load', function () {
-			try {
-				if ( ! rahmen.contentDocument.body.classList.contains( 'interim-login-success' ) ) { return; }
-			} catch ( e ) { return; }
-			original( c.nonce, { credentials: 'same-origin' } )
-				.then( function ( r ) { return r.json(); } )
-				.then( function ( j ) { nonceSetzen( j.nonce ); offen.close(); offen.remove(); offen = null; } );
-		} );
-		offen.appendChild( rahmen );
-		document.body.appendChild( offen );
-		offen.showModal();
-	}
-	window.fetch = function () {
-		return original.apply( this, arguments ).then( function ( r ) {
-			nonceSetzen( r.headers.get( 'X-WP-Nonce' ) );
-			if ( 403 !== r.status ) { return r; }
-			return r.clone().text().then( function ( t ) {
-				if ( -1 !== t.indexOf( 'rest_cookie_invalid_nonce' ) ) { anmelden(); }
-				return r;
-			} );
-		} );
-	};
-} )();
-JS
-	);
-} );
-add_action( 'wp_ajax_<prefix>_rest_nonce', function () {
-	wp_send_json( array( 'nonce' => wp_create_nonce( 'wp_rest' ) ) );
-} );
-```
-
-Die Texte im Dialog (`aria-label`, `title`) legt das Projekt fest. Hängt an Etch-Interna (`?etch=magic`, `window.etchGlobal.nonce`) – nach einem Etch-Update einmal prüfen: im Builder in einem zweiten Tab abmelden, dann speichern.
+Die Texte im Dialog (`aria-label`, `title`) haben eine deutsche Vorgabe; ein Projekt ändert sie über den Filter `bausteine_backend_texte` (Schlüssel `dialog`, `rahmen`). Hängt an Etch-Interna (`?etch=magic`, `window.etchGlobal.nonce`) – nach einem Etch-Update einmal prüfen: im Builder in einem zweiten Tab abmelden, dann speichern.
 
 **Text im Editor bearbeiten: Etch Text Editor** (Plugin `etch-text-editor`). Im Etch-Editor einen Textblock auswählen und „Edit“ klicken; ein Popup bearbeitet den Text samt Formatierung. Es arbeitet auch mit Gutenberg-Textblöcken, die Etch sonst nur durchreicht – sie bleiben Gutenberg-Blöcke.
 
