@@ -187,7 +187,7 @@ Regeln für Komponenten, Block-Markup, Daten, CSS, Hell/Dunkel und KI-Kennzeichn
 
 - Auskommen mit dem, was die freie Version kann. Braucht ein Projekt mehr (z. B. Datei-Upload, mehrstufige Formulare, bedingte Logik, Anbindung an fremde Dienste), vor dem Bauen klären, ob dafür die Pro-Version gekauft wird – nicht mit einem anderen Plugin oder eigenem Code umgehen.
 - Jedes Formular speichert die Anfragen (Aktion „Save to Submissions“) **und** verschickt eine E-Mail (Aktion „Send Email“). Geht eine E-Mail verloren, bleibt die Anfrage im Backend.
-- E-Mail-Versand über SMTP (siehe [Betrieb](betrieb.md#veröffentlichen-mit-duplicator-pro)); Absender ist eine Adresse der eigenen Domain, die Adresse des Besuchers steht im Antwort-Feld (Reply-To). Außerhalb von live werden E-Mails abgefangen – dort über die gespeicherten Anfragen prüfen.
+- E-Mail-Versand über SMTP mit FluentSMTP (siehe [Betrieb](betrieb.md#mailversand-smtp)); Absender ist eine Adresse der eigenen Domain, die Adresse des Besuchers steht im Antwort-Feld (Reply-To). Außerhalb von live werden E-Mails abgefangen – dort über die gespeicherten Anfragen prüfen.
 - Empfänger, Betreff und Texte legt das Projekt fest; Empfänger-Adressen kommen aus den Stammdaten bzw. den Einstellungen des Formulars, nicht aus dem Code.
 - Gestaltung über die ACSS-Variablen und das Stylesheet des Projekts, in beiden Farbschemata geprüft (siehe [Hell/Dunkel](#helldunkel)).
 - Barrierefreiheit: jedes Feld mit sichtbarer Beschriftung (kein Platzhalter als Ersatz), Pflichtfelder gekennzeichnet, Fehlermeldungen als Text am Feld, Bedienung per Tastatur, Meldung nach dem Absenden für Screenreader hörbar.
