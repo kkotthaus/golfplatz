@@ -94,7 +94,7 @@ Die Live-Seite entsteht als Kopie der lokalen Seite (Dateien und Datenbank). WPC
 3. Prüfen, dass live **nicht** `WP_ENVIRONMENT_TYPE` = `local`/`development` gesetzt ist.
 4. Anwendungspasswörter für den MCP-Zugriff widerrufen; Benutzer und Admin-Passwörter prüfen (kommen aus der lokalen Seite mit).
 5. „Suchmaschinen davon abhalten …“ ausschalten.
-6. SMTP einrichten und testen, Admin-E-Mail auf eine echte Adresse setzen.
+6. SMTP einrichten und testen (siehe [Mailversand](#mailversand-smtp)), Admin-E-Mail auf eine echte Adresse setzen.
 7. Lizenzen aller Pro-Plugins auf der neuen Domain aktivieren.
 8. ACSS-Einstellungen einmal speichern (CSS neu erzeugen) und Permalinks speichern.
 9. Installer-Dateien von Duplicator löschen.
@@ -103,6 +103,17 @@ Die Live-Seite entsteht als Kopie der lokalen Seite (Dateien und Datenbank). WPC
 12. SEOPress-Audit live laufen lassen (in der Oberfläche oder, falls freigegeben, per `seopress/get-technical-audit`): Startseite indexierbar, robots.txt erreichbar, Sicherheits-Header.
 
 **Nach dem Livegang nie wieder per Duplicator veröffentlichen** – das überschreibt die komplette Live-Datenbank mit allem, was live gepflegt wurde. Spätere Änderungen gezielt übertragen: PHP im WPCodeBox-Editor bzw. per WPCodeBox Cloud oder kurzzeitig freigeschaltetem Snippet-Sync; Etch-Inhalte per Sync oder im Editor.
+
+## Mailversand (SMTP)
+
+Mails der Website gehen über **FluentSMTP** (`fluent-smtp`) und den SMTP-Server des Postfachs, das als Absender dient (eine Adresse der eigenen Domain). Ohne SMTP verschickt PHP die Mails selbst; sie landen dann oft im Spam oder kommen gar nicht an.
+
+- **Plugin auf jeder Umgebung installiert, Zugangsdaten nur live.** Lokal und auf Staging bleibt FluentSMTP ohne Verbindung. Das Umgebungs-mu-plugin fängt die Mails dort ab (lokal verworfen, Staging an die Adresse des Werkzeugs umgeleitet); FluentSMTP ruft dieselben Filter auf wie WordPress (`wp_mail`, `pre_wp_mail`), die Umleitung greift also weiter. Auf Staging keine SMTP-Zugangsdaten eintragen.
+- **Zugangsdaten in der `wp-config.php`**, nicht in der Datenbank (FluentSMTP bietet beim Einrichten „in wp-config.php speichern“ an): Das Passwort wandert so nicht mit Datenbank-Kopien und Duplicator-Paketen. Passwort des Postfachs in Vaultwarden.
+- Verbindung „Other SMTP“ mit Server, Port 587 und TLS (STARTTLS) bzw. 465 mit SSL nach Angabe des Anbieters; Benutzer ist meist die volle Adresse. Absender-Adresse erzwingen („Force From Email“), damit kein Plugin mit fremder Absenderadresse versendet.
+- **Protokoll** (Email Logging) an, aber mit kurzer Frist (z. B. 14–30 Tage): Es enthält die Inhalte der Mails und damit Personendaten aus Formularen. Darin sieht man, ob eine Mail – auch mit Anhang – verschickt wurde, und kann sie erneut senden.
+- Optional eine zweite Verbindung als Ersatz (Fallback), falls der SMTP-Server ausfällt.
+- Nach der Einrichtung live: Testmail aus FluentSMTP, dann ein echtes Formular absenden und Zustellung, Absender und Spam-Ordner prüfen. SPF/DKIM der Domain müssen den SMTP-Server erlauben (bei Postfächern des Domain-Anbieters meist schon eingerichtet).
 
 ## Caching
 

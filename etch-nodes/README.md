@@ -8,6 +8,7 @@ Gemeinsame Standards für WordPress-Projekte mit Etch, Automatic.css v4, Meta Bo
 | [docs/development-environment.md](docs/development-environment.md) | Stack und Plugins |
 | [docs/konventionen.md](docs/konventionen.md) | Komponenten, Block-Markup, dynamische Daten, CSS, Meta Box |
 | [docs/betrieb.md](docs/betrieb.md) | WPCodeBox-Snippets, MCP-Funktionen, Etch AI Connector, Build/Sync, Duplicator, Caching |
+| [docs/quellen.md](docs/quellen.md) | Fremde Komponenten-Sammlungen: Bewertung, Übernahme, regelmäßige Prüfung |
 
 ## In ein Projekt einbinden (git subtree)
 
