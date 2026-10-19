@@ -30,7 +30,7 @@ Stand 2026-09-24 aus `wp plugin list --status=active`. Automatische Updates sind
 | **OhMyEtch** | `oh-my-etch` | 1.6.0 | aktiv | |
 | **Media Bridge for Etch** | `media-bridge-for-etch` | 2.2.3 | aktiv | Medien-Erweiterung für Etch. _Genauer Einsatzzweck im Projekt noch zu dokumentieren._ |
 | **EtchSliderPro** | `dwc-slider-pro-etch` + Etch-Komponenten (IDs 240–246) | 1.2.3 | aktiv | |
-| **EtchMegaMenuPro** | – (Etch-Komponenten) | – | in Etch hinterlegt | |
+| **EtchMegaMenuPro** | – (Etch-Komponenten) | lokal 1.3.1 (seit 2026-10-19) | in Etch hinterlegt | IDs lokal: DWC Menu Item 67, Dropdown 68, Nav 69, Mobile Toggle 70, Header 71, Tabbed Nav 1387, Tab 1388. Update über die Knöpfe „EMMP-Update“ der Übersicht (`windows-dev/tools/emmp-update.mjs`). |
 | **Meta Box AIO** | `meta-box-aio` | 3.12.0 | aktiv | |
 | **User Role Editor Pro** | `user-role-editor-pro` | 4.66.2 | aktiv | |
 | **WPCodeBox 2** | `wpcodebox2` | 1.4.1 | aktiv | Ordner „Golfplatz“, je Datei aus `wordpress/snippets/` ein Snippet |
