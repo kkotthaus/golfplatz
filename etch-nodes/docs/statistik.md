@@ -58,6 +58,6 @@ Jede Website mit Burst nennt die Statistik in der Datenschutzerklärung. Vorlage
 ## Einrichten und prüfen
 
 - Neue Website: kommt mit dem Blueprint (Plugin in der Plugin-Liste, Schritt „Statistik“).
-- Vorhandene Website: Plugin installieren, dann das Einrichtungs-Skript des Server-Werkzeugs per WP-CLI mit einem Administrator ausführen (`wp eval-file statistik-einrichten.php 0 --user=<admin>`; mit `1` als Probelauf); erneut setzen mit `--neu`. Absatz in der Datenschutzerklärung ergänzen, Technik-Doku und Handbuch der Website nachziehen.
+- Vorhandene Website: Plugin installieren, dann das Einrichtungs-Skript des Server-Werkzeugs per WP-CLI mit einem Administrator ausführen (`wp eval-file statistik-einrichten.php 0 --user=<admin>`; mit `1` als Probelauf); erneut setzen mit `0 neu`. Absatz in der Datenschutzerklärung ergänzen, Technik-Doku und Handbuch der Website nachziehen.
 - Live prüfen: Seite abgemeldet aufrufen, im Quelltext `burst.min.js`, keine Cookies (Entwicklerwerkzeuge › Anwendung); am nächsten Tag Zahlen im Backend (Statistik). Nach Updates von Burst einmal wiederholen.
 - Im Handbuch der Website für den Kunden erklären: wo die Zahlen stehen, was die Ziele zählen, dass eigene Aufrufe nicht mitzählen und dass wiederkehrende Besucher nicht erkannt werden.
