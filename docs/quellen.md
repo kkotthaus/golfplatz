@@ -14,9 +14,9 @@ Fremde Sammlungen von Etch-Komponenten und -Snippets, die regelmäßig auf Neues
 | Versionen | Jede Komponentenseite hat Version und Changelog; Updates kommen nicht von selbst. |
 | Neues abfragen | `https://flyingw.studio/wp-json/wp/v2/library?per_page=100&_fields=slug,title,date,modified,link` (alle Einträge mit Datum der Anlage und letzten Änderung). Einen Feed gibt es seit dem Umzug nicht mehr. |
 
-### Bewertung (Stand 05.11.2026, 72 Einträge)
+### Bewertung (Stand 09.11.2026, 72 Einträge)
 
-Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträge): externe Quellen, Shortcodes, Sprache, Rücksicht auf „weniger Bewegung“. Am 02.11.2026 wurden beim Umzug fast alle Einträge geändert; an den bewerteten Komponenten war dabei inhaltlich nichts Neues zu sehen. Neu seit 17.10. sind Workbench und Flexi Card Cinque Terre (siehe unten). Vor einer Übernahme die Lizenz klären (siehe oben).
+Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträge): externe Quellen, Shortcodes, Sprache, Rücksicht auf „weniger Bewegung“. Am 02.11.2026 wurden beim Umzug fast alle Einträge geändert; an den bewerteten Komponenten war dabei inhaltlich nichts Neues zu sehen. Neu seit 17.10. sind Workbench und Flexi Card Cinque Terre (siehe unten). Am 09.11.2026 nichts Neues; die Lizenz ist weiter offen. Vor einer Übernahme die Lizenz klären (siehe oben).
 
 **Brauchbar bei Bedarf** – füllt eine Lücke im Stack; vor dem Einsatz übernehmen und anpassen:
 
@@ -53,11 +53,11 @@ Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträ
 | Herausgeber | Etch Developer, unabhängige Seite (nicht vom Hersteller von Etch); Unterstützung über Ko-fi (tomchmiel) |
 | Lizenz | FSL-1.1-MIT je Komponente: kostenlos auf beliebig vielen eigenen und Kundenseiten, Ändern erlaubt; nicht verkaufen, auch nicht geändert als Komponente, und nicht in einem konkurrierenden Produkt anbieten. Jede Fassung wird zwei Jahre nach Erscheinen MIT. Mitgelieferte fremde Bibliotheken behalten ihre Lizenz. |
 | Bezug | Knopf „Copy“ oder `.json` herunterladen, im Etch-Canvas einfügen (Strg+V), speichern. CSS und Skript stecken in der Komponente, kein Plugin, kein PHP. Updates kommen nicht von selbst (löschen und neu einfügen). |
-| Gebaut mit | Etch 1.7.1, WordPress 7.1; Variablen `--ed-<komponente>-*`, ACSS-4-Variablen mit Rückfallwerten (ACSS optional) |
+| Gebaut mit | Etch 1.7.1, WordPress 7.1 (am 08.11.2026 mit Etch 1.8.0 und WordPress 7.1.4 nachgetestet, ohne neue Versionen); Variablen `--ed-<komponente>-*`, ACSS-4-Variablen mit Rückfallwerten (ACSS optional) |
 | Versionen | Jede Komponentenseite hat Version und Changelog. Alle Komponenten sind Beta, bis die fehlenden Tests mit Screenreadern und echten Geräten gemacht sind. |
 | Neues abfragen | `https://etchdeveloper.com/wp-json/wp/v2/components?per_page=100&_fields=slug,title,date,modified,link`, Feed: `https://etchdeveloper.com/components/feed/`. Snippets und Plugins unter `/wp-json/wp/v2/snippet` und `/wp-json/wp/v2/plugins`. |
 
-### Bewertung (Stand 05.11.2026, 8 Komponenten)
+### Bewertung (Stand 09.11.2026, 8 Komponenten)
 
 Allen gemeinsam: keine externen Quellen (Bibliotheken mitgeliefert), Tastatur, Fokusring und „weniger Bewegung“ berücksichtigt, Texte meist englisch vorbelegt, aber in den Eigenschaften änderbar.
 

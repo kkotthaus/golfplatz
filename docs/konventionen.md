@@ -256,6 +256,12 @@ Die Texte im Dialog (`aria-label`, `title`) haben eine deutsche Vorgabe; ein Pro
 - Hängt an der experimentellen Schnittstelle `window.etch` (dieselbe wie beim Etch AI Connector, aber ohne ihn: der Connector bleibt aus) – nach jedem Etch-Update prüfen (siehe [Updates](development-environment.md#updates)).
 - Im Handbuch des Projekts erklären: wo „Edit“ erscheint, dass „Close“ bzw. ein Klick neben das Popup speichert und das X verwirft, und die Farbregel.
 
+**Strukturansicht nachladen: „Lazy Structure Tree“** (ab Etch 1.8.2, Etch › Einstellungen › Experimental, Option `etch_settings` › `lazy_structure_tree`). Die Strukturansicht lädt verschachtelte Zeilen erst, wenn ihre Elternzeile zum ersten Mal aufgeklappt wird; das verkürzt den Start des Editors auf großen Seiten.
+
+- **Standard ist aus.** Experimentell, nur je Projekt einschalten, wenn es große Seiten gibt, die im Editor gepflegt werden (und der Editor dort spürbar langsam startet). Für Seiten aus dem Repo bringt er nichts.
+- Auf der Testseite geprüft (Etch 1.8.2): Aufklappen lädt Ebene für Ebene nach; ein im Canvas ausgewähltes Element klappt die Strukturansicht bis zu sich auf, Eigenschaften und HTML erscheinen wie gewohnt; keine Fehler in der Konsole. Ziehen in der Strukturansicht war nicht Teil der Prüfung – nach dem Einschalten in einem Projekt einmal prüfen.
+- Ist er an, nach jedem Etch-Update mitprüfen; macht er Probleme, wieder ausschalten (die Inhalte bleiben unverändert).
+
 Das globale Stylesheet des Projekts kommt per Sync in Etch und braucht keinen dieser Hooks. Pfade über `content_url()` bzw. die Projekt-Konstante, nie über `get_stylesheet_directory_uri()` oder `__DIR__` (siehe [Betrieb](betrieb.md#php-als-wpcodebox-snippets)).
 
 ## Barrierefreiheit
