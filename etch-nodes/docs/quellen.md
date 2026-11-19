@@ -14,9 +14,9 @@ Fremde Sammlungen von Etch-Komponenten und -Snippets, die regelmäßig auf Neues
 | Versionen | Jede Komponentenseite hat Version und Changelog; Updates kommen nicht von selbst. |
 | Neues abfragen | `https://flyingw.studio/wp-json/wp/v2/library?per_page=100&_fields=slug,title,date,modified,link` (alle Einträge mit Datum der Anlage und letzten Änderung). Einen Feed gibt es seit dem Umzug nicht mehr. |
 
-### Bewertung (Stand 09.11.2026, 72 Einträge)
+### Bewertung (Stand 14.11.2026, 73 Einträge)
 
-Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträge): externe Quellen, Shortcodes, Sprache, Rücksicht auf „weniger Bewegung“. Am 02.11.2026 wurden beim Umzug fast alle Einträge geändert; an den bewerteten Komponenten war dabei inhaltlich nichts Neues zu sehen. Neu seit 17.10. sind Workbench und Flexi Card Cinque Terre (siehe unten). Am 09.11.2026 nichts Neues; die Lizenz ist weiter offen. Vor einer Übernahme die Lizenz klären (siehe oben).
+Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträge): externe Quellen, Shortcodes, Sprache, Rücksicht auf „weniger Bewegung“. Am 02.11.2026 wurden beim Umzug fast alle Einträge geändert; an den bewerteten Komponenten war dabei inhaltlich nichts Neues zu sehen. Neu seit 17.10. sind Workbench und Flexi Card Cinque Terre (siehe unten). Am 09.11.2026 nichts Neues. Am 14.11.2026 neu: Gallery Brindisi (10.11.2026, siehe unten); die Lizenz ist weiter offen. Vor einer Übernahme die Lizenz klären (siehe oben).
 
 **Brauchbar bei Bedarf** – füllt eine Lücke im Stack; vor dem Einsatz übernehmen und anpassen:
 
@@ -35,7 +35,7 @@ Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträ
 
 **Nicht nutzen – der Stack deckt es ab:**
 
-- Accordions (Simple, Responsive, Nested, Show/Hide for SN Accordions), Breadcrumbs Appia Antica I/II, In Page Navigation, Content Filter Rimini, Galerien mit Lightbox (Milano, Venezia, Casale) → OhMyEtch.
+- Accordions (Simple, Responsive, Nested, Show/Hide for SN Accordions), Breadcrumbs Appia Antica I/II, In Page Navigation, Content Filter Rimini, Galerien mit Lightbox (Milano, Venezia, Casale, Brindisi) → OhMyEtch. Brindisi (seit 10.11.2026: Masonry-Raster, Vollbild mit Vorschaubildern, Wischen, Zoom, Ansichten „Peek“ und „Theater“) kann mehr als die OhMyEtch Lightbox, ersetzt sie aber nicht; nur als Anregung.
 - Carousel Alpha Plus, Feature Slider Padua, Slider Section Aviano, Mission Viewer Alpha, Continuous Scroller, Marquee → Slider Pro for Etch; Laufband nur, wenn Slider Pro es nicht kann.
 - Open Street Map, Multi Map (OSM), Geo Map Genoa → laden Leaflet von unpkg und Kacheln direkt von OpenStreetMap, die Karte arbeitet zudem mit Shortcode. Stattdessen das eigene Karten-Plugin (Kacheln über die eigene Website).
 - Date Time Formatter → Sprache fest `en-US`; Datumsformate über die Etch-Modifier.
@@ -57,7 +57,7 @@ Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträ
 | Versionen | Jede Komponentenseite hat Version und Changelog. Alle Komponenten sind Beta, bis die fehlenden Tests mit Screenreadern und echten Geräten gemacht sind. |
 | Neues abfragen | `https://etchdeveloper.com/wp-json/wp/v2/components?per_page=100&_fields=slug,title,date,modified,link`, Feed: `https://etchdeveloper.com/components/feed/`. Snippets und Plugins unter `/wp-json/wp/v2/snippet` und `/wp-json/wp/v2/plugins`. |
 
-### Bewertung (Stand 09.11.2026, 8 Komponenten)
+### Bewertung (Stand 14.11.2026, 8 Komponenten)
 
 Allen gemeinsam: keine externen Quellen (Bibliotheken mitgeliefert), Tastatur, Fokusring und „weniger Bewegung“ berücksichtigt, Texte meist englisch vorbelegt, aber in den Eigenschaften änderbar.
 
