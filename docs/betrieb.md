@@ -100,7 +100,7 @@ Die Live-Seite entsteht als Kopie der lokalen Seite (Dateien und Datenbank). WPC
 6. SMTP einrichten und testen (siehe [Mailversand](#mailversand-smtp)), Admin-E-Mail auf eine echte Adresse setzen.
 7. Lizenzen aller Pro-Plugins auf der neuen Domain aktivieren.
 8. ACSS-Einstellungen einmal speichern (CSS neu erzeugen) und Permalinks speichern.
-9. Installer-Dateien von Duplicator löschen.
+9. Installer-Dateien von Duplicator löschen – auch die Reste in `wp-content/duplicator-backups/`: den Ordner `installer/` (darin `orig_files/` mit Kopien der `wp-config.php` der Quell- **und** der Zielseite, also Zugangsdaten zur Datenbank und Salts) und die Logs `logs/*.txt`. Die `.htaccess` von Duplicator dort sperrt mit `Require all denied`; OpenLiteSpeed beachtet das nicht, die Dateien sind sonst öffentlich abrufbar. Danach von außen prüfen (Prüfwerkzeug), und zwar ohne angehängte Parameter: OpenLiteSpeed hält statische Dateien im Speicher und liefert sie nach einer Änderung der Rechte weiter aus – entfernen oder umbenennen, nicht nur die Rechte entziehen.
 10. Cron: `define( 'DISABLE_WP_CRON', true );` und beim Hoster einen Cronjob alle 5–15 Minuten auf `/wp-cron.php`.
 11. Sitemap in der Google Search Console einreichen, in den ersten Wochen das 404-Protokoll ansehen.
 12. SEOPress-Audit live laufen lassen (in der Oberfläche oder, falls freigegeben, per `seopress/get-technical-audit`): Startseite indexierbar, robots.txt erreichbar, Sicherheits-Header.
