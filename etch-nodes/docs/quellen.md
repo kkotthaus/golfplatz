@@ -8,15 +8,15 @@ Fremde Sammlungen von Etch-Komponenten und -Snippets, die regelmäßig auf Neues
 | --- | --- |
 | Adresse | [flyingw.studio](https://flyingw.studio/) – Bibliothek unter `/library/`. Bis Anfang November 2026 UP Studio unter `uplinkpress.studio`; die alte Adresse leitet dauerhaft (301) auf die neue. |
 | Herausgeber | Stephen Walker, „A FlyingW initiative“ ([FlyingW.Press](https://flyingw.press), früher UplinkPress) |
-| Lizenz | **Offen (seit 05.11.2026).** Bis zum Umzug stand je Komponente CC0 1.0 (gemeinfrei). Seit dem Umzug zeigen die Seiten nur „© 2024–2026 Stephen Walker“, ohne Lizenzhinweis und ohne Lizenzseite. Bis das geklärt ist, gilt nichts von dort als frei nutzbar; nur eine Fassung, die nachweislich unter CC0 bezogen wurde (Lizenz und Datum in der Komponente vermerkt), bleibt CC0. |
+| Lizenz | **Offen (seit 05.11.2026).** Bis zum Umzug stand je Komponente CC0 1.0 (gemeinfrei). Seit dem Umzug zeigen die Seiten nur „© 2024–2026 Stephen Walker“, ohne Lizenzhinweis und ohne Lizenzseite. Seit 22.11.2026 trägt Gallery Brindisi wieder „This work is marked CC0 1.0 Universal“, die übrigen Seiten weiter nur „All rights reserved“ – die Lizenz gilt je Komponente, wie sie auf deren Seite steht. Bis das geklärt ist, gilt nichts von dort als frei nutzbar; nur eine Fassung, die nachweislich unter CC0 bezogen wurde (Lizenz und Datum in der Komponente vermerkt), bleibt CC0. |
 | Bezug | Paketdatei `<Name>.clipboard.txt` von der Seite der Komponente, in Etch einfügen (früher Knopf „Copy the JSON“). Bei manchen zusätzlich PHP als Code-Block. |
 | Gebaut mit | Etch 1.7, Etch Theme, Automatic.css 4.0 (Variablen mit Rückfallwerten) |
 | Versionen | Jede Komponentenseite hat Version und Changelog; Updates kommen nicht von selbst. |
 | Neues abfragen | `https://flyingw.studio/wp-json/wp/v2/library?per_page=100&_fields=slug,title,date,modified,link` (alle Einträge mit Datum der Anlage und letzten Änderung). Einen Feed gibt es seit dem Umzug nicht mehr. |
 
-### Bewertung (Stand 14.11.2026, 73 Einträge)
+### Bewertung (Stand 28.11.2026, 72 Einträge)
 
-Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträge): externe Quellen, Shortcodes, Sprache, Rücksicht auf „weniger Bewegung“. Am 02.11.2026 wurden beim Umzug fast alle Einträge geändert; an den bewerteten Komponenten war dabei inhaltlich nichts Neues zu sehen. Neu seit 17.10. sind Workbench und Flexi Card Cinque Terre (siehe unten). Am 09.11.2026 nichts Neues. Am 14.11.2026 neu: Gallery Brindisi (10.11.2026, siehe unten); die Lizenz ist weiter offen. Vor einer Übernahme die Lizenz klären (siehe oben).
+Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträge): externe Quellen, Shortcodes, Sprache, Rücksicht auf „weniger Bewegung“. Am 02.11.2026 wurden beim Umzug fast alle Einträge geändert; an den bewerteten Komponenten war dabei inhaltlich nichts Neues zu sehen. Neu seit 17.10. sind Workbench und Flexi Card Cinque Terre (siehe unten). Am 09.11.2026 nichts Neues. Am 14.11.2026 neu: Gallery Brindisi (10.11.2026, siehe unten); die Lizenz ist weiter offen. Am 22.11.2026 nur Breadcrumbs Appia Antica II geändert (2.1.1 vom 19.11.2026: fehlendes CSS ergänzt, überzähliger Stil entfernt) – bleibt bei OhMyEtch; die Lizenz ist weiter offen. Am 23.11.2026: Gallery Brindisi am Abend des 22.11. geändert (Version 1.0.0 und Changelog unverändert, wieder mit CC0-Hinweis), Workbench aus der Bibliothek entfernt. Am 28.11.2026 nichts Neues. Vor einer Übernahme die Lizenz klären (siehe oben).
 
 **Brauchbar bei Bedarf** – füllt eine Lücke im Stack; vor dem Einsatz übernehmen und anpassen:
 
@@ -41,7 +41,7 @@ Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträ
 - Date Time Formatter → Sprache fest `en-US`; Datumsformate über die Etch-Modifier.
 - Popover San Marino → erst prüfen, ob OhMyEtch (Dialog, Popover) reicht.
 - FW Post Navigator (vorheriger/nächster Beitrag, mit PHP) → vorheriger/nächster Beitrag als dynamische Daten (siehe [konventionen.md](konventionen.md#dynamische-daten-loops-bedingungen)).
-- Workbench (1.0.0, 02.11.2026) → Schaufenster für Komponenten (Live-Vorschau im iframe, Code-Tabs, Gerätegrößen); zum Vorstellen von Komponenten, nicht für Kundenseiten.
+- Workbench (1.0.0, 02.11.2026, seit 23.11.2026 nicht mehr in der Bibliothek) → Schaufenster für Komponenten (Live-Vorschau im iframe, Code-Tabs, Gerätegrößen); zum Vorstellen von Komponenten, nicht für Kundenseiten.
 
 **Design-Muster – nur als Anregung:** Hero-, Section-, Card-, Feature-, Team-, CTA-, Footer- und Button-Muster (darunter Flexi Card Cinque Terre: Karte, deren Hintergrundfarbe ein Skript aus einer Palette verteilt – ohne Kontrastprüfung, ohne JavaScript durchsichtig), Divider, Avatar, Figure und Effekte (Ambient Backgrounds, Kinetic Grid, Trick Cards, Headliner, Section Separator). Design gehört ins Projekt, Seiten entstehen per Generator; Muster nicht als Komponente übernehmen.
 
@@ -53,11 +53,11 @@ Geprüft wurde der Code hinter „Copy the JSON“ (Stand 17.10.2026, 70 Einträ
 | Herausgeber | Etch Developer, unabhängige Seite (nicht vom Hersteller von Etch); Unterstützung über Ko-fi (tomchmiel) |
 | Lizenz | FSL-1.1-MIT je Komponente: kostenlos auf beliebig vielen eigenen und Kundenseiten, Ändern erlaubt; nicht verkaufen, auch nicht geändert als Komponente, und nicht in einem konkurrierenden Produkt anbieten. Jede Fassung wird zwei Jahre nach Erscheinen MIT. Mitgelieferte fremde Bibliotheken behalten ihre Lizenz. |
 | Bezug | Knopf „Copy“ oder `.json` herunterladen, im Etch-Canvas einfügen (Strg+V), speichern. CSS und Skript stecken in der Komponente, kein Plugin, kein PHP. Updates kommen nicht von selbst (löschen und neu einfügen). |
-| Gebaut mit | Etch 1.7.1, WordPress 7.1 (am 08.11.2026 mit Etch 1.8.0 und WordPress 7.1.4 nachgetestet, ohne neue Versionen); Variablen `--ed-<komponente>-*`, ACSS-4-Variablen mit Rückfallwerten (ACSS optional) |
+| Gebaut mit | Etch 1.7.1, WordPress 7.1 (am 08.11.2026 mit Etch 1.8.0 und WordPress 7.1.4 nachgetestet, ohne neue Versionen; am 22., 23. und 28.11.2026 nichts Neues); Variablen `--ed-<komponente>-*`, ACSS-4-Variablen mit Rückfallwerten (ACSS optional) |
 | Versionen | Jede Komponentenseite hat Version und Changelog. Alle Komponenten sind Beta, bis die fehlenden Tests mit Screenreadern und echten Geräten gemacht sind. |
 | Neues abfragen | `https://etchdeveloper.com/wp-json/wp/v2/components?per_page=100&_fields=slug,title,date,modified,link`, Feed: `https://etchdeveloper.com/components/feed/`. Snippets und Plugins unter `/wp-json/wp/v2/snippet` und `/wp-json/wp/v2/plugins`. |
 
-### Bewertung (Stand 14.11.2026, 8 Komponenten)
+### Bewertung (Stand 28.11.2026, 8 Komponenten)
 
 Allen gemeinsam: keine externen Quellen (Bibliotheken mitgeliefert), Tastatur, Fokusring und „weniger Bewegung“ berücksichtigt, Texte meist englisch vorbelegt, aber in den Eigenschaften änderbar.
 
